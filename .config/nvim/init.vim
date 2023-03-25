@@ -124,6 +124,7 @@ call jetpack#begin()
 	Jetpack 'vim-airline/vim-airline-themes'
 	Jetpack 'vim-airline/vim-airline'
 	Jetpack 'scrooloose/nerdtree'
+	Jetpack 'jiangmiao/auto-pairs'
 
 	" 以下の機能は0.7.0から
 	Jetpack 'nvim-lua/plenary.nvim'
