@@ -27,12 +27,11 @@ font pango:monospace 9
 # font, it doesn’t scale on retina/hidpi displays.
 
 # ====== デフォルトの設定 ======
-
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec xfce4-terminal -e tmux
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -189,7 +188,6 @@ client.urgent               $rd        $rd         $tx
 
 
 # ====== キーバインドの設定 ======
-
 # スクリーンショット
 bindsym --release Print exec --no-startup-id xfce4-screenshooter
 bindsym $mod+p exec --no-startup-id xfce4-screenshooter
@@ -198,7 +196,7 @@ bindsym $mod+p exec --no-startup-id xfce4-screenshooter
 bindsym Super_L exec --no-startup-id xfce4-popup-whiskermenu
 
 # ターミナルの起動
-bindsym $mod+ctrl+t exec --no-startup-id xfce4-terminal 
+bindsym $mod+ctrl+t exec --no-startup-id xfce4-terminal -e tmux
 bindsym $mod+t exec --no-startup-id xfce4-terminal --drop-down
 bindsym XF86Launch1 exec --no-startup-id urxvtc -pe tabbed
 
@@ -220,7 +218,6 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 
 # ====== 自動実行するソフトの設定 ======
-
 # ibusの起動
 exec --no-startup-id ibus-daemon
 
