@@ -161,6 +161,15 @@ nnoremap <leader>b <cmd>Telescope buffers theme=get_dropdown<cr>
 " ====== telescopeの設定ここまで ======
 
 
+" ====== quick-scopeの設定 ======
+" highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+" highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+" f,Fキー押下時のみハイライトを有効
+let g:qs_highlight_on_keys = ['f', 'F']
+" ====== quick-scopeの設定ここまで ======
+
+
 " ====== neovim固有の設定 ======
 if has('nvim')
 
