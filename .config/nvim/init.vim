@@ -164,8 +164,8 @@ map <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
 
 " ====== quick-scopeの設定 ======
 " ハイライトの色を設定
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=199 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=129 cterm=underline
 
 " f,Fキー押下時のみハイライトを有効
 let g:qs_highlight_on_keys = ['f', 'F']
