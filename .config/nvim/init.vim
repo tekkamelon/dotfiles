@@ -23,9 +23,11 @@ runtime! debian.vim
 
 " Vim5 and later versions support syntax highlighting. Uncommenting the next
 " line enables syntax highlighting by default.
+
+" 配色の設定
 if has("syntax")
   syntax on
-  colorscheme industry
+  colorscheme ron
 endif
 
 " If using a dark background within the editing area and syntax highlighting
@@ -70,16 +72,14 @@ set cursorline
 " set cursorcolumn
 
 " ヤンクをクリップボードに貼り付け
-set clipboard=unnamedplus
+" set clipboard=unnamedplus
+" set clipboard+=unnamed
 
 " netrwを有効化
 filetype plugin on
 	
-	" プレビューウィンドウを垂直分割で表示
-	let g:netrw_preview=1
-
-" クリップボード連携
-" set clipboard+=unnamed
+" プレビューウィンドウを垂直分割で表示
+let g:netrw_preview=1
 
 " swapファイルを別ディレクトリに作成
 set directory=/tmp
@@ -87,6 +87,23 @@ set directory=/tmp
 " 分割方向を下と右
 set splitbelow
 set splitright
+
+" 分割したウィンドウの移動
+tnoremap <C-w><C-n> <C-\><C-n>
+
+
+" ====== ターミナルの設定 ======
+" ターミナルの起動
+nnoremap <leader>t :Bterm<Enter>
+nnoremap <leader>v :Vterm<Enter>
+command! -nargs=* Bterm split | terminal <args>
+command! -nargs=* Vterm vsplit | terminal <args>
+
+" ターミナル起動時に行番号を非表示
+autocmd TermOpen * setlocal norelativenumber
+autocmd TermOpen * setlocal nonumber
+" ====== ターミナルの設定ここまで ======
+
 
 " ====== leaderをspaceに設定 ====== 
 let mapleader="\<Space>"
@@ -117,28 +134,22 @@ let mapleader="\<Space>"
 " ====== leaderの設定ここまで ====== 
 
 
+" ###### 以降,プラグインの設定 ######
 " ====== jetpackの設定 =======
 call jetpack#begin()
 
 	Jetpack 'tani/vim-jetpack', {'opt': 1}
 	Jetpack 'vim-airline/vim-airline-themes'
 	Jetpack 'vim-airline/vim-airline'
-	Jetpack 'scrooloose/nerdtree'
 	Jetpack 'jiangmiao/auto-pairs'
 	Jetpack 'unblevable/quick-scope'
+	Jetpack 'lambdalisue/fern.vim'
 
 	" 以下の機能は0.7.0から
 	Jetpack 'nvim-lua/plenary.nvim'
 	Jetpack 'nvim-telescope/telescope.nvim'
 
 call jetpack#end()
-" ====== jetpackの設定ここまで =======
-
-
-" ====== NERDTreeの設定 ======
-map <C-n> :NERDTreeToggle<CR>
-" ====== NERDTreeの設定ここまで ======
-
 
 " ====== airlineの設定 ======
 " テーマの指定
@@ -147,8 +158,17 @@ let g:airline_theme = 'dark_minimal'
 
 " タブラインを表示
 let g:airline#extensions#tabline#enabled = 1 
-" ====== airlineの設定ここまで ======
 
+" ====== fernの設定 ======
+map <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
+
+" ====== quick-scopeの設定 ======
+" ハイライトの色を設定
+highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
+highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
+
+" f,Fキー押下時のみハイライトを有効
+let g:qs_highlight_on_keys = ['f', 'F']
 
 " ====== telescopeの設定 ======
 " leader+fでファイルを検索
@@ -158,37 +178,3 @@ nnoremap <leader>f <cmd>Telescope find_files hidden=false theme=get_dropdown<cr>
 nnoremap <leader>F <cmd>Telescope find_files hidden=true theme=get_dropdown<cr>
 " leader+bでバッファを検索
 nnoremap <leader>b <cmd>Telescope buffers theme=get_dropdown<cr>
-" ====== telescopeの設定ここまで ======
-
-
-" ====== quick-scopeの設定 ======
-" highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=155 cterm=underline
-" highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=81 cterm=underline
-
-" f,Fキー押下時のみハイライトを有効
-let g:qs_highlight_on_keys = ['f', 'F']
-" ====== quick-scopeの設定ここまで ======
-
-
-" ====== neovim固有の設定 ======
-if has('nvim')
-
-	" 配色の設定
-	colorscheme industry
-
-	" ターミナルの起動
-	nnoremap <leader>t :Bterm<Enter>
-	nnoremap <leader>v :Vterm<Enter>
-	command! -nargs=* Bterm split | terminal <args>
-	command! -nargs=* Vterm vsplit | terminal <args>
-
-	" 分割したウィンドウの移動
-	tnoremap <C-w><C-n> <C-\><C-n>
-
-	" ターミナル起動時に行番号を非表示
-    autocmd TermOpen * setlocal norelativenumber
-    autocmd TermOpen * setlocal nonumber
-
-endif
-" ====== neovim固有の設定ここまで ======
-
