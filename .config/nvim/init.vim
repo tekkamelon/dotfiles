@@ -93,12 +93,6 @@ tnoremap <C-w><C-n> <C-\><C-n>
 
 
 " ====== ターミナルの設定 ======
-" ターミナルの起動
-nnoremap <leader>t :Bterm<Enter>
-nnoremap <leader>v :Vterm<Enter>
-command! -nargs=* Bterm split | terminal <args>
-command! -nargs=* Vterm vsplit | terminal <args>
-
 " ターミナル起動時に行番号を非表示
 autocmd TermOpen * setlocal norelativenumber
 autocmd TermOpen * setlocal nonumber
@@ -124,8 +118,12 @@ let mapleader="\<Space>"
 	map <leader>Q :q!<Enter>
 
 	"ターミナルを起動
-	nnoremap <leader>t :terminal<Enter>
-	nnoremap <leader>T :tabnew<Enter>
+	nnoremap <leader>t :Bterm<Enter>
+	nnoremap <leader>v :Vterm<Enter>
+	command! -nargs=* Bterm split | terminal <args>
+	command! -nargs=* Vterm vsplit | terminal <args>
+
+	" コンパイル
 	map <leader>m :make<Enter>  
 
 	"バッファの切り替え
