@@ -27,7 +27,7 @@ runtime! debian.vim
 " 配色の設定
 if has("syntax")
   syntax on
-  colorscheme ron
+  colorscheme industry
 endif
 
 " If using a dark background within the editing area and syntax highlighting
@@ -160,7 +160,11 @@ let g:airline_theme = 'dark_minimal'
 let g:airline#extensions#tabline#enabled = 1 
 
 " ====== fernの設定 ======
+" カレントディレクトリからサイドバー形式で開く
 map <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
+
+" 行番号を非表示
+autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
 " ====== quick-scopeの設定 ======
 " ハイライトの色を設定
