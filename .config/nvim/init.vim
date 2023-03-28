@@ -174,9 +174,9 @@ let g:qs_highlight_on_keys = ['f', 'F']
 
 " ====== telescopeの設定 ======
 " leader+fでファイルを検索
-nnoremap <leader>f <cmd>Telescope find_files hidden=false theme=get_dropdown<cr>
+nnoremap <leader>f <cmd>Telescope find_files hidden=false previewer=false theme=get_dropdown<cr>
 
 " leader+Fで隠しファイルごと検索
-nnoremap <leader>F <cmd>Telescope find_files hidden=true theme=get_dropdown<cr>
+nnoremap <leader>F <cmd>Telescope find_files hidden=true previewer=false theme=get_dropdown<cr>
 " leader+bでバッファを検索
 nnoremap <leader>b <cmd>Telescope buffers theme=get_dropdown<cr>
