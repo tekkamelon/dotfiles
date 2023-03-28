@@ -27,7 +27,7 @@ runtime! debian.vim
 " 配色の設定
 if has("syntax")
   syntax on
-  colorscheme industry
+  colorscheme ron
 endif
 
 " If using a dark background within the editing area and syntax highlighting
@@ -117,11 +117,15 @@ let mapleader="\<Space>"
 	map <leader>q :q<Enter>
 	map <leader>Q :q!<Enter>
 
-	"ターミナルを起動
+	" ターミナルの設定
+	" "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
+	command! -nargs=* Bterm split | resize -7 | terminal <args>
+	" "Vterm"の設定,ターミナルを右半分に起動
+	command! -nargs=* Vterm vsplit | terminal <args>
+
+	" 上記コマンドを起動
 	nnoremap <leader>t :Bterm<Enter>
 	nnoremap <leader>v :Vterm<Enter>
-	command! -nargs=* Bterm split | terminal <args>
-	command! -nargs=* Vterm vsplit | terminal <args>
 
 	" コンパイル
 	map <leader>m :make<Enter>  
@@ -180,3 +184,4 @@ nnoremap <leader>f <cmd>Telescope find_files hidden=false previewer=false theme=
 nnoremap <leader>F <cmd>Telescope find_files hidden=true previewer=false theme=get_dropdown<cr>
 " leader+bでバッファを検索,プレビューをオフ
 nnoremap <leader>b <cmd>Telescope buffers previewer=false theme=get_dropdown<cr>
+
