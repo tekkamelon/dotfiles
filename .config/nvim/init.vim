@@ -173,10 +173,10 @@ highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=129 cterm=un
 let g:qs_highlight_on_keys = ['f', 'F']
 
 " ====== telescopeの設定 ======
-" leader+fでファイルを検索
+" leader+fでファイルを検索,プレビューをオフ
 nnoremap <leader>f <cmd>Telescope find_files hidden=false previewer=false theme=get_dropdown<cr>
 
-" leader+Fで隠しファイルごと検索
+" leader+Fで隠しファイルごと検索,プレビューをオフ
 nnoremap <leader>F <cmd>Telescope find_files hidden=true previewer=false theme=get_dropdown<cr>
-" leader+bでバッファを検索
-nnoremap <leader>b <cmd>Telescope buffers theme=get_dropdown<cr>
+" leader+bでバッファを検索,プレビューをオフ
+nnoremap <leader>b <cmd>Telescope buffers previewer=false theme=get_dropdown<cr>
