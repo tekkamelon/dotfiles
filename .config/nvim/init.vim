@@ -8,11 +8,7 @@
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
-
-" Vim will load $VIMRUNTIME/defaults.vim if the user does not have a vimrc.
 " This happens after /etc/vim/vimrc(.local) are loaded, so it will override
-" any settings in these files.
-" If you don't want that to happen, uncomment the below line to prevent
 " defaults.vim from being loaded.
 " let g:skip_defaults_vim = 1
 
@@ -27,8 +23,12 @@ runtime! debian.vim
 " 配色の設定
 if has("syntax")
   syntax on
-  colorscheme ron
+  colorscheme industry
+  " colorscheme ron
 endif
+
+" truecolorの設定
+set termguicolors
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -69,7 +69,12 @@ set shiftwidth=4
 
 " カーソルラインを表示
 set cursorline   
-" set cursorcolumn
+
+" 一度カーソルラインをリセット
+hi clear CursorLine
+
+" カーソルラインをアンダーラインに設定
+hi CursorLine gui=underline cterm=underline
 
 " ヤンクをクリップボードに貼り付け
 " set clipboard=unnamedplus
@@ -156,7 +161,8 @@ call jetpack#end()
 " ====== airlineの設定 ======
 " テーマの指定
 " let g:airline_theme = 'base16_adwaita'               
-let g:airline_theme = 'dark_minimal'               
+" let g:airline_theme = 'dark_minimal'               
+let g:airline_theme = 'badwolf'               
 
 " タブラインを表示
 let g:airline#extensions#tabline#enabled = 1 
@@ -170,8 +176,8 @@ autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
 " ====== quick-scopeの設定 ======
 " ハイライトの色を設定
-highlight QuickScopePrimary guifg='#afff5f' gui=underline ctermfg=199 cterm=underline
-highlight QuickScopeSecondary guifg='#5fffff' gui=underline ctermfg=129 cterm=underline
+highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
+highlight QuickScopeSecondary guifg='pink' gui=underline ctermfg=129 cterm=underline
 
 " f,Fキー押下時のみハイライトを有効
 let g:qs_highlight_on_keys = ['f', 'F']
