@@ -177,10 +177,10 @@ autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 " ====== quick-scopeの設定 ======
 " ハイライトの色を設定
 highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
-highlight QuickScopeSecondary guifg='pink' gui=underline ctermfg=129 cterm=underline
+highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
 
 " f,Fキー押下時のみハイライトを有効
-let g:qs_highlight_on_keys = ['f', 'F']
+" let g:qs_highlight_on_keys = ['f', 'F']
 
 " ====== telescopeの設定 ======
 " leader+fでファイルを検索,プレビューをオフ
