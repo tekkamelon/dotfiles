@@ -96,7 +96,6 @@ set splitright
 " 分割したウィンドウの移動
 tnoremap <C-w><C-n> <C-\><C-n>
 
-
 " ====== ターミナルの設定 ======
 " ターミナル起動時に行番号を非表示
 autocmd TermOpen * setlocal norelativenumber
@@ -146,33 +145,18 @@ let mapleader="\<Space>"
 call jetpack#begin()
 
 	Jetpack 'tani/vim-jetpack', {'opt': 1}
-	Jetpack 'vim-airline/vim-airline-themes'
-	Jetpack 'vim-airline/vim-airline'
 	Jetpack 'jiangmiao/auto-pairs'
 	Jetpack 'unblevable/quick-scope'
 	Jetpack 'lambdalisue/fern.vim'
+	Jetpack 'ojroques/nvim-hardline'
+	Jetpack 'ap/vim-buftabline'
 
 	" 以下の機能は0.7.0から
+	" telescope.nvimの依存関係
 	Jetpack 'nvim-lua/plenary.nvim'
 	Jetpack 'nvim-telescope/telescope.nvim'
 
 call jetpack#end()
-
-" ====== airlineの設定 ======
-" テーマの指定
-" let g:airline_theme = 'base16_adwaita'               
-" let g:airline_theme = 'dark_minimal'               
-let g:airline_theme = 'badwolf'               
-
-" タブラインを表示
-let g:airline#extensions#tabline#enabled = 1 
-
-" ====== fernの設定 ======
-" カレントディレクトリからサイドバー形式で開く
-map <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
-
-" 行番号を非表示
-autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
 " ====== quick-scopeの設定 ======
 " ハイライトの色を設定
@@ -181,6 +165,16 @@ highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=und
 
 " f,Fキー押下時のみハイライトを有効
 " let g:qs_highlight_on_keys = ['f', 'F']
+
+" ====== fernの設定 ======
+" カレントディレクトリからサイドバー形式で開く
+map <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
+
+" 行番号を非表示
+autocmd FileType fern setlocal norelativenumber | setlocal nonumber
+
+" ====== hardlineの設定 ======
+lua require('hardline').setup {}
 
 " ====== telescopeの設定 ======
 " leader+fでファイルを検索,プレビューをオフ
