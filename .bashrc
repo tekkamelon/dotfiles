@@ -163,5 +163,4 @@ export PATH=$PATH:$HOME/.local/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
 # pywalでテーマを設定 
-wal -nqi Pictures/wallpapers/others/fog-forest-nature-twilight-wallpaper-preview.jpg
 
