@@ -136,13 +136,13 @@ alias gdv='git diff | vim -R -u .config/nvim/light_init.vim - '
 # コマンドのエイリアス
 alias bc='bc -q'
 alias info='info --vi-keys'
-alias !!='r'
+alias r='!!'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias lv='dir -1 -v'
 alias lva='dir -1 -v -a'
-alias lvd='ls -a | grep -E "^\." | sed '1,2d''
+alias lvd='ls -a | grep "^\." | sed '1,2d''
 
 # シャットダウン及び再起動
 alias shutdown='systemctl poweroff'
@@ -162,5 +162,5 @@ export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
-# pywalでテーマを設定 
-
+# pywalで最後に利用したテーマを呼び出す
+cat ~/.cache/wal/sequences
