@@ -127,10 +127,11 @@ alias w3b='w3m -B'
 alias upk='urxvtc -pe kuake,tabbed'
 
 # vimの設定
-alias vp="nvim - -R"
 alias vim='nvim'
 alias vi='nvim'
 alias vit='nvim -c Bterm'
+alias vi='nvim -u .config/nvim/light_init.vim -c "set nonumber"'
+alias vp="nvim -R -u .config/nvim/light_init.vim - "
 alias gdv='git diff | vim -R -u .config/nvim/light_init.vim - '
 
 # コマンドのエイリアス
@@ -163,4 +164,4 @@ export PATH=$PATH:$HOME/.local/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
 # pywalで最後に利用したテーマを呼び出す
-cat ~/.cache/wal/sequences
+# cat ~/.cache/wal/sequences
