@@ -27,7 +27,7 @@ if has("syntax")
 endif
 
 " truecolorの設定
-set termguicolors
+" set termguicolors
 
 " If using a dark background within the editing area and syntax highlighting
 " turn on this option as well
@@ -69,12 +69,6 @@ set shiftwidth=4
 " カーソルラインを表示
 set cursorline   
 
-" 一度カーソルラインをリセット
-hi clear CursorLine
-
-" カーソルラインをアンダーラインに設定
-hi CursorLine gui=underline cterm=underline
-
 " swapファイルを別ディレクトリに作成
 set directory=/tmp
 
@@ -85,28 +79,16 @@ set splitright
 " 分割したウィンドウの移動
 tnoremap <C-w><C-n> <C-\><C-n>
 
-" ====== ターミナルの設定 ======
-" ターミナル起動時に行番号を非表示
-autocmd TermOpen * setlocal norelativenumber
-autocmd TermOpen * setlocal nonumber
-
-" "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
-command! -nargs=* Bterm split | resize -7 | terminal <args>
-
-" "Vterm"の設定,ターミナルを右半分に起動
-command! -nargs=* Vterm vsplit | terminal <args>
-" ====== ターミナルの設定ここまで ======
-
 
 " ====== leaderをspaceに設定 ====== 
 let mapleader="\<Space>"
 	" ノーマルモード時のコメントアウト
-	map <leader>/ ^i//<ESC>
+	map <leader>/ ^i// <ESC>
 	map <leader>2 ^i" <ESC>
 	map <leader>3 ^i# <ESC>
 
 	" ビジュアルモード時のコメントアウト
-	vmap <leader>/ :'<,'>normal i//<Enter>
+	vmap <leader>/ :'<,'>normal i// <Enter>
 	vmap <leader>2 :'<,'>normal i" <Enter>
 	vmap <leader>3 :'<,'>normal i# <Enter>
 
@@ -115,13 +97,6 @@ let mapleader="\<Space>"
 	map <leader>W :wq<Enter>
 	map <leader>q :q<Enter>
 	map <leader>Q :q!<Enter>
-
-	" ターミナルをを起動
-	nnoremap <leader>t :Bterm<Enter>
-	nnoremap <leader>v :Vterm<Enter>
-
-	" コンパイル
-	map <leader>m :make<Enter>  
 
 	"バッファの切り替え
 	nnoremap <leader>j :bprev<CR>

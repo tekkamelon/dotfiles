@@ -105,12 +105,12 @@ autocmd TermOpen * setlocal nonumber
 " ====== leaderをspaceに設定 ====== 
 let mapleader="\<Space>"
 	" ノーマルモード時のコメントアウト
-	map <leader>/ ^i//<ESC>
+	map <leader>/ ^i// <ESC>
 	map <leader>2 ^i" <ESC>
 	map <leader>3 ^i# <ESC>
 
 	" ビジュアルモード時のコメントアウト
-	vmap <leader>/ :'<,'>normal i//<Enter>
+	vmap <leader>/ :'<,'>normal i// <Enter>
 	vmap <leader>2 :'<,'>normal i" <Enter>
 	vmap <leader>3 :'<,'>normal i# <Enter>
 
