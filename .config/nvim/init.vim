@@ -105,14 +105,14 @@ autocmd TermOpen * setlocal nonumber
 " ====== leaderをspaceに設定 ====== 
 let mapleader="\<Space>"
 	" ノーマルモード時のコメントアウト
-	map <leader>/ ^i// <ESC>
-	map <leader>2 ^i" <ESC>
-	map <leader>3 ^i# <ESC>
+	" map <leader>/ ^i// <ESC>
+	" map <leader>2 ^i" <ESC>
+	" map <leader>3 ^i# <ESC>
 
 	" ビジュアルモード時のコメントアウト
-	vmap <leader>/ :'<,'>normal i// <Enter>
-	vmap <leader>2 :'<,'>normal i" <Enter>
-	vmap <leader>3 :'<,'>normal i# <Enter>
+	" vmap <leader>/ :'<,'>normal i// <Enter>
+	" vmap <leader>2 :'<,'>normal i" <Enter>
+	" vmap <leader>3 :'<,'>normal i# <Enter>
 
 	" spaceを使い保存及び終了
 	map <leader>w :w<Enter>
@@ -149,6 +149,7 @@ call jetpack#begin()
 	Jetpack 'lambdalisue/fern.vim'
 	Jetpack 'ojroques/nvim-hardline'
 	Jetpack 'ap/vim-buftabline'
+	Jetpack 'numToStr/Comment.nvim'
 
 	" 以下の機能は0.7.0から
 	" telescope.nvimの依存関係
@@ -157,7 +158,7 @@ call jetpack#begin()
 
 call jetpack#end()
 
-" ====== quick-scopeの設定 ======
+" quick-scopeの設定
 " ハイライトの色を設定
 highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
 highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
@@ -165,17 +166,20 @@ highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=und
 " f,Fキー押下時のみハイライトを有効
 " let g:qs_highlight_on_keys = ['f', 'F']
 
-" ====== fernの設定 ======
+" fernの設定
 " カレントディレクトリからサイドバー形式で開く
 map <C-n> :Fern . -reveal=% -drawer -toggle -width=30<CR>
 
 " 行番号を非表示
 autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
-" ====== hardlineの設定 ======
+" hardlineの設定
 lua require('hardline').setup {}
 
-" ====== telescopeの設定 ======
+" Commentの設定
+lua require('Comment').setup {}
+
+" telescopeの設定
 " leader+fでファイルを検索,プレビューをオフ
 nnoremap <leader>f <cmd>Telescope find_files hidden=false previewer=false theme=get_dropdown<cr>
 
