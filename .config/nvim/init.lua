@@ -1,5 +1,20 @@
--- カラースキーム
--- vim.cmd('colorscheme industry')
+-- 標準プラグインの読込の停止
+vim.cmd([[
+
+	let g:did_install_default_menus = 1
+	let g:loaded_2html_plugin       = 1
+	let g:loaded_gzip               = 1
+	let g:loaded_man                = 1
+	let g:loaded_matchit            = 1
+	let g:loaded_matchparen         = 1
+	let g:loaded_shada_plugin       = 1
+	let g:loaded_spellfile_plugin   = 1
+	let g:loaded_tarPlugin          = 1
+	let g:loaded_tutor_mode_plugin  = 1
+	let g:loaded_zipPlugin          = 1
+	let g:skip_loading_mswin        = 1
+
+]])
 
 -- 24bitカラーを有効
 vim.opt.termguicolors = true
@@ -33,6 +48,17 @@ vim.cmd([[
 	autocmd TermOpen * setlocal norelativenumber
 	autocmd TermOpen * setlocal nonumber
 
+	" fernの設定
+	" 行番号を非表示
+	autocmd FileType fern setlocal norelativenumber | setlocal nonumber
+
+	" ターミナルの設定
+	" "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
+	command! -nargs=* Bterm split | resize -7 | terminal <args>
+
+	" "Vterm"の設定,ターミナルを右半分に起動
+	command! -nargs=* Vterm vsplit | terminal <args>
+
 ]])
 
 -- ターミナルノーマルモードへの移行
@@ -57,4 +83,57 @@ vim.api.nvim_set_keymap('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
 -- バッファの切り替え
 vim.api.nvim_set_keymap('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
+
+-- ターミナルの起動
+vim.api.nvim_set_keymap('n' , '<leader>t' , ':Bterm<CR>' , {noremap = true})
+vim.api.nvim_set_keymap('n' , '<leader>v' , ':Vterm<CR>' , {noremap = true})
 -- ====== leaderの設定ここまで ====== 
+
+-- ====== 以降プラグインの設定 ======
+-- Jetpackの設定
+vim.cmd([[
+
+call jetpack#begin()
+
+	Jetpack 'tani/vim-jetpack', {'opt': 1}
+	Jetpack 'LunarWatcher/auto-pairs'
+	Jetpack 'unblevable/quick-scope'
+	Jetpack 'lambdalisue/fern.vim'
+	Jetpack 'ojroques/nvim-hardline'
+	Jetpack 'ap/vim-buftabline'
+	Jetpack 'numToStr/Comment.nvim'
+
+	" 以下の機能は0.7.0から
+	" telescope.nvimの依存関係
+	Jetpack 'nvim-lua/plenary.nvim'
+	Jetpack 'nvim-telescope/telescope.nvim'
+
+	" quick-scopeの設定
+	" ハイライトの色を設定
+	highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
+	highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
+
+call jetpack#end()
+
+]])
+
+-- hardlineの設定
+require('hardline').setup {}
+
+-- Commentの設定
+require('Comment').setup {}
+
+-- fernの設定
+-- カレントディレクトリからサイドバー形式で開く
+vim.api.nvim_set_keymap('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
+
+-- telescopeの設定,プレビューをオフ
+-- leader+fでファイルを検索
+vim.api.nvim_set_keymap('n' , '<leader>f' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
+-- leader+Fで隠しファイルごと検索
+vim.api.nvim_set_keymap('n' , '<leader>F' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
+-- leader+bでバッファを検索,プレビューをオフ
+vim.api.nvim_set_keymap('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
