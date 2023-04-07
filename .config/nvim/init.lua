@@ -1,10 +1,10 @@
 -- カラースキーム
-vim.cmd('colorscheme industry')
+-- vim.cmd('colorscheme industry')
 
 -- 24bitカラーを有効
 vim.opt.termguicolors = true
 
--- 背景色をダークモード
+-- 背景色をダークモードに設定
 vim.opt.background = 'dark'
 
 -- 行番号を表示
@@ -19,6 +19,9 @@ vim.opt.cursorline = true
 
 -- カーソルラインの設定
 vim.cmd([[
+	
+	" カラースキームを設定
+	colorscheme industry
 
 	" 一度カーソルラインをリセット
 	hi clear CursorLine
@@ -44,3 +47,14 @@ vim.opt.splitright= true
 
 -- ====== leaderをspaceに設定 ====== 
 vim.g.mapleader = " "
+
+-- 保存,終了
+vim.api.nvim_set_keymap('n' , '<leader>w' , ':w<CR>' , {noremap = true})
+vim.api.nvim_set_keymap('n' , '<leader>W' , ':wq<CR>' , {noremap = true})
+vim.api.nvim_set_keymap('n' , '<leader>q' , ':q<CR>' , {noremap = true})
+vim.api.nvim_set_keymap('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
+
+-- バッファの切り替え
+vim.api.nvim_set_keymap('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
+vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
+-- ====== leaderの設定ここまで ====== 
