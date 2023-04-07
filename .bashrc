@@ -128,9 +128,9 @@ alias w3b='w3m -B'
 # vimの設定
 alias vim='nvim'
 alias vit='nvim -c Bterm'
-alias vi='nvim -u $HOME/.config/nvim/light_init.vim -c "set nonumber" -c "syntax off"'
-alias vp="nvim -R -u $HOME/.config/nvim/light_init.vim - "
-alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.vim - '
+alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber" -c "syntax off"'
+alias vp="nvim -R -u $HOME/.config/nvim/light_init.lua - "
+alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - '
 
 # コマンドのエイリアス
 alias bc='bc -q'
