@@ -36,7 +36,8 @@ vim.opt.cursorline = true
 vim.cmd([[
 	
 	" カラースキームを設定
-	colorscheme industry
+	-- colorscheme ron 
+	colorscheme industry 
 
 	" 一度カーソルラインをリセット
 	hi clear CursorLine
@@ -87,33 +88,34 @@ vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
 -- ターミナルの起動
 vim.api.nvim_set_keymap('n' , '<leader>t' , ':Bterm<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>v' , ':Vterm<CR>' , {noremap = true})
+
 -- ====== leaderの設定ここまで ====== 
 
 -- ====== 以降プラグインの設定 ======
 -- Jetpackの設定
 vim.cmd([[
 
-call jetpack#begin()
+	call jetpack#begin()
 
-	Jetpack 'tani/vim-jetpack', {'opt': 1}
-	Jetpack 'LunarWatcher/auto-pairs'
-	Jetpack 'unblevable/quick-scope'
-	Jetpack 'lambdalisue/fern.vim'
-	Jetpack 'ojroques/nvim-hardline'
-	Jetpack 'ap/vim-buftabline'
-	Jetpack 'numToStr/Comment.nvim'
+		Jetpack 'tani/vim-jetpack', {'opt': 1}
+		Jetpack 'LunarWatcher/auto-pairs'
+		Jetpack 'unblevable/quick-scope'
+		Jetpack 'lambdalisue/fern.vim'
+		Jetpack 'ojroques/nvim-hardline'
+		Jetpack 'ap/vim-buftabline'
+		Jetpack 'numToStr/Comment.nvim'
 
-	" 以下の機能は0.7.0から
-	" telescope.nvimの依存関係
-	Jetpack 'nvim-lua/plenary.nvim'
-	Jetpack 'nvim-telescope/telescope.nvim'
+		" 以下の機能は0.7.0から
+		" telescope.nvimの依存関係
+		Jetpack 'nvim-lua/plenary.nvim'
+		Jetpack 'nvim-telescope/telescope.nvim'
+
+	call jetpack#end()
 
 	" quick-scopeの設定
 	" ハイライトの色を設定
 	highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
 	highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
-
-call jetpack#end()
 
 ]])
 
@@ -126,6 +128,10 @@ require('Comment').setup {}
 -- fernの設定
 -- カレントディレクトリからサイドバー形式で開く
 vim.api.nvim_set_keymap('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
+
+-- Commentの設定
+vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap= true})
+vim.keymap.set('v' , '<leader>g' , 'gc' , {remap= true})
 
 -- telescopeの設定,プレビューをオフ
 -- leader+fでファイルを検索
