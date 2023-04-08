@@ -36,7 +36,7 @@ vim.opt.cursorline = true
 vim.cmd([[
 	
 	" カラースキームを設定
-	-- colorscheme ron 
+	" colorscheme ron 
 	colorscheme industry 
 
 	" 一度カーソルラインをリセット
@@ -93,24 +93,26 @@ vim.api.nvim_set_keymap('n' , '<leader>v' , ':Vterm<CR>' , {noremap = true})
 
 -- ====== 以降プラグインの設定 ======
 -- Jetpackの設定
+vim.cmd('packadd vim-jetpack')
+
+require('jetpack.paq'){
+
+	{'tani/vim-jetpack', opt = 1},
+	'LunarWatcher/auto-pairs',
+	'unblevable/quick-scope',
+	'lambdalisue/fern.vim',
+	'ojroques/nvim-hardline',
+	'ap/vim-buftabline',
+	'numToStr/Comment.nvim',
+
+	-- " 以下の機能は0.7.0から
+	-- " telescope.nvimの依存関係
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope.nvim',
+
+}
+
 vim.cmd([[
-
-	call jetpack#begin()
-
-		Jetpack 'tani/vim-jetpack', {'opt': 1}
-		Jetpack 'LunarWatcher/auto-pairs'
-		Jetpack 'unblevable/quick-scope'
-		Jetpack 'lambdalisue/fern.vim'
-		Jetpack 'ojroques/nvim-hardline'
-		Jetpack 'ap/vim-buftabline'
-		Jetpack 'numToStr/Comment.nvim'
-
-		" 以下の機能は0.7.0から
-		" telescope.nvimの依存関係
-		Jetpack 'nvim-lua/plenary.nvim'
-		Jetpack 'nvim-telescope/telescope.nvim'
-
-	call jetpack#end()
 
 	" quick-scopeの設定
 	" ハイライトの色を設定
