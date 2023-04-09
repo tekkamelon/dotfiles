@@ -1,3 +1,5 @@
+-- init.lua
+
 -- 標準プラグインの読込の停止
 vim.cmd([[
 
@@ -102,7 +104,6 @@ require('jetpack.paq'){
 	'unblevable/quick-scope',
 	'lambdalisue/fern.vim',
 	'ojroques/nvim-hardline',
-	'ap/vim-buftabline',
 	'numToStr/Comment.nvim',
 
 	-- " 以下の機能は0.7.0から
@@ -122,7 +123,37 @@ vim.cmd([[
 ]])
 
 -- hardlineの設定
-require('hardline').setup {}
+require('hardline').setup {
+
+	-- バッファラインの表示
+	bufferline = true,
+
+	-- テーマ
+	theme = 'one',
+
+	-- 表示するステータス,配色などの設定
+	sections = {
+		
+		-- 現在のモード
+		{class = 'mode', item = require('hardline.parts.mode').get_item},
+
+		-- ファイル名の配色を"med"(中間)に設定
+		{class = 'med', item = require('hardline.parts.filename').get_item},
+    	'%<',
+		{class = 'med', item = '%='},
+
+		-- 現在の単語数
+    	{class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
+
+		-- ファイルの種類
+		{class = 'high', item = require('hardline.parts.filetype').get_item, hide = 60},
+
+		-- 行全体のパーセンテージ
+    	{class = 'mode', item = require('hardline.parts.line').get_item},
+
+	}
+
+}
 
 -- Commentの設定
 require('Comment').setup {}
