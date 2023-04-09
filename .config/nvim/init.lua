@@ -34,7 +34,7 @@ vim.opt.shiftwidth = 4
 -- カーソルラインを表示
 vim.opt.cursorline = true
 
--- カーソルラインの設定
+-- vim script
 vim.cmd([[
 	
 	" カラースキームを設定
@@ -50,10 +50,6 @@ vim.cmd([[
 	" ターミナル起動時に行番号を非表示
 	autocmd TermOpen * setlocal norelativenumber
 	autocmd TermOpen * setlocal nonumber
-
-	" fernの設定
-	" 行番号を非表示
-	autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
 	" ターミナルの設定
 	" "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
@@ -113,12 +109,23 @@ require('jetpack.paq'){
 
 }
 
+-- quick-scopeの設定
 vim.cmd([[
 
-	" quick-scopeの設定
 	" ハイライトの色を設定
 	highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
 	highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
+
+]])
+
+-- fernの設定
+-- カレントディレクトリからサイドバー形式で開く
+vim.api.nvim_set_keymap('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
+
+-- 行番号を非表示
+vim.cmd([[
+
+	autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
 ]])
 
@@ -158,12 +165,10 @@ require('hardline').setup {
 -- Commentの設定
 require('Comment').setup {}
 
--- fernの設定
--- カレントディレクトリからサイドバー形式で開く
-vim.api.nvim_set_keymap('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
-
--- Commentの設定
+-- ノーマルモード時にleader+gでコメントアウト
 vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap= true})
+
+-- ビジュアルモード時にleader+gでコメントアウト
 vim.keymap.set('v' , '<leader>g' , 'gc' , {remap= true})
 
 -- telescopeの設定,プレビューをオフ
