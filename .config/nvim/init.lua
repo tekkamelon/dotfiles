@@ -42,10 +42,7 @@ vim.cmd([[
 	colorscheme industry 
 
 	" 一度カーソルラインをリセット
-	hi clear CursorLine
-
-	" カーソルラインをアンダーラインに設定
-	hi CursorLine gui=underline cterm=underline
+	highlight clear CursorLine
 
 	" ターミナル起動時に行番号を非表示
 	autocmd TermOpen * setlocal norelativenumber
@@ -59,6 +56,9 @@ vim.cmd([[
 	command! -nargs=* Vterm vsplit | terminal <args>
 
 ]])
+
+-- カーソルラインをアンダーラインに設定
+vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 
 -- ターミナルノーマルモードへの移行
 vim.keymap.set('t', '<C-w><C-n>' , [[<C-\><C-n>]] , {noremap=true})
