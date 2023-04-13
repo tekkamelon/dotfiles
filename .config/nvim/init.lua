@@ -101,6 +101,7 @@ require('jetpack.paq'){
 	'lambdalisue/fern.vim',
 	'ojroques/nvim-hardline',
 	'numToStr/Comment.nvim',
+	'thinca/vim-partedit',
 
 	-- " 以下の機能は0.7.0から
 	-- " telescope.nvimの依存関係
