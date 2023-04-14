@@ -1,6 +1,5 @@
-# PS1='$(whoami)@$(hostname) > '
-
-PS1='$(print -n "\033[32m${USER}@$(hostname) ";[[ "$HOME" == "$PWD" ]] && print -n "~" ||([[ "${PWD##*/}" == "" ]] && print -n "/" || print -n "${PWD##*/}");print "$ ")'
+PS1=$'\E[32m$(hostname -s): ${PWD} $ \E[0m'
+# PS1='${LOGNAME}@${HOSTNAME%%.*} $ '
 
 # viモードに設定
 set -o vi
@@ -14,14 +13,13 @@ alias w3b='w3m -B'
 # vimの設定
 alias vim='nvim'
 alias vit='nvim -c Bterm'
-alias vi='nvim -u $HOME/.config/nvim/light_init.vim -c "set nonumber" -c "syntax off"'
-alias vp="nvim -R -u $HOME/.config/nvim/light_init.vim - "
-alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.vim - '
+alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber" -c "syntax off"'
+alias vp="nvim -R -u $HOME/.config/nvim/light_init.lua - "
+alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - '
 
 # コマンドのエイリアス
 alias bc='bc -q'
 alias info='info --vi-keys'
-alias !!='r'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -47,5 +45,3 @@ export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
-# pywalで最後に利用したテーマを呼び出す
-cat ~/.cache/wal/sequences
