@@ -26,6 +26,20 @@ if has("syntax")
   colorscheme default
 endif
 
+" 標準プラグインの読込の停止
+let g:did_install_default_menus = 1
+let g:loaded_2html_plugin       = 1
+let g:loaded_gzip               = 1
+let g:loaded_man                = 1
+let g:loaded_matchit            = 1
+let g:loaded_matchparen         = 1
+let g:loaded_shada_plugin       = 1
+let g:loaded_spellfile_plugin   = 1
+let g:loaded_tarPlugin          = 1
+let g:loaded_tutor_mode_plugin  = 1
+let g:loaded_zipPlugin          = 1
+let g:skip_loading_mswin        = 1
+
 " truecolorの設定
 " set termguicolors
 
@@ -83,9 +97,9 @@ tnoremap <C-w><C-n> <C-\><C-n>
 " ====== leaderをspaceに設定 ====== 
 let mapleader="\<Space>"
 	" ノーマルモード時のコメントアウト
-	map <leader>/ ^i// <ESC>
-	map <leader>2 ^i" <ESC>
-	map <leader>3 ^i# <ESC>
+	" map <leader>/ ^i// <ESC>
+	" map <leader>2 ^i" <ESC>
+	" map <leader>3 ^i# <ESC>
 
 	" ビジュアルモード時のコメントアウト
 	vmap <leader>/ :'<,'>normal i// <Enter>
