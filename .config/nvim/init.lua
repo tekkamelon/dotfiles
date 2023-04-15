@@ -84,7 +84,7 @@ vim.api.nvim_set_keymap('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
 
 -- ターミナルの起動
-vim.api.nvim_set_keymap('n' , '<leader>t' , ':Bterm<CR>' , {noremap = true})
+-- vim.api.nvim_set_keymap('n' , '<leader>t' , ':Bterm<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>v' , ':Vterm<CR>' , {noremap = true})
 
 -- ====== leaderの設定ここまで ====== 
@@ -102,6 +102,7 @@ require('jetpack.paq'){
 	'ojroques/nvim-hardline',
 	'numToStr/Comment.nvim',
 	'thinca/vim-partedit',
+	'akinsho/toggleterm.nvim',
 
 	-- " 以下の機能は0.7.0から
 	-- " telescope.nvimの依存関係
@@ -166,6 +167,18 @@ require('hardline').setup {
 -- Commentの設定
 require('Comment').setup {}
 
+-- toggletermの設定
+require("toggleterm").setup{}
+
+-- leader+tでターミナル起動
+vim.api.nvim_set_keymap('n' , '<leader>t' , ':ToggleTerm size=20<CR>' , {noremap = true})
+
+-- ノーマルモード時にleader+Tで現在カーソルのある行をターミナルに送る
+vim.api.nvim_set_keymap('n' , '<leader>T' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
+
+-- ビジュアルモード時にleader+tで選択範囲をターミナルに送る
+vim.api.nvim_set_keymap('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
+
 -- ノーマルモード時にleader+gでコメントアウト
 vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap= true})
 
@@ -173,11 +186,11 @@ vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap= true})
 vim.keymap.set('v' , '<leader>g' , 'gc' , {remap= true})
 
 -- telescopeの設定,プレビューをオフ
--- leader+fでファイルを検索
-vim.api.nvim_set_keymap('n' , '<leader>f' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
+-- leader+ffでファイルを検索
+vim.api.nvim_set_keymap('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
--- leader+Fで隠しファイルごと検索
-vim.api.nvim_set_keymap('n' , '<leader>F' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
+-- leader+fhで隠しファイルごと検索
+vim.api.nvim_set_keymap('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
 -- leader+bでバッファを検索,プレビューをオフ
 vim.api.nvim_set_keymap('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
