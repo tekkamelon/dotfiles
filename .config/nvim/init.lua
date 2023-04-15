@@ -170,11 +170,14 @@ require('Comment').setup {}
 -- toggletermの設定
 require("toggleterm").setup{}
 
--- leader+tでターミナル起動
-vim.api.nvim_set_keymap('n' , '<leader>t' , ':ToggleTerm size=20<CR>' , {noremap = true})
+-- leader+ttで下方にターミナルのトグル
+vim.api.nvim_set_keymap('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , {noremap = true})
+
+-- leader+tfでフロートウィンドウでターミナルのトグル
+vim.api.nvim_set_keymap('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , {noremap = true})
 
 -- ノーマルモード時にleader+Tで現在カーソルのある行をターミナルに送る
-vim.api.nvim_set_keymap('n' , '<leader>T' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
+vim.api.nvim_set_keymap('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
 
 -- ビジュアルモード時にleader+tで選択範囲をターミナルに送る
 vim.api.nvim_set_keymap('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
