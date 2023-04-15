@@ -13,7 +13,7 @@ alias w3b='w3m -B'
 # vimの設定
 alias vim='nvim'
 alias vit='nvim -c Bterm'
-alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber" -c "syntax off"'
+alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber"'
 alias vp="nvim -R -u $HOME/.config/nvim/light_init.lua - "
 alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - '
 
@@ -30,6 +30,23 @@ alias lvd='ls -a | grep "^\." | sed '1,2d''
 # シャットダウン及び再起動
 alias shutdown='systemctl poweroff'
 alias reboot='systemctl reboot'
+
+gdv(){
+
+	# git diffの結果の有無を判定,あれば真,なければ偽
+	if [ -n "$(git diff)" ] ; then
+
+		# 真の場合はgit diffの結果をnvimに渡す
+		git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - 
+
+	else
+
+		# 偽の場合はステータスを表示
+		git status
+
+	fi
+
+}
 # ====== エイリアスの設定ここまで ======
 
 
