@@ -179,7 +179,8 @@ require('hardline').setup{
 require('Comment').setup{}
 
 -- vim-parteditの設定
-vim.api.nvim_set_keymap('v' , '<leader>p' , ':Partedit -filetype ' , {noremap = true})
+-- ビジュアルモード時にleader+eでexモードのコマンドを表示
+vim.api.nvim_set_keymap('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
 
 -- ====== toggletermｎの設定 ======
 require("toggleterm").setup{}
