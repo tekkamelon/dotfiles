@@ -36,7 +36,7 @@ vim.opt.cursorline = true
 
 -- vim script
 vim.cmd([[
-	
+
 	" カラースキームを設定
 	" colorscheme ron 
 	colorscheme industry 
@@ -54,6 +54,9 @@ vim.cmd([[
 
 	" "Vterm"の設定,ターミナルを右半分に起動
 	command! -nargs=* Vterm vsplit | terminal <args>
+
+	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
+	au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=700 , on_visual=false}
 
 ]])
 
@@ -84,9 +87,7 @@ vim.api.nvim_set_keymap('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
 
 -- ターミナルの起動
--- vim.api.nvim_set_keymap('n' , '<leader>t' , ':Bterm<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>v' , ':Vterm<CR>' , {noremap = true})
-
 -- ====== leaderの設定ここまで ====== 
 
 -- ====== 以降プラグインの設定 ======
@@ -103,8 +104,9 @@ require('jetpack.paq'){
 	'numToStr/Comment.nvim',
 	'thinca/vim-partedit',
 	'akinsho/toggleterm.nvim',
+	'haya14busa/vim-edgemotion',
 
-	-- " 以下の機能は0.7.0から
+	-- neovim 0.7.0から
 	-- " telescope.nvimの依存関係
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
@@ -188,6 +190,15 @@ vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap= true})
 -- ビジュアルモード時にleader+gでコメントアウト
 vim.keymap.set('v' , '<leader>g' , 'gc' , {remap= true})
 
+-- vim-edgemotionの設定
+-- ctrl+jで1つ下のコードブロックへ
+vim.api.nvim_set_keymap('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+
+-- ctrl+kで1つ上のコードブロックへ
+vim.api.nvim_set_keymap('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+
+
+-- ====== neovim 0.7.0から ======
 -- telescopeの設定,プレビューをオフ
 -- leader+ffでファイルを検索
 vim.api.nvim_set_keymap('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
