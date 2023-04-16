@@ -35,7 +35,7 @@ vim.opt.shiftwidth = 4
 vim.opt.cursorline = true
 
 -- ビジュアルモード時に"$"で改行を含めないようにする
-vim.keymap.set('v' , '$' , 'g_' , {remap= true})
+vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
 -- vim script
 vim.cmd([[
@@ -59,15 +59,16 @@ vim.cmd([[
 	command! -nargs=* Vterm vsplit | terminal <args>
 
 	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
-	au TextYankPost * silent! lua vim.highlight.on_yank {higroup="IncSearch", timeout=700 , on_visual=false}
+	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
 
 ]])
+
 
 -- カーソルラインをアンダーラインに設定
 vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 
 -- ターミナルノーマルモードへの移行
-vim.keymap.set('t', '<C-w><C-n>' , [[<C-\><C-n>]] , {noremap=true})
+vim.keymap.set('t', '<C-w><C-n>' , [[<C-\><C-n>]] , {noremap = true})
 
 -- swapファイルを別ディレクトリに作成
 vim.opt.directory = '/tmp'
@@ -76,7 +77,8 @@ vim.opt.directory = '/tmp'
 vim.opt.splitbelow = true
 vim.opt.splitright= true
 
--- ====== leaderをspaceに設定 ====== 
+-- ====== leaderの設定 ====== 
+-- leaderをspaceに設定  
 vim.g.mapleader = " "
 
 -- 保存,終了
@@ -114,16 +116,18 @@ require('jetpack.paq'){
 
 }
 
--- quick-scopeの設定
+-- ====== quick-scopeの設定 ======
+-- ハイライトの色を設定
 vim.cmd([[
 
-	" ハイライトの色を設定
 	highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
 	highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
 
 ]])
+-- ====== quick-scopeの設定ここまで ======
 
--- fernの設定
+
+-- ====== fernの設定 ====== 
 -- カレントディレクトリからサイドバー形式で開く
 vim.api.nvim_set_keymap('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
 
@@ -133,9 +137,11 @@ vim.cmd([[
 	autocmd FileType fern setlocal norelativenumber | setlocal nonumber
 
 ]])
+-- ====== fernの設定ここまで ====== 
 
--- hardlineの設定
-require('hardline').setup {
+
+-- ====== hardlineの設定 ======
+require('hardline').setup{
 
 	-- バッファラインの表示
 	bufferline = true,
@@ -166,11 +172,16 @@ require('hardline').setup {
 	}
 
 }
+-- ====== hardlineの設定ここまで ======
+
 
 -- Commentの設定
-require('Comment').setup {}
+require('Comment').setup{}
 
--- toggletermの設定
+-- vim-parteditの設定
+vim.api.nvim_set_keymap('v' , '<leader>p' , ':Partedit -filetype ' , {noremap = true})
+
+-- ====== toggletermｎの設定 ======
 require("toggleterm").setup{}
 
 -- leader+ttで下方にターミナルのトグル
@@ -188,18 +199,22 @@ vim.api.nvim_set_keymap('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , 
 -- ビジュアルモード時にleader+tで選択範囲をターミナルに送る
 vim.api.nvim_set_keymap('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
 
--- ノーマルモード時にleader+gでコメントアウト
-vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap= true})
+-- leader+gでコメントアウト
+vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
+vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
+-- ====== toggletermの設定ここまで ======
 
--- ビジュアルモード時にleader+gでコメントアウト
-vim.keymap.set('v' , '<leader>g' , 'gc' , {remap= true})
 
--- vim-edgemotionの設定
+-- ====== vim-edgemotionの設定 ======
+
 -- ctrl+jで1つ下のコードブロックへ
 vim.api.nvim_set_keymap('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.api.nvim_set_keymap('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
 
 -- ctrl+kで1つ上のコードブロックへ
 vim.api.nvim_set_keymap('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.api.nvim_set_keymap('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+-- ====== vim-edgemotionの設定ここまで ======
 
 
 -- ====== neovim 0.7.0から ======
@@ -212,4 +227,5 @@ vim.api.nvim_set_keymap('n' , '<leader>fh' , ':Telescope find_files hidden=true 
 
 -- leader+bでバッファを検索
 vim.api.nvim_set_keymap('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+-- ====== プラグインの設定ここまで ======
 
