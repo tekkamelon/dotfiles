@@ -11,6 +11,9 @@ vim.opt.shiftwidth = 4
 -- カーソルラインを表示
 vim.opt.cursorline = true
 
+-- ビジュアルモード時に"$"で改行を含めないようにする
+vim.keymap.set('v' , '$' , 'g_' , {remap= true})
+
 -- カーソルラインの設定
 vim.cmd([[
 

@@ -34,6 +34,9 @@ vim.opt.shiftwidth = 4
 -- カーソルラインを表示
 vim.opt.cursorline = true
 
+-- ビジュアルモード時に"$"で改行を含めないようにする
+vim.keymap.set('v' , '$' , 'g_' , {remap= true})
+
 -- vim script
 vim.cmd([[
 
@@ -85,12 +88,10 @@ vim.api.nvim_set_keymap('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
 -- バッファの切り替え
 vim.api.nvim_set_keymap('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
 vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
-
--- ターミナルの起動
-vim.api.nvim_set_keymap('n' , '<leader>v' , ':Vterm<CR>' , {noremap = true})
 -- ====== leaderの設定ここまで ====== 
 
--- ====== 以降プラグインの設定 ======
+
+-- ====== プラグインの設定 ======
 -- Jetpackの設定
 vim.cmd('packadd vim-jetpack')
 
@@ -175,10 +176,13 @@ require("toggleterm").setup{}
 -- leader+ttで下方にターミナルのトグル
 vim.api.nvim_set_keymap('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , {noremap = true})
 
+-- leader+tvで右側にターミナルのトグル
+vim.api.nvim_set_keymap('n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , {noremap = true})
+
 -- leader+tfでフロートウィンドウでターミナルのトグル
 vim.api.nvim_set_keymap('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , {noremap = true})
 
--- ノーマルモード時にleader+Tで現在カーソルのある行をターミナルに送る
+-- ノーマルモード時にleader+tsで現在カーソルのある行をターミナルに送る
 vim.api.nvim_set_keymap('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
 
 -- ビジュアルモード時にleader+tで選択範囲をターミナルに送る
@@ -206,6 +210,6 @@ vim.api.nvim_set_keymap('n' , '<leader>ff' , ':Telescope find_files hidden=false
 -- leader+fhで隠しファイルごと検索
 vim.api.nvim_set_keymap('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
--- leader+bでバッファを検索,プレビューをオフ
+-- leader+bでバッファを検索
 vim.api.nvim_set_keymap('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
