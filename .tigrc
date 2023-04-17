@@ -1,0 +1,17 @@
+# tigrc
+
+# ビューを横に分割
+set vertical-split = no
+
+# タブのサイズを4
+set tab-size = 4
+
+# 検索時に大文字小文字を無視
+set ignore-case = true
+
+# 分割サイズを50%
+set split-view-height = 50%
+
+# カーソルのある行のハイライト
+set cursor grey green 
+
