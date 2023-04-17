@@ -18,8 +18,9 @@ vim.cmd([[
 
 ]])
 
--- 24bitカラーを有効
+-- 24bitカラーの設定
 vim.opt.termguicolors = true
+-- vim.opt.termguicolors = false
 
 -- 背景色をダークモードに設定
 vim.opt.background = 'dark'
@@ -94,7 +95,7 @@ vim.api.nvim_set_keymap('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
 
 
 -- ====== プラグインの設定 ======
--- Jetpackの設定
+-- ====== Jetpackの設定 ======
 vim.cmd('packadd vim-jetpack')
 
 require('jetpack.paq'){
@@ -108,6 +109,7 @@ require('jetpack.paq'){
 	'thinca/vim-partedit',
 	'akinsho/toggleterm.nvim',
 	'haya14busa/vim-edgemotion',
+	'tpope/vim-surround',
 
 	-- neovim 0.7.0から
 	-- " telescope.nvimの依存関係
@@ -115,6 +117,7 @@ require('jetpack.paq'){
 	'nvim-telescope/telescope.nvim',
 
 }
+-- ====== Jetpackの設定ここまで ======
 
 -- ====== quick-scopeの設定 ======
 -- ハイライトの色を設定
