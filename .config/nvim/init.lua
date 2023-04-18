@@ -20,7 +20,6 @@ vim.cmd([[
 
 -- 24bitカラーの設定
 vim.opt.termguicolors = true
--- vim.opt.termguicolors = false
 
 -- 背景色をダークモードに設定
 vim.opt.background = 'dark'
@@ -42,10 +41,7 @@ vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 vim.cmd([[
 
 	" カラースキームを設定
-	" colorscheme ron 
-	colorscheme industry 
-
-	" 一度カーソルラインをリセット
+	" colorscheme iceberg colorscheme industry " 一度カーソルラインをリセット
 	highlight clear CursorLine
 
 	" ターミナル起動時に行番号を非表示
