@@ -13,5 +13,5 @@ set ignore-case = true
 set split-view-height = 50%
 
 # カーソルのある行のハイライト
-set cursor grey green 
+color cursor white cyan bold
 
