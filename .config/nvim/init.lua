@@ -15,6 +15,7 @@ vim.cmd([[
 	let g:loaded_tutor_mode_plugin  = 1
 	let g:loaded_zipPlugin          = 1
 	let g:skip_loading_mswin        = 1
+	let g:loaded_netrwPlugin        = 1
 
 ]])
 
@@ -41,7 +42,10 @@ vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 vim.cmd([[
 
 	" カラースキームを設定
-	" colorscheme iceberg colorscheme industry " 一度カーソルラインをリセット
+	" colorscheme iceberg 
+	colorscheme industry 
+
+	" 一度カーソルラインをリセット
 	highlight clear CursorLine
 
 	" ターミナル起動時に行番号を非表示
@@ -97,7 +101,6 @@ vim.cmd('packadd vim-jetpack')
 require('jetpack.paq'){
 
 	{'tani/vim-jetpack', opt = 1},
-	'LunarWatcher/auto-pairs',
 	'unblevable/quick-scope',
 	'lambdalisue/fern.vim',
 	'ojroques/nvim-hardline',
@@ -111,9 +114,14 @@ require('jetpack.paq'){
 	-- " telescope.nvimの依存関係
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
+	'windwp/nvim-autopairs',
+	'lewis6991/impatient.nvim',
 
 }
 -- ====== Jetpackの設定ここまで ======
+
+-- impatientの設定
+require'impatient'.enable_profile()
 
 -- ====== quick-scopeの設定 ======
 -- ハイライトの色を設定
@@ -124,7 +132,6 @@ vim.cmd([[
 
 ]])
 -- ====== quick-scopeの設定ここまで ======
-
 
 -- ====== fernの設定 ====== 
 -- カレントディレクトリからサイドバー形式で開く
@@ -206,7 +213,6 @@ vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
 
 
 -- ====== vim-edgemotionの設定 ======
-
 -- ctrl+jで1つ下のコードブロックへ
 vim.api.nvim_set_keymap('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
 vim.api.nvim_set_keymap('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
@@ -227,5 +233,8 @@ vim.api.nvim_set_keymap('n' , '<leader>fh' , ':Telescope find_files hidden=true 
 
 -- leader+bでバッファを検索
 vim.api.nvim_set_keymap('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
+-- autopairsの設定
+require('nvim-autopairs').setup{}
 -- ====== プラグインの設定ここまで ======
 
