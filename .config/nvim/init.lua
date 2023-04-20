@@ -62,27 +62,14 @@ vim.opt.splitright= true
 vim.keymap.set('t' , '<C-w><C-n>' , [[<C-\><C-n>]] , {noremap = true})
 
 -- ターミナル起動時に行番号を非表示
-vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-
-  pattern = '*',
-
-  command = 'setlocal norelativenumber',
-
-})
-
-vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-
-  pattern = '*',
-
-  command = 'setlocal nonumber',
-
-})
+vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber',})
+vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal nonumber',})
 
 -- "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
-vim.api.nvim_create_user_command('Bterm', 'split | resize -7 | terminal', { nargs = 0 })
+vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nargs = 0 })
 
 -- "Vterm"の設定,ターミナルを右半分に起動
-vim.api.nvim_create_user_command('Vterm', 'vsplit | terminal', { nargs = 0 })
+vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
 -- ====== ターミナルの設定の終了 ====== 
 
 
@@ -108,7 +95,7 @@ vim.cmd('packadd vim-jetpack')
 
 require('jetpack.paq'){
 
-	{'tani/vim-jetpack', opt = 1},
+	{'tani/vim-jetpack' , opt = 1},
 	'unblevable/quick-scope',
 	'lambdalisue/fern.vim',
 	'ojroques/nvim-hardline',
@@ -135,8 +122,8 @@ require'impatient'.enable_profile()
 -- ハイライトの色を設定
 vim.cmd([[
 
-	highlight QuickScopePrimary guifg='red' gui=underline ctermfg=199 cterm=underline
-	highlight QuickScopeSecondary guifg='orange' gui=underline ctermfg=129 cterm=underline
+	highlight QuickScopePrimary guifg = 'red' gui = underline ctermfg = 199 cterm = underline
+	highlight QuickScopeSecondary guifg = 'orange' gui = underline ctermfg = 129 cterm = underline
 
 ]])
 -- ====== quick-scopeの設定ここまで ======
@@ -146,11 +133,7 @@ vim.cmd([[
 vim.keymap.set('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
 
 -- 行番号を非表示
-vim.cmd([[
-
-	autocmd FileType fern setlocal norelativenumber | setlocal nonumber
-
-]])
+vim.cmd('autocmd FileType fern setlocal norelativenumber | setlocal nonumber')
 -- ====== fernの設定ここまで ====== 
 
 
@@ -166,21 +149,21 @@ require('hardline').setup{
 	sections = {
 		
 		-- 現在のモード
-		{class = 'mode', item = require('hardline.parts.mode').get_item},
+		{class = 'mode' , item = require('hardline.parts.mode').get_item},
 
 		-- ファイル名の配色を"med"(中間)に設定
-		{class = 'med', item = require('hardline.parts.filename').get_item},
+		{class = 'med' , item = require('hardline.parts.filename').get_item},
     	'%<',
-		{class = 'med', item = '%='},
+		{class = 'med' , item = '%='},
 
 		-- 現在の単語数
-    	{class = 'low', item = require('hardline.parts.wordcount').get_item, hide = 100},
+    	{class = 'low' , item = require('hardline.parts.wordcount').get_item, hide = 100},
 
 		-- ファイルの種類
-		{class = 'high', item = require('hardline.parts.filetype').get_item, hide = 60},
+		{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
 
 		-- 行全体のパーセンテージ
-    	{class = 'mode', item = require('hardline.parts.line').get_item},
+    	{class = 'mode' , item = require('hardline.parts.line').get_item},
 
 	}
 
