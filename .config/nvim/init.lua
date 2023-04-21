@@ -114,12 +114,13 @@ require('jetpack.paq'){
 	'akinsho/toggleterm.nvim',
 	'haya14busa/vim-edgemotion',
 	'tpope/vim-surround',
+	'echasnovski/mini.pairs',
+	'echasnovski/mini.completion',
 
 	-- neovim 0.7.0から
 	-- " telescope.nvimの依存関係
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
-	'windwp/nvim-autopairs',
 	'lewis6991/impatient.nvim',
 
 }
@@ -214,6 +215,11 @@ vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 -- ====== vim-edgemotionの設定ここまで ======
 
+-- mini.pairsの設定
+require('mini.pairs').setup{}
+
+-- mini.completionの設定
+require('mini.completion').setup{}
 
 -- ====== neovim 0.7.0から ======
 -- telescopeの設定
@@ -223,8 +229,5 @@ vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer
 
 -- leader+bでバッファを検索
 vim.keymap.set('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
-
--- autopairsの設定
-require('nvim-autopairs').setup{}
 -- ====== プラグインの設定ここまで ======
 
