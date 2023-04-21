@@ -153,24 +153,25 @@ require('hardline').setup{
 	-- バッファラインの表示
 	bufferline = true,
 
+	-- テーマの設定
+	theme = 'one',
+
 	sections = {
 		
 		-- 現在のモード
 		{class = 'mode' , item = require('hardline.parts.mode').get_item},
 
-		-- ファイル名の配色を"med"(中間)に設定
-		{class = 'med' , item = require('hardline.parts.filename').get_item},
-    	'%<',
-		{class = 'med' , item = '%='},
-
-		-- 現在の単語数
-    	{class = 'low' , item = require('hardline.parts.wordcount').get_item, hide = 100},
-
 		-- ファイルの種類
 		{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
 
-		-- 行全体のパーセンテージ
-    	{class = 'mode' , item = require('hardline.parts.line').get_item},
+		-- カレントバッファのパス
+		{class = 'med' , item = require('hardline.parts.filename').get_item},
+		
+		-- セパレーター
+		{class = 'med' , item = '%='},
+
+		-- カレント行の位置
+    	{class = 'low' , item = require('hardline.parts.line').get_item},
 
 	}
 
