@@ -44,13 +44,13 @@ vim.opt.number = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
--- 24bitカラーの設定
-vim.opt.termguicolors = true
+-- 24bitカラーの設定 
+vim.opt.termguicolors = true 
 
 -- 背景色をダークモードに設定
-vim.opt.background = 'dark'
+vim.opt.background = 'dark' 
 
--- カーソルラインを表示
+-- カーソルラインを表示 
 vim.opt.cursorline = true
 
 -- カーソルラインをアンダーラインに設定
@@ -109,13 +109,13 @@ require('jetpack.paq'){
 	'unblevable/quick-scope',
 	'lambdalisue/fern.vim',
 	'ojroques/nvim-hardline',
-	'numToStr/Comment.nvim',
 	'thinca/vim-partedit',
 	'akinsho/toggleterm.nvim',
 	'haya14busa/vim-edgemotion',
 	'tpope/vim-surround',
 	'echasnovski/mini.pairs',
 	'echasnovski/mini.completion',
+	'echasnovski/mini.comment',
 
 	-- neovim 0.7.0から
 	-- " telescope.nvimの依存関係
@@ -138,6 +138,7 @@ vim.cmd([[
 
 ]])
 -- ====== quick-scopeの設定ここまで ======
+
 
 -- ====== fernの設定 ====== 
 -- カレントディレクトリからサイドバー形式で開く
@@ -179,13 +180,10 @@ require('hardline').setup{
 }
 -- ====== hardlineの設定ここまで ======
 
-
--- Commentの設定
-require('Comment').setup{}
-
 -- vim-parteditの設定
 -- ビジュアルモード時にleader+eでexモードのコマンドを表示
 vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
+
 
 -- ====== toggletermの設定 ======
 require("toggleterm").setup{}
@@ -220,6 +218,9 @@ require('mini.pairs').setup{}
 
 -- mini.completionの設定
 require('mini.completion').setup{}
+
+-- mini.commentの設定
+require('mini.comment').setup{}
 
 -- ====== neovim 0.7.0から ======
 -- telescopeの設定
