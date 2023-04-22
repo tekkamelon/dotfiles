@@ -46,10 +46,6 @@ vim.opt.shiftwidth = 4
 -- 背景色をダークモードに設定
 vim.opt.background = 'dark' 
 
--- カーソルラインをアンダーラインに設定
-vim.opt.cursorline = true
-vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
-
 -- ビジュアルモード時に"$"で改行を含めないようにする
 vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
@@ -84,6 +80,11 @@ else
 
 end
 -- ====== ホスト名ごとでの処理の分岐の終了 ======
+
+
+-- カーソルラインをアンダーラインに設定
+vim.opt.cursorline = true
+vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 
 
 -- ====== ターミナルの設定 ====== 
@@ -135,9 +136,10 @@ require('jetpack.paq'){
 	'echasnovski/mini.pairs',
 	'echasnovski/mini.completion',
 	'echasnovski/mini.comment',
+	'lambdalisue/fern-hijack.vim',
 	
 	-- neovim 0.7.0から
-	-- " telescope.nvimの依存関係
+	-- telescope.nvimの依存関係
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
 	'lewis6991/impatient.nvim',
