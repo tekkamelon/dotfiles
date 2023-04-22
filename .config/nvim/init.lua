@@ -28,14 +28,13 @@ vim.cmd([[
 	let g:loaded_netrwSettings      = 1
 	let g:loaded_netrwFileHandlers  = 1
 
-	" カラースキームを設定
-	" colorscheme iceberg 
-	colorscheme industry 
-
 	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
 
 ]])
+
+-- 24bitカラーを有効 
+vim.opt.termguicolors = true 
 
 -- 行番号を表示
 vim.opt.number = true
@@ -44,27 +43,47 @@ vim.opt.number = true
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
--- 24bitカラーの設定 
-vim.opt.termguicolors = true 
-
 -- 背景色をダークモードに設定
 vim.opt.background = 'dark' 
 
--- カーソルラインを表示 
-vim.opt.cursorline = true
-
 -- カーソルラインをアンダーラインに設定
+vim.opt.cursorline = true
 vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 
 -- ビジュアルモード時に"$"で改行を含めないようにする
 vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
+-- 分割方向を下と右に設定
+vim.opt.splitbelow = true
+vim.opt.splitright= true
+
 -- swapファイルを別ディレクトリに作成
 vim.opt.directory = '/tmp'
 
--- 分割方向を下と右
-vim.opt.splitbelow = true
-vim.opt.splitright= true
+
+-- ====== ホスト名ごとでの処理の分岐 ======
+-- ホスト名を確認"pop-os"の場合は真,そうでない場合は偽
+if vim.fn.hostname() == "pop-os" then
+
+	-- 真の場合はカラースキームを"iceberg"に設定
+	vim.cmd([[colorscheme iceberg]])
+
+-- 偽の場合はホスト名を確認,"pcg-2c7n"の場合は真,そうでない場合は偽
+elseif vim.fn.hostname() == "pcg-2c7n" then
+
+	-- 真の場合はカラースキームを"elflord"に設定
+	vim.cmd([[colorscheme elflord]])
+
+	-- 24bitカラーを無効
+	vim.opt.termguicolors = false 
+
+else
+
+	-- 偽の場合はカラースキームを"industry"に設定
+	vim.cmd([[colorscheme industry]])
+
+end
+-- ====== ホスト名ごとでの処理の分岐の終了 ======
 
 
 -- ====== ターミナルの設定 ====== 
@@ -116,7 +135,7 @@ require('jetpack.paq'){
 	'echasnovski/mini.pairs',
 	'echasnovski/mini.completion',
 	'echasnovski/mini.comment',
-
+	
 	-- neovim 0.7.0から
 	-- " telescope.nvimの依存関係
 	'nvim-lua/plenary.nvim',
@@ -180,6 +199,7 @@ require('hardline').setup{
 }
 -- ====== hardlineの設定ここまで ======
 
+
 -- vim-parteditの設定
 -- ビジュアルモード時にleader+eでexモードのコマンドを表示
 vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
@@ -213,14 +233,25 @@ vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 -- ====== vim-edgemotionの設定ここまで ======
 
+
 -- mini.pairsの設定
 require('mini.pairs').setup{}
 
 -- mini.completionの設定
-require('mini.completion').setup{}
+require('mini.completion').setup{auto_setup = false,}
 
 -- mini.commentの設定
-require('mini.comment').setup{}
+require('mini.comment').setup{
+
+	options = {
+
+		-- 空白行を無視
+		ignore_blank_line = true,
+
+	},
+
+}
+
 
 -- ====== neovim 0.7.0から ======
 -- telescopeの設定
