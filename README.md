@@ -5,6 +5,32 @@
 
 - urxvtの配色などの設定
 
+# .fbtermrc
+
+- fbtermの設定
+
+# .tigrc
+
+- tigの設定
+
+# .tmux.conf
+
+- tmuxの設定
+
+# .*shrc
+
+- 各種シェルの設定
+
+# ncmpcpp
+
+## bindings
+
+- ncmpcppのキーバインドの設定
+
+## config
+
+- ncmpcppの配色などの設定
+
 # .config
 
 ## i3
@@ -17,9 +43,24 @@
 
 ### init.vim
 
+- neovimの起動時に読み込まれるキーバインドやプラグインなどの設定,現在更新予定なし
+
+### init.lua
+
 - neovimの起動時に読み込まれるキーバインドやプラグインなどの設定
+
+### light_init.vim
+
+- neovimをプラグイン無しで起動する際に使用,現在更新予定なし
+
+### light_init.lua
+
+- neovimをプラグイン無しで起動する際に使用
 
 #### after/plugin/after_set.vim
 
-- init.vimのあとに読み込まれる設定
+- init.*のあとに読み込まれる設定
 
+## ranger
+
+- rangerの各種設定ファイル集
