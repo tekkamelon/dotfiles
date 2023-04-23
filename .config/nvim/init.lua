@@ -128,18 +128,15 @@ require('jetpack.paq'){
 	{'tani/vim-jetpack' , opt = 1},
 	'unblevable/quick-scope',
 	'lambdalisue/fern.vim',
+	'lambdalisue/fern-hijack.vim',
 	'ojroques/nvim-hardline',
 	'thinca/vim-partedit',
 	'akinsho/toggleterm.nvim',
 	'haya14busa/vim-edgemotion',
-	'tpope/vim-surround',
 	'echasnovski/mini.pairs',
 	'echasnovski/mini.completion',
 	'echasnovski/mini.comment',
-	'lambdalisue/fern-hijack.vim',
-	
-	-- neovim 0.7.0から
-	-- telescope.nvimの依存関係
+	'echasnovski/mini.surround',
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
 	'lewis6991/impatient.nvim',
@@ -245,17 +242,14 @@ require('mini.completion').setup{auto_setup = false,}
 -- mini.commentの設定
 require('mini.comment').setup{
 
-	options = {
-
-		-- 空白行を無視
-		ignore_blank_line = true,
-
-	},
+	-- 空白行を無視
+	options = {ignore_blank_line = true,},
 
 }
 
+-- mini.surroundの設定
+require('mini.surround').setup{}
 
--- ====== neovim 0.7.0から ======
 -- telescopeの設定
 -- leader+ffで隠しファイルを含めず,fhで含めて検索,プレビューをオフ
 vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
