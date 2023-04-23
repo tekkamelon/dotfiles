@@ -59,6 +59,10 @@
 
 #### after/plugin/after_set.vim
 
+- init.*のあとに読み込まれる設定,現在更新予定なし
+
+#### after/plugin/after_set.lua
+
 - init.*のあとに読み込まれる設定
 
 ## ranger
