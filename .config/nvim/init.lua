@@ -31,6 +31,7 @@ vim.cmd([[
 	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
 
+
 ]])
 
 -- 24bitカラーを有効 
@@ -55,7 +56,6 @@ vim.opt.splitright= true
 
 -- swapファイルを別ディレクトリに作成
 vim.opt.directory = '/tmp'
-
 
 -- ====== ホスト名ごとでの処理の分岐 ======
 -- ホスト名を確認"pop-os"の場合は真,そうでない場合は偽
@@ -237,7 +237,12 @@ vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 require('mini.pairs').setup{}
 
 -- mini.completionの設定
-require('mini.completion').setup{auto_setup = false,}
+require('mini.completion').setup{
+
+	-- lspの補完をオフ
+	lsp_completion = {auto_setup = false,},
+
+}
 
 -- mini.commentの設定
 require('mini.comment').setup{
@@ -250,12 +255,19 @@ require('mini.comment').setup{
 -- mini.surroundの設定
 require('mini.surround').setup{}
 
--- telescopeの設定
--- leader+ffで隠しファイルを含めず,fhで含めて検索,プレビューをオフ
+-- ====== telescopeの設定,プレビューをオフ =======
+-- leader+ffで隠しファイルを含めず,fhで含めて検索
 vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
 vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
 -- leader+bでバッファを検索
-vim.keymap.set('n' , '<leader>b' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+vim.keymap.set('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
+-- leader+frでレジスタ一覧を検索
+vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true})
+
+-- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
+vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
+-- ====== telescopeの設定ここまで =======
 -- ====== プラグインの設定ここまで ======
 
