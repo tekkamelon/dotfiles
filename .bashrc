@@ -179,5 +179,6 @@ export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
-# pywalで最後に利用したテーマを呼び出す
-# cat ~/.cache/wal/sequences
+# ホスト名に"thinkpad"が含まれていない場合にのみpywalで最後に利用したテーマを呼び出す
+hostname | grep -F -q "thinkpad" || cat ~/.cache/wal/sequences
+
