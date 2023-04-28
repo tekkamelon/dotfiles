@@ -6,6 +6,7 @@ vim.cmd([[
 	" 標準プラグインの読込の停止
 	let g:did_install_default_menus = 1
 	let g:did_load_ftplugin         = 1
+	let g:did_load_filetypes        = 1
 	let g:loaded_2html_plugin       = 1
 	let g:loaded_gzip               = 1
 	let g:loaded_man                = 1
@@ -30,8 +31,11 @@ vim.cmd([[
 	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
 
-
 ]])
+
+-- 拡張子が".cgi"の際にシェルスクリプトのハイライトを適用
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
 
 -- 24bitカラーを有効 
 vim.opt.termguicolors = true 
