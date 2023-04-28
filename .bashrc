@@ -180,5 +180,11 @@ export PATH=$PATH:$HOME/.local/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
 # ホスト名に"thinkpad"が含まれていない場合にのみpywalで最後に利用したテーマを呼び出す
-hostname | grep -F -q "thinkpad" || cat ~/.cache/wal/sequences
+echo_hostname=$(hostname)
+
+check_thinkpad=$(echo "${echo_hostname#thinkpad}")
+
+check_hostname="${echo_hostname%"${check_thinkpad}"}"
+
+test "${check_hostname}" = "thinkpad" || cat ~/.cache/wal/sequences
 
