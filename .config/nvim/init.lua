@@ -33,9 +33,22 @@ vim.cmd([[
 
 ]])
 
--- 拡張子が".cgi"の際にシェルスクリプトのハイライトを適用
+--  ====== 拡張子ごとのハイライトの設定 ======
+-- *.cgiの場合
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
+
+-- 各種設定ファイル
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*conf*' , command = 'set filetype=conf',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*conf*' , command = 'set filetype=conf',})
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*rc' , command = 'set filetype=conf',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*rc' , command = 'set filetype=conf',})
+
+-- シェルの設定ファイル
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set filetype=sh',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
+--  ====== 拡張子ごとのハイライトの設定ここまで ======
+
 
 -- 24bitカラーを有効 
 vim.opt.termguicolors = true 
