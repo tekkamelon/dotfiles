@@ -33,10 +33,15 @@ vim.cmd([[
 
 ]])
 
+
 --  ====== 拡張子ごとのハイライトの設定 ======
 -- *.cgiの場合
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
+
+-- *.scadの場合
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.scad' , command = 'set filetype=openscad',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.scad' , command = 'set filetype=openscad',})
 
 -- 各種設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*conf*' , command = 'set filetype=conf',})
@@ -72,6 +77,7 @@ vim.opt.splitright= true
 
 -- swapファイルを別ディレクトリに作成
 vim.opt.directory = '/tmp'
+
 
 -- ====== ホスト名ごとでの処理の分岐 ======
 -- ホスト名を確認"pop-os"の場合は真,そうでない場合は偽
@@ -142,21 +148,31 @@ vim.cmd('packadd vim-jetpack')
 require('jetpack.paq'){
 
 	{'tani/vim-jetpack' , opt = 1},
+
+	-- キャッシュなどの高速化
+	'lewis6991/impatient.nvim',
+	'nathom/filetype.nvim',
+
+	-- vim script製プラグイン
 	'unblevable/quick-scope',
 	'lambdalisue/fern.vim',
 	'lambdalisue/fern-hijack.vim',
-	'ojroques/nvim-hardline',
 	'thinca/vim-partedit',
-	'akinsho/toggleterm.nvim',
 	'haya14busa/vim-edgemotion',
+
+	-- lua製プラグイン
+	'ojroques/nvim-hardline',
+	'akinsho/toggleterm.nvim',
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope.nvim',
+
+	-- mini.nvimのコンポーネント
 	'echasnovski/mini.pairs',
 	'echasnovski/mini.completion',
 	'echasnovski/mini.comment',
 	'echasnovski/mini.surround',
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope.nvim',
-	'lewis6991/impatient.nvim',
-	'nathom/filetype.nvim',
+
+	-- lspの設定
 	'neovim/nvim-lspconfig',
 	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim',
@@ -164,8 +180,10 @@ require('jetpack.paq'){
 }
 -- ====== Jetpackの設定ここまで ======
 
+
 -- impatientの設定
 require'impatient'.enable_profile()
+
 
 -- ====== quick-scopeの設定 ======
 -- ハイライトの色を設定
@@ -185,6 +203,22 @@ vim.keymap.set('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>'
 -- 行番号を非表示
 vim.cmd('autocmd FileType fern setlocal norelativenumber | setlocal nonumber')
 -- ====== fernの設定ここまで ====== 
+
+
+-- vim-parteditの設定
+-- ビジュアルモード時にleader+eでexモードのコマンドを表示
+vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
+
+
+-- ====== vim-edgemotionの設定 ======
+-- ctrl+jで1つ下のコードブロックへ
+vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+
+-- ctrl+kで1つ上のコードブロックへ
+vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+-- ====== vim-edgemotionの設定ここまで ======
 
 
 -- ====== hardlineの設定 ======
@@ -219,9 +253,22 @@ require('hardline').setup{
 -- ====== hardlineの設定ここまで ======
 
 
--- vim-parteditの設定
--- ビジュアルモード時にleader+eでexモードのコマンドを表示
-vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
+-- ====== telescopeの設定 =======
+require("telescope").setup{}
+
+-- leader+ffで隠しファイルを含めず,fhで含めて検索
+vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
+vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
+-- leader+fbでバッファを検索
+vim.keymap.set('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+
+-- leader+frでレジスタ一覧を検索
+vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true})
+
+-- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
+vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
+-- ====== telescopeの設定ここまで =======
 
 
 -- ====== toggletermの設定 ======
@@ -242,17 +289,6 @@ vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
 -- ====== toggletermの設定ここまで ======
 
 
--- ====== vim-edgemotionの設定 ======
--- ctrl+jで1つ下のコードブロックへ
-vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-
--- ctrl+kで1つ上のコードブロックへ
-vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
--- ====== vim-edgemotionの設定ここまで ======
-
-
 -- mini.pairsの設定
 require('mini.pairs').setup{}
 
@@ -269,21 +305,6 @@ require('mini.comment').setup{
 
 -- mini.surroundの設定
 require('mini.surround').setup{}
-
--- ====== telescopeの設定 =======
--- leader+ffで隠しファイルを含めず,fhで含めて検索
-vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
-
--- leader+fbでバッファを検索
-vim.keymap.set('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
-
--- leader+frでレジスタ一覧を検索
-vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true})
-
--- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
-vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
--- ====== telescopeの設定ここまで =======
 
 
 -- ====== mason*の設定 =======
