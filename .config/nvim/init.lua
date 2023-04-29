@@ -34,7 +34,7 @@ vim.cmd([[
 ]])
 
 
---  ====== 拡張子ごとのハイライトの設定 ======
+--  ====== 拡張子ごとのfiletypeの設定 ======
 -- *.cgiの場合
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
@@ -52,7 +52,7 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*rc' , command = 'set filet
 -- シェルの設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
---  ====== 拡張子ごとのハイライトの設定ここまで ======
+--  ====== 拡張子ごとのfiletypeの設定ここまで ======
 
 
 -- 24bitカラーを有効 
@@ -304,7 +304,28 @@ require('mini.comment').setup{
 }
 
 -- mini.surroundの設定
-require('mini.surround').setup{}
+require('mini.surround').setup{
+
+	-- キーマッピングの設定
+	mappings = {
+
+		add = 'ca',
+		delete = 'cd',
+		find = 'cf',
+		find_left = 'cF',
+		highlight = 'ch',
+		repkace = 'cr',
+		update_n_lines = 'cn',
+
+		suffix_last ='l',
+		suffix_next = 'n',
+
+	},
+
+	-- 矩形選択時に各行を囲む
+	respect_selection_type = true,
+
+}
 
 
 -- ====== mason*の設定 =======
