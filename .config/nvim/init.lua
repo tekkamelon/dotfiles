@@ -129,15 +129,34 @@ vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
 -- leaderをspaceに設定  
 vim.g.mapleader = " "
 
--- 保存,終了
-vim.keymap.set('n' , '<leader>w' , ':w<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>W' , ':wq<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>q' , ':q<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
+-- vscode-nvimから起動したときに無効
+if not vim.g.vscode then
 
--- バッファの切り替え
-vim.keymap.set('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
+	-- 保存,終了
+	vim.keymap.set('n' , '<leader>w' , ':w<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>W' , ':wq<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>q' , ':q<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
+
+	-- バッファの切り替え
+	vim.keymap.set('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
+end
+
+-- vscode-nvimから起動したときのみ有効
+if vim.g.vscode then
+
+	-- 保存及び終了
+	vim.cmd([[
+
+		nnoremap <silent> <leader>w <Cmd>call VSCodeCall('workbench.action.files.save')<CR>
+		nnoremap <silent> <leader>W <Cmd>call VSCodeCall('workbench.action.files.saveALL')<CR>
+		nnoremap <silent> <leader>q <Cmd>call VSCodeCall('workbench.action.closeActiveEditor')<CR>
+		nnoremap <silent> <leader>Q <Cmd>call VSCodeCall('workbench.action.closeAllEditors')<CR>
+		
+	]])
+
+end
 -- ====== leaderの設定ここまで ====== 
 
 
