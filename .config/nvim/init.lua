@@ -184,6 +184,7 @@ require('jetpack.paq'){
 	'akinsho/toggleterm.nvim',
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
+	'glacambre/firenvim',
 
 	-- mini.nvimのコンポーネント
 	'echasnovski/mini.pairs',
@@ -288,6 +289,22 @@ vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true
 -- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
 vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
 -- ====== telescopeの設定ここまで =======
+
+
+-- ====== firenvimの設定 =======
+-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
+if vim.g.started_by_firenvim == true then
+
+	-- 真の場合はfirenvimを起動
+	vim.o.laststatus = 0
+
+else
+
+	-- 偽の場合は起動しない
+	vim.o.laststatus = 2
+
+end
+-- ====== firenvimの設定ここまで =======
 
 
 -- ====== toggletermの設定 ======
