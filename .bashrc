@@ -129,7 +129,7 @@ alias w3b='w3m -B'
 alias vim='nvim'
 alias vit='nvim -c Bterm'
 alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber"'
-alias vp="nvim -R -u $HOME/.config/nvim/light_init.lua - "
+alias vp=nvim -R -u "$HOME/.config/nvim/light_init.lua -"
 alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - '
 
 # コマンドのエイリアス
@@ -154,7 +154,7 @@ function gdv(){
 	if [ -n "$(git diff)" ] ; then
 
 		# 真の場合はgit diffの結果をnvimに渡す
-		git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - 
+		git diff | nvim -R -u "$HOME/.config/nvim/light_init.lua -"
 
 	else
 
@@ -172,17 +172,19 @@ function gdv(){
 export EDITOR=nvim
 export CALIBRE_USE_DARK_PALETTE=1
 export W3MIMGDISPLAY_PATH=/usr/lib/w3m/w3mimgdisplay
+export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto/
 
 # パスの設定
 export PATH=$PATH:/opt/processing-3.5.4/
 export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
+export PATH="$PATH:$JAVA_HOME/bin"
 # ====== 環境変数及びパスの設定ここまで ======
 
 # ホスト名に"thinkpad"が含まれていない場合にのみpywalで最後に利用したテーマを呼び出す
 echo_hostname=$(hostname)
 
-check_thinkpad=$(echo "${echo_hostname#thinkpad}")
+check_thinkpad="${echo_hostname#thinkpad}"
 
 check_hostname="${echo_hostname%"${check_thinkpad}"}"
 
