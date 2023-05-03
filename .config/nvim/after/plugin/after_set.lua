@@ -27,4 +27,4 @@ else
 end
 
 -- 改行時の自動コメントアウトをoff
-vim.cmd([[au FileType * setlocal formatoptions-=ro]])
+vim.api.nvim_create_autocmd('FileType' , {pattern = '*' , command = 'setlocal formatoptions-=ro',})
