@@ -33,6 +33,10 @@
 
 # .config
 
+## user-dirs-.dirs
+
+- "XDG_xxx_DIR"の設定
+
 ## i3
 
 ### config
