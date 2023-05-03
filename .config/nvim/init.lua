@@ -89,6 +89,7 @@ local options = {
 	-- swapファイルを別ディレクトリに作成
 	directory = '/tmp',
 
+	-- カーソルラインを有効
 	cursorline = true,
 
 }
@@ -126,9 +127,6 @@ else
 end
 -- ====== ホスト名ごとでの処理の分岐の終了 ======
 
-
--- カーソルラインをアンダーラインに設定
-vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 
 -- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 vim.cmd([[
