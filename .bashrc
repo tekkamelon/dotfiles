@@ -129,8 +129,7 @@ alias w3b='w3m -B'
 alias vim='nvim'
 alias vit='nvim -c Bterm'
 alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber"'
-alias vp=nvim -R -u "$HOME/.config/nvim/light_init.lua -"
-alias gdv='git diff | nvim -R -u $HOME/.config/nvim/light_init.lua - '
+alias vp="nvim - -R -u "$HOME/.config/nvim/light_init.lua""
 
 # コマンドのエイリアス
 alias bc='bc -q'
@@ -154,7 +153,7 @@ function gdv(){
 	if [ -n "$(git diff)" ] ; then
 
 		# 真の場合はgit diffの結果をnvimに渡す
-		git diff | nvim -R -u "$HOME/.config/nvim/light_init.lua -"
+		git diff | vp
 
 	else
 
