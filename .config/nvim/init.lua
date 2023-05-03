@@ -55,28 +55,40 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set fil
 --  ====== 拡張子ごとのfiletypeの設定ここまで ======
 
 
--- 24bitカラーを有効 
-vim.opt.termguicolors = true 
-
--- 行番号を表示
-vim.opt.number = true
-
--- tabの幅を4に設定
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-
--- 背景色をダークモードに設定
-vim.opt.background = 'dark' 
-
 -- ビジュアルモード時に"$"で改行を含めないようにする
 vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
--- 分割方向を下と右に設定
-vim.opt.splitbelow = true
-vim.opt.splitright= true
+-- vim.optをテーブルで設定
+local options = {
 
--- swapファイルを別ディレクトリに作成
-vim.opt.directory = '/tmp'
+	-- 24bitカラーを有効 
+	termguicolors = true,
+
+	-- 背景色をダークモードに設定
+	background = 'dark',
+
+	-- 行番号を表示
+	number = true,
+
+	-- tabの幅を4に設定
+	tabstop = 4,
+	shiftwidth = 4,
+
+	-- 分割方向を下と右に設定
+	splitbelow = true,
+	splitright = true,
+
+	-- swapファイルを別ディレクトリに作成
+	directory = '/tmp',
+
+}
+
+-- 上記の変数をループで回す
+for i, j in pairs(options) do
+
+  vim.opt[i] = j
+
+end
 
 
 -- ====== ホスト名ごとでの処理の分岐 ======
