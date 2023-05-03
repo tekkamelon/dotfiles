@@ -1,37 +1,31 @@
 -- init.lua
 
--- vim script
-vim.cmd([[
-
-	" 標準プラグインの読込の停止
-	let g:did_install_default_menus = 1
-	let g:did_load_ftplugin         = 1
-	let g:did_load_filetypes        = 1
-	let g:loaded_2html_plugin       = 1
-	let g:loaded_gzip               = 1
-	let g:loaded_man                = 1
-	let g:loaded_matchit            = 1
-	let g:loaded_remote_plugins     = 1
-	let g:loaded_shada_plugin       = 1
-	let g:loaded_spellfile_plugin   = 1
-	let g:loaded_tarPlugin          = 1
-	let g:loaded_tutor_mode_plugin  = 1
-	let g:loaded_zipPlugin          = 1
-	let g:skip_loading_mswin        = 1
-	let g:loaded_rrhelper           = 1
-	let g:loaded_vimball            = 1
-	let g:loaded_vimballPlugin      = 1
-	let g:loaded_getscript          = 1
-	let g:loaded_getscriptPlugin    = 1
-	let g:loaded_netrw              = 1
-	let g:loaded_netrwPlugin        = 1
-	let g:loaded_netrwSettings      = 1
-	let g:loaded_netrwFileHandlers  = 1
-
-	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
-	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
-
-]])
+-- ====== 標準プラグインの読込停止 ======
+vim.g.did_install_default_menus = 1
+vim.g.did_load_ftplugin = 1
+vim.g.did_load_filetypes = 1
+vim.g.loaded_2html_plugin = 1
+vim.g.loaded_gzip = 1
+vim.g.loaded_man = 1
+vim.g.loaded_matchit = 1
+vim.g.loaded_remote_plugins = 1
+vim.g.loaded_shada_plugin = 1
+vim.g.loaded_spellfile_plugin = 1
+vim.g.loaded_tarPlugin = 1
+vim.g.loaded_tutor_mode_plugin = 1
+vim.g.loaded_zipPlugin = 1
+vim.g.skip_loading_mswin = 1
+vim.g.loaded_rrhelper = 1
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
+-- ====== 標準プラグインの読込停止ここまで ======
 
 
 --  ====== 拡張子ごとのfiletypeの設定 ======
@@ -58,6 +52,8 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set fil
 -- ビジュアルモード時に"$"で改行を含めないようにする
 vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
+
+-- ====== vim.optの設定 ======
 -- vim.optをテーブルで設定
 local options = {
 
@@ -81,14 +77,17 @@ local options = {
 	-- swapファイルを別ディレクトリに作成
 	directory = '/tmp',
 
+	cursorline = true
+
 }
 
--- 上記の変数をループで回す
-for i, j in pairs(options) do
+-- "options"内の左辺を"set",右辺を"str"にそれぞれ代入しループ
+for set, str in pairs(options) do
 
-  vim.opt[i] = j
+  vim.opt[set] = str
 
 end
+-- ====== vim.optの設定ここまで ======
 
 
 -- ====== ホスト名ごとでの処理の分岐 ======
@@ -117,8 +116,14 @@ end
 
 
 -- カーソルラインをアンダーラインに設定
-vim.opt.cursorline = true
 vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
+
+-- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
+vim.cmd([[
+
+	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
+
+]])
 
 
 -- ====== ターミナルの設定 ====== 
