@@ -1,30 +1,42 @@
 -- init.lua
 
 -- ====== 標準プラグインの読込停止 ======
-vim.g.did_install_default_menus = 1
-vim.g.did_load_ftplugin = 1
-vim.g.did_load_filetypes = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_man = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_remote_plugins = 1
-vim.g.loaded_shada_plugin = 1
-vim.g.loaded_spellfile_plugin = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_tutor_mode_plugin = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.skip_loading_mswin = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.g.loaded_netrwFileHandlers = 1
+-- "vim.g"をテーブルで設定
+local options = {
+
+	did_install_default_menus = 1,
+	did_load_ftplugin = 1,
+	did_load_filetypes = 1,
+	loaded_2html_plugin = 1,
+	loaded_gzip = 1,
+	loaded_man = 1,
+	loaded_matchit = 1,
+	loaded_remote_plugins = 1,
+	loaded_shada_plugin = 1,
+	loaded_spellfile_plugin = 1,
+	loaded_tarPlugin = 1,
+	loaded_tutor_mode_plugin = 1,
+	loaded_zipPlugin = 1,
+	skip_loading_mswin = 1,
+	loaded_rrhelper = 1,
+	loaded_vimball = 1,
+	loaded_vimballPlugin = 1,
+	loaded_getscript = 1,
+	loaded_getscriptPlugin = 1,
+	loaded_netrw = 1,
+	loaded_netrw = 1,
+	loaded_netrwPlugin = 1,
+	loaded_netrwSettings = 1,
+	loaded_netrwFileHandlers = 1,
+
+}
+
+-- "options"内の左辺を"let",右辺を"disable"にそれぞれ代入しループ
+for let, disable in pairs(options) do
+
+  vim.g[let] = disable
+
+end
 -- ====== 標準プラグインの読込停止ここまで ======
 
 
@@ -54,7 +66,7 @@ vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
 
 -- ====== vim.optの設定 ======
--- vim.optをテーブルで設定
+-- "vim.opt"をテーブルで設定
 local options = {
 
 	-- 24bitカラーを有効 
@@ -77,7 +89,7 @@ local options = {
 	-- swapファイルを別ディレクトリに作成
 	directory = '/tmp',
 
-	cursorline = true
+	cursorline = true,
 
 }
 
