@@ -218,6 +218,7 @@ require('jetpack.paq'){
 	'echasnovski/mini.completion',
 	'echasnovski/mini.comment',
 	'echasnovski/mini.surround',
+	'echasnovski/mini.jump2d',
 
 	-- lspの設定
 	'neovim/nvim-lspconfig',
@@ -377,7 +378,7 @@ require('mini.surround').setup{
 		find = 'cf',
 		find_left = 'cF',
 		highlight = 'ch',
-		repkace = 'cr',
+		replace = 'cr',
 		update_n_lines = 'cn',
 
 		suffix_last ='l',
@@ -387,6 +388,28 @@ require('mini.surround').setup{
 
 	-- 矩形選択時に各行を囲む
 	respect_selection_type = true,
+
+}
+
+-- mini.jump2dの設定
+require('mini.jump2d').setup{
+
+	-- ラベルに使う文字の設定
+	labels = 'qwertyuiophjklasdfg',
+
+	view = {
+
+		-- 使用時にハイライトの無い部分を暗くする
+		dim = true,
+
+	},
+
+	mappings = {
+
+		-- leader+hwで起動
+		start_jumping = '<leader>hw',
+
+	},
 
 }
 
