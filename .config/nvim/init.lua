@@ -406,8 +406,8 @@ require('mini.jump2d').setup{
 
 	mappings = {
 
-		-- leader+hwで起動
-		start_jumping = '<leader>hw',
+		-- leader+jで起動
+		start_jumping = '<leader>j',
 
 	},
 
