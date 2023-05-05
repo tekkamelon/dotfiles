@@ -134,7 +134,6 @@ alias vp="nvim - -R -u "$HOME/.config/nvim/light_init.lua""
 # コマンドのエイリアス
 alias bc='bc -q'
 alias info='info --vi-keys'
-alias r='!!'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
@@ -180,6 +179,7 @@ export PATH=$PATH:$HOME/.local/bin/
 export PATH="$PATH:$JAVA_HOME/bin"
 # ====== 環境変数及びパスの設定ここまで ======
 
+
 # ホスト名に"thinkpad"が含まれていない場合にのみpywalで最後に利用したテーマを呼び出す
 echo_hostname=$(hostname)
 
@@ -187,5 +187,5 @@ check_thinkpad="${echo_hostname#thinkpad}"
 
 check_hostname="${echo_hostname%"${check_thinkpad}"}"
 
-test "${check_hostname}" = "thinkpad" || cat ~/.cache/wal/sequences
+test "${check_hostname}" = "thinkpad" || cat ~/.cache/wal/sequences 2> /dev/null
 
