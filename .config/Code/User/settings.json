@@ -1,0 +1,24 @@
+{
+    "workbench.startupEditor": "newUntitledFile",
+    "breadcrumbs.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "editor.glyphMargin": false,
+    "terminal.integrated.rendererType": "dom",
+    "editor.wordWrap": "on",
+    "security.workspace.trust.untrustedFiles": "open",
+    "vscode-neovim.logLevel": "none",
+    "vscode-neovim.neovimExecutablePaths.linux": "/home/tekkamelon/Applications/nvim.appimage",
+    "terminal.integrated.commandsToSkipShell": [
+        "-workbench.action.quickOpen"
+    ],
+    "vscode-neovim.neovimExecutablePaths.win32": "",
+    "vscode-neovim.neovimExecutablePaths.darwin": "",
+    "vscode-neovim.mouseSelectionStartVisualMode": true,
+    "workbench.colorTheme": "Iceberg",
+    "vscode-neovim.revealCursorScrollLine": true,
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "workbench.activityBar.visible": false
+}
