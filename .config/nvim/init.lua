@@ -172,6 +172,18 @@ if vim.g.vscode then
 		nnoremap <silent> <leader>j :call VSCodeCall('workbench.action.previousEditor')<CR>
 		nnoremap <silent> <leader>k :call VSCodeCall('workbench.action.nextEditor')<CR>
 
+		" ファイルを開く
+		nnoremap <silent> <leader>ff :call VSCodeCall('workbench.action.files.openFile')<CR>
+
+		" フォルダーを開く
+		nnoremap <silent> <leader>fh :call VSCodeCall('workbench.action.files.openFolder')<CR>
+
+		" ターミナルのトグル
+		nnoremap <silent> <leader>tt :call VSCodeCall('workbench.action.terminal.toggleTerminal')<CR>
+
+		" コメントのトグル
+		nnoremap <silent> <leader>g :call VSCodeCall('editor.action.commentLine')<CR>
+
 	]])
 
 else
@@ -278,52 +290,62 @@ vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 
 
 -- ====== hardlineの設定 ======
-require('hardline').setup{
+-- vscode-neovim以外から起動したときに有効
+if not vim.g.vscode then
 
-	-- バッファラインの表示
-	bufferline = true,
+	require('hardline').setup{
 
-	-- テーマの設定
-	theme = 'one',
+		-- バッファラインの表示
+		bufferline = true,
 
-	sections = {
-		
-		-- 現在のモード
-		{class = 'mode' , item = require('hardline.parts.mode').get_item},
+		-- テーマの設定
+		theme = 'one',
 
-		-- ファイルの種類
-		{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
+		sections = {
+			
+			-- 現在のモード
+			{class = 'mode' , item = require('hardline.parts.mode').get_item},
 
-		-- カレントバッファのパス
-		{class = 'med' , item = require('hardline.parts.filename').get_item},
-		
-		-- セパレーター
-		{class = 'med' , item = '%='},
+			-- ファイルの種類
+			{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
 
-		-- カレント行の位置
-    	{class = 'low' , item = require('hardline.parts.line').get_item},
+			-- カレントバッファのパス
+			{class = 'med' , item = require('hardline.parts.filename').get_item},
+			
+			-- セパレーター
+			{class = 'med' , item = '%='},
 
-	}
+			-- カレント行の位置
+			{class = 'low' , item = require('hardline.parts.line').get_item},
+
+		}
 
 }
+
+end
 -- ====== hardlineの設定ここまで ======
 
 
 -- ====== telescopeの設定 =======
-require("telescope").setup{}
+-- vscode-neovim以外から起動したときに有効
+if not vim.g.vscode then
 
--- leader+ffで隠しファイルを含めず,fhで含めて検索
-vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
+	require("telescope").setup{}
 
--- leader+fbでバッファを検索
-vim.keymap.set('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+	-- leader+ffで隠しファイルを含めず,fhで含めて検索
+	vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
--- leader+frでレジスタ一覧を検索
-vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true})
+	-- leader+fbでバッファを検索
+	vim.keymap.set('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
 
--- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
-vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
+	-- leader+frでレジスタ一覧を検索
+	vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true})
+
+	-- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
+	vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
+
+end
 -- ====== telescopeの設定ここまで =======
 
 
@@ -344,36 +366,52 @@ end
 
 
 -- ====== toggletermの設定 ======
-require("toggleterm").setup{}
+-- vscode-neovim以外から起動したときに有効
+if not vim.g.vscode then
 
--- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
-vim.keymap.set('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , {noremap = true})
-vim.keymap.set('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , {noremap = true})
+	require("toggleterm").setup{}
 
--- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
-vim.keymap.set('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
-vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
+	-- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
+	vim.keymap.set('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , {noremap = true})
+	vim.keymap.set('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , {noremap = true})
 
--- leader+gでコメントアウト
-vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
-vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
+	-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
+	vim.keymap.set('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
+	vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
+
+	-- leader+gでコメントアウト
+	vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
+	vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
+
+end
 -- ====== toggletermの設定ここまで ======
 
 
--- mini.pairsの設定
+-- ====== mini.pairsの設定 ======
 require('mini.pairs').setup{}
+
+-- "<>"でのペアを設定
+MiniPairs.map('i', '<', { action = 'open', pair = '<>', neigh_pattern = '\r.', register = { cr = false } })
+MiniPairs.map('i', '>', { action = 'close', pair = '<>', register = { cr = false } })
+-- ====== mini.pairsの設定ここまで ======
+
 
 -- mini.completionの設定
 require('mini.completion').setup{}
 
 -- mini.commentの設定
-require('mini.comment').setup{
+-- vscode-neovim以外から起動したときに有効
+if not vim.g.vscode then
 
-	-- 空白行を無視
-	options = {ignore_blank_line = true,},
+	require('mini.comment').setup{
 
-}
+		-- 空白行を無視
+		options = {ignore_blank_line = true,},
+
+	}
+
+end
 
 -- mini.surroundの設定
 require('mini.surround').setup{
