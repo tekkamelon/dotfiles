@@ -160,14 +160,18 @@ vim.g.mapleader = " "
 if vim.g.vscode then
 
 	-- 真の場合のキーマップ
-	-- 保存,終了
 	vim.cmd([[
-
-		nnoremap <silent> <leader>w <Cmd>call VSCodeCall('workbench.action.files.save')<CR>
-		nnoremap <silent> <leader>W <Cmd>call VSCodeCall('workbench.action.files.saveALL')<CR>
-		nnoremap <silent> <leader>q <Cmd>call VSCodeCall('workbench.action.closeActiveEditor')<CR>
-		nnoremap <silent> <leader>Q <Cmd>call VSCodeCall('workbench.action.closeAllEditors')<CR>
 		
+		" 保存,終了
+		nnoremap <silent> <leader>w :call VSCodeCall('workbench.action.files.save')<CR>
+		nnoremap <silent> <leader>W :call VSCodeCall('workbench.action.files.saveALL')<CR>
+		nnoremap <silent> <leader>q :call VSCodeCall('workbench.action.closeActiveEditor')<CR>
+		nnoremap <silent> <leader>Q :call VSCodeCall('workbench.action.closeAllEditors')<CR>
+
+		" バッファの切り替え
+		nnoremap <silent> <leader>j :call VSCodeCall('workbench.action.previousEditor')<CR>
+		nnoremap <silent> <leader>k :call VSCodeCall('workbench.action.nextEditor')<CR>
+
 	]])
 
 else
@@ -262,10 +266,14 @@ vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap
 -- ctrl+jで1つ下のコードブロックへ
 vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
 vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set('n' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set('v' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
 
 -- ctrl+kで1つ上のコードブロックへ
 vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 -- ====== vim-edgemotionの設定ここまで ======
 
 
@@ -406,8 +414,8 @@ require('mini.jump2d').setup{
 
 	mappings = {
 
-		-- leader+jで起動
-		start_jumping = '<leader>j',
+		-- leader+hで起動
+		start_jumping = '<leader>h',
 
 	},
 
