@@ -221,54 +221,55 @@ require('jetpack.paq'){
 -- ====== Jetpackの設定ここまで ======
 
 
--- impatientの設定
-require'impatient'.enable_profile()
-
-
--- ====== quick-scopeの設定 ======
--- ハイライトの色を設定
-vim.cmd([[
-
-	highlight QuickScopePrimary guifg = 'red' gui = underline ctermfg = 199 cterm = underline
-	highlight QuickScopeSecondary guifg = 'orange' gui = underline ctermfg = 129 cterm = underline
-
-]])
--- ====== quick-scopeの設定ここまで ======
-
-
--- ====== fernの設定 ====== 
--- カレントディレクトリからサイドバー形式で開く
-vim.keymap.set('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
-
--- 行番号を非表示
-vim.cmd('autocmd FileType fern setlocal norelativenumber | setlocal nonumber')
--- ====== fernの設定ここまで ====== 
-
-
--- vim-parteditの設定
--- ビジュアルモード時にleader+eでexモードのコマンドを表示
-vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
-
-
--- ====== vim-edgemotionの設定 ======
--- ctrl+jで1つ下のコードブロックへ
-vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('n' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('v' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
-
--- ctrl+kで1つ上のコードブロックへ
-vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
--- ====== vim-edgemotionの設定ここまで ======
-
-
--- ====== hardlineの設定 ======
--- vscode-neovim以外から起動したときに有効
+-- vscode-neovimから起動した際に真,それ以外で偽
 if not vim.g.vscode then
 
+	-- 真の場合はプラグインの読込
+	-- impatientの設定
+	require'impatient'.enable_profile()
+
+
+	-- ====== quick-scopeの設定 ======
+	-- ハイライトの色を設定
+	vim.cmd([[
+
+		highlight QuickScopePrimary guifg = 'red' gui = underline ctermfg = 199 cterm = underline
+		highlight QuickScopeSecondary guifg = 'orange' gui = underline ctermfg = 129 cterm = underline
+
+	]])
+	-- ====== quick-scopeの設定ここまで ======
+
+
+	-- ====== fernの設定 ====== 
+	-- カレントディレクトリからサイドバー形式で開く
+	vim.keymap.set('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
+
+	-- 行番号を非表示
+	vim.cmd('autocmd FileType fern setlocal norelativenumber | setlocal nonumber')
+	-- ====== fernの設定ここまで ====== 
+
+
+	-- vim-parteditの設定
+	-- ビジュアルモード時にleader+eでexモードのコマンドを表示
+	vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
+
+
+	-- ====== vim-edgemotionの設定 ======
+	-- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
+	vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+	vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+	vim.keymap.set('n' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+	vim.keymap.set('v' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+
+	-- ctrl+k,上キーで1つ上のコードブロックへ
+	vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	-- ====== vim-edgemotionの設定ここまで ======
+
+
+	-- ====== hardlineの設定 ======
 	require('hardline').setup{
 
 		-- バッファラインの表示
@@ -296,16 +297,11 @@ if not vim.g.vscode then
 
 		}
 
-}
-
-end
--- ====== hardlineの設定ここまで ======
+	}
+	-- ====== hardlineの設定ここまで ======
 
 
--- ====== telescopeの設定 =======
--- vscode-neovim以外から起動したときに有効
-if not vim.g.vscode then
-
+	-- ====== telescopeの設定 =======
 	require("telescope").setup{}
 
 	-- leader+ffで隠しファイルを含めず,fhで含めて検索
@@ -320,31 +316,26 @@ if not vim.g.vscode then
 
 	-- leader+fgでファイル内文字列を検索,"$ sudo apt install ripgrep -y"で使用可能
 	vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
-
-end
--- ====== telescopeの設定ここまで =======
+	-- ====== telescopeの設定ここまで =======
 
 
--- ====== firenvimの設定 =======
--- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
-if vim.g.started_by_firenvim == true then
+	-- ====== firenvimの設定 =======
+	-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
+	if vim.g.started_by_firenvim == true then
 
-	-- 真の場合はfirenvimを起動
-	vim.o.laststatus = 0
+		-- 真の場合はfirenvimを起動
+		vim.o.laststatus = 0
 
-else
+	else
 
-	-- 偽の場合は起動しない
-	vim.o.laststatus = 2
+		-- 偽の場合は起動しない
+		vim.o.laststatus = 2
 
-end
--- ====== firenvimの設定ここまで =======
+	end
+	-- ====== firenvimの設定ここまで =======
 
 
--- ====== toggletermの設定 ======
--- vscode-neovim以外から起動したときに有効
-if not vim.g.vscode then
-
+	-- ====== toggletermの設定 ======
 	require("toggleterm").setup{}
 
 	-- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
@@ -359,27 +350,23 @@ if not vim.g.vscode then
 	-- leader+gでコメントアウト
 	vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
 	vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
-
-end
--- ====== toggletermの設定ここまで ======
+	-- ====== toggletermの設定ここまで ======
 
 
--- ====== mini.pairsの設定 ======
-require('mini.pairs').setup{}
+	-- ====== mini.pairsの設定 ======
+	require('mini.pairs').setup{}
 
--- "<>"でのペアを設定
-MiniPairs.map('i', '<', { action = 'open', pair = '<>', neigh_pattern = '\r.', register = { cr = false } })
-MiniPairs.map('i', '>', { action = 'close', pair = '<>', register = { cr = false } })
--- ====== mini.pairsの設定ここまで ======
+	-- "<>"でのペアを設定
+	MiniPairs.map('i', '<', { action = 'open', pair = '<>', neigh_pattern = '\r.', register = { cr = false } })
+	MiniPairs.map('i', '>', { action = 'close', pair = '<>', register = { cr = false } })
+	-- ====== mini.pairsの設定ここまで ======
 
 
--- mini.completionの設定
-require('mini.completion').setup{}
+	-- mini.completionの設定
+	require('mini.completion').setup{}
 
--- mini.commentの設定
--- vscode-neovim以外から起動したときに有効
-if not vim.g.vscode then
 
+	-- mini.commentの設定
 	require('mini.comment').setup{
 
 		-- 空白行を無視
@@ -387,72 +374,82 @@ if not vim.g.vscode then
 
 	}
 
-end
 
--- mini.surroundの設定
-require('mini.surround').setup{
+	-- ====== mini.surroundの設定 ====== 
+	require('mini.surround').setup{
 
-	-- キーマッピングの設定
-	mappings = {
+		-- キーマッピングの設定
+		mappings = {
 
-		add = 'ca',
-		delete = 'cd',
-		find = 'cf',
-		find_left = 'cF',
-		highlight = 'ch',
-		replace = 'cr',
-		update_n_lines = 'cn',
+			add = 'ca',
+			delete = 'cd',
+			find = 'cf',
+			find_left = 'cF',
+			highlight = 'ch',
+			replace = 'cr',
+			update_n_lines = 'cn',
 
-		suffix_last ='l',
-		suffix_next = 'n',
+			suffix_last ='l',
+			suffix_next = 'n',
 
-	},
+		},
 
-	-- 矩形選択時に各行を囲む
-	respect_selection_type = true,
-
-}
-
--- mini.jump2dの設定
-require('mini.jump2d').setup{
-
-	-- ラベルに使う文字の設定
-	labels = 'qwertyuiophjklasdfg',
-
-	view = {
-
-		-- 使用時にハイライトの無い部分を暗くする
-		dim = true,
-
-	},
-
-	mappings = {
-
-		-- leader+hで起動
-		start_jumping = '<leader>h',
-
-	},
-
-}
-
-
--- ====== mason*の設定 =======
-require('mason').setup{}
-
--- ローカル関数の定義
-local lspconfig = require('lspconfig')
-
-require('mason-lspconfig').setup_handlers{
-
-	function(server_name)
-
-		lspconfig[server_name].setup{
-
-		capabilities = capabilities,
+		-- 矩形選択時に各行を囲む
+		respect_selection_type = true,
 
 	}
+	-- ====== mini.surroundの設定ここまで ====== 
 
-	end,
-}
--- ====== mason*の設定ここまで =======
+
+	-- ====== mini.jump2dの設定 ======
+	require('mini.jump2d').setup{
+
+		-- ラベルに使う文字の設定
+		labels = 'qwertyuiophjklasdfg',
+
+		view = {
+
+			-- 使用時にハイライトの無い部分を暗くする
+			dim = true,
+
+		},
+
+		mappings = {
+
+			-- leader+hで起動
+			start_jumping = '<leader>h',
+
+		},
+
+	}
+	-- ====== mini.jump2dの設定ここまで ======
+
+
+	-- ====== mason*の設定 =======
+	require('mason').setup{}
+
+	-- ローカル関数の定義
+	local lspconfig = require('lspconfig')
+
+	require('mason-lspconfig').setup_handlers{
+
+		function(server_name)
+
+			lspconfig[server_name].setup{
+
+			capabilities = capabilities,
+
+		}
+
+		end,
+
+	}
+	-- ====== mason*の設定ここまで =======
+
+else
+
+	-- 偽の場合は"vscode-neovim_plug"を読込
+	require('vscode-neovim_plug')
+
+end
 -- ====== プラグインの設定ここまで ======
