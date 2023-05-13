@@ -222,7 +222,12 @@ require('jetpack.paq'){
 
 
 -- vscode-neovimから起動した際に真,それ以外で偽
-if not vim.g.vscode then
+if vim.g.vscode then
+
+	-- 偽の場合は"vscode-neovim_plug"を読込
+	require('vscode-neovim_plug')
+
+else
 
 	-- 真の場合はプラグインの読込
 	-- impatientの設定
@@ -445,11 +450,6 @@ if not vim.g.vscode then
 
 	}
 	-- ====== mason*の設定ここまで =======
-
-else
-
-	-- 偽の場合は"vscode-neovim_plug"を読込
-	require('vscode-neovim_plug')
 
 end
 -- ====== プラグインの設定ここまで ======
