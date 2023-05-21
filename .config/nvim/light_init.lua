@@ -1,34 +1,41 @@
 -- light_init.lua
 
--- vim script
+-- ====== 標準プラグインの読込停止 ======
+-- "vim.g"をテーブルで設定
+local options = {
+
+	did_install_default_menus = 1,
+	loaded_2html_plugin = 1,
+	loaded_getscript = 1,
+	loaded_getscriptPlugin = 1,
+	loaded_gzip = 1,
+	loaded_man = 1,
+	loaded_matchit = 1,
+	loaded_remote_plugins = 1,
+	loaded_rrhelper = 1,
+	loaded_shada_plugin = 1,
+	loaded_spellfile_plugin = 1,
+	loaded_tarPlugin = 1,
+	loaded_tutor_mode_plugin = 1,
+	loaded_vimball = 1,
+	loaded_vimballPlugin = 1,
+	loaded_zipPlugin = 1,
+	skip_loading_mswin = 1,
+
+}
+
+-- "options"内の左辺を"let",右辺を"status"にそれぞれ代入しループ
+for let, status in pairs(options) do
+
+  vim.g[let] = status
+
+end
+-- ====== 標準プラグインの読込停止ここまで ======
+
+
+-- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 vim.cmd([[
 
-	" 標準プラグインの読込の停止
-	let g:did_install_default_menus = 1
-	let g:did_load_ftplugin         = 1
-	let g:loaded_2html_plugin       = 1
-	let g:loaded_gzip               = 1
-	let g:loaded_man                = 1
-	let g:loaded_matchit            = 1
-	let g:loaded_matchparen         = 1
-	let g:loaded_remote_plugins     = 1
-	let g:loaded_shada_plugin       = 1
-	let g:loaded_spellfile_plugin   = 1
-	let g:loaded_tarPlugin          = 1
-	let g:loaded_tutor_mode_plugin  = 1
-	let g:loaded_zipPlugin          = 1
-	let g:skip_loading_mswin        = 1
-	let g:loaded_rrhelper           = 1
-	let g:loaded_vimball            = 1
-	let g:loaded_vimballPlugin      = 1
-	let g:loaded_getscript          = 1
-	let g:loaded_getscriptPlugin    = 1
-	let g:loaded_netrw              = 1
-	let g:loaded_netrwPlugin        = 1
-	let g:loaded_netrwSettings      = 1
-	let g:loaded_netrwFileHandlers  = 1
-
-	" ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
 
 ]])
@@ -56,6 +63,9 @@ vim.opt.directory = '/tmp'
 -- カーソルラインをアンダーラインに設定
 vim.opt.cursorline = true
 vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
+
+-- カラースキームをindustryに設定
+vim.cmd([[colorscheme industry]])
 
 
 -- ====== ターミナルの設定 ====== 
@@ -87,5 +97,9 @@ vim.keymap.set('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
 -- バッファの切り替え
 vim.keymap.set('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
 vim.keymap.set('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
+
+-- ターミナルの起動
+vim.keymap.set('n' , '<leader>tt' , ':Bterm<CR>' , {noremap = true})
+vim.keymap.set('n' , '<leader>tv' , ':Vterm<CR>' , {noremap = true})
 -- ====== leaderの設定ここまで ====== 
 
