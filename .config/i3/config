@@ -237,6 +237,9 @@ exec --no-startup-id xrdb .Xresouces
 exec --no-startup-id feh --bg-fill 
 exec --no-startup-id ~/.fehbg
 
+# pulseaudioの起動
+exec --no-startup-id pulseaudio -D
+
 # ディスプレイの再レイアウト
 exec --no-startup-id sleep 1; ~/.screenlayout/pop-layout.sh
 # ====== 自動実行するソフトの設定ここまで ======
