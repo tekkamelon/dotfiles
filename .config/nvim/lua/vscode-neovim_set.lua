@@ -22,8 +22,5 @@ vim.cmd([[
 	" ターミナルのトグル
 	nnoremap <silent> <leader>tt :call VSCodeCall('workbench.action.terminal.toggleTerminal')<CR>
 
-	" コメントのトグル
-	nnoremap <silent> <leader>g :call VSCodeCall('editor.action.commentLine')<CR>
-
 ]])
 

@@ -60,10 +60,6 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.scad' , command = 'set fil
 --  ====== 拡張子ごとのfiletypeの設定ここまで ======
 
 
--- ビジュアルモード時に"$"で改行を含めないようにする
-vim.keymap.set('v' , '$' , 'g_' , {remap = true})
-
-
 -- ====== vim.optの設定 ======
 -- "vim.opt"をテーブルで設定
 local options = {
@@ -177,6 +173,10 @@ end
 -- ====== leaderの設定ここまで ====== 
 
 
+-- ビジュアルモード時に"$"で改行を含めないようにする
+vim.keymap.set('v' , '$' , 'g_' , {remap = true})
+
+
 -- ====== プラグインの設定 ======
 -- ====== Jetpackの設定 ======
 vim.cmd('packadd vim-jetpack')
@@ -195,7 +195,6 @@ require('jetpack.paq'){
 	'lambdalisue/fern-hijack.vim',
 	'thinca/vim-partedit',
 	'haya14busa/vim-edgemotion',
-
 	-- lua製プラグイン
 	'ojroques/nvim-hardline',
 	'akinsho/toggleterm.nvim',
@@ -216,15 +215,106 @@ require('jetpack.paq'){
 	'williamboman/mason-lspconfig.nvim',
 
 }
-
 -- ====== Jetpackの設定ここまで ======
+
+
+-- ====== quick-scopeの設定 ======
+-- ハイライトの色を設定
+vim.cmd([[
+
+	highlight QuickScopePrimary guifg = 'red' gui = underline ctermfg = 199 cterm = underline
+	highlight QuickScopeSecondary guifg = 'orange' gui = underline ctermfg = 129 cterm = underline
+
+]])
+-- ====== quick-scopeの設定ここまで ======
+
+
+-- ====== vim-edgemotionの設定 ======
+-- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
+vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set('n' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set('v' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+
+-- ctrl+k,上キーで1つ上のコードブロックへ
+vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+-- ====== vim-edgemotionの設定ここまで ======
+
+
+-- ====== mini.jump2dの設定 ======
+require('mini.jump2d').setup{
+
+	-- ラベルに使う文字の設定
+	labels = 'qwertyuiophjklasdfg',
+
+	view = {
+
+		-- 使用時にハイライトの無い部分を暗くする
+		dim = true,
+
+	},
+
+	mappings = {
+
+		-- leader+hで起動
+		start_jumping = '<leader>h',
+
+	},
+
+}
+-- ====== mini.jump2dの設定ここまで ======
+
+
+-- ====== mini.commentの設定 ======
+require('mini.comment').setup{
+
+	-- 空白行を無視
+	options = {ignore_blank_line = true,},
+
+}
+
+-- leader+gでコメントアウト
+vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
+vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
+-- ====== mini.commentの設定ここまで ======
+
+
+-- ====== mini.surroundの設定 ====== 
+require('mini.surround').setup{
+
+	-- キーマッピングの設定
+	mappings = {
+
+		add = 'ca',
+		delete = 'cd',
+		find = 'cf',
+		find_left = 'cF',
+		highlight = 'ch',
+		replace = 'cr',
+		update_n_lines = 'cn',
+
+		suffix_last ='l',
+		suffix_next = 'n',
+
+	},
+
+	-- 矩形選択時に各行を囲む
+	respect_selection_type = true,
+
+}
+-- ====== mini.surroundの設定ここまで ====== 
 
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
 
-	-- 真の場合は"vscode-neovim_plug"を読込
-	require('vscode-neovim_plug')
+	-- 真の場合は"vim-edgemotion"の設定の変更
+	-- ctrl+l,上キーで1つ上のコードブロックへ
+	vim.keymap.set('n' , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	vim.keymap.set('v' , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
 
 else
 
@@ -236,18 +326,6 @@ else
 		require'impatient'.enable_profile()
 
 	end
-
-
-	-- ====== quick-scopeの設定 ======
-	-- ハイライトの色を設定
-	vim.cmd([[
-
-		highlight QuickScopePrimary guifg = 'red' gui = underline ctermfg = 199 cterm = underline
-		highlight QuickScopeSecondary guifg = 'orange' gui = underline ctermfg = 129 cterm = underline
-
-	]])
-	-- ====== quick-scopeの設定ここまで ======
-
 
 	-- ====== fernの設定 ====== 
 	-- カレントディレクトリからサイドバー形式で開く
@@ -262,21 +340,6 @@ else
 	-- vim-parteditの設定
 	-- ビジュアルモード時にleader+eでexモードのコマンドを表示
 	vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
-
-
-	-- ====== vim-edgemotionの設定 ======
-	-- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
-	vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-	vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-	vim.keymap.set('n' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
-	vim.keymap.set('v' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
-
-	-- ctrl+k,上キーで1つ上のコードブロックへ
-	vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-	vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-	vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
-	vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
-	-- ====== vim-edgemotionの設定ここまで ======
 
 
 	-- ====== hardlineの設定 ======
@@ -356,10 +419,6 @@ else
 	-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
 	vim.keymap.set('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
 	vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
-
-	-- leader+gでコメントアウト
-	vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
-	vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
 	-- ====== toggletermの設定ここまで ======
 
 
@@ -374,65 +433,6 @@ else
 
 	-- mini.completionの設定
 	require('mini.completion').setup{}
-
-
-	-- mini.commentの設定
-	require('mini.comment').setup{
-
-		-- 空白行を無視
-		options = {ignore_blank_line = true,},
-
-	}
-
-
-	-- ====== mini.surroundの設定 ====== 
-	require('mini.surround').setup{
-
-		-- キーマッピングの設定
-		mappings = {
-
-			add = 'ca',
-			delete = 'cd',
-			find = 'cf',
-			find_left = 'cF',
-			highlight = 'ch',
-			replace = 'cr',
-			update_n_lines = 'cn',
-
-			suffix_last ='l',
-			suffix_next = 'n',
-
-		},
-
-		-- 矩形選択時に各行を囲む
-		respect_selection_type = true,
-
-	}
-	-- ====== mini.surroundの設定ここまで ====== 
-
-
-	-- ====== mini.jump2dの設定 ======
-	require('mini.jump2d').setup{
-
-		-- ラベルに使う文字の設定
-		labels = 'qwertyuiophjklasdfg',
-
-		view = {
-
-			-- 使用時にハイライトの無い部分を暗くする
-			dim = true,
-
-		},
-
-		mappings = {
-
-			-- leader+hで起動
-			start_jumping = '<leader>h',
-
-		},
-
-	}
-	-- ====== mini.jump2dの設定ここまで ======
 
 
 	-- ====== mason*の設定 =======
