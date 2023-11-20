@@ -40,14 +40,6 @@ end
 
 
 --  ====== 拡張子ごとのfiletypeの設定 ======
--- *.cgiの場合
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
-
--- *.scadの場合
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.scad' , command = 'set filetype=openscad',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.scad' , command = 'set filetype=openscad',})
-
 -- 各種設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*conf*' , command = 'set filetype=conf',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '*conf*' , command = 'set filetype=conf',})
@@ -57,6 +49,14 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*rc' , command = 'set filet
 -- シェルの設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
+
+-- *.cgiの場合
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
+
+-- *.scadの場合
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.scad' , command = 'set filetype=openscad',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.scad' , command = 'set filetype=openscad',})
 --  ====== 拡張子ごとのfiletypeの設定ここまで ======
 
 
@@ -102,8 +102,8 @@ end
 -- ====== vim.optの設定ここまで ======
 
 
--- ====== ホスト名ごとでの処理の分岐 ======
--- ホスト名を確認"pop-os"の場合は真,そうでない場合は偽
+-- ====== カラースキームの設定 ======
+-- ホスト名が"pop-os"の場合は真,そうでない場合は偽
 if vim.fn.hostname() == "pop-os" then
 
 	-- 真の場合はカラースキームを"iceberg"に設定
@@ -124,8 +124,7 @@ else
 	vim.cmd([[colorscheme industry]])
 
 end
--- ====== ホスト名ごとでの処理の分岐の終了 ======
-
+-- ====== カラースキームの設定ここまで ======
 
 -- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 vim.cmd([[
@@ -217,20 +216,26 @@ require('jetpack.paq'){
 	'williamboman/mason-lspconfig.nvim',
 
 }
+
 -- ====== Jetpackの設定ここまで ======
 
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
 
-	-- 偽の場合は"vscode-neovim_plug"を読込
+	-- 真の場合は"vscode-neovim_plug"を読込
 	require('vscode-neovim_plug')
 
 else
 
-	-- 真の場合はプラグインの読込
-	-- impatientの設定
-	require'impatient'.enable_profile()
+	-- 偽の場合はプラグインの読込
+	-- ホスト名が"pop-os"ではない場合に"impatient"を読み込み
+	if vim.fn.hostname() ~= "pop-os" then
+
+		-- impatientの設定
+		require'impatient'.enable_profile()
+
+	end
 
 
 	-- ====== quick-scopeの設定 ======
@@ -246,6 +251,7 @@ else
 
 	-- ====== fernの設定 ====== 
 	-- カレントディレクトリからサイドバー形式で開く
+	-- vim.keymap.set('n' , '<C-n>' , ':Fern %:h -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
 	vim.keymap.set('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
 
 	-- 行番号を非表示
