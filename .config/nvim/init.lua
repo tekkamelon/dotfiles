@@ -5,7 +5,7 @@
 local options = {
 
 	did_install_default_menus = 1,
-	did_load_filetypes = 1,
+	-- did_load_filetypes = 1,
 	did_load_ftplugin = 1,
 	loaded_2html_plugin = 1,
 	loaded_getscript = 1,
@@ -30,10 +30,21 @@ local options = {
 
 }
 
+-- ホスト名が"pop-os"ではない場合は"did_load_filetypes"の読み込みを停止
+if vim.fn.hostname() == "pop-os" then
+
+	-- 真の場合は何もしない
+
+else
+
+	vim.g.did_load_filetypes = 1
+
+end
+
 -- "options"内の左辺を"let",右辺を"status"にそれぞれ代入しループ
 for let, status in pairs(options) do
 
-  vim.g[let] = status
+	vim.g[let] = status
 
 end
 -- ====== 標準プラグインの読込停止ここまで ======
@@ -92,7 +103,7 @@ local options = {
 -- "options"内の左辺を"set",右辺を"str"にそれぞれ代入しループ
 for set, str in pairs(options) do
 
-  vim.opt[set] = str
+	vim.opt[set] = str
 
 end
 -- ====== vim.optの設定ここまで ======
@@ -179,42 +190,54 @@ vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
 -- ====== プラグインの設定 ======
 -- ====== Jetpackの設定 ======
-vim.cmd('packadd vim-jetpack')
+-- ホスト名が"pop-os"の場合は真,そうでない場合は偽
+if vim.fn.hostname() == "pop-os" then
 
-require('jetpack.paq'){
+	-- 真の場合は別ファイルを読み込み
+	require('pop-os_plug')
 
-	{'tani/vim-jetpack' , opt = 1},
+else
 
-	-- キャッシュなどの高速化
-	'lewis6991/impatient.nvim',
-	'nathom/filetype.nvim',
+	-- 偽の場合は通常通りプラグインを読み込み
+	vim.cmd('packadd vim-jetpack')
 
-	-- vim script製プラグイン
-	'unblevable/quick-scope',
-	'lambdalisue/fern.vim',
-	'lambdalisue/fern-hijack.vim',
-	'thinca/vim-partedit',
-	'haya14busa/vim-edgemotion',
-	-- lua製プラグイン
-	'ojroques/nvim-hardline',
-	'akinsho/toggleterm.nvim',
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope.nvim',
-	'glacambre/firenvim',
+		require('jetpack.paq'){
 
-	-- mini.nvimのコンポーネント
-	'echasnovski/mini.pairs',
-	'echasnovski/mini.completion',
-	'echasnovski/mini.comment',
-	'echasnovski/mini.surround',
-	'echasnovski/mini.jump2d',
+			{'tani/vim-jetpack' , opt = 1},
 
-	-- lspの設定
-	'neovim/nvim-lspconfig',
-	'williamboman/mason.nvim',
-	'williamboman/mason-lspconfig.nvim',
+			-- キャッシュなどの高速化
+			'lewis6991/impatient.nvim',
+			'nathom/filetype.nvim',
 
-}
+			-- vim script製プラグイン
+			'unblevable/quick-scope',
+			'lambdalisue/fern.vim',
+			'lambdalisue/fern-hijack.vim',
+			'thinca/vim-partedit',
+			'haya14busa/vim-edgemotion',
+
+			-- lua製プラグイン
+			'ojroques/nvim-hardline',
+			'akinsho/toggleterm.nvim',
+			'nvim-lua/plenary.nvim',
+			'nvim-telescope/telescope.nvim',
+			'glacambre/firenvim',
+
+			-- mini.nvimのコンポーネント
+			'echasnovski/mini.pairs',
+			'echasnovski/mini.completion',
+			'echasnovski/mini.comment',
+			'echasnovski/mini.surround',
+			'echasnovski/mini.jump2d',
+
+			-- lspの設定
+			'neovim/nvim-lspconfig',
+			'williamboman/mason.nvim',
+			'williamboman/mason-lspconfig.nvim',
+
+		}
+	
+end
 -- ====== Jetpackの設定ここまで ======
 
 
