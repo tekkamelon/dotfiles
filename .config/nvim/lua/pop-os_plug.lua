@@ -38,5 +38,14 @@ require('jetpack.paq'){
 
 }
 
--- mini.indentscopeの設定
-require('mini.indentscope').setup{}
+-- vscode-neovimから起動した際に真,それ以外で偽
+if vim.g.vscode then
+
+	-- 真の場合は何もしない
+
+else
+
+	-- mini.indentscopeの設定
+	require('mini.indentscope').setup{}
+
+end
