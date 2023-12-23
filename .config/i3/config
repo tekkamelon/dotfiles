@@ -201,7 +201,7 @@ bindsym Super_L exec --no-startup-id xfce4-popup-whiskermenu
 
 # ターミナルの起動
 bindsym $mod+ctrl+t exec --no-startup-id xfce4-terminal 
-bindsym $mod+t exec --no-startup-id xfce4-terminal --drop-down -e tmux
+bindsym $mod+t exec --no-startup-id xfce4-terminal --drop-down
 bindsym XF86Launch1 exec --no-startup-id stterm -f "VL Gothic-10"
 
 # ディスプレイのレイアウト用シェルスクリプトの起動
@@ -241,6 +241,6 @@ exec --no-startup-id ~/.fehbg
 exec --no-startup-id pulseaudio -D
 
 # ディスプレイの再レイアウト
-exec --no-startup-id sleep 1; ~/.screenlayout/pop-layout.sh
+# exec --no-startup-id sleep 1; ~/.screenlayout/pop-layout.sh
 # ====== 自動実行するソフトの設定ここまで ======
 
