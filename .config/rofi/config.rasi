@@ -1,0 +1,12 @@
+configuration {
+
+	modi: "drun,run,system:~/.config/rofi/rofi_system-mode.sh,mpd-client:~/.config/rofi/rofi_mpd-mode.sh,window";
+	width: 40;
+	show-icons: true;
+	lines: 15;
+	fake-transparency: true;
+	sidebar-mode: true;
+	
+}
+
+@import "/home/tekkamelon/.config/rofi/themes/retro_green-term.rasi"
