@@ -22,6 +22,7 @@ require('jetpack.paq'){
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope.nvim',
 	'glacambre/firenvim',
+	'nvim-zh/colorful-winsep.nvim',
 
 	-- mini.nvimのコンポーネント
 	'echasnovski/mini.pairs',
