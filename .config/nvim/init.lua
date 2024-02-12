@@ -190,55 +190,46 @@ vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
 -- ====== プラグインの設定 ======
 -- ====== Jetpackの設定 ======
--- ホスト名が"pop-os"の場合は真,そうでない場合は偽
-if vim.fn.hostname() == "pop-os" then
+vim.cmd('packadd vim-jetpack')
 
-	-- 真の場合は別ファイルを読み込み
-	require('pop-os_plug')
+	require('jetpack.paq'){
 
-else
+		{'tani/vim-jetpack' , opt = 1},
 
-	-- 偽の場合は通常通りプラグインを読み込み
-	vim.cmd('packadd vim-jetpack')
+		-- キャッシュなどの高速化
+		-- 'lewis6991/impatient.nvim',
+		'nathom/filetype.nvim',
 
-		require('jetpack.paq'){
+		-- vim script製プラグイン
+		'unblevable/quick-scope',
+		'lambdalisue/fern.vim',
+		'lambdalisue/fern-hijack.vim',
+		'thinca/vim-partedit',
+		'haya14busa/vim-edgemotion',
 
-			{'tani/vim-jetpack' , opt = 1},
+		-- lua製プラグイン
+		'ojroques/nvim-hardline',
+		'akinsho/toggleterm.nvim',
+		'nvim-lua/plenary.nvim',
+		'nvim-telescope/telescope.nvim',
+		'glacambre/firenvim',
+		'nvim-zh/colorful-winsep.nvim',
 
-			-- キャッシュなどの高速化
-			'lewis6991/impatient.nvim',
-			'nathom/filetype.nvim',
+		-- mini.nvimのコンポーネント
+		'echasnovski/mini.pairs',
+		'echasnovski/mini.completion',
+		'echasnovski/mini.comment',
+		'echasnovski/mini.surround',
+		'echasnovski/mini.jump2d',
+		'echasnovski/mini.indentscope',
 
-			-- vim script製プラグイン
-			'unblevable/quick-scope',
-			'lambdalisue/fern.vim',
-			'lambdalisue/fern-hijack.vim',
-			'thinca/vim-partedit',
-			'haya14busa/vim-edgemotion',
+		-- lspの設定
+		'neovim/nvim-lspconfig',
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim',
 
-			-- lua製プラグイン
-			'ojroques/nvim-hardline',
-			'akinsho/toggleterm.nvim',
-			'nvim-lua/plenary.nvim',
-			'nvim-telescope/telescope.nvim',
-			'glacambre/firenvim',
-			'nvim-zh/colorful-winsep.nvim',
-
-			-- mini.nvimのコンポーネント
-			'echasnovski/mini.pairs',
-			'echasnovski/mini.completion',
-			'echasnovski/mini.comment',
-			'echasnovski/mini.surround',
-			'echasnovski/mini.jump2d',
-
-			-- lspの設定
-			'neovim/nvim-lspconfig',
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
-
-		}
+	}
 	
-end
 -- ====== Jetpackの設定ここまで ======
 
 
@@ -343,14 +334,6 @@ if vim.g.vscode then
 else
 
 	-- 偽の場合はプラグインの読込
-	-- ホスト名が"pop-os"ではない場合に"impatient"を読み込み
-	if vim.fn.hostname() ~= "pop-os" then
-
-		-- impatientの設定
-		require'impatient'.enable_profile()
-
-	end
-
 	-- ====== fernの設定 ====== 
 	-- カレントディレクトリからサイドバー形式で開く
 	-- vim.keymap.set('n' , '<C-n>' , ':Fern %:h -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
@@ -472,6 +455,9 @@ else
 
 	-- mini.completionの設定
 	require('mini.completion').setup{}
+
+	-- mini.indentscopeの設定
+	require('mini.indentscope').setup{}
 
 
 	-- ====== mason*の設定 =======
