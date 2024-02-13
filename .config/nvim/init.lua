@@ -440,7 +440,7 @@ else
 
 	-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
 	vim.keymap.set('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
-	vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualSelection<CR>' , {noremap = true})
+	vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , {noremap = true})
 	-- ====== toggletermの設定ここまで ======
 
 
