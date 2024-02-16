@@ -5,7 +5,6 @@
 local options = {
 
 	did_install_default_menus = 1,
-	-- did_load_filetypes = 1,
 	did_load_ftplugin = 1,
 	loaded_2html_plugin = 1,
 	loaded_getscript = 1,
@@ -30,16 +29,6 @@ local options = {
 
 }
 
--- ホスト名が"pop-os"ではない場合は"did_load_filetypes"の読み込みを停止
-if vim.fn.hostname() == "pop-os" then
-
-	-- 真の場合は何もしない
-
-else
-
-	vim.g.did_load_filetypes = 1
-
-end
 
 -- "options"内の左辺を"let",右辺を"status"にそれぞれ代入しループ
 for let, status in pairs(options) do
@@ -60,14 +49,6 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*rc' , command = 'set filet
 -- シェルの設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
-
--- *.cgiの場合
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = 'set filetype=sh',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = 'set filetype=sh',})
-
--- *.scadの場合
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.scad' , command = 'set filetype=openscad',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.scad' , command = 'set filetype=openscad',})
 --  ====== 拡張子ごとのfiletypeの設定ここまで ======
 
 
@@ -195,10 +176,6 @@ vim.cmd('packadd vim-jetpack')
 	require('jetpack.paq'){
 
 		{'tani/vim-jetpack' , opt = 1},
-
-		-- キャッシュなどの高速化
-		-- 'lewis6991/impatient.nvim',
-		'nathom/filetype.nvim',
 
 		-- vim script製プラグイン
 		'unblevable/quick-scope',
@@ -334,6 +311,7 @@ if vim.g.vscode then
 else
 
 	-- 偽の場合はプラグインの読込
+
 	-- ====== fernの設定 ====== 
 	-- カレントディレクトリからサイドバー形式で開く
 	-- vim.keymap.set('n' , '<C-n>' , ':Fern %:h -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
