@@ -97,14 +97,11 @@ if vim.fn.hostname() == "pop-os" then
 	-- 真の場合はカラースキームを"iceberg"に設定
 	vim.cmd([[colorscheme iceberg]])
 
--- 偽の場合はホスト名を確認,"pcg-2c7n"の場合は真,そうでない場合は偽
-elseif vim.fn.hostname() == "pcg-2c7n" then
+-- 偽の場合はホスト名を確認,"tekkamelon-pcg-2c7n"の場合は真,そうでない場合は偽
+elseif vim.fn.hostname() == "tekkamelon-pcg-2c7n" then
 
-	-- 真の場合はカラースキームを"elflord"に設定
-	vim.cmd([[colorscheme elflord]])
-
-	-- 24bitカラーを無効
-	vim.opt.termguicolors = false 
+	-- 真の場合はカラースキームを"default"に設定
+	vim.cmd([[colorscheme default]])
 
 else
 
