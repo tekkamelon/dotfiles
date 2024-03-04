@@ -85,16 +85,16 @@ end
 -- ホスト名が"pop-os"の場合は真,そうでない場合は偽
 if vim.fn.hostname() == "pop-os" then
 
-	vim.cmd([[colorscheme iceberg]])
+	vim.cmd.colorscheme "iceberg"
 
 -- 偽の場合はホスト名を確認,"tekkamelon-pcg-2c7n"の場合は真,そうでない場合は偽
 elseif vim.fn.hostname() == "tekkamelon-pcg-2c7n" then
 
-	vim.cmd([[colorscheme default]])
+	vim.cmd.colorscheme "default"
 
 else
 
-	vim.cmd([[colorscheme industry]])
+	vim.cmd.colorscheme "industry"
 
 end
 
