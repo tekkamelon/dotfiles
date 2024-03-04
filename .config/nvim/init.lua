@@ -1,6 +1,6 @@
 -- init.lua
 
--- ====== 標準プラグインの読込停止 ======
+-- 標準プラグインの読込停止
 -- "vim.g"をテーブルで設定
 local options = {
 
@@ -36,10 +36,8 @@ for let, status in pairs(options) do
 	vim.g[let] = status
 
 end
--- ====== 標準プラグインの読込停止ここまで ======
 
-
---  ====== 拡張子ごとのfiletypeの設定 ======
+--  拡張子ごとのfiletypeの設定
 -- 各種設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*conf*' , command = 'set filetype=conf',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '*conf*' , command = 'set filetype=conf',})
@@ -49,10 +47,8 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*rc' , command = 'set filet
 -- シェルの設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set filetype=sh',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
---  ====== 拡張子ごとのfiletypeの設定ここまで ======
 
-
--- ====== vim.optの設定 ======
+-- vim.optの設定
 -- "vim.opt"をテーブルで設定
 local options = {
 
@@ -83,10 +79,8 @@ for set, str in pairs(options) do
 	vim.opt[set] = str
 
 end
--- ====== vim.optの設定ここまで ======
 
-
--- ====== カラースキームの設定 ======
+-- カラースキームの設定
 -- ホスト名が"pop-os"の場合は真,そうでない場合は偽
 if vim.fn.hostname() == "pop-os" then
 
@@ -102,7 +96,6 @@ else
 	vim.cmd([[colorscheme industry]])
 
 end
--- ====== カラースキームの設定ここまで ======
 
 -- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
 vim.cmd([[
@@ -111,8 +104,7 @@ vim.cmd([[
 
 ]])
 
-
--- ====== ターミナルの設定 ====== 
+-- ターミナルの設定 
 -- ターミナルノーマルモードへの移行
 vim.keymap.set('t' , '<C-w><C-n>' , [[<C-\><C-n>]] , {noremap = true})
 
@@ -125,11 +117,8 @@ vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nar
 
 -- "Vterm"の設定,ターミナルを右半分に起動
 vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
--- ====== ターミナルの設定の終了 ====== 
 
-
--- ====== leaderの設定 ====== 
--- leaderをspaceに設定  
+-- leaderの設定 
 vim.g.mapleader = " "
 
 -- vscode-neovimから起動した際に真,それ以外で偽
@@ -151,15 +140,13 @@ else
 	vim.keymap.set('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
 
 end
--- ====== leaderの設定ここまで ====== 
-
+-- leaderの設定ここまで 
 
 -- ビジュアルモード時に"$"で改行を含めないようにする
 vim.keymap.set('v' , '$' , 'g_' , {remap = true})
 
-
--- ====== プラグインの設定 ======
--- ====== Jetpackの設定 ======
+-- プラグインの設定
+-- Jetpackの設定
 vim.cmd('packadd vim-jetpack')
 
 	require('jetpack.paq'){
@@ -195,7 +182,6 @@ vim.cmd('packadd vim-jetpack')
 
 	}
 	
--- ====== Jetpackの設定ここまで ======
 
 -- vim-edgemotionの設定
 -- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
@@ -209,7 +195,6 @@ vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
-
 
 -- mini.jump2dの設定
 require('mini.jump2d').setup{
@@ -290,11 +275,9 @@ else
 	-- ビジュアルモード時にleader+eでexモードのコマンドを表示
 	vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
 
-
 	-- hardlineの設定
 	require('hardline').setup{
 
-		-- バッファラインの表示
 		bufferline = true,
 
 		-- テーマの設定
@@ -351,20 +334,6 @@ else
 	vim.api.nvim_set_hl(0, 'EyelinerPrimary',{ fg='red', bold = true, underline = true })
 	vim.api.nvim_set_hl(0, 'EyelinerSecondary',{ fg='orange', bold = true, underline = true })
 
-	-- firenvimの設定
-	-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
-	-- if vim.g.started_by_firenvim == true then
-
-	-- 	-- 真の場合はfirenvimを起動
-	-- 	vim.o.laststatus = 0
-
-	-- else
-
-	-- 	-- 偽の場合は起動しない
-	-- 	vim.o.laststatus = 2
-
-	-- end
-
 	-- toggletermの設定
 	require("toggleterm").setup{}
 
@@ -405,5 +374,19 @@ else
 		end,
 
 	}
+
+	-- firenvimの設定
+	-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
+	-- if vim.g.started_by_firenvim == true then
+
+	-- 	-- 真の場合はfirenvimを起動
+	-- 	vim.o.laststatus = 0
+
+	-- else
+
+	-- 	-- 偽の場合は起動しない
+	-- 	vim.o.laststatus = 2
+
+	-- end
 
 end
