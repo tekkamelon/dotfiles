@@ -72,3 +72,11 @@
 ## ranger
 
 - rangerの各種設定ファイル集
+
+## Code
+
+- vscodeの設定ファイル
+
+## alacritty
+
+- alacrittyの設定ファイル
