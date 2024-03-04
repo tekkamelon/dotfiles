@@ -178,7 +178,7 @@ vim.cmd('packadd vim-jetpack')
 		'akinsho/toggleterm.nvim',
 		'nvim-lua/plenary.nvim',
 		'nvim-telescope/telescope.nvim',
-		'glacambre/firenvim',
+		-- 'glacambre/firenvim',
 
 		-- mini.nvimのコンポーネント
 		'echasnovski/mini.pairs',
@@ -352,17 +352,17 @@ else
 
 	-- firenvimの設定
 	-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
-	if vim.g.started_by_firenvim == true then
+	-- if vim.g.started_by_firenvim == true then
 
-		-- 真の場合はfirenvimを起動
-		vim.o.laststatus = 0
+	-- 	-- 真の場合はfirenvimを起動
+	-- 	vim.o.laststatus = 0
 
-	else
+	-- else
 
-		-- 偽の場合は起動しない
-		vim.o.laststatus = 2
+	-- 	-- 偽の場合は起動しない
+	-- 	vim.o.laststatus = 2
 
-	end
+	-- end
 
 	-- toggletermの設定
 	require("toggleterm").setup{}
