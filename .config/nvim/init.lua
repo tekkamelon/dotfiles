@@ -187,7 +187,6 @@ vim.cmd('packadd vim-jetpack')
 		'nvim-lua/plenary.nvim',
 		'nvim-telescope/telescope.nvim',
 		'glacambre/firenvim',
-		'nvim-zh/colorful-winsep.nvim',
 
 		-- mini.nvimのコンポーネント
 		'echasnovski/mini.pairs',
@@ -388,21 +387,6 @@ else
 
 	end
 	-- ====== firenvimの設定ここまで =======
-
-
-	-- ====== colorful-winsepの設定======
-	require("colorful-winsep").setup({
-
-		highlight = {
-
-			bg = "",
-
-			fg = "#00898F",
-
-		},
-
-	})
-	-- ====== colorful-winsepの設定ここまで ======
 
 
 	-- ====== toggletermの設定 ======
