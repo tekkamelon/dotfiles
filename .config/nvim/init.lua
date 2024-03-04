@@ -167,7 +167,6 @@ vim.cmd('packadd vim-jetpack')
 		{'tani/vim-jetpack' , opt = 1},
 
 		-- vim script製プラグイン
-		'unblevable/quick-scope',
 		'lambdalisue/fern.vim',
 		'lambdalisue/fern-hijack.vim',
 		'thinca/vim-partedit',
@@ -178,6 +177,7 @@ vim.cmd('packadd vim-jetpack')
 		'akinsho/toggleterm.nvim',
 		'nvim-lua/plenary.nvim',
 		'nvim-telescope/telescope.nvim',
+		'jinh0/eyeliner.nvim',
 		-- 'glacambre/firenvim',
 
 		-- mini.nvimのコンポーネント
@@ -196,18 +196,6 @@ vim.cmd('packadd vim-jetpack')
 	}
 	
 -- ====== Jetpackの設定ここまで ======
-
-
--- quick-scopeの設定
--- ハイライトの色を設定
-vim.cmd([[
-
-	highlight QuickScopePrimary guifg = 'red' gui = underline ctermfg = 199 cterm = underline
-	highlight QuickScopeSecondary guifg = 'orange' gui = underline ctermfg = 129 cterm = underline
-
-]])
--- quick-scopeの設定ここまで
-
 
 -- vim-edgemotionの設定
 -- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
@@ -349,6 +337,19 @@ else
 	-- leader+fgでファイル内文字列を検索
 	-- "$ sudo apt install ripgrep -y"で使用可能
 	vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
+
+	-- eyelinerの設定
+	require('eyeliner').setup {
+
+		highlight_on_key = false,
+
+		dim = false,
+
+	}
+
+	-- eyelinerのハイライトの色を設定
+	vim.api.nvim_set_hl(0, 'EyelinerPrimary',{ fg='red', bold = true, underline = true })
+	vim.api.nvim_set_hl(0, 'EyelinerSecondary',{ fg='orange', bold = true, underline = true })
 
 	-- firenvimの設定
 	-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
