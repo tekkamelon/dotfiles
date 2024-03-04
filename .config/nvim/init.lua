@@ -1,5 +1,6 @@
 -- init.lua
 
+
 -- 標準プラグインの読込停止
 -- "vim.g"をテーブルで設定
 local options = {
@@ -182,7 +183,6 @@ vim.cmd('packadd vim-jetpack')
 
 	}
 	
-
 -- vim-edgemotionの設定
 -- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
 vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
@@ -200,7 +200,7 @@ vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 require('mini.jump2d').setup{
 
 	-- ラベルに使う文字の設定
-	labels = 'qwertyuiophjklasdfg',
+	labels = 'gfdsalkjhpoiuytrewq',
 
 	view = {
 
@@ -347,7 +347,17 @@ else
 	vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , {noremap = true})
 
 	-- mini.pairsの設定
-	require('mini.pairs').setup{}
+	require('mini.pairs').setup{
+
+		mappings = {
+
+			-- "<>"の設定の追加
+			['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+			['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+
+		},
+
+	}
 
 	-- mini.completionの設定
 	require('mini.completion').setup{}
