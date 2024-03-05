@@ -65,21 +65,21 @@
 
 - after_set.vim
 
-    - init.*の後に読み込まれる設定,現在更新予定なし
+    - プラグインの後に読み込まれる設定,現在更新予定なし
 
 - after_set.lua
 
-    - init.*の後に読み込まれる設定
+    - プラグインの後に読み込まれる設定
 
 #### lua/
 
 - pop-os.lua
 
-    - pop-os用のプラグインの設定,現在不使用,更新予定なし
+    - pop-os用のプラグインの設定,更新予定なし
 
 - vscode-neovim_plug.lua
 
-    - vscode-neovimから起動した際に読み込まれるプラグインの設定
+    - vscode-neovimから起動した際に読み込まれるプラグインの設定,更新予定なし
 
 - vscode-neovim_set.lua
 
@@ -89,14 +89,20 @@
 
 - rangerの各種設定ファイル集
 
-### Code
+### Code/User
 
-- vscodeの設定ファイル
+- settings.json
+
+    - vscodeの設定ファイル
 
 ### alacritty
 
-- alacrittyの設定ファイル
+- alacritty.toml
+
+    - alacrittyの設定ファイル
 
 ### mpd
 
-- mpdの設定ファイル
+- mpd.conf
+
+    - mpdの設定ファイル
