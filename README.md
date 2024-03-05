@@ -1,82 +1,102 @@
 # dotfiles
 自分用の設定ファイル
 
-# .Xresources
+## .Xresources
 
 - urxvtの配色などの設定
 
-# .fbtermrc
+## .fbtermrc
 
 - fbtermの設定
 
-# .tigrc
+## .tigrc
 
 - tigの設定
 
-# .tmux.conf
+## .tmux.conf
 
 - tmuxの設定
 
-# .*shrc
+## .*shrc
 
 - 各種シェルの設定
 
-# ncmpcpp
+## ncmpcpp
 
-## bindings
+### bindings
 
 - ncmpcppのキーバインドの設定
 
-## config
+### config
 
 - ncmpcppの配色などの設定
 
-# .config
+## .config
 
-## user-dirs-.dirs
+### user-dirs-.dirs
 
 - "XDG_xxx_DIR"の設定
 
-## i3
+### i3
 
-### config
+#### config
 
 - i3ウィンドウマネージャーのキーバインドや自動実行するソフトの設定
 
-## nvim
+### nvim
 
-### init.vim
+#### init.vim
 
 - neovimの起動時に読み込まれるキーバインドやプラグインなどの設定,現在更新予定なし
 
-### init.lua
+#### init.lua
 
 - neovimの起動時に読み込まれるキーバインドやプラグインなどの設定
 
-### light_init.vim
+#### light_init.vim
 
 - neovimをプラグイン無しで起動する際に使用,現在更新予定なし
 
-### light_init.lua
+#### light_init.lua
 
 - neovimをプラグイン無しで起動する際に使用
 
-#### after/plugin/after_set.vim
+#### after/plugin/
 
-- init.*のあとに読み込まれる設定,現在更新予定なし
+- after_set.vim
 
-#### after/plugin/after_set.lua
+    - init.*の後に読み込まれる設定,現在更新予定なし
 
-- init.*のあとに読み込まれる設定
+- after_set.lua
 
-## ranger
+    - init.*の後に読み込まれる設定
+
+#### lua/
+
+- pop-os.lua
+
+    - pop-os用のプラグインの設定,現在不使用,更新予定なし
+
+- vscode-neovim_plug.lua
+
+    - vscode-neovimから起動した際に読み込まれるプラグインの設定
+
+- vscode-neovim_set.lua
+
+    - vscode-neovimのキーバインドの設定
+
+### ranger
 
 - rangerの各種設定ファイル集
 
-## Code
+### Code
 
 - vscodeの設定ファイル
 
-## alacritty
+### alacritty
 
 - alacrittyの設定ファイル
+
+### mpd
+
+- mpdの設定ファイル
