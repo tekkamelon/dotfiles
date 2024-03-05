@@ -2,7 +2,6 @@
 -- プラグインの起動後に読込
 
 
--- ====== 共通の設定 ======
 -- ポップアップメニューの設定
 vim.api.nvim_set_hl(0, 'Pmenu',{ guifg=white , guibg=grey})
 
@@ -18,16 +17,18 @@ vim.cmd([[
 	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
 
 ]])
--- ====== 共通の設定ここまで ======
-
 
 -- ポップアップメニューの設定,ホスト名を確認,"pop-os"であれ真,それ以外で偽
 if vim.fn.hostname() == "pop-os" then
 
-	vim.api.nvim_set_hl(0, 'PmenuSel',{ fg='#2f3234', bg='#8389a3' })
+	vim.api.nvim_set_hl(0, 'PmenuSel',{ fg='#2f3234' , bg='#8389a3' })
 
 else
 
-	vim.api.nvim_set_hl(0, 'PmenuSel',{ fg='#2f3234', bg='#00aaaa' })
+	vim.api.nvim_set_hl(0, 'PmenuSel',{ fg='#2f3234' , bg='#00aaaa' })
 
 end
+
+-- eyelinerのハイライトの色を設定
+vim.api.nvim_set_hl(0, 'EyelinerPrimary',{ fg='red', bold = true, underline = true })
+vim.api.nvim_set_hl(0, 'EyelinerSecondary',{ fg='orange', bold = true, underline = true })

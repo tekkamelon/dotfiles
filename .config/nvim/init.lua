@@ -1,4 +1,5 @@
 -- init.lua
+-- neovim >= 0.9.0
 
 
 -- 標準プラグインの読込停止
@@ -29,7 +30,6 @@ local options = {
 	skip_loading_mswin = 1,
 
 }
-
 
 -- "options"内の左辺を"let",右辺を"status"にそれぞれ代入しループ
 for let, status in pairs(options) do
@@ -329,10 +329,6 @@ else
 		dim = false,
 
 	}
-
-	-- eyelinerのハイライトの色を設定
-	vim.api.nvim_set_hl(0, 'EyelinerPrimary',{ fg='red', bold = true, underline = true })
-	vim.api.nvim_set_hl(0, 'EyelinerSecondary',{ fg='orange', bold = true, underline = true })
 
 	-- toggletermの設定
 	require("toggleterm").setup{}
