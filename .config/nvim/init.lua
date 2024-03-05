@@ -166,6 +166,7 @@ vim.cmd('packadd vim-jetpack')
 		'nvim-lua/plenary.nvim',
 		'nvim-telescope/telescope.nvim',
 		'jinh0/eyeliner.nvim',
+		'lewis6991/gitsigns.nvim',
 		-- 'glacambre/firenvim',
 
 		-- mini.nvimのコンポーネント
@@ -363,6 +364,9 @@ else
 
 	-- mason*の設定
 	require('mason').setup{}
+
+	-- gitsignsの設定
+	require('gitsigns').setup{}
 
 	-- ローカル関数の定義
 	local lspconfig = require('lspconfig')
