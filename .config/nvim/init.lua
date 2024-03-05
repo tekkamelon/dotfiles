@@ -366,7 +366,17 @@ else
 	require('mason').setup{}
 
 	-- gitsignsの設定
-	require('gitsigns').setup{}
+	require('gitsigns').setup{
+
+		signs = {
+			
+			change = { text = '>>' },
+			
+		},
+
+		numhl = true,
+		
+	}
 
 	-- ローカル関数の定義
 	local lspconfig = require('lspconfig')
