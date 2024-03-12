@@ -1,22 +1,14 @@
-#!/bin/sh
+#!/bin/sh -eu
 
-acpi | 
+# ====== 変数の設定 ======
+# ロケールの設定
+export LC_ALL=C
+export LANG=C
 
-awk 'BEGIN{
+# GNU coreutilsの挙動をPOSIXに準拠
+export POSIXLY_CORRECT=1
 
-	# 区切り文字を","と":"に指定
-	FS="[,|:]"
+# バッテリー残量を取得
+bat_status=$(cat /sys/class/power_supply/BAT0/capacity)
 
-	OFS = " "
-
-
-}
-
-{
-
-	# スペースの削除
-	gsub(" " , "")
-
-	print "<"$2,$3">"
-
-}'
+echo "<BAT0:${bat_status}%>"
