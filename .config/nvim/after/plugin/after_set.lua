@@ -11,13 +11,6 @@ vim.api.nvim_create_autocmd('FileType' , {pattern = '*' , command = 'setlocal fo
 -- カーソルラインをアンダーラインに設定
 vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 
--- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
-vim.cmd([[
-
-	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
-
-]])
-
 -- ポップアップメニューの設定,ホスト名を確認,"pop-os"であれ真,それ以外で偽
 if vim.fn.hostname() == "pop-os" then
 

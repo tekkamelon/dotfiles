@@ -98,10 +98,12 @@ else
 
 end
 
--- ヤンクした範囲のハイライト,ビジュアルモード時にオフ
+-- ヤンクした範囲のハイライト
+vim.highlight.on_yank({ higroup = 'YankHighlight', timeout = 200 })
+
 vim.cmd([[
 
-	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 700 , on_visual = false}
+	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 200, on_visual = true}
 
 ]])
 
