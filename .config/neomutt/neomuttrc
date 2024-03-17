@@ -1,0 +1,103 @@
+# メール送信・受信設定
+source "gpg -d ~/.config/neomutt/passwds.gpg |"
+set realname= "鉄火メロン"
+set hostname= "gmail.com"
+set from= "type2guntank@gmail.com"
+
+# SMTPの設定
+set smtp_url= "smtps://type2guntank@gmail.com@smtp.gmail.com:465/"
+
+# IMAPの設定
+set imap_user = "type2guntank@gmail.com"
+
+# 受信メールの読み込み先(993番ポート=SSL対応)
+set folder = "imaps://imap.gmail.com:993"
+
+# セキュリティ設定
+set ssl_starttls = yes
+
+# TLSの使用を強制
+set ssl_force_tls = yes 
+
+# サイドバーの設定
+set sidebar_visible= yes
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+
+# ディレクトリ名の表示を短縮
+set sidebar_short_path
+set sidebar_delim_chars="/"
+
+# 定期的にメールの状態をチェック
+set mail_check_stats
+
+# 日付の降順でメール一覧を表示
+set sort_aux= reverse-date
+
+# メールのFromヘッダを自動生成
+set use_from = yes
+
+# メールを書く時のエディタ
+# 環境変数EDITORに従う場合,$(echo \$EDITOR)と記載
+set editor = "nvim"
+
+# Terminal(およびメール送信時)で使用する文字
+set charset = "utf-8"
+
+# 文字コードの優先順位
+set assumed_charset = "utf-8:iso-2022-jp:euc-jp:shift_jis"
+
+# 複数のメッセージが連結した形式で保存
+set mbox_type= "maildir" 
+
+# 送信済みメール
+set spoolfile = "+INBOX"
+
+# 下書きの保存先
+# set postponed = "\+[GMail]/Drafts"
+set postponed = "~/.config/neomutt/postponed/"
+
+# 送信済みメール
+# set record = "+[Gmail]/Sent Mail"
+set record = "~/.config/neomutt/sent/"
+
+# キャッシュディレクトリ
+set header_cache = "~/.config/neomutt/cache/headers"
+set message_cachedir = "~/.config/neomutt/cache/bodies"
+
+# CAの証明書の格納先(接続先の認証ファイル)
+set certificate_file = "~/.config/neomutt/certificates"
+
+# HTMLメールをw3mでプレビュー
+set mailcap_path = "~/.config/neomutt/mailcap" 
+auto_view text/html
+
+# 未分類メール
+mailboxes = "+INBOX"
+
+# 送信済みメール
+mailboxes "~/.config/neomutt/sent"
+
+# 下書き
+mailboxes "~/.config/neomutt/postponed"
+
+# IMAPで読み込むメールボックス
+source "~/.config/neomutt/mailboxes.neomuttrc"
+
+#キーバインドの設定
+bind index,pager \Ck sidebar-prev 
+bind index,pager \Cj sidebar-next 
+bind index,pager \Cn sidebar-toggle-visible
+bind index,pager \Ci sidebar-open 
+bind pager j next-line
+bind pager k previous-line
+bind attach,index,pager \CD next-page
+bind attach,index,pager \CU previous-page
+bind pager g top
+bind pager G bottom
+bind attach,index g first-entry
+bind attach,index G last-entry 
+
+# カラースキーム
+# source /home/tekkamelon/.config/neomutt/colorschemes/neonwolf-256.neomuttrc
+# source /home/tekkamelon/.config/neomutt/colorschemes/zenburn.neomuttrc
+source /home/tekkamelon/.config/neomutt/colorschemes/vombatidae.neomutt
