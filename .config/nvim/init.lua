@@ -91,6 +91,7 @@ if vim.fn.hostname() == "pop-os" then
 elseif vim.fn.hostname() == "tekkamelon-pcg-2c7n" then
 
 	vim.cmd.colorscheme "default"
+	vim.opt.termguicolors = false
 
 else
 
