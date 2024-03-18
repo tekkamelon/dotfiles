@@ -22,6 +22,7 @@ set ssl_force_tls = yes
 # サイドバーの設定
 set sidebar_visible= yes
 set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width = 23
 
 # ディレクトリ名の表示を短縮
 set sidebar_short_path
@@ -100,4 +101,4 @@ bind attach,index G last-entry
 # カラースキーム
 # source /home/tekkamelon/.config/neomutt/colorschemes/neonwolf-256.neomuttrc
 # source /home/tekkamelon/.config/neomutt/colorschemes/zenburn.neomuttrc
-source /home/tekkamelon/.config/neomutt/colorschemes/vombatidae.neomutt
+# source /home/tekkamelon/.config/neomutt/colorschemes/vombatidae.neomutt
