@@ -38,7 +38,7 @@ for let, status in pairs(options) do
 
 end
 
---  拡張子ごとのfiletypeの設定
+-- 拡張子ごとのfiletypeの設定
 -- 各種設定ファイル
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*conf*' , command = 'set filetype=conf',})
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '*conf*' , command = 'set filetype=conf',})
@@ -100,8 +100,10 @@ else
 end
 
 -- ヤンクした範囲のハイライト
+-- ノーマルモード
 vim.highlight.on_yank({ higroup = 'YankHighlight', timeout = 200 })
 
+-- ビジュアルモード
 vim.cmd([[
 
 	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 200, on_visual = true}
@@ -351,9 +353,13 @@ else
 
 		mappings = {
 
-			-- "<>"の設定の追加
+			-- "<>"の設定
 			['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
 			['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+
+			-- "「」"の設定
+			['「'] = { action = 'open', pair = '「」', neigh_pattern = '[^\\].' },
+			['」'] = { action = 'close', pair = '「」', neigh_pattern = '[^\\].' },
 
 		},
 
@@ -381,7 +387,7 @@ else
 		
 	}
 
-	-- ローカル関数の定義
+	-- masonの設定
 	local lspconfig = require('lspconfig')
 
 	require('mason-lspconfig').setup_handlers{
