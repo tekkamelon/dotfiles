@@ -597,7 +597,7 @@ audio_output {
 #active_window_border = red
 #visualizer_fifo_path = "/tmp/mpd.fifo"
 #
-#colors_enabled = yes
+colors_enabled = yes
 empty_tag_color = "white"
 header_window_color = "blue"
 volume_color = "white"
@@ -618,5 +618,10 @@ visualizer_fifo_path = "/tmp/mpd.fifo"
 visualizer_output_name = "my_fifo"
 visualizer_sync_interval = "30" 
 visualizer_in_stereo = "yes"
-visualizer_type = "spectrum"
+
+# spectrum,ellipse,wave_filledのいずれかを選択
+visualizer_type = "wave_filled"
 visualizer_look = "+|"
+
+# 楽曲の変更を通知
+execute_on_song_change = "songinfo"
