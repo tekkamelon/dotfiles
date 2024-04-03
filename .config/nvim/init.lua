@@ -50,14 +50,17 @@ vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set 
 vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
 
 -- テンプレート
-vim.cmd([[
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.sh' , command = '0r $HOME/Templates/sh.txt',})
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = '0r $HOME/Templates/sh.txt',})
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.awk' , command = '0r $HOME/Templates/awk.txt',})
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.py' , command = '0r $HOME/Templates/python.txt',})
+vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.c' , command = '0r $HOME/Templates/c.txt',})
 
-	autocmd BufNewFile *.sh 0r $HOME/Templates/sh.txt
-	autocmd BufNewFile *.awk 0r $HOME/Templates/awk.txt
-	autocmd BufNewFile *.py 0r $HOME/Templates/python.txt
-	autocmd BufNewFile *.c 0r $HOME/Templates/c.txt
-
-]])
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.sh' , command = '0r $HOME/Templates/sh.txt',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = '0r $HOME/Templates/sh.txt',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.awk' , command = '0r $HOME/Templates/awk.txt',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.py' , command = '0r $HOME/Templates/python.txt',})
+vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.c' , command = '0r $HOME/Templates/c.txt',})
 
 -- vim.optの設定
 -- "vim.opt"をテーブルで設定
