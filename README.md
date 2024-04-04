@@ -1,6 +1,10 @@
 # dotfiles
 自分用の設定ファイル
 
+## Template
+
+- neovimで使用するテンプレート
+
 ## .Xresources
 
 - urxvtの配色などの設定
@@ -16,6 +20,10 @@
 ## .tmux.conf
 
 - tmuxの設定
+
+## .tmux
+
+- .tmux.confで使用するスクリプト
 
 ## .*shrc
 
