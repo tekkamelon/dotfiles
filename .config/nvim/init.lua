@@ -56,12 +56,6 @@ vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.awk' , command = '0r $H
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.py' , command = '0r $HOME/Templates/python.txt',})
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.c' , command = '0r $HOME/Templates/c.txt',})
 
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.sh' , command = '0r $HOME/Templates/sh.txt',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.cgi' , command = '0r $HOME/Templates/sh.txt',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.awk' , command = '0r $HOME/Templates/awk.txt',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.py' , command = '0r $HOME/Templates/python.txt',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*.c' , command = '0r $HOME/Templates/c.txt',})
-
 -- vim.optの設定
 -- "vim.opt"をテーブルで設定
 local options = {
