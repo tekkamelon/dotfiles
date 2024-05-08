@@ -141,6 +141,13 @@ alias lv='dir -1 -v'
 alias lva='dir -1 -v -a'
 alias lvd='ls -a | grep "^\." | sed '1,2d''
 
+# "fastfetch"がパスの通ったディレクトリにあれば真
+if type fastfetch > /dev/null 2>&1 ; then
+
+	alias neofetch="fastfetch"
+
+fi
+
 # シャットダウン及び再起動
 alias shutdown='systemctl poweroff'
 alias reboot='systemctl reboot'
