@@ -192,6 +192,9 @@ client.urgent               $rd        $rd         $tx
 
 
 # ====== キーバインドの設定 ======
+# 空ウィンドウの作成
+bindsym $mod+o open
+
 # スクリーンショット
 bindsym --release Print exec --no-startup-id xfce4-screenshooter
 bindsym $mod+p exec --no-startup-id xfce4-screenshooter
