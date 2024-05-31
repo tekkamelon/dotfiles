@@ -40,6 +40,8 @@ alias reboot='systemctl reboot'
 
 
 # ====== 環境変数及びパスの設定 ======
+CDPATH="${HOME}"/Documents/github
+
 # 環境変数の設定
 export EDITOR=nvim
 export CALIBRE_USE_DARK_PALETTE=1
