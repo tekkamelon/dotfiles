@@ -1,3 +1,6 @@
+# shellcheck disable=SC2148
+
+
 PS1=$'\E[32m$(hostname -s): ${PWD} $ \E[0m'
 # PS1='${LOGNAME}@${HOSTNAME%%.*} $ '
 
@@ -22,9 +25,9 @@ alias info='info --vi-keys'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lv='dir -1 -v'
-alias lva='dir -1 -v -a'
-alias lvd='ls -a | grep "^\." | sed '1,2d''
+alias lv='ls -1'
+alias lva='ls -1 -v -a'
+alias lvd='ls -d .*'
 
 # "fastfetch"がパスの通ったディレクトリにあれば真
 if type fastfetch > /dev/null 2>&1 ; then

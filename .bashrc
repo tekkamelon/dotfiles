@@ -1,3 +1,8 @@
+# shellcheck disable=SC1090
+# shellcheck disable=SC1091
+# shellcheck disable=SC2015
+# shellcheck disable=SC2148
+
 # ~/.bashrc: executed by bash(1) for non-lggin shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -137,9 +142,9 @@ alias info='info --vi-keys'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias lv='dir -1 -v'
-alias lva='dir -1 -v -a'
-alias lvd='ls -a | grep "^\." | sed '1,2d''
+alias lv='ls -1'
+alias lva='ls -1 -v -a'
+alias lvd='ls -d .*'
 
 # "fastfetch"がパスの通ったディレクトリにあれば真
 if type fastfetch > /dev/null 2>&1 ; then
