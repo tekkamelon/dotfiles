@@ -29,6 +29,14 @@
 
 - 各種シェルの設定
 
+    - .bashrc
+
+    - .kshrc
+
+    - .mkshrc
+
+    - yashrc
+
 ## ncmpcpp
 
 ### bindings
