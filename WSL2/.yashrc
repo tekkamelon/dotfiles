@@ -1,0 +1,106 @@
+# shellcheck disable=SC1091
+# shellcheck disable=SC2148
+
+##### Sample Yashrc #####
+# This is a sample initialization script for yash. Copy this file to ~/.yashrc
+# and add your favorite customization to it.
+
+PS1='$(print -n "${USER}@${HOST%%.*} ";[[ "$HOME" == "$PWD" ]] && print -n "~" ||([[ "${PWD##*/}" == "" ]] && print -n "/" || print -n "${PWD##*/}");print "$ ")'
+
+# Firstly, load the common customization script.
+# If you don't like settings applied in this script, remove this line.
+. --autoload --no-alias initialization/common
+
+# These are additional aliases that are not defined in the common script.
+# Uncomment to enable them.
+#alias g='grep'
+#alias l='$PAGER'
+#alias --global L='|$PAGER'
+#alias --global N='>/dev/null 2>&1' N1='>/dev/null' N2='2>/dev/null'
+
+# Uncomment to enable direnv support. (jq required)
+#_update_direnv() {
+#  eval "$(
+#    direnv export json |
+#    jq -r 'to_entries | .[] |
+#    if .value == null then
+#      @sh "unset \(.key)"
+#    else
+#      @sh "export \(.key)=\(.value)"
+#    end'
+#  )"
+#}
+#_update_direnv
+#YASH_AFTER_CD=("$YASH_AFTER_CD" '_update_direnv')
+
+# And add your own customization below.
+
+# vim: set et sw=2 sts=2 tw=78 ft=sh:
+
+# viモードに設定
+set -o vi
+
+# ====== エイリアスの設定 ======
+# ソフトの起動
+alias popshop='io.elementary.appcenter'
+alias scad='openscad' 
+alias w3b='w3m -B'
+
+# vimの設定
+alias nvim='nvim --appimage-extract-and-run'
+alias vim='nvim'
+alias vit='nvim -c Bterm'
+alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber"'
+alias vp='nvim - -R -u "${HOME}/.config/nvim/light_init.lua"'
+
+# コマンドのエイリアス
+alias bc='bc -q'
+alias info='info --vi-keys'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lv='ls -1'
+alias lva='ls -1 -v -a'
+alias lvd='ls -d .*'
+
+# "fastfetch"がパスの通ったディレクトリにあれば真
+if type fastfetch > /dev/null 2>&1 ; then
+
+	alias neofetch="fastfetch"
+
+fi
+
+# シャットダウン及び再起動
+alias shutdown='systemctl poweroff'
+alias reboot='systemctl reboot'
+# ====== エイリアスの設定ここまで ======
+
+
+# ====== 環境変数及びパスの設定 ======
+CDPATH="${HOME}"/Documents/github
+
+# 環境変数の設定
+export EDITOR="nvim --appimage-extract-and-run"
+export CALIBRE_USE_DARK_PALETTE=1
+export W3MIMGDISPLAY_PATH=/usr/lib/w3m/w3mimgdisplay
+export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto/
+
+
+# パスの設定
+export PATH=$PATH:$HOME/Documents/nvim-linux64/bin/
+export PATH=$PATH:/opt/processing-3.5.4/
+export PATH=$PATH:/usr/sbin/
+export PATH=$PATH:$HOME/.local/bin/
+export PATH="$PATH:$JAVA_HOME/bin"
+# ====== 環境変数及びパスの設定ここまで ======
+
+
+# ホスト名に"thinkpad"が含まれていない場合にのみpywalで最後に利用したテーマを呼び出す
+echo_hostname=$(hostname)
+
+check_thinkpad="${echo_hostname#thinkpad}"
+
+check_hostname="${echo_hostname%"${check_thinkpad}"}"
+
+test "${check_hostname}" = "thinkpad" || cat ~/.cache/wal/sequences 2> /dev/null
+
