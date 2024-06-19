@@ -7,31 +7,28 @@ export LANG=C
 
 # GNU coreutilsの挙動をPOSIXに準拠
 export POSIXLY_CORRECT=1
+# ====== 変数の設定ここまで ======
 
-# iwconfigの結果のエラー出力を捨て変数に代入
-ssid=$(iwconfig 2> /dev/null)
 
-echo "${ssid}" |
+iwconfig 2> /dev/null |
 
-awk 'BEGIN{
-
-	# 区切り文字をダブルクォートに指定
-	FS="\""
-
-}
+# 区切り文字を":"とすぺーすに指定
+awk -F[:" "] '
 
 # 1行目のみを処理
-NR==1{
+NR == 1{
 
-	# "IEEE"があれば真,なければ偽
-	if(/IEEE/){
+	# 5フィールド目が"IEEE"かつ9フィールド目が"off/any"ではない場合に真
+	if($5 == "IEEE" && $9 != "off/any"){
 
-		printf "<"$2">\n"
+		print "<" $9 ">"
 
 	}else{
 
-		printf "<no wireless>\n"
+		print "<no " "wireless>"
 
 	}
 
-}'
+}
+'
+
