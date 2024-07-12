@@ -92,12 +92,19 @@ export PATH="$PATH:$JAVA_HOME/bin"
 # ====== 環境変数及びパスの設定ここまで ======
 
 
-# ホスト名に"thinkpad"が含まれていない場合にのみpywalで最後に利用したテーマを呼び出す
+# ホスト名をから"thinkpad"を抽出
 echo_hostname=$(hostname)
 
 check_thinkpad="${echo_hostname#thinkpad}"
 
 check_hostname="${echo_hostname%"${check_thinkpad}"}"
 
-test "${check_hostname}" = "thinkpad" || cat ~/.cache/wal/sequences 2> /dev/null
+# ホスト名が"thinkpad"ではない場合に真
+if [ "${check_hostname}" != "thinkpad" ] ; then
+
+	cat ~/.cache/wal/sequences 2> /dev/null
+
+	. "$HOME/.cargo/env"
+
+fi
 
