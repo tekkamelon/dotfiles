@@ -99,12 +99,17 @@ check_thinkpad="${echo_hostname#thinkpad}"
 
 check_hostname="${echo_hostname%"${check_thinkpad}"}"
 
-# ホスト名が"thinkpad"ではない場合に真
-if [ "${check_hostname}" != "thinkpad" ] ; then
+# ホスト名が"pop-os"であれば真
+if [ "${echo_hostname}" = "pop-os" ] ; then
 
 	cat ~/.cache/wal/sequences 2> /dev/null
 
 	. "$HOME/.cargo/env"
+
+# ホスト名に"thinkpad"が含まれない場合に真
+elif [ "${check_hostname}" != "thinkpad" ] ; then
+
+	cat ~/.cache/wal/sequences 2> /dev/null
 
 fi
 
