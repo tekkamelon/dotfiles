@@ -51,7 +51,6 @@ vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set fil
 
 -- テンプレート
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.sh' , command = '0r $HOME/Templates/sh.txt',})
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.cgi' , command = '0r $HOME/Templates/sh.txt',})
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.awk' , command = '0r $HOME/Templates/awk.txt',})
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.py' , command = '0r $HOME/Templates/python.txt',})
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.c' , command = '0r $HOME/Templates/c.txt',})
@@ -311,7 +310,7 @@ else
 			{class = 'med' , item = '%='},
 
 			-- カレント行の位置
-			{class = 'low' , item = require('hardline.parts.line').get_item},
+			{class = 'mode' , item = require('hardline.parts.line').get_item},
 
 		}
 
@@ -411,18 +410,5 @@ else
 
 	}
 
-	-- firenvimの設定
-	-- ブラウザ側のfirenvimが起動していれば真,それ以外で偽
-	-- if vim.g.started_by_firenvim == true then
-
-	-- 	-- 真の場合はfirenvimを起動
-	-- 	vim.o.laststatus = 0
-
-	-- else
-
-	-- 	-- 偽の場合は起動しない
-	-- 	vim.o.laststatus = 2
-
-	-- end
-
 end
+
