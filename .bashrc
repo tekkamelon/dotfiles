@@ -145,6 +145,7 @@ alias l='ls -CF'
 alias lv='ls -1'
 alias lva='ls -1 -v -a'
 alias lvd='ls -d .*'
+alias shhf='history | sed "s/^ [0-9]* .//g" | sort | uniq | fzf --reverse --prompt="${USER} > " | bash'
 
 # "fastfetch"がパスの通ったディレクトリにあれば真
 if type fastfetch > /dev/null 2>&1 ; then
