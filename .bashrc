@@ -146,6 +146,7 @@ alias lv='ls -1'
 alias lva='ls -1 -v -a'
 alias lvd='ls -d .*'
 alias shhf='history | sed "s/^ [0-9]* .//g" | sort | uniq | fzf --reverse --prompt="${USER} > " | bash'
+alias fzf='fzf --reverse'
 
 # "fastfetch"がパスの通ったディレクトリにあれば真
 if type fastfetch > /dev/null 2>&1 ; then
@@ -188,8 +189,6 @@ check_hostname="${echo_hostname%"${check_thinkpad}"}"
 if [ "${echo_hostname}" = "pop-os" ] ; then
 
 	cat ~/.cache/wal/sequences 2> /dev/null
-
-	. "$HOME/.cargo/env"
 
 # ホスト名に"thinkpad"が含まれない場合に真
 elif [ "${check_hostname}" != "thinkpad" ] ; then

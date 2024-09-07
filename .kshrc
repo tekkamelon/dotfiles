@@ -29,6 +29,7 @@ alias lv='ls -1'
 alias lva='ls -1 -v -a'
 alias lvd='ls -d .*'
 alias shhf='history | cut -f2- | sort | uniq | fzf --reverse --prompt="${USER} > " | sh'
+alias fzf='fzf --reverse'
 
 # "fastfetch"がパスの通ったディレクトリにあれば真
 if type fastfetch > /dev/null 2>&1 ; then
