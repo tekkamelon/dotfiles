@@ -1,0 +1,78 @@
+# viモードに設定
+set -o vi
+
+# ====== エイリアスの設定 ======
+# ソフトの起動
+alias popshop='io.elementary.appcenter'
+alias scad='openscad' 
+alias w3b='w3m -B'
+
+# vimの設定
+alias vim='nvim'
+alias vit='nvim -c Bterm'
+alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber"'
+alias vp='nvim - -R -u "${HOME}/.config/nvim/light_init.lua"'
+
+# コマンドのエイリアス
+alias bc='bc -q'
+alias info='info --vi-keys'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias lv='ls -1'
+alias lva='ls -1 -v -a'
+alias lvd='ls -d .*'
+alias shhf='history | cut -f2- | sort | uniq | fzf --reverse --prompt="${USER} > " | sh'
+alias fzf='fzf --reverse'
+
+# "fastfetch"がパスの通ったディレクトリにあれば真
+if type fastfetch > /dev/null 2>&1 ; then
+
+	alias neofetch="fastfetch"
+
+fi
+
+# シャットダウン及び再起動
+alias shutdown='systemctl poweroff'
+alias reboot='systemctl reboot'
+# ====== エイリアスの設定ここまで ======
+
+
+# ====== 環境変数及びパスの設定 ======
+CDPATH="${HOME}"/Documents/github
+
+# 環境変数の設定
+export EDITOR=nvim
+export CALIBRE_USE_DARK_PALETTE=1
+export W3MIMGDISPLAY_PATH=/usr/lib/w3m/w3mimgdisplay
+export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto/
+
+# パスの設定
+export PATH=$PATH:/opt/processing-3.5.4/
+export PATH=$PATH:/usr/sbin/
+export PATH=$PATH:$HOME/.local/bin/
+export PATH="$PATH:$JAVA_HOME/bin"
+# ====== 環境変数及びパスの設定ここまで ======
+
+
+# ホスト名をから"thinkpad"を抽出
+echo_hostname=$(hostname)
+
+check_thinkpad="${echo_hostname#thinkpad}"
+
+check_hostname="${echo_hostname%"${check_thinkpad}"}"
+
+# ホスト名が"pop-os"であれば真
+if [ "${echo_hostname}" = "pop-os" ] ; then
+
+	cat ~/.cache/wal/sequences 2> /dev/null
+
+	. "$HOME/.cargo/env"
+
+# ホスト名に"thinkpad"が含まれない場合に真
+elif [ "${check_hostname}" != "thinkpad" ] ; then
+
+	cat ~/.cache/wal/sequences 2> /dev/null
+
+fi
+
