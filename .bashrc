@@ -121,3 +121,6 @@ fi
 # 各シェル共通の設定を読み込み
 source "${HOME}"/.shrc
 
+# シェル固有の設定
+alias shhf='history | sed -e "s/^ //g" -e "s/  / /"| cut -d" " -f2- | sort | uniq | fzf --prompt="${USER} > " | bash'
+
