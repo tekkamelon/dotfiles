@@ -14,7 +14,7 @@ export POSIXLY_CORRECT=1
 
 iwconfig 2> /dev/null |
 
-# 区切り文字を":"とすぺーすに指定
+# 区切り文字を":"とスペースに指定
 awk -F[:" "] '
 
 # 1行目のみを処理
