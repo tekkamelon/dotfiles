@@ -52,6 +52,19 @@ export PATH=$PATH:/opt/processing-3.5.4/
 export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
 export PATH="$PATH:$JAVA_HOME/bin"
+
+# WSL2用の設定
+# "/mnt/c"がありかつ"Documents"以下にneovimのバイナリがあれば真
+if [ -d "/mnt/c" ] && [ -e "${HOME}/Documents/nvim-linux64/bin/nvim" ] ; then
+
+	export PATH=$PATH:${HOME}/Documents/nvim-linux64/bin/
+
+# "/mnt/c"がありかつ".local"以下にneovimのバイナリがあれば真
+elif [ -d "/mnt/c" ] && [ -d "${HOME}/.local/nvim-linux64" ] ; then
+	
+	export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
+
+fi
 # ====== 環境変数及びパスの設定ここまで ======
 
 
