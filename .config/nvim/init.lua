@@ -170,6 +170,7 @@ vim.cmd('packadd vim-jetpack')
 		'lambdalisue/fern-hijack.vim',
 		'thinca/vim-partedit',
 		'haya14busa/vim-edgemotion',
+		"github/copilot.vim",
 
 		-- lua製プラグイン
 		'ojroques/nvim-hardline',
@@ -207,6 +208,9 @@ vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+
+-- copilit.vimの設定
+vim.g.copilot_filetypes = {markdown = true}
 
 -- mini.jump2dの設定
 require('mini.jump2d').setup{
