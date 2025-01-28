@@ -396,23 +396,30 @@ else
 	-- copilot.luaの設定
 	require('copilot').setup{
 
+		-- サジェストの設定
 		suggestion = {
 
 			enabled = true,
-			auto_trigger = false,
+			auto_trigger = true,
 			hide_during_completion = true,
 			debounce = 75,
 
+			-- キーマッピングの設定
 			keymap = {
 
-				accept = "<C-END>",
-				accept_word = false,
-				accept_line = false,
+				accept = "<C-s>",
 				next = "<C-f>",
 				prev = "<C-F>",
 				dismiss = "<C-]>",
 
 			},
+
+		},
+
+		-- ファイルタイプの設定
+		filetype = {
+
+			gitcommit = true,
 
 		},
 
