@@ -1,7 +1,6 @@
 -- init.lua
 -- neovim >= 0.9.0
 
-
 -- 標準プラグインの読込停止
 -- "vim.g"をテーブルで設定
 local options = {
@@ -170,7 +169,6 @@ vim.cmd('packadd vim-jetpack')
 		'lambdalisue/fern-hijack.vim',
 		'thinca/vim-partedit',
 		'haya14busa/vim-edgemotion',
-		"github/copilot.vim",
 
 		-- lua製プラグイン
 		'ojroques/nvim-hardline',
@@ -179,6 +177,7 @@ vim.cmd('packadd vim-jetpack')
 		'nvim-telescope/telescope.nvim',
 		'jinh0/eyeliner.nvim',
 		'lewis6991/gitsigns.nvim',
+		"zbirenbaum/copilot.lua",
 		-- 'glacambre/firenvim',
 
 		-- mini.nvimのコンポーネント
@@ -208,9 +207,6 @@ vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
-
--- copilit.vimの設定
-vim.g.copilot_filetypes = {markdown = true}
 
 -- mini.jump2dの設定
 require('mini.jump2d').setup{
@@ -265,10 +261,10 @@ require('mini.surround').setup{
 
 	},
 
-	-- 矩形選択時に各行を囲む
-	respect_selection_type = true,
+		-- 矩形選択時に各行を囲む
+		respect_selection_type = true,
 
-}
+	}
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
@@ -395,6 +391,31 @@ else
 
 		numhl = true,
 		
+	}
+
+	-- copilot.luaの設定
+	require('copilot').setup{
+
+		suggestion = {
+
+			enabled = true,
+			auto_trigger = false,
+			hide_during_completion = true,
+			debounce = 75,
+
+			keymap = {
+
+				accept = "<C-END>",
+				accept_word = false,
+				accept_line = false,
+				next = "<C-f>",
+				prev = "<C-F>",
+				dismiss = "<C-]>",
+
+			},
+
+		},
+
 	}
 
 	-- masonの設定
