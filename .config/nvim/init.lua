@@ -180,6 +180,7 @@ vim.cmd('packadd vim-jetpack')
 		'lewis6991/gitsigns.nvim',
 		'zbirenbaum/copilot.lua',
 		'salkin-mada/openscad.nvim',
+		'nvim-treesitter/nvim-treesitter',
 
 		-- mini.nvimのコンポーネント
 		'echasnovski/mini.pairs',
@@ -413,6 +414,17 @@ else
 
 	-- openscad.nvimの設定
 	require('openscad').setup{}
+
+	-- treesitterの設定
+	require('nvim-treesitter.configs').setup{
+
+		highlight = {
+
+			enable = true,
+
+  		}
+
+	}
 
 	-- masonの設定
 	local lspconfig = require('lspconfig')
