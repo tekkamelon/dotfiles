@@ -177,7 +177,8 @@ vim.cmd('packadd vim-jetpack')
 		'nvim-telescope/telescope.nvim',
 		'jinh0/eyeliner.nvim',
 		'lewis6991/gitsigns.nvim',
-		"zbirenbaum/copilot.lua",
+		'zbirenbaum/copilot.lua',
+		'salkin-mada/openscad.nvim',
 		-- 'glacambre/firenvim',
 
 		-- mini.nvimのコンポーネント
@@ -420,10 +421,14 @@ else
 		filetype = {
 
 			gitcommit = true,
+			-- awk = true,
 
 		},
 
 	}
+
+	-- openscad.nvimの設定
+	require('openscad').setup{}
 
 	-- masonの設定
 	local lspconfig = require('lspconfig')
