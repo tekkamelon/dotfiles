@@ -388,9 +388,9 @@ else
 			-- キーマッピングの設定
 			keymap = {
 
-				accept = "<C-s>",
-				next = "<C-f>",
-				prev = "<C-F>",
+				accept = "<Leader>a",
+				next = "<Leader>n",
+				prev = "<Leader>b",
 				dismiss = "<C-]>",
 
 			},
@@ -401,7 +401,7 @@ else
 		filetype = {
 
 			gitcommit = true,
-			-- awk = true,
+			markdown = true,
 
 		},
 
