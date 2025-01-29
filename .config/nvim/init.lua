@@ -431,6 +431,32 @@ else
 
 	}
 
+	-- 特定の言語でハイライトしないようにする
+	vim.treesitter.start = (function(wrapped)
+
+		return function(bufnr, lang)
+
+			local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
+
+			local check = (
+
+				-- ファイルタイプが"help"または言語が"bash"の場合はハイライトしない
+				ft == 'help' or lang == 'bash'
+
+			)
+
+			if check then
+
+				return
+
+			end
+
+			wrapped(bufnr, lang)
+
+		end
+
+	end)(vim.treesitter.start)
+
 	-- masonの設定
 	local lspconfig = require('lspconfig')
 
