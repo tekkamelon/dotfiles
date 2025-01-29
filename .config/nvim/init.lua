@@ -431,31 +431,39 @@ else
 
 	}
 
-	-- 特定の言語でハイライトしないようにする
-	vim.treesitter.start = (function(wrapped)
+	-- カラースキームが"industry"の場合の設定
+	-- ローカル変数"colorscheme"に現在のカラースキームを代入"
+	local colorscheme = vim.g.colors_name
 
-		return function(bufnr, lang)
+	-- "colorscheme"が"industry"であれば真
+	if colorscheme == "industry" then
 
-			local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
+		-- 特定の言語でハイライトしないようにする
+		vim.treesitter.start = (function(wrapped)
 
-			local check = (
+			return function(bufnr, lang)
 
-				-- ファイルタイプが"help"または言語が"bash"の場合はハイライトしない
-				ft == 'help' or lang == 'bash'
+				local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
 
-			)
+				local check = (
 
-			if check then
+					ft == 'help' or lang == 'bash'
 
-				return
+				)
+
+				if check then
+
+					return
+
+				end
+
+				wrapped(bufnr, lang)
 
 			end
 
-			wrapped(bufnr, lang)
+		end)(vim.treesitter.start)
 
-		end
-
-	end)(vim.treesitter.start)
+	end
 
 	-- masonの設定
 	local lspconfig = require('lspconfig')
