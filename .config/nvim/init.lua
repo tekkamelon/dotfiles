@@ -188,7 +188,6 @@ vim.cmd('packadd vim-jetpack')
 		'echasnovski/mini.comment',
 		'echasnovski/mini.surround',
 		'echasnovski/mini.indentscope',
-		'echasnovski/mini.cursorword',
 
 		-- lspの設定
 		'neovim/nvim-lspconfig',
@@ -359,9 +358,6 @@ else
 
 	-- mini.indentscopeの設定
 	require('mini.indentscope').setup{}
-
-	-- mini.cursorwordの設定
-	require('mini.cursorword').setup{}
 
 	-- mason*の設定
 	require('mason').setup{}
