@@ -169,6 +169,7 @@ vim.cmd('packadd vim-jetpack')
 		'lambdalisue/fern-hijack.vim',
 		'thinca/vim-partedit',
 		'haya14busa/vim-edgemotion',
+		'skanehira/jumpcursor.vim',
 
 		-- lua製プラグイン
 		'ojroques/nvim-hardline',
@@ -179,14 +180,12 @@ vim.cmd('packadd vim-jetpack')
 		'lewis6991/gitsigns.nvim',
 		'zbirenbaum/copilot.lua',
 		'salkin-mada/openscad.nvim',
-		-- 'glacambre/firenvim',
 
 		-- mini.nvimのコンポーネント
 		'echasnovski/mini.pairs',
 		'echasnovski/mini.completion',
 		'echasnovski/mini.comment',
 		'echasnovski/mini.surround',
-		'echasnovski/mini.jump2d',
 		'echasnovski/mini.indentscope',
 
 		-- lspの設定
@@ -209,27 +208,8 @@ vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 
--- mini.jump2dの設定
-require('mini.jump2d').setup{
-
-	-- ラベルに使う文字の設定
-	labels = 'gfdsalkjhpoiuytrewq',
-
-	view = {
-
-		-- 使用時にハイライトの無い部分を暗くする
-		dim = true,
-
-	},
-
-	mappings = {
-
-		-- leader+hで起動
-		start_jumping = '<leader>h',
-
-	},
-
-}
+-- jumpcursorの設定
+vim.keymap.set('n' , '<leader>h' , '<Plug>(jumpcursor-jump)' , {noremap = true})
 
 -- mini.commentの設定
 require('mini.comment').setup{
