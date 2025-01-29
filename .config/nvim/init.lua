@@ -418,11 +418,20 @@ else
 	-- treesitterの設定
 	require('nvim-treesitter.configs').setup{
 
+		-- ハイライトを有効化
 		highlight = {
 
 			enable = true,
 
-  		}
+  		},
+
+		-- インデントを有効化
+		indent = {
+
+			enable = true,
+
+		},
+
 
 	}
 
