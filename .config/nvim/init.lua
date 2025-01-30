@@ -165,8 +165,6 @@ vim.cmd('packadd vim-jetpack')
 		{'tani/vim-jetpack' , opt = 1},
 
 		-- vim script製プラグイン
-		'lambdalisue/fern.vim',
-		'lambdalisue/fern-hijack.vim',
 		'thinca/vim-partedit',
 		'haya14busa/vim-edgemotion',
 		'skanehira/jumpcursor.vim',
@@ -188,6 +186,7 @@ vim.cmd('packadd vim-jetpack')
 		'echasnovski/mini.comment',
 		'echasnovski/mini.surround',
 		'echasnovski/mini.indentscope',
+		'echasnovski/mini.files',
 
 		-- lspの設定
 		'neovim/nvim-lspconfig',
@@ -257,10 +256,6 @@ if vim.g.vscode then
 	vim.keymap.set('v' , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
 
 else
-
-	-- fernの設定 
-	-- カレントディレクトリからサイドバー形式で開く
-	vim.keymap.set('n' , '<C-n>' , ':Fern . -reveal=% -drawer -toggle -width=30<CR>' , {noremap = true})
 
 	-- 行番号を非表示
 	vim.cmd('autocmd FileType fern setlocal norelativenumber | setlocal nonumber')
@@ -358,6 +353,10 @@ else
 
 	-- mini.indentscopeの設定
 	require('mini.indentscope').setup{}
+
+	require('mini.files').setup{}
+
+	vim.keymap.set('n' , '<C-n>' , ':lua MiniFiles.open()<CR>' , {noremap = true})
 
 	-- mason*の設定
 	require('mason').setup{}
