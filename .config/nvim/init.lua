@@ -181,7 +181,7 @@ vim.cmd('packadd vim-jetpack')
 		'salkin-mada/openscad.nvim',
 		'nvim-treesitter/nvim-treesitter',
 
-		-- mini.nvimのコンポーネント
+		-- mini.nvimのモジュール
 		'echasnovski/mini.pairs',
 		'echasnovski/mini.completion',
 		'echasnovski/mini.comment',

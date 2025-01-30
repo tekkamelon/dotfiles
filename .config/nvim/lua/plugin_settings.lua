@@ -62,9 +62,6 @@ if vim.g.vscode then
 
 else
 
-	-- 行番号を非表示
-	vim.cmd('autocmd FileType fern setlocal norelativenumber | setlocal nonumber')
-
 	-- vim-parteditの設定
 	-- ビジュアルモード時にleader+eでexモードのコマンドを表示
 	vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
@@ -176,7 +173,8 @@ else
 			-- ファイラが開いていれば真
 			if not MiniFiles.close() 
 
-				then MiniFiles.open(...) 
+				-- カレントバッファのディレクトリを表示
+				then MiniFiles.open(vim.api.nvim_buf_get_name(0))
 
 			end
 
@@ -284,7 +282,7 @@ else
 
 	end
 
-	-- mason*の設定
+	-- masonの設定
 	require('mason').setup{}
 
 		local lspconfig = require('lspconfig')
@@ -304,4 +302,5 @@ else
 		}
 
 end
+
 
