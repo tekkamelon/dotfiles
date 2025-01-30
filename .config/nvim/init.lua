@@ -187,6 +187,7 @@ vim.cmd('packadd vim-jetpack')
 		'echasnovski/mini.surround',
 		'echasnovski/mini.indentscope',
 		'echasnovski/mini.files',
+		'echasnovski/mini.icons',
 
 		-- lspの設定
 		'neovim/nvim-lspconfig',
@@ -354,9 +355,19 @@ else
 	-- mini.indentscopeの設定
 	require('mini.indentscope').setup{}
 
+	-- mini.filesの設定
 	require('mini.files').setup{}
 
-	vim.keymap.set('n' , '<C-n>' , ':lua MiniFiles.open()<CR>' , {noremap = true})
+		--  ファイラの起動
+		vim.keymap.set('n' , '<C-n>' , ':lua MiniFiles.open()<CR>' , {noremap = true})
+
+	-- mini.iconsの設定
+	require('mini.icons').setup{
+
+		-- アイコンのスタイルを"ascii"に設定
+		style = 'ascii',
+
+	}
 
 	-- mason*の設定
 	require('mason').setup{}
