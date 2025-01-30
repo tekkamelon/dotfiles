@@ -431,14 +431,6 @@ else
 
   		},
 
-		-- インデントを有効化
-		indent = {
-
-			enable = true,
-
-		},
-
-
 	}
 
 	-- カラースキームが"industry"の場合の設定
