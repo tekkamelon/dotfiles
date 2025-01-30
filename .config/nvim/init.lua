@@ -186,8 +186,8 @@ vim.cmd('packadd vim-jetpack')
 		'echasnovski/mini.comment',
 		'echasnovski/mini.surround',
 		'echasnovski/mini.indentscope',
-		'echasnovski/mini.files',
 		'echasnovski/mini.icons',
+		'echasnovski/mini.files',
 
 		-- lspの設定
 		'neovim/nvim-lspconfig',
@@ -355,19 +355,6 @@ else
 	-- mini.indentscopeの設定
 	require('mini.indentscope').setup{}
 
-	-- mini.filesの設定
-	require('mini.files').setup{
-
-		mappings = {
-
-			close = '<C-n>',
-
-		}
-	}
-
-		--  ファイラの起動
-		vim.keymap.set('n' , '<C-n>' , ':lua MiniFiles.open()<CR>' , {noremap = true})
-
 	-- mini.iconsの設定
 	require('mini.icons').setup{
 
@@ -376,8 +363,23 @@ else
 
 	}
 
-	-- mason*の設定
-	require('mason').setup{}
+	-- mini.filesの設定
+	require('mini.files').setup{}
+		
+		-- minifiles_toggle関数を定義
+		local minifiles_toggle = function(...)
+
+			-- ファイラが開いていれば真
+			if not MiniFiles.close() 
+
+				then MiniFiles.open(...) 
+
+			end
+
+		end
+
+		-- キーマッピングを設定
+		vim.keymap.set('n', '<C-n>', minifiles_toggle, { noremap = true, silent = true })
 
 	-- gitsignsの設定
 	require('gitsigns').setup{
@@ -477,22 +479,24 @@ else
 
 	end
 
-	-- masonの設定
-	local lspconfig = require('lspconfig')
+	-- mason*の設定
+	require('mason').setup{}
 
-	require('mason-lspconfig').setup_handlers{
+		local lspconfig = require('lspconfig')
 
-		function(server_name)
+		require('mason-lspconfig').setup_handlers{
 
-			lspconfig[server_name].setup{
+			function(server_name)
 
-			capabilities = capabilities,
+				lspconfig[server_name].setup{
+
+				capabilities = capabilities,
+
+			}
+
+			end,
 
 		}
-
-		end,
-
-	}
 
 end
 
