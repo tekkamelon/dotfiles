@@ -356,7 +356,14 @@ else
 	require('mini.indentscope').setup{}
 
 	-- mini.filesの設定
-	require('mini.files').setup{}
+	require('mini.files').setup{
+
+		mappings = {
+
+			close = '<C-n>',
+
+		}
+	}
 
 		--  ファイラの起動
 		vim.keymap.set('n' , '<C-n>' , ':lua MiniFiles.open()<CR>' , {noremap = true})
