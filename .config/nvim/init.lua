@@ -447,7 +447,10 @@ else
 
 				local check = (
 
-					ft == 'help' or lang == 'bash'
+					ft == 'help' 
+					or lang == 'bash'
+					or lang == 'awk'
+					or lang == 'html'
 
 				)
 
