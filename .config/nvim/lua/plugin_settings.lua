@@ -1,5 +1,45 @@
 -- plug_config.lua
 
+-- プラグインのリスト
+-- Jetpackの設定
+vim.cmd('packadd vim-jetpack')
+
+	require('jetpack.paq'){
+
+		{'tani/vim-jetpack' , opt = 1},
+
+		-- vim script製プラグイン
+		'thinca/vim-partedit',
+		'haya14busa/vim-edgemotion',
+		'skanehira/jumpcursor.vim',
+
+		-- lua製プラグイン
+		'ojroques/nvim-hardline',
+		'akinsho/toggleterm.nvim',
+		'nvim-lua/plenary.nvim',
+		'nvim-telescope/telescope.nvim',
+		'jinh0/eyeliner.nvim',
+		'lewis6991/gitsigns.nvim',
+		'zbirenbaum/copilot.lua',
+		'salkin-mada/openscad.nvim',
+		'nvim-treesitter/nvim-treesitter',
+
+		-- mini.nvimのモジュール
+		'echasnovski/mini.pairs',
+		'echasnovski/mini.completion',
+		'echasnovski/mini.comment',
+		'echasnovski/mini.surround',
+		'echasnovski/mini.indentscope',
+		'echasnovski/mini.icons',
+		'echasnovski/mini.files',
+
+		-- lspの設定
+		'neovim/nvim-lspconfig',
+		'williamboman/mason.nvim',
+		'williamboman/mason-lspconfig.nvim',
+
+	}
+
 -- vim-edgemotionの設定
 -- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
 vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
