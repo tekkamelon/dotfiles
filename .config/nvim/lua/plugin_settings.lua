@@ -21,6 +21,7 @@ vim.cmd('packadd vim-jetpack')
 		'jinh0/eyeliner.nvim',
 		'lewis6991/gitsigns.nvim',
 		'zbirenbaum/copilot.lua',
+		'CopilotC-Nvim/CopilotChat.nvim',
 		'salkin-mada/openscad.nvim',
 		'nvim-treesitter/nvim-treesitter',
 
@@ -269,6 +270,9 @@ else
 		},
 
 	}
+
+	-- CopilotChatの設定
+	require("CopilotChat").setup{}
 
 	-- openscad.nvimの設定
 	require('openscad').setup{}
