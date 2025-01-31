@@ -1,4 +1,4 @@
--- plug_config.lua
+	-- plug_config.lua
 
 -- プラグインのリスト
 -- Jetpackの設定
@@ -272,8 +272,24 @@ else
 	}
 
 	-- CopilotChatの設定
-	require("CopilotChat").setup{}
+	require("CopilotChat").setup{
 
+		-- チャット用のバッファの設定
+		window = {
+
+			layout = 'horizontal',
+			width = 0.5,
+			height = 0.35,
+			-- border = 'solid',
+
+		},
+
+	}
+
+	-- leader+ccでチャット用バッファをトグル
+	vim.keymap.set('n' , '<leader>cc' , ':CopilotChatToggle<CR>' , { noremap = true })
+
+	
 	-- openscad.nvimの設定
 	require('openscad').setup{}
 
@@ -346,5 +362,4 @@ else
 		}
 
 end
-
 
