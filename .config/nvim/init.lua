@@ -39,14 +39,11 @@ end
 
 -- 拡張子ごとのfiletypeの設定
 -- 各種設定ファイル
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*conf*' , command = 'set filetype=conf',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '*conf*' , command = 'set filetype=conf',})
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*rc' , command = 'set filetype=conf',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*rc' , command = 'set filetype=conf',})
+vim.api.nvim_create_autocmd({'BufNewFile' , 'BufRead'} , {pattern = '*conf*' , command = 'set filetype=conf',})
+vim.api.nvim_create_autocmd({'BufNewFile' , 'BufRead'} , {pattern = '.*rc' , command = 'set filetype=conf',})
 
 -- シェルの設定ファイル
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '.*shrc' , command = 'set filetype=sh',})
-vim.api.nvim_create_autocmd('BufRead' , {pattern = '.*shrc' , command = 'set filetype=sh',})
+vim.api.nvim_create_autocmd({'BufNewFile' , 'BufRead'} , {pattern = '.*shrc' , command = 'set filetype=sh',})
 
 -- テンプレート
 vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.sh' , command = '0r $HOME/Templates/sh.txt',})
@@ -109,11 +106,8 @@ end
 vim.highlight.on_yank({ higroup = 'YankHighlight', timeout = 200 })
 
 -- ビジュアルモード
-vim.cmd([[
-
-	au TextYankPost * silent! lua vim.highlight.on_yank {higroup = "IncSearch", timeout = 200, on_visual = true}
-
-]])
+vim.cmd([[ au TextYankPost * silent! ]])
+vim.highlight.on_yank {higroup = "IncSearch", timeout = 200, on_visual = true}
 
 -- ターミナルの設定 
 -- ターミナルノーマルモードへの移行

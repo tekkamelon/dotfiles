@@ -43,16 +43,12 @@ vim.cmd('packadd vim-jetpack')
 
 -- vim-edgemotionの設定
 -- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
-vim.keymap.set('n' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('v' , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('n' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set('v' , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set({'n' , 'v'} , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim.keymap.set({'n' , 'v'} , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
 
 -- ctrl+k,上キーで1つ上のコードブロックへ
-vim.keymap.set('n' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('v' , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('n' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set('v' , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set({'n' , 'v'} , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim.keymap.set({'n' , 'v'} , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
 
 -- jumpcursorの設定
 vim.keymap.set('n' , '<leader>h' , '<Plug>(jumpcursor-jump)' , {noremap = true})
@@ -66,8 +62,7 @@ require('mini.comment').setup{
 }
 
 -- leader+gでコメントアウト
-vim.keymap.set('n' , '<leader>g' , 'gcc' , {remap = true})
-vim.keymap.set('v' , '<leader>g' , 'gc' , {remap = true})
+vim.keymap.set({'n' , 'v'} , '<leader>g' , 'gcc' , {remap = true})
 
 -- mini.surroundの設定 
 require('mini.surround').setup{
@@ -91,15 +86,14 @@ require('mini.surround').setup{
 		-- 矩形選択時に各行を囲む
 		respect_selection_type = true,
 
-	}
+}
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
 
 	-- 真の場合は"vim-edgemotion"の設定の変更
 	-- ctrl+l,上キーで1つ上のコードブロックへ
-	vim.keymap.set('n' , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
-	vim.keymap.set('v' , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	vim.keymap.set({'n' , 'v'} , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
 
 else
 
@@ -157,8 +151,6 @@ else
 	require('eyeliner').setup {
 
 		highlight_on_key = false,
-
-		dim = false,
 
 	}
 
@@ -279,15 +271,14 @@ else
 
 			layout = 'horizontal',
 			width = 0.5,
-			height = 0.35,
-			-- border = 'solid',
+			height = 0.4,
 
 		},
 
 	}
 
 	-- leader+ccでチャット用バッファをトグル
-	vim.keymap.set('n' , '<leader>cc' , ':CopilotChatToggle<CR>' , { noremap = true })
+	vim.keymap.set({'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , { noremap = true })
 
 	
 	-- openscad.nvimの設定
