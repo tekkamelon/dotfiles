@@ -45,17 +45,29 @@ vim.cmd('packadd vim-jetpack')
 local vim_keymap = vim.keymap.set
 local options = { noremap = true }
 
--- vim-edgemotionの設定
--- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
-vim_keymap({'n' , 'v'} , '<C-j>' , '<Plug>(edgemotion-j)' , options)
-vim_keymap({'n' , 'v'} , '<C-Down>' , '<Plug>(edgemotion-j)' , options)
+-- vim scriptのプラグインのキーマップ
+-- テーブルを設定
+local kmaps = {
 
--- ctrl+k,上キーで1つ上のコードブロックへ
-vim_keymap({'n' , 'v'} , '<C-k>' , '<Plug>(edgemotion-k)' , options)
-vim_keymap({'n' , 'v'} , '<C-Up>' , '<Plug>(edgemotion-k)' , options)
+	-- vim-edgemotionの設定
+	-- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
+	{ '<C-j>' , '<Plug>(edgemotion-j)' } , 
+	{ '<C-Down>' , '<Plug>(edgemotion-j)' },
+	-- ctrl+k,上キーで1つ上のコードブロックへ
+	{ '<C-k>' , '<Plug>(edgemotion-k)' } , 
+	{ '<C-Up>' , '<Plug>(edgemotion-k)' },
 
--- jumpcursorの設定
-vim_keymap('n' , '<leader>h' , '<Plug>(jumpcursor-jump)' , options)
+	-- jumpcursorの設定
+	{ '<leader>h' , '<Plug>(jumpcursor-jump)' },
+
+}
+
+-- テーブルの内容をループし代入
+for _, kmaps in pairs(kmaps) do
+
+	vim_keymap('n' , kmaps[1] , kmaps[2] , options)
+
+end
 
 -- mini.commentの設定
 require('mini.comment').setup{
