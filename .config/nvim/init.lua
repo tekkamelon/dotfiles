@@ -1,6 +1,7 @@
 -- init.lua
 -- neovim >= 0.9.0
 
+
 -- 標準プラグインの読込停止
 -- "vim.g"をテーブルで設定
 local options = {
@@ -109,13 +110,18 @@ vim.highlight.on_yank({ higroup = 'YankHighlight', timeout = 200 })
 vim.cmd([[ au TextYankPost * silent! ]])
 vim.highlight.on_yank {higroup = "IncSearch", timeout = 200, on_visual = true}
 
+
+-- キーマップの設定
+-- ローカル変数を宣言
+local vim_keymap = vim.keymap.set
+local options = { noremap = true }
+
 -- ターミナルの設定 
 -- ターミナルノーマルモードへの移行
-vim.keymap.set('t' , '<C-w><C-n>' , [[<C-\><C-n>]] , {noremap = true})
+vim_keymap('t' , '<C-w><C-n>' , [[<C-\><C-n>]] , options)
 
 -- ターミナル起動時に行番号を非表示
-vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber',})
-vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal nonumber',})
+vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber | setlocal nonumber',})
 
 -- "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
 vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nargs = 0 })
@@ -135,20 +141,20 @@ else
 
 	-- 偽の場合のキーマップ
 	-- 保存,終了
-	vim.keymap.set('n' , '<leader>w' , ':w<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>W' , ':wq<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>q' , ':q<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>Q' , ':q!<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>w' , ':w<CR>' , options)
+	vim_keymap('n' , '<leader>W' , ':wq<CR>' , options)
+	vim_keymap('n' , '<leader>q' , ':q<CR>' , options)
+	vim_keymap('n' , '<leader>Q' , ':q!<CR>' , options)
 
 	-- バッファの切り替え
-	vim.keymap.set('n' , '<leader>j' , ':bprev<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>k' , ':bnext<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>j' , ':bprev<CR>' , options)
+	vim_keymap('n' , '<leader>k' , ':bnext<CR>' , options)
 
 end
 -- leaderの設定ここまで 
 
 -- ビジュアルモード時に"$"で改行を含めないようにする
-vim.keymap.set('v' , '$' , 'g_' , {remap = true})
+vim_keymap('v' , '$' , 'g_' , {remap = true})
 
 -- プラグインの設定を読み込み
 require('plugin_settings')

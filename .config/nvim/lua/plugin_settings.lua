@@ -41,17 +41,21 @@ vim.cmd('packadd vim-jetpack')
 
 	}
 
+-- ローカル変数を宣言
+local vim_keymap = vim.keymap.set
+local options = { noremap = true }
+
 -- vim-edgemotionの設定
 -- -- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
-vim.keymap.set({'n' , 'v'} , '<C-j>' , '<Plug>(edgemotion-j)' , {noremap = true})
-vim.keymap.set({'n' , 'v'} , '<C-Down>' , '<Plug>(edgemotion-j)' , {noremap = true})
+vim_keymap({'n' , 'v'} , '<C-j>' , '<Plug>(edgemotion-j)' , options)
+vim_keymap({'n' , 'v'} , '<C-Down>' , '<Plug>(edgemotion-j)' , options)
 
 -- ctrl+k,上キーで1つ上のコードブロックへ
-vim.keymap.set({'n' , 'v'} , '<C-k>' , '<Plug>(edgemotion-k)' , {noremap = true})
-vim.keymap.set({'n' , 'v'} , '<C-Up>' , '<Plug>(edgemotion-k)' , {noremap = true})
+vim_keymap({'n' , 'v'} , '<C-k>' , '<Plug>(edgemotion-k)' , options)
+vim_keymap({'n' , 'v'} , '<C-Up>' , '<Plug>(edgemotion-k)' , options)
 
 -- jumpcursorの設定
-vim.keymap.set('n' , '<leader>h' , '<Plug>(jumpcursor-jump)' , {noremap = true})
+vim_keymap('n' , '<leader>h' , '<Plug>(jumpcursor-jump)' , options)
 
 -- mini.commentの設定
 require('mini.comment').setup{
@@ -62,7 +66,7 @@ require('mini.comment').setup{
 }
 
 -- leader+gでコメントアウト
-vim.keymap.set({'n' , 'v'} , '<leader>g' , 'gcc' , {remap = true})
+vim_keymap({'n' , 'v'} , '<leader>g' , 'gcc' , {remap = true})
 
 -- mini.surroundの設定 
 require('mini.surround').setup{
@@ -93,13 +97,13 @@ if vim.g.vscode then
 
 	-- 真の場合は"vim-edgemotion"の設定の変更
 	-- ctrl+l,上キーで1つ上のコードブロックへ
-	vim.keymap.set({'n' , 'v'} , '<C-L>' , '<Plug>(edgemotion-k)' , {noremap = true})
+	vim_keymap({'n' , 'v'} , '<C-L>' , '<Plug>(edgemotion-k)' , options)
 
 else
 
 	-- vim-parteditの設定
 	-- ビジュアルモード時にleader+eでexモードのコマンドを表示
-	vim.keymap.set('v' , '<leader>e' , ':Partedit -opener new -filetype ' , {noremap = true})
+	vim_keymap('v' , '<leader>e' , ':Partedit -opener new -filetype ' , options)
 
 	-- hardlineの設定
 	require('hardline').setup{
@@ -134,18 +138,18 @@ else
 	require("telescope").setup{}
 
 	-- leader+ffで隠しファイルを含めず,fhで含めて検索
-	vim.keymap.set('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , options)
+	vim_keymap('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , options)
 
 	-- leader+fbでバッファを検索
-	vim.keymap.set('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , options)
 
 	-- leader+frでレジスタ一覧を検索
-	vim.keymap.set('n' , '<leader>fr' , ':Telescope registers<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>fr' , ':Telescope registers<CR>' , options)
 
 	-- leader+fgでファイル内文字列を検索
 	-- "$ sudo apt install ripgrep -y"で使用可能
-	vim.keymap.set('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , options)
 
 	-- eyelinerの設定
 	require('eyeliner').setup {
@@ -158,13 +162,13 @@ else
 	require("toggleterm").setup{}
 
 	-- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
-	vim.keymap.set('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , {noremap = true})
-	vim.keymap.set('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , options)
+	vim_keymap('n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , options)
+	vim_keymap('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , options)
 
 	-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
-	vim.keymap.set('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , {noremap = true})
-	vim.keymap.set('v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , {noremap = true})
+	vim_keymap('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , options)
+	vim_keymap('v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , options)
 
 	-- mini.pairsの設定
 	require('mini.pairs').setup{
@@ -214,7 +218,7 @@ else
 		end
 
 		-- キーマッピングを設定
-		vim.keymap.set('n', '<C-n>', minifiles_toggle, { noremap = true, silent = true })
+		vim_keymap('n', '<C-n>', minifiles_toggle, { noremap = true, silent = true })
 
 	-- gitsignsの設定
 	require('gitsigns').setup{
@@ -278,7 +282,7 @@ else
 	}
 
 	-- leader+ccでチャット用バッファをトグル
-	vim.keymap.set({'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , { noremap = true })
+	vim_keymap({'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , { noremap = true })
 
 	
 	-- openscad.nvimの設定
