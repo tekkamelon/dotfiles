@@ -333,56 +333,52 @@ else
 
 		}
 
-
 	-- ローカル変数を宣言
-	-- local vim_keymap = vim.keymap.set
-	-- local options = { noremap = true }
+	local vim_keymap = vim.keymap.set
+	local options = { noremap = true }
 
-	-- local kmaps = {
+	local kmaps = {
 
+		-- vim-partedit
+		-- ビジュアルモード時にleader+eでexモードのコマンドを表示
+		{ 'v' , '<leader>e' , ':Partedit -opener new -filetype ' , options },
 
-	-- }
+		-- telescope
+		-- leader+ffで隠しファイルを含めず,fhで含めて検索
+		{ 'n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , options },
+		{ 'n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , options },
+		-- leader+fbでバッファを検索
+		{ 'n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , options },
+		-- leader+frでレジスタ一覧を検索
+		{ 'n' , '<leader>fr' , ':Telescope registers<CR>' , options },
+		-- leader+fgでファイル内文字列を検索
+		-- "$ sudo apt install ripgrep -y"で使用可能
+		{ 'n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , options },
 
-	-- -- テーブルの内容をループし代入
-	-- for _, kmaps in pairs(kmaps) do
+		-- toggleterm
+		-- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
+		{ 'n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , options },
+		{ 'n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , options },
+		{ 'n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , options },
+		-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
+		{ 'n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , options },
+		{ 'v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , options },
 
-	-- 	vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
+		-- mini.files
+		{ 'n', '<C-n>', minifiles_toggle, { noremap = true, silent = true } },
 
-	-- end
+		-- copilot
+		-- leader+ccでチャット用バッファをトグル
+		{ {'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , options },
 
-	-- キーマップの設定
-	-- vim-partedit
-	-- ビジュアルモード時にleader+eでexモードのコマンドを表示
-	vim_keymap('v' , '<leader>e' , ':Partedit -opener new -filetype ' , options)
+	}
 
-	-- telescope
-	-- leader+ffで隠しファイルを含めず,fhで含めて検索
-	vim_keymap('n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , options)
-	vim_keymap('n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , options)
-	-- leader+fbでバッファを検索
-	vim_keymap('n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , options)
-	-- leader+frでレジスタ一覧を検索
-	vim_keymap('n' , '<leader>fr' , ':Telescope registers<CR>' , options)
-	-- leader+fgでファイル内文字列を検索
-	-- "$ sudo apt install ripgrep -y"で使用可能
-	vim_keymap('n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , options)
+	-- テーブルの内容をループし代入
+	for _, kmaps in pairs(kmaps) do
 
-	-- toggleterm
-	-- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
-	vim_keymap('n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , options)
-	vim_keymap('n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , options)
-	vim_keymap('n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , options)
-	-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
-	vim_keymap('n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , options)
-	vim_keymap('v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , options)
+		vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
 
-	-- mini.files
-	-- キーマッピングを設定
-	vim_keymap('n', '<C-n>', minifiles_toggle, { noremap = true, silent = true })
-
-	-- copilot
-	-- leader+ccでチャット用バッファをトグル
-	vim_keymap({'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , options)
+	end
 
 end
 
