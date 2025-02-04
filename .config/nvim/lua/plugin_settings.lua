@@ -1,4 +1,6 @@
-	-- plug_config.lua
+-- plug_config.lua
+-- neovim >= 0.9.0
+
 
 -- プラグインのリスト
 -- Jetpackの設定
@@ -80,10 +82,10 @@ local options = { noremap = true }
 local kmaps = {
 
 	-- vim-edgemotion
-	-- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
+	-- 下キーで1つ下のコードブロック
 	{ '<C-j>' , '<Plug>(edgemotion-j)' , options },
 	{ '<C-Down>' , '<Plug>(edgemotion-j)', options },
-	-- ctrl+k,上キーで1つ上のコードブロックへ
+	-- 上キーで1つ上のコードブロック
 	{ '<C-k>' , '<Plug>(edgemotion-k)' , options },
 	{ '<C-Up>' , '<Plug>(edgemotion-k)', options },
 
@@ -91,7 +93,7 @@ local kmaps = {
 	{ '<leader>h' , '<Plug>(jumpcursor-jump)' , options },
 
 	-- mini.comment
-	-- leader+gでコメントアウト
+	-- コメントアウト
 	{ '<leader>g' , 'gcc' , {remap = true }},
 
 }
@@ -107,7 +109,7 @@ end
 if vim.g.vscode then
 
 	-- 真の場合は"vim-edgemotion"の設定の変更
-	-- ctrl+l,上キーで1つ上のコードブロックへ
+	-- 1つ上のコードブロック
 	vim_keymap({'n' , 'v'} , '<C-L>' , '<Plug>(edgemotion-k)' , options)
 
 else
@@ -188,18 +190,18 @@ else
 	-- mini.filesの設定
 	require('mini.files').setup{}
 		
-		-- minifiles_toggle関数を定義
-		local minifiles_toggle = function(...)
+	-- minifiles_toggle関数を定義
+	local minifiles_toggle = function(...)
 
-			-- ファイラが開いていれば真
-			if not MiniFiles.close() 
+		-- ファイラが開いていれば真
+		if not MiniFiles.close() 
 
-				-- カレントバッファのディレクトリを表示
-				then MiniFiles.open(vim.api.nvim_buf_get_name(0))
-
-			end
+			-- カレントバッファのディレクトリを表示
+			then MiniFiles.open(vim.api.nvim_buf_get_name(0))
 
 		end
+
+	end
 
 	-- gitsignsの設定
 	require('gitsigns').setup{
@@ -291,6 +293,7 @@ else
 
 				local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
 
+				-- 除外する言語のリスト
 				local check = (
 
 					ft == 'help' 
@@ -340,35 +343,37 @@ else
 	local kmaps = {
 
 		-- vim-partedit
-		-- ビジュアルモード時にleader+eでexモードのコマンドを表示
+		-- ビジュアルモード時にコマンドを表示
 		{ 'v' , '<leader>e' , ':Partedit -opener new -filetype ' , options },
 
 		-- telescope
-		-- leader+ffで隠しファイルを含めず,fhで含めて検索
+		-- 隠しファイルを含めず検索
 		{ 'n' , '<leader>ff' , ':Telescope find_files hidden=false previewer=false theme=get_dropdown<CR>' , options },
+		-- 隠しファイルを含め検索
 		{ 'n' , '<leader>fh' , ':Telescope find_files hidden=true previewer=false theme=get_dropdown<CR>' , options },
-		-- leader+fbでバッファを検索
+		-- バッファを検索
 		{ 'n' , '<leader>fb' , ':Telescope buffers previewer=false theme=get_dropdown<CR>' , options },
-		-- leader+frでレジスタ一覧を検索
+		-- レジスタ一覧を検索
 		{ 'n' , '<leader>fr' , ':Telescope registers<CR>' , options },
-		-- leader+fgでファイル内文字列を検索
+		-- ファイル内文字列を検索
 		-- "$ sudo apt install ripgrep -y"で使用可能
 		{ 'n' , '<leader>fg' , ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>' , options },
 
 		-- toggleterm
-		-- leader+ttで下方,tvで右側,tfでフロートウィンドウのターミナルのトグル
+		-- 下方,右側,フロートウィンドウのターミナルのトグル
 		{ 'n' , '<leader>tt' , ':ToggleTerm size=20 direction=horizontal<CR>' , options },
 		{ 'n' , '<leader>tv' , ':ToggleTerm size=60 direction=vertical<CR>' , options },
 		{ 'n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , options },
-		-- ノーマルモード時にleader+tsで現在カーソルのある行を,ビジュアルモード時にleader+tで選択範囲をターミナルに送る
+		-- ノーマルモード時に現在カーソルのある行を,ビジュアルモード時に選択範囲をターミナルに送る
 		{ 'n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , options },
 		{ 'v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , options },
 
 		-- mini.files
+		-- ファイラをトグル
 		{ 'n', '<C-n>', minifiles_toggle, { noremap = true, silent = true } },
 
 		-- copilot
-		-- leader+ccでチャット用バッファをトグル
+		-- チャット用バッファをトグル
 		{ {'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , options },
 
 	}
