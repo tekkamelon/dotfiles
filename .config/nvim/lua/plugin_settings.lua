@@ -65,7 +65,7 @@ local kmaps = {
 -- テーブルの内容をループし代入
 for _, kmaps in pairs(kmaps) do
 
-	vim_keymap('n' , kmaps[1] , kmaps[2] , options)
+	vim_keymap({'n' , 'v'} , kmaps[1] , kmaps[2] , options)
 
 end
 
