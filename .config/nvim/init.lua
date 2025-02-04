@@ -31,7 +31,7 @@ local options = {
 
 }
 
--- "options"内の左辺を"let",右辺を"status"にそれぞれ代入しループ
+-- "options"内のkeyを"let",valueを"status"にそれぞれ代入しループ
 for let, status in pairs(options) do
 
 	vim.g[let] = status
@@ -47,10 +47,23 @@ vim.api.nvim_create_autocmd({'BufNewFile' , 'BufRead'} , {pattern = '.*rc' , com
 vim.api.nvim_create_autocmd({'BufNewFile' , 'BufRead'} , {pattern = '.*shrc' , command = 'set filetype=sh',})
 
 -- テンプレート
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.sh' , command = '0r $HOME/Templates/sh.txt',})
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.awk' , command = '0r $HOME/Templates/awk.txt',})
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.py' , command = '0r $HOME/Templates/python.txt',})
-vim.api.nvim_create_autocmd('BufNewFile' , {pattern = '*.c' , command = '0r $HOME/Templates/c.txt',})
+-- テーブルを作成
+local templates = {
+
+	-- テンプレートのファイル名
+	sh = 'sh.txt',
+	awk = 'awk.txt',
+	py = 'python.txt',
+	c = 'c.txt',
+
+}
+
+-- "templates"内のkeyを"ext",valueを"file"にそれぞれ代入しループ
+for ext, file in pairs(templates) do
+
+  vim.api.nvim_create_autocmd('BufNewFile', {pattern = '*.' .. ext , command = '0r $HOME/Templates/' .. file ,})
+
+end
 
 -- vim.optの設定
 -- "vim.opt"をテーブルで設定
@@ -77,7 +90,7 @@ local options = {
 
 }
 
--- "options"内の左辺を"set",右辺を"str"にそれぞれ代入しループ
+-- "options"内のkeyを"set",valueを"str"にそれぞれ代入しループ
 for set, str in pairs(options) do
 
 	vim.opt[set] = str
@@ -108,29 +121,15 @@ vim.highlight.on_yank({ higroup = 'YankHighlight', timeout = 200 })
 
 -- ビジュアルモード
 vim.cmd([[ au TextYankPost * silent! ]])
-vim.highlight.on_yank {higroup = "IncSearch", timeout = 200, on_visual = true}
+vim.highlight.on_yank{higroup = "IncSearch", timeout = 200, on_visual = true}
 
+-- leaderの設定 
+vim.g.mapleader = " "
 
 -- キーマップの設定
 -- ローカル変数を宣言
 local vim_keymap = vim.keymap.set
 local options = { noremap = true }
-
--- ターミナルの設定 
--- ターミナルノーマルモードへの移行
-vim_keymap('t' , '<C-w><C-n>' , [[<C-\><C-n>]] , options)
-
--- ターミナル起動時に行番号を非表示
-vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber | setlocal nonumber',})
-
--- "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
-vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nargs = 0 })
-
--- "Vterm"の設定,ターミナルを右半分に起動
-vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
-
--- leaderの設定 
-vim.g.mapleader = " "
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
@@ -140,21 +139,45 @@ if vim.g.vscode then
 else
 
 	-- 偽の場合のキーマップ
-	-- 保存,終了
-	vim_keymap('n' , '<leader>w' , ':w<CR>' , options)
-	vim_keymap('n' , '<leader>W' , ':wq<CR>' , options)
-	vim_keymap('n' , '<leader>q' , ':q<CR>' , options)
-	vim_keymap('n' , '<leader>Q' , ':q!<CR>' , options)
+	-- テーブルを作成
+	local kmaps = {
 
-	-- バッファの切り替え
-	vim_keymap('n' , '<leader>j' , ':bprev<CR>' , options)
-	vim_keymap('n' , '<leader>k' , ':bnext<CR>' , options)
+		-- 保存,終了
+		{ 'n' , '<leader>w' , ':w<CR>' , options },
+		{ 'n' , '<leader>W' , ':wq<CR>' , options },
+		{ 'n' , '<leader>q' , ':q<CR>' , options },
+		{ 'n' , '<leader>Q' , ':q!<CR>' , options },
+
+		-- バッファの切り替え
+		{ 'n' , '<leader>j' , ':bprev<CR>' , options },
+		{ 'n' , '<leader>k' , ':bnext<CR>' , options },
+
+		-- ターミナルノーマルモードへの移行
+		{ 't' , '<C-w><C-n>' , [[<C-\><C-n>]] , options },
+
+		-- ビジュアルモード時に"$"で改行を含めないようにする
+		{ 'v' , '$' , 'g_' , {remap = true} },
+
+	}
+
+	-- テーブルの内容をループし代入
+	for _, kmaps in pairs(kmaps) do
+
+		vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
+
+	end
 
 end
--- leaderの設定ここまで 
 
--- ビジュアルモード時に"$"で改行を含めないようにする
-vim_keymap('v' , '$' , 'g_' , {remap = true})
+-- ターミナルの設定 
+-- ターミナル起動時に行番号を非表示
+vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber | setlocal nonumber',})
+
+-- "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
+vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nargs = 0 })
+
+-- "Vterm"の設定,ターミナルを右半分に起動
+vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
 
 -- プラグインの設定を読み込み
 require('plugin_settings')
