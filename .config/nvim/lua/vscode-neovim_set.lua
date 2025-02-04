@@ -1,23 +1,37 @@
 -- vscode-neovim_set.lua
 
 -- "vscode-neovim"の場合のキーマップ
+-- ローカル変数を宣言
+local vim_keymap = vim.keymap.set
+local options = { noremap = true }
 
--- 保存,終了
-vim.keymap.set('n' , '<leader>w' , ":call VSCodeCall('workbench.action.files.save')<CR>" , { noremap = true})
-vim.keymap.set('n' , '<leader>W' , ":call VSCodeCall('workbench.action.files.saveALL')<CR>" , { noremap = true})
-vim.keymap.set('n' , '<leader>q' , ":call VSCodeCall('workbench.action.closeActiveEditor')<CR>" , { noremap = true})
-vim.keymap.set('n' , '<leader>Q' , ":call VSCodeCall('workbench.action.closeAllEditors')<CR>" , { noremap = true})
+local kmaps = {
 
--- バッファの切り替え
-vim.keymap.set('n' , '<leader>j' , ":call VSCodeCall('workbench.action.previousEditor')<CR>" , { noremap = true})
-vim.keymap.set('n' , '<leader>k' , ":call VSCodeCall('workbench.action.nextEditor')<CR>" , { noremap = true})
+	-- 保存,終了
+	{ '<leader>w' , ":call VSCodeCall('workbench.action.files.save')<CR>" },
+	{ '<leader>W' , ":call VSCodeCall('workbench.action.files.saveALL')<CR>" },
+	{ '<leader>q' , ":call VSCodeCall('workbench.action.closeActiveEditor')<CR>" },
+	{ '<leader>Q' , ":call VSCodeCall('workbench.action.closeAllEditors')<CR>" },
 
--- ファイルを開く
-vim.keymap.set('n' , '<leader>ff' , ":call VSCodeCall('workbench.action.files.openFile')<CR>" , { noremap = true})
+	-- バッファの切り替え
+	{ '<leader>j' , ":call VSCodeCall('workbench.action.previousEditor')<CR>" },
+	{ '<leader>k' , ":call VSCodeCall('workbench.action.nextEditor')<CR>" },
 
--- フォルダーを開く
-vim.keymap.set('n' , '<leader>fh' , ":call VSCodeCall('workbench.action.files.openFolder')<CR>" , { noremap = true})
+	-- ファイルを開く
+	{ '<leader>ff' , ":call VSCodeCall('workbench.action.files.openFile')<CR>" },
 
--- ターミナルを起動
-vim.keymap.set('n' , '<leader>tt' , ":call VSCodeCall('workbench.action.terminal.toggleTerminal')<CR>" , { noremap = true})
+	-- フォルダーを開く
+	{ '<leader>fh' , ":call VSCodeCall('workbench.action.files.openFolder')<CR>" },
+
+	-- ターミナルを起動
+	{ '<leader>tt' , ":call VSCodeCall('workbench.action.terminal.toggleTerminal')<CR>" },
+
+}
+
+-- テーブルの内容をループし代入
+for _, kmaps in pairs(kmaps) do
+
+	vim_keymap('n' , kmaps[1] , kmaps[2] , options)
+
+end
 
