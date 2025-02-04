@@ -41,34 +41,6 @@ vim.cmd('packadd vim-jetpack')
 
 	}
 
--- ローカル変数を宣言
-local vim_keymap = vim.keymap.set
-local options = { noremap = true }
-
--- vim scriptのプラグインのキーマップ
--- テーブルを設定
-local kmaps = {
-
-	-- vim-edgemotionの設定
-	-- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
-	{ '<C-j>' , '<Plug>(edgemotion-j)' } , 
-	{ '<C-Down>' , '<Plug>(edgemotion-j)' },
-	-- ctrl+k,上キーで1つ上のコードブロックへ
-	{ '<C-k>' , '<Plug>(edgemotion-k)' } , 
-	{ '<C-Up>' , '<Plug>(edgemotion-k)' },
-
-	-- jumpcursorの設定
-	{ '<leader>h' , '<Plug>(jumpcursor-jump)' },
-
-}
-
--- テーブルの内容をループし代入
-for _, kmaps in pairs(kmaps) do
-
-	vim_keymap({'n' , 'v'} , kmaps[1] , kmaps[2] , options)
-
-end
-
 -- mini.commentの設定
 require('mini.comment').setup{
 
@@ -76,9 +48,6 @@ require('mini.comment').setup{
 	options = {ignore_blank_line = true,},
 
 }
-
--- leader+gでコメントアウト
-vim_keymap({'n' , 'v'} , '<leader>g' , 'gcc' , {remap = true})
 
 -- mini.surroundの設定 
 require('mini.surround').setup{
@@ -103,6 +72,38 @@ require('mini.surround').setup{
 		respect_selection_type = true,
 
 }
+
+-- ローカル変数を宣言
+local vim_keymap = vim.keymap.set
+local options = { noremap = true }
+
+local kmaps = {
+
+	-- vim script製プラグインのキーマップ
+	-- vim-edgemotionの設定
+	-- ctrl+j,ctrl+下キーで1つ下のコードブロックへ
+	{ '<C-j>' , '<Plug>(edgemotion-j)' , options },
+	{ '<C-Down>' , '<Plug>(edgemotion-j)', options },
+	-- ctrl+k,上キーで1つ上のコードブロックへ
+	{ '<C-k>' , '<Plug>(edgemotion-k)' , options },
+	{ '<C-Up>' , '<Plug>(edgemotion-k)', options },
+
+	-- jumpcursorの設定
+	{ '<leader>h' , '<Plug>(jumpcursor-jump)' , options },
+
+	-- lua製プラグインのキーマップ
+	-- mini.commentの設定
+	-- leader+gでコメントアウト
+	{ '<leader>g' , 'gcc' , {remap = true }},
+
+}
+
+-- テーブルの内容をループし代入
+for _, kmaps in pairs(kmaps) do
+
+	vim_keymap({'n' , 'v'} , kmaps[1] , kmaps[2] , kmaps[3])
+
+end
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
