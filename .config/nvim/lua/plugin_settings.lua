@@ -228,7 +228,6 @@ else
 			debounce = 75,
 			accept = false,
 
-			
 			-- キーマッピングの設定
 			keymap = {
 
@@ -250,6 +249,36 @@ else
 
 	}
 
+	-- インサートモード時の<Tab>キーの動作を定義
+	vim_keymap("i", '<Tab>', function()
+
+		-- ローカル変数を宣言
+		local suggest = require("copilot.suggestion")
+
+		-- copilotがサジェストしていれば真
+		if suggest.is_visible() then
+
+			-- サジェストを受け入れ
+			suggest.accept()
+
+		else
+
+			-- 通常の<Tab>キーの動作を実行
+			vim.api.nvim_feedkeys(
+
+				-- キーコードをneovimが理解可能な形式に変換
+				vim.api.nvim_replace_termcodes("<Tab>" , true , false , true) , "n" , false
+
+			)
+
+		end
+
+	end, {
+
+		-- コマンドラインへの表示をオフ
+		silent = true,
+
+	})
 
 	-- CopilotChatの設定
 	require("CopilotChat").setup{
@@ -386,35 +415,6 @@ else
 		vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
 
 	end
-
-	-- copilot用の追加設定
-	-- インサートモード時の<Tab>キーの動作を定義
-	vim_keymap("i", '<Tab>', function()
-
-		-- copilotがサジェストしていれば真
-		if require("copilot.suggestion").is_visible() then
-
-			-- サジェストを受け入れ
-			require("copilot.suggestion").accept()
-
-		else
-
-			-- 通常の<Tab>キーの動作を実行
-			vim.api.nvim_feedkeys(
-
-				-- キーコードをneovimが理解可能な形式に変換
-				vim.api.nvim_replace_termcodes("<Tab>" , true , false , true) , "n" , false
-
-			)
-
-		end
-
-	end, {
-
-		-- コマンドラインへの表示をオフ
-		silent = true,
-
-	})
 
 end
 
