@@ -64,7 +64,30 @@ require('jetpack.packer').add {
 
 		end,
 	},
-	'CopilotC-Nvim/CopilotChat.nvim',
+
+	{'CopilotC-Nvim/CopilotChat.nvim',
+	
+		event = 'VimEnter',
+
+		-- CopilotChatの設定
+		config = function()
+
+			require('CopilotChat').setup{
+
+				-- チャット用のバッファの設定
+				window = {
+
+					layout = 'horizontal',
+					width = 0.5,
+					height = 0.4,
+
+				},
+
+			}
+
+		end, 
+
+	},
 	'nvim-treesitter/nvim-treesitter',
 
 	-- mini.nvimのモジュール
@@ -287,20 +310,6 @@ else
 		silent = true,
 
 	})
-
-	-- CopilotChatの設定
-	require("CopilotChat").setup{
-
-		-- チャット用のバッファの設定
-		window = {
-
-			layout = 'horizontal',
-			width = 0.5,
-			height = 0.4,
-
-		},
-
-	}
 
 	-- treesitterの設定
 	require('nvim-treesitter.configs').setup{
