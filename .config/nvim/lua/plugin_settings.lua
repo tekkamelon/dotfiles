@@ -19,7 +19,21 @@ require('jetpack.packer').add {
 	'ojroques/nvim-hardline',
 	'akinsho/toggleterm.nvim',
 	'nvim-lua/plenary.nvim',
-	{'nvim-telescope/telescope.nvim' , lock = 1},
+	{'nvim-telescope/telescope.nvim' ,
+
+		lock = 1,
+
+		event = 'VimEnter',
+
+		-- telescopeの設定
+		config = function()
+
+			require('telescope').setup{}
+
+		end,
+
+	},
+
 	'jinh0/eyeliner.nvim',
 	'lewis6991/gitsigns.nvim',
 	{'zbirenbaum/copilot.lua', 
@@ -205,9 +219,6 @@ else
 		}
 
 	}
-
-	-- telescopeの設定
-	require("telescope").setup{}
 
 	-- eyelinerの設定
 	require('eyeliner').setup {
