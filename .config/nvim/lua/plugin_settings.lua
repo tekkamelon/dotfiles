@@ -19,12 +19,11 @@ require('jetpack.packer').add {
 	'ojroques/nvim-hardline',
 	'akinsho/toggleterm.nvim',
 	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope.nvim',
+	{'nvim-telescope/telescope.nvim' , lock = 1},
 	'jinh0/eyeliner.nvim',
 	'lewis6991/gitsigns.nvim',
-	'zbirenbaum/copilot.lua',
+	'zbirenbaum/copilot.lua', 
 	'CopilotC-Nvim/CopilotChat.nvim',
-	'salkin-mada/openscad.nvim', 
 	'nvim-treesitter/nvim-treesitter',
 
 	-- mini.nvimのモジュール
@@ -295,9 +294,6 @@ else
 		},
 
 	}
-
-	-- openscad.nvimの設定
-	require('openscad').setup{}
 
 	-- treesitterの設定
 	require('nvim-treesitter.configs').setup{
