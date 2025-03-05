@@ -11,9 +11,10 @@ require('jetpack.packer').add {
 	{'tani/vim-jetpack' , opt = 1},
 
 	-- vim script製プラグイン
-	'thinca/vim-partedit',
-	'haya14busa/vim-edgemotion',
-	'skanehira/jumpcursor.vim',
+	-- 起動後に読み込み
+	{'thinca/vim-partedit' , event = 'VimEnter'},
+	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
+	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
 
 	-- lua製プラグイン
 	'ojroques/nvim-hardline',
