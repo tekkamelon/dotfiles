@@ -226,11 +226,13 @@ else
 			auto_trigger = true,
 			hide_during_completion = true,
 			debounce = 75,
-			accept = false,
+			-- accept = false,
 
 			-- キーマッピングの設定
 			keymap = {
 
+				accept_word = false,
+				accept = "<C-s>",
 				next = "<C-f>",
 				prev = "<C-F>",
 				dismiss = "<C-]>",
@@ -258,8 +260,8 @@ else
 		-- copilotがサジェストしていれば真
 		if suggest.is_visible() then
 
-			-- サジェストを受け入れ
-			suggest.accept()
+			-- サジェストを単語単位で受け入れ
+			suggest.accept_word()
 
 		else
 
@@ -295,7 +297,7 @@ else
 	}
 
 	-- openscad.nvimの設定
-	require'openscad'.setup{}
+	require('openscad').setup{}
 
 	-- treesitterの設定
 	require('nvim-treesitter.configs').setup{
