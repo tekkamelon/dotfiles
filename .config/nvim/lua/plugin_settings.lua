@@ -11,7 +11,6 @@ require('jetpack.packer').add {
 	{'tani/vim-jetpack' , opt = 1},
 
 	-- vim script製プラグイン
-	-- 起動後に読み込み
 	{'thinca/vim-partedit' , event = 'VimEnter'},
 	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
@@ -23,7 +22,48 @@ require('jetpack.packer').add {
 	{'nvim-telescope/telescope.nvim' , lock = 1},
 	'jinh0/eyeliner.nvim',
 	'lewis6991/gitsigns.nvim',
-	'zbirenbaum/copilot.lua', 
+	{'zbirenbaum/copilot.lua', 
+
+		event = 'VimEnter',
+
+		-- copilot.luaの設定
+		config = function()
+
+			require('copilot').setup{
+
+				-- サジェストの設定
+				suggestion = {
+
+					enabled = true,
+					auto_trigger = true,
+					hide_during_completion = true,
+					debounce = 75,
+
+					-- キーマッピングの設定
+					keymap = {
+
+						accept_word = false,
+						accept = "<C-s>",
+						next = "<C-f>",
+						prev = "<C-F>",
+						dismiss = "<C-]>",
+
+					},
+
+				},
+
+				-- ファイルタイプの設定
+				filetype = {
+
+					gitcommit = true,
+					markdown = true,
+
+				},
+
+			}
+
+		end,
+	},
 	'CopilotC-Nvim/CopilotChat.nvim',
 	'nvim-treesitter/nvim-treesitter',
 
@@ -217,40 +257,6 @@ else
 	}
 
 	-- copilot.luaの設定
-	require('copilot').setup{
-
-		-- サジェストの設定
-		suggestion = {
-
-			enabled = true,
-			auto_trigger = true,
-			hide_during_completion = true,
-			debounce = 75,
-			-- accept = false,
-
-			-- キーマッピングの設定
-			keymap = {
-
-				accept_word = false,
-				accept = "<C-s>",
-				next = "<C-f>",
-				prev = "<C-F>",
-				dismiss = "<C-]>",
-
-			},
-
-		},
-
-		-- ファイルタイプの設定
-		filetype = {
-
-			gitcommit = true,
-			markdown = true,
-
-		},
-
-	}
-
 	-- インサートモード時の<Tab>キーの動作を定義
 	vim_keymap("i", '<Tab>', function()
 
