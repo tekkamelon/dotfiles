@@ -90,6 +90,9 @@ require('jetpack.packer').add {
 
 			require('CopilotChat').setup{
 
+				-- デフォルトの言語モデルを変更
+				model = "claude-3.5-sonnet",
+
 				-- チャット用のバッファの設定
 				window = {
 
@@ -421,6 +424,10 @@ else
 		-- copilot
 		-- チャット用バッファをトグル
 		{ {'n' , 'v'} , '<leader>cc' , ':CopilotChatToggle<CR>' , options },
+		-- チャットをリセット
+		{ {'n' , 'v'} , '<leader>cr' , ':CopilotChatReset<CR>' , options },
+		-- 言語モデルを変更
+		{ {'n' , 'v'} , '<leader>cm' , ':CopilotChatModels<CR>' , options },
 
 	}
 
