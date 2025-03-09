@@ -126,48 +126,6 @@ vim.highlight.on_yank{higroup = "IncSearch", timeout = 200, on_visual = true}
 -- leaderの設定 
 vim.g.mapleader = " "
 
--- キーマップの設定
--- ローカル変数を宣言
-local vim_keymap = vim.keymap.set
-local options = { noremap = true }
-
--- vscode-neovimから起動した際に真,それ以外で偽
-if vim.g.vscode then
-
-	require('vscode-neovim_set')
-
-else
-
-	-- 偽の場合のキーマップ
-	-- テーブルを作成
-	local kmaps = {
-
-		-- 保存,終了
-		{ 'n' , '<leader>w' , ':w<CR>' , options },
-		{ 'n' , '<leader>W' , ':wq<CR>' , options },
-		{ 'n' , '<leader>q' , ':q<CR>' , options },
-		{ 'n' , '<leader>Q' , ':q!<CR>' , options },
-
-		-- バッファの切り替え
-		{ 'n' , '<leader>j' , ':bprev<CR>' , options },
-		{ 'n' , '<leader>k' , ':bnext<CR>' , options },
-
-		-- ターミナルノーマルモードへの移行
-		{ 't' , '<C-w><C-n>' , [[<C-\><C-n>]] , options },
-
-		-- ビジュアルモード時に"$"で改行を含めないようにする
-		{ 'v' , '$' , 'g_' , {remap = true} },
-
-	}
-
-	-- テーブルの内容をループし代入
-	for _, kmaps in pairs(kmaps) do
-
-		vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
-
-	end
-
-end
 
 -- ターミナルの設定 
 -- ターミナル起動時に行番号を非表示
@@ -178,6 +136,9 @@ vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nar
 
 -- "Vterm"の設定,ターミナルを右半分に起動
 vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
+
+-- キーマップ設定を読み込み
+require('keymaps.general')
 
 -- プラグインの設定を読み込み
 require('plugins')
