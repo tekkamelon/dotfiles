@@ -164,7 +164,24 @@ require('jetpack.packer').add {
 	'echasnovski/mini.comment',
 	'echasnovski/mini.surround',
 	'echasnovski/mini.indentscope',
-	'echasnovski/mini.icons',
+
+	-- mini.iconsの設定
+    {'echasnovski/mini.icons',
+
+        event = "VimEnter",
+
+        config = function()
+
+            require('mini.icons').setup{
+
+                -- アイコンのスタイルを"ascii"に設定
+                style = 'ascii',
+            }
+
+        end,
+
+    },
+
 	'echasnovski/mini.files',
 
 	-- lspの設定
@@ -267,14 +284,6 @@ else
 
 	-- mini.indentscopeの設定
 	require('mini.indentscope').setup{}
-
-	-- mini.iconsの設定
-	require('mini.icons').setup{
-
-		-- アイコンのスタイルを"ascii"に設定
-		style = 'ascii',
-
-	}
 
 	-- mini.filesの設定
 	require('mini.files').setup{}
