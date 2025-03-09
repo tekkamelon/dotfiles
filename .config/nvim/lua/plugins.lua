@@ -133,7 +133,33 @@ require('jetpack.packer').add {
 	},
 
 	-- mini.nvimのモジュール
-	'echasnovski/mini.pairs',
+	-- mini.pairsの設定
+	{'echasnovski/mini.pairs',
+
+		event = 'InsertEnter',
+
+		config = function()
+
+			require('mini.pairs').setup{
+
+				mappings = {
+
+					-- "<>"の設定
+					['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
+					['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
+
+					-- "「」"の設定
+					['「'] = { action = 'open', pair = '「」', neigh_pattern = '[^\\].' },
+					['」'] = { action = 'close', pair = '「」', neigh_pattern = '[^\\].' },
+
+				},
+
+			}
+
+		end,
+
+	},
+
 	'echasnovski/mini.completion',
 	'echasnovski/mini.comment',
 	'echasnovski/mini.surround',
@@ -235,22 +261,6 @@ else
 	-- toggletermの設定
 	require("toggleterm").setup{}
 
-	-- mini.pairsの設定
-	require('mini.pairs').setup{
-
-		mappings = {
-
-			-- "<>"の設定
-			['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
-			['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
-
-			-- "「」"の設定
-			['「'] = { action = 'open', pair = '「」', neigh_pattern = '[^\\].' },
-			['」'] = { action = 'close', pair = '「」', neigh_pattern = '[^\\].' },
-
-		},
-
-	}
 
 	-- mini.completionの設定
 	require('mini.completion').setup{}
