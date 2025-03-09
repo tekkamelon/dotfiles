@@ -39,7 +39,7 @@ require('jetpack.packer').add {
 	'lewis6991/gitsigns.nvim',
 
 	-- copilot.luaの設定
-	{'zbirenbaum/copilot.lua', 
+	{'zbirenbaum/copilot.lua',
 
 		event = 'VimEnter',
 
@@ -83,7 +83,7 @@ require('jetpack.packer').add {
 
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
-	
+
 		event = 'VimEnter',
 
 		config = function()
@@ -101,15 +101,17 @@ require('jetpack.packer').add {
 
 			}
 
-		end, 
+		end,
 
 	},
 
 	-- treesitterの設定
-    {'nvim-treesitter/nvim-treesitter', 
+    {'nvim-treesitter/nvim-treesitter',
 
-		event = 'VimEn er',
-	
+		opt = true,
+
+		event = 'VimEnter',
+
 		config = function()
 
 			require('nvim-treesitter.configs').setup{
@@ -179,31 +181,8 @@ require('mini.surround').setup{
 local vim_keymap = vim.keymap.set
 local options = { noremap = true }
 
-local kmaps = {
-
-	-- vim-edgemotion
-	-- 下キーで1つ下のコードブロック
-	{ '<C-j>' , '<Plug>(edgemotion-j)' , options },
-	{ '<C-Down>' , '<Plug>(edgemotion-j)', options },
-	-- 上キーで1つ上のコードブロック
-	{ '<C-k>' , '<Plug>(edgemotion-k)' , options },
-	{ '<C-Up>' , '<Plug>(edgemotion-k)', options },
-
-	-- jumpcursor
-	{ '<leader>h' , '<Plug>(jumpcursor-jump)' , options },
-
-	-- mini.comment
-	-- コメントアウト
-	{ '<leader>g' , 'gcc' , {remap = true }},
-
-}
-
--- テーブルの内容をループし代入
-for _, kmaps in pairs(kmaps) do
-
-	vim_keymap({'n' , 'v'} , kmaps[1] , kmaps[2] , kmaps[3])
-
-end
+-- キーマップ設定を読み込み
+require('keymaps.plugins')
 
 -- vscode-neovimから起動した際に真,それ以外で偽
 if vim.g.vscode then
@@ -223,7 +202,7 @@ else
 		theme = 'one',
 
 		sections = {
-			
+
 			-- 現在のモード
 			{class = 'mode' , item = require('hardline.parts.mode').get_item},
 
@@ -232,7 +211,7 @@ else
 
 			-- カレントバッファのパス
 			{class = 'med' , item = require('hardline.parts.filename').get_item},
-			
+
 			-- セパレーター
 			{class = 'med' , item = '%='},
 
@@ -286,7 +265,7 @@ else
 
 	-- mini.filesの設定
 	require('mini.files').setup{}
-		
+
 	-- minifiles_toggle関数を定義
 	local minifiles_toggle = function(...)
 
@@ -304,13 +283,13 @@ else
 	require('gitsigns').setup{
 
 		signs = {
-			
+
 			change = { text = '>>' },
-			
+
 		},
 
 		numhl = true,
-		
+
 	}
 
 	-- copilot.luaの設定
@@ -407,10 +386,6 @@ else
 		}
 
 	-- キーマップの設定
-	-- ローカル変数を宣言
-	local vim_keymap = vim.keymap.set
-	local options = { noremap = true }
-
 	local kmaps = {
 
 		-- vim-partedit
