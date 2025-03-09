@@ -19,13 +19,14 @@ require('jetpack.packer').add {
 	'ojroques/nvim-hardline',
 	'akinsho/toggleterm.nvim',
 	'nvim-lua/plenary.nvim',
+
+	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
 
 		lock = 1,
 
 		event = 'VimEnter',
 
-		-- telescopeの設定
 		config = function()
 
 			require('telescope').setup{}
@@ -37,11 +38,11 @@ require('jetpack.packer').add {
 	'jinh0/eyeliner.nvim',
 	'lewis6991/gitsigns.nvim',
 
+	-- copilot.luaの設定
 	{'zbirenbaum/copilot.lua', 
 
 		event = 'VimEnter',
 
-		-- copilot.luaの設定
 		config = function()
 
 			require('copilot').setup{
@@ -80,11 +81,11 @@ require('jetpack.packer').add {
 		end,
 	},
 
+	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
 	
 		event = 'VimEnter',
 
-		-- CopilotChatの設定
 		config = function()
 
 			require('CopilotChat').setup{
@@ -104,13 +105,13 @@ require('jetpack.packer').add {
 
 	},
 
+	-- treesitterの設定
     {'nvim-treesitter/nvim-treesitter', 
 
-		event = 'VimEnter',
+		event = 'VimEn er',
 	
 		config = function()
 
-			-- treesitterの設定
 			require('nvim-treesitter.configs').setup{
 
 				-- ハイライトを有効化
@@ -354,8 +355,10 @@ else
 		-- 特定の言語でハイライトしないようにする
 		vim.treesitter.start = (function(wrapped)
 
+			-- ラッパー関数
 			return function(bufnr, lang)
 
+				-- ローカル変数"ft"にバッファのファイルタイプを代入
 				local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
 
 				-- 除外する言語のリスト
@@ -368,6 +371,7 @@ else
 
 				)
 
+				-- "check"が真であれば終了
 				if check then
 
 					return
@@ -385,6 +389,7 @@ else
 	-- masonの設定
 	require('mason').setup{}
 
+		-- lspconfigの設定
 		local lspconfig = require('lspconfig')
 
 		require('mason-lspconfig').setup_handlers{
