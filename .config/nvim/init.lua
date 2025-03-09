@@ -180,5 +180,5 @@ vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nar
 vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
 
 -- プラグインの設定を読み込み
-require('plugin_settings')
+require('plugins')
 
