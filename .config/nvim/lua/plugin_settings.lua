@@ -8,7 +8,7 @@ vim.cmd('packadd vim-jetpack')
 
 require('jetpack.packer').add {
 
-	{'tani/vim-jetpack' , opt = 1},
+	{'tani/vim-jetpack' , opt = true},
 
 	-- vim script製プラグイン
 	{'thinca/vim-partedit' , event = 'VimEnter'},
@@ -36,6 +36,7 @@ require('jetpack.packer').add {
 
 	'jinh0/eyeliner.nvim',
 	'lewis6991/gitsigns.nvim',
+
 	{'zbirenbaum/copilot.lua', 
 
 		event = 'VimEnter',
@@ -102,7 +103,28 @@ require('jetpack.packer').add {
 		end, 
 
 	},
-	'nvim-treesitter/nvim-treesitter',
+
+    {'nvim-treesitter/nvim-treesitter', 
+
+		event = 'VimEnter',
+	
+		config = function()
+
+			-- treesitterの設定
+			require('nvim-treesitter.configs').setup{
+
+				-- ハイライトを有効化
+				highlight = {
+
+					enable = true,
+
+				},
+
+			}
+
+		end,
+
+	},
 
 	-- mini.nvimのモジュール
 	'echasnovski/mini.pairs',
@@ -321,18 +343,6 @@ else
 		silent = true,
 
 	})
-
-	-- treesitterの設定
-	require('nvim-treesitter.configs').setup{
-
-		-- ハイライトを有効化
-		highlight = {
-
-			enable = true,
-
-  		},
-
-	}
 
 	-- カラースキームが"industry"の場合の設定
 	-- ローカル変数"colorscheme"に現在のカラースキームを代入"
