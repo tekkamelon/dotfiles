@@ -25,7 +25,7 @@ require('jetpack.packer').add {
 
 		lock = 1,
 
-		event = 'VimEnter',
+		cmd = 'Telescope',
 
 		config = function()
 
