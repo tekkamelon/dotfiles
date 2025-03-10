@@ -284,13 +284,6 @@ else
 
 	}
 
-	-- -- eyelinerの設定
-	-- require('eyeliner').setup {
-
-	-- 	highlight_on_key = false,
-
-	-- }
-
 	-- toggletermの設定
 	require("toggleterm").setup{}
 
