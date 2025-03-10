@@ -35,7 +35,23 @@ require('jetpack.packer').add {
 
 	},
 
-	'jinh0/eyeliner.nvim',
+	-- eyelinerの設定
+	{'jinh0/eyeliner.nvim',
+
+		event = 'BuffReadPost',
+
+		config = function()
+
+			require('eyeliner').setup {
+
+				highlight_on_key = false,
+
+			}
+
+		end,
+
+	 },
+
 	'lewis6991/gitsigns.nvim',
 
 	-- copilot.luaの設定
@@ -268,12 +284,12 @@ else
 
 	}
 
-	-- eyelinerの設定
-	require('eyeliner').setup {
+	-- -- eyelinerの設定
+	-- require('eyeliner').setup {
 
-		highlight_on_key = false,
+	-- 	highlight_on_key = false,
 
-	}
+	-- }
 
 	-- toggletermの設定
 	require("toggleterm").setup{}
@@ -365,7 +381,7 @@ else
 				-- 除外する言語のリスト
 				local check = (
 
-					ft == 'help' 
+					ft == 'help'
 					or lang == 'bash'
 					or lang == 'awk'
 					or lang == 'html'
