@@ -39,7 +39,7 @@ require('jetpack.packer').add {
 		lock = 1,
 
 		-- 依存関係のプラグイン
-        dependencies = { 'nvim-lua/plenary.nvim' },
+        dependencies = 'nvim-lua/plenary.nvim',
 
 		-- 起動に使用するコマンド
 		cmd = 'Telescope',
@@ -221,8 +221,43 @@ require('jetpack.packer').add {
 
 	-- lspの設定
 	'neovim/nvim-lspconfig',
-	'williamboman/mason.nvim',
 	'williamboman/mason-lspconfig.nvim',
+
+	-- -- masonの設定
+	{'williamboman/mason.nvim',
+
+		-- 依存関係のプラグイン
+		dependencies = 'williamboman/nvim-lspconfig',
+
+		-- 起動に使用するコマンド
+        cmd = {'Mason', 'MasonInstall', 'MasonUninstall', 'MasonLog', 'MasonUpdate', 'MasonUninstall'},
+
+        config = function()
+
+			-- masonの設定
+			require('mason').setup{}
+
+			-- lspconfigの設定
+			local lspconfig = require('lspconfig')
+			local  capabilities = vim.lsp.protocol.make_client_capabilities()
+
+			require('mason-lspconfig').setup_handlers{
+
+				function(server_name)
+
+					lspconfig[server_name].setup{
+
+					capabilities = capabilities,
+
+					}
+
+				end,
+
+			}
+
+		end,
+
+	},
 
 }
 
@@ -369,27 +404,6 @@ else
 		silent = true,
 
 	})
-
-	-- masonの設定
-	require('mason').setup{}
-
-		-- lspconfigの設定
-		local lspconfig = require('lspconfig')
-		local  capabilities = vim.lsp.protocol.make_client_capabilities()
-
-		require('mason-lspconfig').setup_handlers{
-
-			function(server_name)
-
-				lspconfig[server_name].setup{
-
-				capabilities = capabilities,
-
-				}
-
-			end,
-
-		}
 
 	-- キーマップの設定
 	local kmaps = {
