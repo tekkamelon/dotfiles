@@ -38,7 +38,7 @@ require('jetpack.packer').add {
 	-- eyelinerの設定
 	{'jinh0/eyeliner.nvim',
 
-		event = 'BuffReadPost',
+		event = 'VimEnter',
 
 		config = function()
 
@@ -57,7 +57,9 @@ require('jetpack.packer').add {
 	-- copilot.luaの設定
 	{'zbirenbaum/copilot.lua',
 
-		event = 'VimEnter',
+		cmd = 'Copilot',
+
+		event = 'InsertEnter',
 
 		config = function()
 
