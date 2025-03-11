@@ -297,11 +297,11 @@ else
 	-- mini.filesの設定
 	require('mini.files').setup{}
 
-	-- minifiles_toggle関数を定義
-	local minifiles_toggle = function(...)
+	local MiniFiles = require('mini.files')
+	local minifiles_toggle = function()
 
 		-- ファイラが開いていれば真
-		if not MiniFiles.close() 
+		if not MiniFiles.close()
 
 			-- カレントバッファのディレクトリを表示
 			then MiniFiles.open(vim.api.nvim_buf_get_name(0))
