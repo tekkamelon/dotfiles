@@ -5,7 +5,6 @@
 -- プラグインのリスト
 -- Jetpackの設定
 vim.cmd('packadd vim-jetpack')
-
 require('jetpack.packer').add {
 
 	{'tani/vim-jetpack' , opt = true},
@@ -396,6 +395,7 @@ else
 
 		-- lspconfigの設定
 		local lspconfig = require('lspconfig')
+		local  capabilities = vim.lsp.protocol.make_client_capabilities()
 
 		require('mason-lspconfig').setup_handlers{
 
@@ -405,7 +405,7 @@ else
 
 				capabilities = capabilities,
 
-			}
+				}
 
 			end,
 
@@ -455,9 +455,9 @@ else
 	}
 
 	-- テーブルの内容をループし代入
-	for _, kmaps in pairs(kmaps) do
+	for _, kmap in pairs(kmaps) do
 
-		vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
+		vim_keymap(kmap[1] , kmap[2] , kmap[3] , kmap[4])
 
 	end
 
