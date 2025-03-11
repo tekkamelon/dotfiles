@@ -19,9 +19,43 @@ if colorscheme == "iceberg" then
 
 	vim.api.nvim_set_hl(0, 'PmenuSel',{ fg='#2f3234' , bg='#8389a3' })
 
-else
+-- "colorscheme"が"industry"であれば真
+elseif colorscheme == "industry" then
 
 	vim.api.nvim_set_hl(0, 'PmenuSel',{ fg='#2f3234' , bg='#00aaaa' })
+
+	-- 特定の言語でハイライトしないようにする
+	vim.treesitter.start = (function(wrapped)
+
+		-- ラッパー関数
+		return function(bufnr, lang)
+
+			-- ローカル変数"ft"にバッファのファイルタイプを代入
+			local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
+
+			-- 除外する言語のリスト
+			local check = (
+
+				ft == 'help'
+				or lang == 'bash'
+				or lang == 'awk'
+				or lang == 'html'
+
+			)
+
+			-- "check"が真であれば終了
+			if check then
+
+				return
+
+			end
+
+			wrapped(bufnr, lang)
+
+		end
+
+	end)(vim.treesitter.start)
+
 
 end
 

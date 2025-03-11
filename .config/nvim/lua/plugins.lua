@@ -355,47 +355,6 @@ else
 
 	})
 
-	-- カラースキームが"industry"の場合の設定
-	-- ローカル変数"colorscheme"に現在のカラースキームを代入"
-	local colorscheme = vim.g.colors_name
-
-	-- "colorscheme"が"industry"であれば真
-	if colorscheme == "industry" then
-
-		-- 特定の言語でハイライトしないようにする
-		vim.treesitter.start = (function(wrapped)
-
-			-- ラッパー関数
-			return function(bufnr, lang)
-
-				-- ローカル変数"ft"にバッファのファイルタイプを代入
-				local ft = vim.fn.getbufvar(bufnr or vim.fn.bufnr(''), '&filetype')
-
-				-- 除外する言語のリスト
-				local check = (
-
-					ft == 'help'
-					or lang == 'bash'
-					or lang == 'awk'
-					or lang == 'html'
-
-				)
-
-				-- "check"が真であれば終了
-				if check then
-
-					return
-
-				end
-
-				wrapped(bufnr, lang)
-
-			end
-
-		end)(vim.treesitter.start)
-
-	end
-
 	-- masonの設定
 	require('mason').setup{}
 
