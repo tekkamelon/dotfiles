@@ -25,6 +25,20 @@ require('jetpack.packer').add {
 
 		lock = 1,
 
+		-- キーマッピングの設定
+        keys = {
+
+            '<leader>ff',
+            '<leader>fh',
+            '<leader>fb',
+            '<leader>fr',
+            '<leader>fg'
+
+        },
+
+		-- 依存関係のプラグイン
+        dependencies = { 'nvim-lua/plenary.nvim' },
+
 		cmd = 'Telescope',
 
 		config = function()
