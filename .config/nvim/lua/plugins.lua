@@ -20,16 +20,6 @@ require('jetpack.packer').add {
 	-- toggletermの設定
 	{ 'akinsho/toggleterm.nvim',
 
-		-- キーマッピングの設定
-        keys = {
-
-            '<leader>tt',
-            '<leader>tv',
-            '<leader>tf',
-            '<leader>ts',
-
-        },
-
 		-- 起動に使用するコマンド
         cmd = {'ToggleTerm', 'ToggleTermSendCurrentLine', 'ToggleTermSendVisualLines'},
 
@@ -48,20 +38,10 @@ require('jetpack.packer').add {
 
 		lock = 1,
 
-		-- キーマッピングの設定
-        keys = {
-
-            '<leader>ff',
-            '<leader>fh',
-            '<leader>fb',
-            '<leader>fr',
-            '<leader>fg'
-
-        },
-
 		-- 依存関係のプラグイン
         dependencies = { 'nvim-lua/plenary.nvim' },
 
+		-- 起動に使用するコマンド
 		cmd = 'Telescope',
 
 		config = function()
