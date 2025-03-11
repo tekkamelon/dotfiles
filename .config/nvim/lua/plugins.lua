@@ -17,7 +17,31 @@ require('jetpack.packer').add {
 
 	-- lua製プラグイン
 	'ojroques/nvim-hardline',
-	'akinsho/toggleterm.nvim',
+
+	-- toggletermの設定
+	{ 'akinsho/toggleterm.nvim',
+
+		-- キーマッピングの設定
+        keys = {
+
+            '<leader>tt',
+            '<leader>tv',
+            '<leader>tf',
+            '<leader>ts',
+
+        },
+
+		-- 起動に使用するコマンド
+        cmd = {'ToggleTerm', 'ToggleTermSendCurrentLine', 'ToggleTermSendVisualLines'},
+
+        config = function()
+
+            require("toggleterm").setup{}
+
+        end,
+
+	},
+
 	'nvim-lua/plenary.nvim',
 
 	-- telescopeの設定
@@ -300,10 +324,6 @@ else
 
 	}
 
-	-- toggletermの設定
-	require("toggleterm").setup{}
-
-
 	-- mini.completionの設定
 	require('mini.completion').setup{}
 
@@ -418,7 +438,7 @@ else
 		{ 'n' , '<leader>tf' , ':ToggleTerm direction=float<CR>' , options },
 		-- ノーマルモード時に現在カーソルのある行を,ビジュアルモード時に選択範囲をターミナルに送る
 		{ 'n' , '<leader>ts' , ':ToggleTermSendCurrentLine<CR>' , options },
-		{ 'v' , '<leader>t' , ':ToggleTermSendVisualLines<CR>' , options },
+		{ 'v' , '<leader>ts' , ':ToggleTermSendVisualLines<CR>' , options },
 
 		-- mini.files
 		-- ファイラをトグル
