@@ -25,7 +25,12 @@ require('jetpack.packer').add {
 
         config = function()
 
-            require("toggleterm").setup{}
+			-- vscode-neovimから起動していない場合に真
+			if not vim.g.vscode then
+
+				require('toggleterm').setup{}
+
+			end
 
         end,
 
@@ -46,7 +51,11 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('telescope').setup{}
+			if not vim.g.vscode then
+
+				require('telescope').setup{}
+
+			end
 
 		end,
 
@@ -59,7 +68,7 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('eyeliner').setup {
+			require('eyeliner').setup{
 
 				highlight_on_key = false,
 
@@ -234,26 +243,29 @@ require('jetpack.packer').add {
 
         config = function()
 
-			-- masonの設定
-			require('mason').setup{}
+			if not vim.g.vscode then
 
-			-- lspconfigの設定
-			local lspconfig = require('lspconfig')
-			local  capabilities = vim.lsp.protocol.make_client_capabilities()
+				require('mason').setup{}
 
-			require('mason-lspconfig').setup_handlers{
+				-- lspconfigの設定
+				local lspconfig = require('lspconfig')
+				local  capabilities = vim.lsp.protocol.make_client_capabilities()
 
-				function(server_name)
+				require('mason-lspconfig').setup_handlers{
 
-					lspconfig[server_name].setup{
+					function(server_name)
 
-					capabilities = capabilities,
+						lspconfig[server_name].setup{
 
-					}
+						capabilities = capabilities,
 
-				end,
+						}
 
-			}
+					end,
+
+				}
+
+			end
 
 		end,
 
