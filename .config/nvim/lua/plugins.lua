@@ -89,38 +89,42 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('copilot').setup{
+			if not vim.g.vscode then
 
-				-- サジェストの設定
-				suggestion = {
+				require('copilot').setup{
 
-					enabled = true,
-					auto_trigger = true,
-					hide_during_completion = true,
-					debounce = 75,
+					-- サジェストの設定
+					suggestion = {
 
-					-- キーマッピングの設定
-					keymap = {
+						enabled = true,
+						auto_trigger = true,
+						hide_during_completion = true,
+						debounce = 75,
 
-						accept_word = false,
-						accept = "<C-s>",
-						next = "<C-f>",
-						prev = "<C-F>",
-						dismiss = "<C-]>",
+						-- キーマッピングの設定
+						keymap = {
+
+							accept_word = false,
+							accept = "<C-s>",
+							next = "<C-f>",
+							prev = "<C-F>",
+							dismiss = "<C-]>",
+
+						},
 
 					},
 
-				},
+					-- ファイルタイプの設定
+					filetype = {
 
-				-- ファイルタイプの設定
-				filetype = {
+						gitcommit = true,
+						markdown = true,
 
-					gitcommit = true,
-					markdown = true,
+					},
 
-				},
+				}
 
-			}
+			end
 
 		end,
 	},
@@ -132,21 +136,25 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('CopilotChat').setup{
+			if not vim.g.vscode then
 
-				-- デフォルトの言語モデルを変更
-				model = "claude-3.5-sonnet",
+				require('CopilotChat').setup{
 
-				-- チャット用のバッファの設定
-				window = {
+					-- デフォルトの言語モデルを変更
+					model = "claude-3.5-sonnet",
 
-					layout = 'horizontal',
-					width = 0.5,
-					height = 0.4,
+					-- チャット用のバッファの設定
+					window = {
 
-				},
+						layout = 'horizontal',
+						width = 0.5,
+						height = 0.4,
 
-			}
+					},
+
+				}
+
+			end
 
 		end,
 
@@ -161,16 +169,20 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('nvim-treesitter.configs').setup{
+			if not vim.g.vscode then
 
-				-- ハイライトを有効化
-				highlight = {
+				require('nvim-treesitter.configs').setup{
 
-					enable = true,
+					-- ハイライトを有効化
+					highlight = {
 
-				},
+						enable = true,
 
-			}
+					},
+
+				}
+
+			end
 
 		end,
 
@@ -216,11 +228,16 @@ require('jetpack.packer').add {
 
         config = function()
 
-            require('mini.icons').setup{
+			if not vim.g.vscode then
 
-                -- アイコンのスタイルを"ascii"に設定
-                style = 'ascii',
-            }
+				require('mini.icons').setup{
+
+					-- アイコンのスタイルを"ascii"に設定
+					style = 'ascii',
+
+				}
+
+			end
 
         end,
 
@@ -257,7 +274,7 @@ require('jetpack.packer').add {
 
 						lspconfig[server_name].setup{
 
-						capabilities = capabilities,
+							capabilities = capabilities,
 
 						}
 
