@@ -128,7 +128,7 @@ require('jetpack.packer').add {
 
 		end,
 	},
- 
+
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
 
@@ -245,48 +245,10 @@ require('jetpack.packer').add {
 
 	'echasnovski/mini.files',
 
-	-- lspの設定
+	-- lsp関連
 	'neovim/nvim-lspconfig',
 	'williamboman/mason-lspconfig.nvim',
-
-	-- -- masonの設定
-	{'williamboman/mason.nvim',
-
-		-- 依存関係のプラグイン
-		dependencies = 'williamboman/nvim-lspconfig',
-
-		-- 起動に使用するコマンド
-        cmd = {'Mason', 'MasonInstall', 'MasonUninstall', 'MasonLog', 'MasonUpdate', 'MasonUninstall'},
-
-        config = function()
-
-			if not vim.g.vscode then
-
-				require('mason').setup{}
-
-				-- lspconfigの設定
-				local lspconfig = require('lspconfig')
-				local  capabilities = vim.lsp.protocol.make_client_capabilities()
-
-				require('mason-lspconfig').setup_handlers{
-
-					function(server_name)
-
-						lspconfig[server_name].setup{
-
-							capabilities = capabilities,
-
-						}
-
-					end,
-
-				}
-
-			end
-
-		end,
-
-	},
+	'williamboman/mason.nvim',
 
 }
 
@@ -377,6 +339,27 @@ if not vim.g.vscode then
 	}
 
 end
+
+	-- lspの設定
+	require('mason').setup{}
+
+	-- lspconfigの設定
+	local lspconfig = require('lspconfig')
+	local  capabilities = vim.lsp.protocol.make_client_capabilities()
+
+	require('mason-lspconfig').setup_handlers{
+
+		function(server_name)
+
+			lspconfig[server_name].setup{
+
+				capabilities = capabilities,
+
+			}
+
+		end,
+
+	}
 
 -- プラグインのキーマップ設定を読み込み
 require('keymaps.plugins')
