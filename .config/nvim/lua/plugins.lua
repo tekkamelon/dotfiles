@@ -130,7 +130,7 @@ require('jetpack.packer').add {
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
 
-		event = 'VimEnter',
+		cmd = {'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
 
 		config = function()
 
