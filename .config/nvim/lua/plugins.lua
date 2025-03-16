@@ -78,8 +78,6 @@ require('jetpack.packer').add {
 
 	 },
 
-	'lewis6991/gitsigns.nvim',
-
 	-- copilot.luaの設定
 	{'zbirenbaum/copilot.lua',
 
@@ -163,8 +161,6 @@ require('jetpack.packer').add {
 	-- treesitterの設定
     {'nvim-treesitter/nvim-treesitter',
 
-		opt = true,
-
 		event = 'VimEnter',
 
 		config = function()
@@ -216,11 +212,6 @@ require('jetpack.packer').add {
 
 	},
 
-	'echasnovski/mini.completion',
-	'echasnovski/mini.comment',
-	'echasnovski/mini.surround',
-	'echasnovski/mini.indentscope',
-
 	-- mini.iconsの設定
     {'echasnovski/mini.icons',
 
@@ -243,6 +234,9 @@ require('jetpack.packer').add {
 
     },
 
+	'echasnovski/mini.completion',
+	'echasnovski/mini.comment',
+	'echasnovski/mini.surround',
 	'echasnovski/mini.files',
 
 	-- lsp関連
@@ -279,12 +273,12 @@ require('mini.surround').setup{
 
 	},
 
-		-- 矩形選択時に各行を囲む
-		respect_selection_type = true,
+	-- 矩形選択時に各行を囲む
+	respect_selection_type = true,
 
 }
 
--- vscode-neovimから起動した際に真,それ以外で偽
+-- vscode以外から起動した場合に真
 if not vim.g.vscode then
 
 	-- hardlineの設定
@@ -318,9 +312,6 @@ if not vim.g.vscode then
 
 	-- mini.completionの設定
 	require('mini.completion').setup{}
-
-	-- mini.indentscopeの設定
-	require('mini.indentscope').setup{}
 
 	-- mini.filesの設定
 	require('mini.files').setup{}
@@ -360,6 +351,8 @@ end
 		end,
 
 	}
+
+end
 
 -- プラグインのキーマップ設定を読み込み
 require('keymaps.plugins')
