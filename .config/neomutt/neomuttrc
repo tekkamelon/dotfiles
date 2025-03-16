@@ -38,7 +38,6 @@ set sort_aux= reverse-date
 set use_from = yes
 
 # メールを書く時のエディタ
-# 環境変数EDITORに従う場合,$(echo \$EDITOR)と記載
 set editor = "nvim"
 
 # Terminal(およびメール送信時)で使用する文字
@@ -50,16 +49,10 @@ set assumed_charset = "utf-8:iso-2022-jp:euc-jp:shift_jis"
 # 複数のメッセージが連結した形式で保存
 set mbox_type= "maildir" 
 
-# 送信済みメール
+# メールボックスの設定
 set spoolfile = "+INBOX"
-
-# 下書きの保存先
-# set postponed = "\+[GMail]/Drafts"
-set postponed = "~/.config/neomutt/postponed/"
-
-# 送信済みメール
-# set record = "+[Gmail]/Sent Mail"
-set record = "~/.config/neomutt/sent/"
+set postponed = "+[Gmail]/下書き"
+set record = "+[Gmail]/送信済みメール"
 
 # キャッシュディレクトリ
 set header_cache = "~/.config/neomutt/cache/headers"
@@ -71,15 +64,6 @@ set certificate_file = "~/.config/neomutt/certificates"
 # HTMLメールをw3mでプレビュー
 set mailcap_path = "~/.config/neomutt/mailcap" 
 auto_view text/html
-
-# 未分類メール
-mailboxes = "+INBOX"
-
-# 送信済みメール
-mailboxes "~/.config/neomutt/sent"
-
-# 下書き
-mailboxes "~/.config/neomutt/postponed"
 
 # IMAPで読み込むメールボックス
 source "~/.config/neomutt/mailboxes.neomuttrc"
@@ -98,7 +82,3 @@ bind pager G bottom
 bind attach,index g first-entry
 bind attach,index G last-entry 
 
-# カラースキーム
-# source /home/tekkamelon/.config/neomutt/colorschemes/neonwolf-256.neomuttrc
-# source /home/tekkamelon/.config/neomutt/colorschemes/zenburn.neomuttrc
-# source /home/tekkamelon/.config/neomutt/colorschemes/vombatidae.neomutt
