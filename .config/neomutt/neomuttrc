@@ -68,11 +68,17 @@ auto_view text/html
 # IMAPで読み込むメールボックス
 source "~/.config/neomutt/mailboxes.neomuttrc"
 
-#キーバインドの設定
+# カラースキーム
+source "~/.config/neomutt/colorschemes/neonwolf-256.muttrc"
+
+# キーバインドの設定
+# サイドバーでの操作
 bind index,pager \Ck sidebar-prev 
 bind index,pager \Cj sidebar-next 
 bind index,pager \Cn sidebar-toggle-visible
 bind index,pager \Ci sidebar-open 
+
+# vimライク
 bind pager j next-line
 bind pager k previous-line
 bind attach,index,pager \CD next-page
