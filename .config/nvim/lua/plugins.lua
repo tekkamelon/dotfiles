@@ -184,6 +184,41 @@ require('jetpack.packer').add {
 
 	},
 
+	-- hlchunkの設定
+	{'shellRaining/hlchunk.nvim',
+
+	 	event = 'VimEnter',
+
+		config = function()
+
+			require('hlchunk').setup{
+
+				chunk = {
+
+					enable = true
+
+				},
+
+				indent = {
+
+					enable = true
+
+				},
+
+				line_num = {
+
+					enable = true
+
+				}
+
+			}
+
+		end,
+
+	},
+
+	'lewis6991/gitsigns.nvim',
+
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
 	{'echasnovski/mini.pairs',
@@ -328,8 +363,6 @@ if not vim.g.vscode then
 		numhl = true,
 
 	}
-
-end
 
 	-- lspの設定
 	require('mason').setup{}
