@@ -195,7 +195,15 @@ require('jetpack.packer').add {
 
 				chunk = {
 
-					enable = true
+					enable = true,
+
+					-- ハイライトの色
+					style = {
+
+						-- HLChunk1
+						{fg = "#11ffe3"},
+
+					},
 
 				},
 
@@ -207,7 +215,14 @@ require('jetpack.packer').add {
 
 				line_num = {
 
-					enable = true
+					enable = true,
+
+					style = {
+
+						-- HLChunk1
+						{fg = "#11ffe3"},
+
+					},
 
 				}
 
