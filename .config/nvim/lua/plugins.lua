@@ -191,42 +191,78 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('hlchunk').setup{
+			local colorscheme = vim.g.colors_name
 
-				chunk = {
+			-- "colorscheme"が"industry"であれば真
+			if colorscheme == "industry" then
 
-					enable = true,
+				require('hlchunk').setup{
 
-					-- ハイライトの色
-					style = {
+					chunk = {
 
-						-- HLChunk1
-						{fg = "#11ffe3"},
+						enable = true,
+
+						-- ハイライトの色
+						style = {
+
+							-- HLChunk1
+							{fg = "#11FFE3"},
+
+						},
+
+					},
+
+					indent = {
+
+						enable = true,
+
+						style = {
+
+							{fg = "#008080"},
+
+						},
 
 					},
 
-				},
+					line_num = {
 
-				indent = {
+						enable = true,
 
-					enable = true
+						style = {
 
-				},
+							{fg = "#11FFE3"},
 
-				line_num = {
+						},
 
-					enable = true,
-
-					style = {
-
-						-- HLChunk1
-						{fg = "#11ffe3"},
-
-					},
+					}
 
 				}
 
-			}
+			else
+
+				require('hlchunk').setup{
+
+					chunk = {
+
+						enable = true,
+
+					},
+
+					indent = {
+
+						enable = true
+
+					},
+
+					line_num = {
+
+						enable = true,
+
+					}
+
+				}
+
+			end
 
 		end,
 
