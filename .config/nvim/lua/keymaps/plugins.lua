@@ -29,9 +29,9 @@ if vim.g.vscode then
 	}
 
 	-- テーブルの内容をループし代入
-	for _, kmaps in pairs(kmaps) do
+	for _, kmap in pairs(kmaps) do
 
-		vim_keymap({'n' , 'v'} , kmaps[1] , kmaps[2] , kmaps[3])
+		vim_keymap({'n' , 'v'} , kmap[1] , kmap[2] , kmap[3])
 
 	end
 
@@ -87,6 +87,8 @@ else
 
 	end
 
+
+	-- キーマップ設定のテーブルを作成
 	local kmaps = {
 
 		-- vim-edgemotion
@@ -103,7 +105,7 @@ else
 		-- mini.comment
 		-- コメントアウト
 		{ {'n' , 'v'} , '<leader>g' , 'gcc' , {remap = true }},
-		
+
 		-- vim-partedit
 		-- ビジュアルモード時にコマンドを表示
 		{ 'v' , '<leader>e' , ':Partedit -opener new -filetype ' , options },
@@ -145,9 +147,9 @@ else
 	}
 
 	-- テーブルの内容をループし代入
-	for _, kmaps in pairs(kmaps) do
+	for _, kmap in pairs(kmaps) do
 
-		vim_keymap(kmaps[1] , kmaps[2] , kmaps[3] , kmaps[4])
+		vim_keymap(kmap[1] , kmap[2] , kmap[3] , kmap[4])
 
 	end
 
