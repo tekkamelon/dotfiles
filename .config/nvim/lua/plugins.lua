@@ -102,8 +102,8 @@ require('jetpack.packer').add {
 						-- キーマッピングの設定
 						keymap = {
 
-							accept_word = false,
-							accept = "<C-s>",
+							accept = false,
+							accept_word = "<C-s>",
 							next = "<C-f>",
 							prev = "<C-F>",
 							dismiss = "<C-]>",

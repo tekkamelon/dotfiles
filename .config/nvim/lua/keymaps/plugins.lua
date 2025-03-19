@@ -47,8 +47,8 @@ else
 			-- copilotがサジェストしていれば真
 			if suggest.is_visible() then
 
-				-- サジェストを単語単位で受け入れ
-				suggest.accept_word()
+				-- サジェストを受け入れ
+				suggest.accept()
 
 			else
 
