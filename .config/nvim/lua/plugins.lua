@@ -320,7 +320,23 @@ require('jetpack.packer').add {
 
     },
 
-	'echasnovski/mini.completion',
+	-- mini.completionの設定
+	{'echasnovski/mini.completion',
+
+		event = 'InsertEnter',
+
+		config = function()
+
+			if not vim.g.vscode then
+
+				require('mini.completion').setup{}
+
+			end
+
+		end,
+
+	},
+
 	'echasnovski/mini.comment',
 	'echasnovski/mini.surround',
 	'echasnovski/mini.files',
@@ -395,9 +411,6 @@ if not vim.g.vscode then
 		}
 
 	}
-
-	-- mini.completionの設定
-	require('mini.completion').setup{}
 
 	-- mini.filesの設定
 	require('mini.files').setup{}
