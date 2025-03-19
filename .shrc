@@ -12,7 +12,6 @@ alias w3b='w3m -B'
 # vimの設定
 alias vim='nvim'
 alias vit='nvim -c Bterm'
-# alias vi='nvim -u $HOME/.config/nvim/light_init.lua -c "set nonumber"'
 alias vi='nvim'
 alias vp='nvim - -R -u "${HOME}/.config/nvim/light_init.lua"'
 
@@ -55,22 +54,13 @@ export PATH=$PATH:/opt/processing-3.5.4/
 export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
 export PATH="$PATH:$JAVA_HOME/bin"
-
-# WSL2用の設定
-# "/mnt/c"がありかつ".local"以下にneovimのバイナリがあれば真
-if [ -d "/mnt/c" ] && [ -d "${HOME}/.local/nvim-linux64" ] ; then
-	
-	export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
-
-fi
+export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
 # ====== 環境変数及びパスの設定ここまで ======
 
 
 # ホスト名をから"thinkpad"を抽出
 echo_hostname=$(hostname)
-
 check_thinkpad="${echo_hostname#thinkpad}"
-
 check_hostname="${echo_hostname%"${check_thinkpad}"}"
 
 # ホスト名が"pop-os"であれば真
