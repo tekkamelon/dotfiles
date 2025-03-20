@@ -39,23 +39,28 @@ for let, status in pairs(options) do
 end
 
 
--- 拡張子ごとの設定
--- バッファの種類
-local buf = {'BufNewFile' , 'BufRead'}
+-- 自動コマンドの設定
 local create_autocmd = vim.api.nvim_create_autocmd
+
+-- バッファ上のファイルの種類
+local buf_nr = {'BufNewFile', 'BufRead'}
+local buf_n = 'BufNewFile'
 
 local template_files = {
 
 	-- filetypeの設定
-	{buf, {pattern = '*conf*', command = 'set filetype=conf'}},
-	{buf, {pattern = '.*rc', command = 'set filetype=conf'}},
-	{buf, {pattern = '.*shrc', command = 'set filetype=sh'}},
+	{buf_nr, {pattern = '*conf*', command = 'set filetype=conf'}},
+	{buf_nr, {pattern = '.*rc', command = 'set filetype=conf'}},
+	{buf_nr, {pattern = '.*shrc', command = 'set filetype=sh'}},
 
 	-- テンプレートの読み込み
-    {'BufNewFile', {pattern = '*.sh', command = [[0r $HOME/Templates/sh.txt]]}},
-    {'BufNewFile', {pattern = '*.awk', command = [[0r $HOME/Templates/awk.txt]]}},
-    {'BufNewFile', {pattern = '*.py', command = [[0r $HOME/Templates/python.txt]]}},
-    {'BufNewFile', {pattern = '*.c', command = [[0r $HOME/Templates/c.txt]]}},
+    {buf_n, {pattern = '*.sh', command = [[0r $HOME/Templates/sh.txt]]}},
+    {buf_n, {pattern = '*.awk', command = [[0r $HOME/Templates/awk.txt]]}},
+    {buf_n, {pattern = '*.py', command = [[0r $HOME/Templates/python.txt]]}},
+    {buf_n, {pattern = '*.c', command = [[0r $HOME/Templates/c.txt]]}},
+
+	-- ターミナル起動時に行番号を非表示
+	{'TermOpen', {pattern = '*', command = 'setlocal norelativenumber | setlocal nonumber'}}
 
 }
 
@@ -123,11 +128,6 @@ vim.highlight.on_yank{higroup = "IncSearch", timeout = 200, on_visual = true}
 
 -- leaderの設定 
 vim.g.mapleader = " "
-
-
--- ターミナルの設定 
--- ターミナル起動時に行番号を非表示
-vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber | setlocal nonumber',})
 
 -- キーマップ設定を読み込み
 require('keymaps.general')
