@@ -39,16 +39,23 @@ for let, status in pairs(options) do
 end
 
 
--- 拡張子ごとのfiletypeの設定
+-- 拡張子ごとの設定
 -- バッファの種類
 local buf = {'BufNewFile' , 'BufRead'}
 local create_autocmd = vim.api.nvim_create_autocmd
 
 local template_files = {
 
+	-- filetypeの設定
 	{buf, {pattern = '*conf*', command = 'set filetype=conf'}},
 	{buf, {pattern = '.*rc', command = 'set filetype=conf'}},
-	{buf, {pattern = '.*shrc', command = 'set filetype=sh'}}
+	{buf, {pattern = '.*shrc', command = 'set filetype=sh'}},
+
+	-- テンプレートの読み込み
+    {'BufNewFile', {pattern = '*.sh', command = [[0r $HOME/Templates/sh.txt]]}},
+    {'BufNewFile', {pattern = '*.awk', command = [[0r $HOME/Templates/awk.txt]]}},
+    {'BufNewFile', {pattern = '*.py', command = [[0r $HOME/Templates/python.txt]]}},
+    {'BufNewFile', {pattern = '*.c', command = [[0r $HOME/Templates/c.txt]]}},
 
 }
 
@@ -58,24 +65,6 @@ for _, table in ipairs(template_files) do
 
 end
 
--- テンプレート
--- テーブルを作成
-local templates = {
-
-	-- テンプレートのファイル名
-	sh = 'sh.txt',
-	awk = 'awk.txt',
-	py = 'python.txt',
-	c = 'c.txt',
-
-}
-
--- "templates"内のkeyを"ext",valueを"file"にそれぞれ代入しループ
-for ext, file in pairs(templates) do
-
-	vim.api.nvim_create_autocmd('BufNewFile', {pattern = '*.' .. ext , command = '0r $HOME/Templates/' .. file ,})
-
-end
 
 -- vim.optの設定
 -- "vim.opt"をテーブルで設定
