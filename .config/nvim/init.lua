@@ -1,6 +1,8 @@
 -- init.lua
 -- neovim >= 0.9.0
 
+-- モジュールを遅延読み込み
+vim.loader.enable()
 
 -- 標準プラグインの読込停止
 -- "vim.g"をテーブルで設定
@@ -132,6 +134,7 @@ vim.highlight.on_yank{higroup = "IncSearch", timeout = 200, on_visual = true}
 
 -- leaderの設定 
 vim.g.mapleader = " "
+
 
 -- キーマップ設定を読み込み
 require('keymaps.general')
