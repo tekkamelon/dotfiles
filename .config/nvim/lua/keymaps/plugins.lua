@@ -149,7 +149,7 @@ else
 	-- テーブルの内容をループし代入
 	for _, kmap in ipairs(kmaps) do
 
-		vim_keymap(kmap[1], kmap[2], kmap[3], options)
+		vim_keymap(kmap[1], kmap[2], kmap[3], kmap[4] or options)
 
 	end
 
