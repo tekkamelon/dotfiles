@@ -71,10 +71,9 @@ end
 local vim_opt = {
 
 	termguicolors = true,
-
 	background = 'dark',
-
 	number = true,
+	cursorline = true,
 
 	-- tabの幅を4に設定
 	tabstop = 4,
@@ -86,8 +85,6 @@ local vim_opt = {
 
 	-- swapファイルを別ディレクトリに作成
 	directory = '/tmp',
-
-	cursorline = true,
 
 }
 
@@ -131,12 +128,6 @@ vim.g.mapleader = " "
 -- ターミナルの設定 
 -- ターミナル起動時に行番号を非表示
 vim.api.nvim_create_autocmd('TermOpen' , {pattern = '*' , command = 'setlocal norelativenumber | setlocal nonumber',})
-
--- "Bterm"コマンドの設定,ターミナルを下画面に高さを7行分下げた状態で起動
-vim.api.nvim_create_user_command('Bterm' , 'split | resize -7 | terminal', { nargs = 0 })
-
--- "Vterm"の設定,ターミナルを右半分に起動
-vim.api.nvim_create_user_command('Vterm' , 'vsplit | terminal', { nargs = 0 })
 
 -- キーマップ設定を読み込み
 require('keymaps.general')
