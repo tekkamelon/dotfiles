@@ -49,9 +49,10 @@ local buf_n = 'BufNewFile'
 local template_files = {
 
 	-- filetypeの設定
-	{buf_nr, {pattern = '*conf*', command = 'set filetype=conf'}},
-	{buf_nr, {pattern = '.*rc', command = 'set filetype=conf'}},
+	{buf_nr, {pattern = {'*conf*', '*rc' }, command = 'set filetype=conf'}},
 	{buf_nr, {pattern = '.*shrc', command = 'set filetype=sh'}},
+	{buf_nr, {pattern = '.vimrc', command = 'set filetype=vim'}},
+	{buf_nr, {pattern = '.tmux.conf', command = 'set filetype=tmux'}},
 
 	-- テンプレートの読み込み
     {buf_n, {pattern = '*.sh', command = [[0r $HOME/Templates/sh.txt]]}},
