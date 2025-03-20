@@ -101,22 +101,25 @@ for set, str in pairs(vim_opt) do
 end
 
 -- カラースキームの設定
--- ホスト名が"pop-os"の場合は真,そうでない場合は偽
-if vim.fn.hostname() == "pop-os" then
+-- ホスト名に基づくカラースキーム設定をテーブルで管理
+local colorscheme_settings = {
 
-	vim.cmd.colorscheme "iceberg"
+    ['default'] = {scheme = 'industry', termguicolors = true},
+    ['pop-os'] = {scheme = 'iceberg', termguicolors = true},
+    ['tekkamelon-pcg-2c7n'] = {scheme = 'default', termguicolors = false}
 
--- 偽の場合はホスト名を確認,"tekkamelon-pcg-2c7n"の場合は真,そうでない場合は偽
-elseif vim.fn.hostname() == "tekkamelon-pcg-2c7n" then
+}
 
-	vim.cmd.colorscheme "default"
-	vim.opt.termguicolors = false
+-- "hostname"に現在のマシンのホスト名を代入
+local hostname = vim.fn.hostname()
 
-else
+-- "settings"にホスト名に応じたテーブルの値を代入
+local settings = colorscheme_settings[hostname] or colorscheme_settings['default']
 
-	vim.cmd.colorscheme "industry"
+-- 設定を適用
+vim.cmd.colorscheme(settings.scheme)
+vim.opt.termguicolors = settings.termguicolors
 
-end
 
 -- ヤンクした範囲のハイライト
 -- ノーマルモード
