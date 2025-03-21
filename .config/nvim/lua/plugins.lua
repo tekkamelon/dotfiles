@@ -18,7 +18,7 @@ require('jetpack.packer').add {
 	'ojroques/nvim-hardline',
 
 	-- toggletermの設定
-	{ 'akinsho/toggleterm.nvim',
+	{'akinsho/toggleterm.nvim',
 
 		-- 起動に使用するコマンド
         cmd = {'ToggleTerm', 'ToggleTermSendCurrentLine', 'ToggleTermSendVisualLines'},
@@ -165,20 +165,7 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			if not vim.g.vscode then
-
-				require('nvim-treesitter.configs').setup{
-
-					-- ハイライトを有効化
-					highlight = {
-
-						enable = true,
-
-					},
-
-				}
-
-			end
+			require('plugins.treesitter')
 
 		end,
 
