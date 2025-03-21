@@ -87,42 +87,7 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			if not vim.g.vscode then
-
-				require('copilot').setup{
-
-					-- サジェストの設定
-					suggestion = {
-
-						enabled = true,
-						auto_trigger = true,
-						hide_during_completion = true,
-						debounce = 75,
-
-						-- キーマッピングの設定
-						keymap = {
-
-							accept = false,
-							accept_word = "<C-s>",
-							next = "<C-f>",
-							prev = "<C-F>",
-							dismiss = "<C-]>",
-
-						},
-
-					},
-
-					-- ファイルタイプの設定
-					filetype = {
-
-						gitcommit = true,
-						markdown = true,
-
-					},
-
-				}
-
-			end
+			require('plugins.copilot')
 
 		end,
 	},
@@ -134,25 +99,7 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			if not vim.g.vscode then
-
-				require('CopilotChat').setup{
-
-					-- デフォルトの言語モデルを変更
-					model = "claude-3.5-sonnet",
-
-					-- チャット用のバッファの設定
-					window = {
-
-						layout = 'horizontal',
-						width = 0.5,
-						height = 0.4,
-
-					},
-
-				}
-
-			end
+			require('plugins.copilotchat')
 
 		end,
 
@@ -178,78 +125,7 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			local colorscheme = vim.g.colors_name
-
-			-- "colorscheme"が"industry"であれば真
-			if colorscheme == "industry" then
-
-				require('hlchunk').setup{
-
-					chunk = {
-
-						enable = true,
-
-						-- ハイライトの色
-						style = {
-
-							-- HLChunk1
-							{fg = "#11FFE3"},
-
-						},
-
-					},
-
-					indent = {
-
-						enable = true,
-
-						style = {
-
-							{fg = "#008080"},
-
-						},
-
-					},
-
-					line_num = {
-
-						enable = true,
-
-						style = {
-
-							{fg = "#11FFE3"},
-
-						},
-
-					}
-
-				}
-
-			else
-
-				require('hlchunk').setup{
-
-					chunk = {
-
-						enable = true,
-
-					},
-
-					indent = {
-
-						enable = true
-
-					},
-
-					line_num = {
-
-						enable = true,
-
-					}
-
-				}
-
-			end
+			require('plugins.hlchunk')
 
 		end,
 
