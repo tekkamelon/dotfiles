@@ -11,8 +11,19 @@ vim.api.nvim_set_hl(0, 'CursorLine' , { underline = true })
 -- カラースキームごとのポップアップメニューの設定
 local colorscheme_settings = {
 
-    iceberg = {PmenuSel = {fg = '#2f3234', bg = '#8389a3'}},
-    industry = {PmenuSel = {fg = '#2f3234', bg = '#00aaaa'}},
+    iceberg = {
+
+		PmenuSel = {fg = '#2f3234', bg = '#8389a3'},
+		Pmenu = {fg = '#FFFFFF', bg = '#2f3234'}
+
+	},
+
+    industry = {
+
+		PmenuSel = {fg = '#2f3234', bg = '#00aaaa'},
+		Pmenu = {fg = '#FFFFFF', bg = '#000000'}
+
+	},
 
 }
 
@@ -29,9 +40,6 @@ local settings = colorscheme_settings[vim.g.colors_name]
     end
 
 end
-
--- ポップアップメニューの設定
-vim.api.nvim_set_hl(0, 'Pmenu', {fg = '#FFFFFF', bg = '#2f3234'})
 
 -- eyelinerのハイライトの色を設定
 vim.api.nvim_set_hl(0, 'EyelinerPrimary', {fg = 'red', bold = true, underline = true})
