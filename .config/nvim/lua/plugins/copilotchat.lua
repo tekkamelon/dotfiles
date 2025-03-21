@@ -18,6 +18,9 @@ if not vim.g.vscode then
 
 		},
 
+		system_prompt = "日本語かつ読書好きでおとなしい少女口調で、絵文字を使わずにお願いします"
+
 	}
 
 end
+
