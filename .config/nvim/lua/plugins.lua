@@ -205,9 +205,66 @@ require('jetpack.packer').add {
 	'echasnovski/mini.files',
 
 	-- lsp関連
-	'neovim/nvim-lspconfig',
-	'williamboman/mason-lspconfig.nvim',
-	'williamboman/mason.nvim',
+	{'neovim/nvim-lspconfig',
+
+		event = 'VeryLazy',
+
+	},
+
+	{'williamboman/mason.nvim',
+
+		event = 'VeryLazy',
+
+		config = function()
+
+			require('mason').setup{}
+
+		end,
+
+	},
+
+	{'williamboman/mason-lspconfig.nvim',
+
+		event = 'VeryLazy',
+
+		-- 依存関係のプラグイン
+		dependencies = {
+
+			'neovim/nvim-lspconfig',
+			'williamboman/mason.nvim'
+
+		},
+
+		config = function()
+
+			if not vim.g.vscode then
+
+				-- lspconfigを読み込み
+				local lspconfig = require('lspconfig')
+
+				-- LSPのクライアントの設定
+				local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+				require('mason-lspconfig').setup_handlers{
+
+					function(server_name)
+
+						lspconfig[server_name].setup{
+
+							capabilities = capabilities,
+
+						}
+
+					end,
+
+				}
+
+			end
+
+		end,
+
+	},
+
 
 }
 
@@ -288,27 +345,6 @@ if not vim.g.vscode then
 		},
 
 		numhl = true,
-
-	}
-
-	-- lspの設定
-	require('mason').setup{}
-
-	-- lspconfigの設定
-	local lspconfig = require('lspconfig')
-	local  capabilities = vim.lsp.protocol.make_client_capabilities()
-
-	require('mason-lspconfig').setup_handlers{
-
-		function(server_name)
-
-			lspconfig[server_name].setup{
-
-				capabilities = capabilities,
-
-			}
-
-		end,
 
 	}
 
