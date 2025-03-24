@@ -27,7 +27,11 @@
 
 ## .*shrc
 
-- 各種シェルの設定
+### .shrc
+
+- 各シェル共通の設定
+
+- 各種シェル固有の設定
 
     - .bashrc
 
@@ -35,7 +39,7 @@
 
     - .mkshrc
 
-    - yashrc
+    - .yashrc
 
 ## ncmpcpp
 
@@ -67,7 +71,7 @@
 
 #### init.lua
 
-- neovimの起動時に読み込まれるキーバインドやプラグインなどの設定
+- neovimの起動時に読み込まれる設定
 
 #### light_init.vim
 
@@ -76,6 +80,10 @@
 #### light_init.lua
 
 - neovimをプラグイン無しで起動する際に使用
+
+#### .luarc.json
+
+- luaのlspの設定
 
 #### after/plugin/
 
@@ -89,6 +97,10 @@
 
 #### lua/
 
+- plugins.lua
+
+    - プラグインの読み込みなどの設定
+
 - pop-os.lua
 
     - pop-os用のプラグインの設定,更新予定なし
@@ -99,7 +111,29 @@
 
 - vscode-neovim_set.lua
 
-    - vscode-neovimのキーバインドの設定
+    - vscode-neovimのキーバインドの設定,更新予定なし
+
+##### plugins/
+
+- 各種プラグインの設定
+
+- copilot.lua
+
+- copilotchat.lua
+
+- hlchunk.lua
+
+##### keymaps/
+
+- キーマップの設定
+
+- general.lua
+
+    - プラグイン以外のキーマップ
+
+- plugins.lua
+
+    - プラグインのキーマップ
 
 ### ranger
 
