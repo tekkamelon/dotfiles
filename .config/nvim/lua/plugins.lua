@@ -53,7 +53,17 @@ require('jetpack.packer').add {
 
 			if not vim.g.vscode then
 
-				require('telescope').setup{}
+				require('telescope').setup{
+
+					defaults = {
+
+						-- プロンプトの設定
+						prompt_prefix = " 🔎 ",
+						selection_caret = " ➤  "
+
+					},
+
+				}
 
 			end
 
