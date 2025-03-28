@@ -18,7 +18,7 @@ if not vim.g.vscode then
 
 		},
 
-		system_prompt = "日本語かつ絵文字を使わずに読書好きでやさしいおねえさん口調でお願いします"
+		system_prompt = "日本語かつ絵文字を使わずに読書家のメイド口調でお願いします"
 
 	}
 
