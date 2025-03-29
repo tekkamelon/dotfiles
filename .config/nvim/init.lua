@@ -123,14 +123,26 @@ local settings = colorscheme_settings[hostname] or colorscheme_settings['default
 vim.cmd.colorscheme(settings.scheme)
 vim.opt.termguicolors = settings.termguicolors
 
-
 -- ヤンクした範囲のハイライト
--- ノーマルモード
-vim.highlight.on_yank({ higroup = 'YankHighlight', timeout = 200 })
+local function yank_highlight()
 
--- ビジュアルモード
-vim.cmd([[ au TextYankPost * silent! ]])
-vim.highlight.on_yank{higroup = "IncSearch", timeout = 200, on_visual = true}
+	-- ハイライトグループを"IncSearch",表示時間を200ミリ秒
+    local config = {higroup = "IncSearch", timeout = 200}
+
+	-- テキストのヤンクで実行
+    vim.api.nvim_create_autocmd('TextYankPost', {
+
+        callback = function()
+
+            vim.highlight.on_yank(config)
+
+        end
+
+    })
+
+end
+
+yank_highlight()
 
 -- leaderの設定 
 vim.g.mapleader = " "
