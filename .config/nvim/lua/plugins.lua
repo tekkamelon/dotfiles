@@ -41,8 +41,6 @@ require('jetpack.packer').add {
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
 
-		lock = 1,
-
 		-- 依存関係のプラグイン
         dependencies = 'nvim-lua/plenary.nvim',
 
@@ -105,7 +103,7 @@ require('jetpack.packer').add {
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
 
-		cmd = {'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
+		cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
 
 		config = function()
 
