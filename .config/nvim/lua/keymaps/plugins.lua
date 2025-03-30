@@ -143,6 +143,8 @@ else
 		{{'n', 'v'}, '<leader>cr', ':CopilotChatReset<CR>'},
 		-- 言語モデルを変更
 		{{'n', 'v'}, '<leader>cm', ':CopilotChatModels<CR>'},
+		-- 会話内容を保存
+		{{'n', 'v'}, '<leader>cs', ':CopilotChatSave'},
 
 	}
 
