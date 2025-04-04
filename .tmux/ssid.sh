@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eu
+set -u
 
 # ====== 変数の設定 ======
 # ロケールの設定
@@ -12,29 +12,21 @@ export POSIXLY_CORRECT=1
 # ====== 変数の設定ここまで ======
 
 
-iwconfig 2> /dev/null |
+# 現在のssidを変数に代入,wi-fiに接続している場合はssidが表示される
+ssid_text=$(iw dev | grep -F "ssid")
 
-# 区切り文字を":"とスペースに指定
-awk -F[:" "] '
+# ssid_textからssidを抽出
+clean_ssid="${ssid_text#*ssid }"
 
-# 1行目のみを処理
-NR == 1{
+# ssid_textがあれば真
+if [ -n "${ssid_text}" ] ; then
 
-	# Wi-Fiに接続している場合
-	# 6フィールド目が"802.11"かつ9フィールド目が"off/any"ではない場合に真
-	if($6 == "802.11" && $9 != "off/any"){
+	# 現在のssidを表示
+	printf '<%s>\n' "${clean_ssid}"
 
-		# ダブルクォートを削除
-		gsub("\"" , "" , $9)
+else
 
-		print "<" $9 ">"
+	printf "<no wireless>\n"
 
-	}else{
-
-		print "<no wireless>"
-
-	}
-
-}
-'
+fi
 
