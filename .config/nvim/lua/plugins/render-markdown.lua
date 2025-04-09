@@ -7,7 +7,14 @@ require('render-markdown').setup{
 
 	heading = {enabled = false},
 	sign = {enabled = false},
-	indent = {enabled = true},
+
+	-- インデントの設定
+	indent = {
+
+		enabled = true,
+		skip_heading = true,
+
+	},
 
 	-- コードブロックの設定
 	code = {
@@ -15,10 +22,19 @@ require('render-markdown').setup{
 		width = "block",
 		left_pad = 0,
 		right_pad = 0,
+		highlight = '',
+
+	},
+
+	-- テキストの設定
+	bullet = {
+
+		icons = {'● ', '○ ', '● ', '○ '},
 
 	},
 
 	-- リンクの設定
+
 	link = {
 
 		-- アイコンの設定
