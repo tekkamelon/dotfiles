@@ -141,6 +141,57 @@ require('jetpack.packer').add {
 
 	'lewis6991/gitsigns.nvim',
 
+	{'MeanderingProgrammer/render-markdown.nvim',
+
+		dependencies = 'nvim-treesitter/nvim-treesitter',
+
+		event = 'VimEnter',
+
+		config = function()
+
+			require('render-markdown').setup{
+
+				render_modes = true,
+
+				heading = {enabled = false},
+				sign = {enabled = false},
+				indent = {enabled = true},
+
+				-- コードブロックの設定
+				code = {
+
+					width = "block",
+					left_pad = 0,
+					right_pad = 0,
+
+				},
+
+				-- リンクの設定
+				link = {
+
+					-- アイコンの設定
+					image = '🖼 ',
+					email = '📧 ',
+					hyperlink = '🔗 ',
+
+					custom = {
+
+						web = { pattern = '^http', icon = '🌐' },
+						github = { pattern = 'github%.com', icon = '🐙 ' },
+						google = { pattern = 'google%.com', icon = '🔍 ' },
+
+					}
+
+				},
+
+			}
+
+		end,
+
+	},
+
+
+
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
 	{'echasnovski/mini.pairs',
