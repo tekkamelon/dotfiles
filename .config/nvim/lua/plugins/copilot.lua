@@ -12,7 +12,7 @@ if not vim.g.vscode then
 			enabled = true,
 			auto_trigger = true,
 			hide_during_completion = true,
-			debounce = 75,
+			debounce = 50,
 
 			-- キーマッピングの設定
 			keymap = {
@@ -21,7 +21,7 @@ if not vim.g.vscode then
 				accept_word = "<C-s>",
 				next = "<C-f>",
 				prev = "<C-F>",
-				dismiss = "<C-]>",
+				dismiss = "<C-q>",
 
 			},
 
