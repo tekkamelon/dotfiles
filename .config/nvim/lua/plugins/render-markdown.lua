@@ -8,14 +8,6 @@ require('render-markdown').setup{
 	heading = {enabled = false},
 	sign = {enabled = false},
 
-	-- インデントの設定
-	indent = {
-
-		enabled = true,
-		skip_heading = true,
-
-	},
-
 	-- コードブロックの設定
 	code = {
 
