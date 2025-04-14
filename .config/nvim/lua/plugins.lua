@@ -145,6 +145,8 @@ require('jetpack.packer').add {
 
 		event = 'VimEnter',
 
+		ft = {'markdown'},
+
 		config = function()
 
 			require('plugins.render-markdown')
