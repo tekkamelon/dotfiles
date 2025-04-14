@@ -1,4 +1,4 @@
--- plug_config.lua
+-- lug_config.lua
 -- neovim >= 0.9.0
 
 
@@ -153,7 +153,32 @@ require('jetpack.packer').add {
 
 	},
 
-	'lewis6991/gitsigns.nvim',
+	{'lewis6991/gitsigns.nvim',
+
+		event = {'BufReadPre', 'BufNewFile'},
+
+		config = function()
+
+			-- vscode以外から起動した場合に真
+			if not vim.g.vscode then
+
+				require('gitsigns').setup{
+
+					signs = {
+
+						change = { text = '>>' },
+
+					},
+
+					numhl = true,
+
+				}
+
+			end
+
+		end,
+
+	},
 
 
 	-- mini.nvimのモジュール
@@ -335,19 +360,6 @@ if not vim.g.vscode then
 
 	-- mini.filesの設定
 	require('mini.files').setup{}
-
-	-- gitsignsの設定
-	require('gitsigns').setup{
-
-		signs = {
-
-			change = { text = '>>' },
-
-		},
-
-		numhl = true,
-
-	}
 
 end
 
