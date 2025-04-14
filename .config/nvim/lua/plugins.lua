@@ -15,7 +15,47 @@ require('jetpack.packer').add {
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
 
 	-- lua製プラグイン
-	'ojroques/nvim-hardline',
+	{'ojroques/nvim-hardline',
+
+		event = 'VeryLazy',
+
+		config = function()
+
+			-- vscode以外から起動した場合に真
+			if not vim.g.vscode then
+
+				require('hardline').setup{
+
+					bufferline = true,
+
+					-- テーマの設定
+					theme = 'one',
+
+					sections = {
+
+						-- 現在のモード
+						{class = 'mode' , item = require('hardline.parts.mode').get_item},
+
+						-- ファイルの種類
+						{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
+
+						-- カレントバッファのパス
+						{class = 'med' , item = require('hardline.parts.filename').get_item},
+
+						-- セパレーター
+						{class = 'med' , item = '%='},
+
+						-- カレント行の位置
+						{class = 'mode' , item = require('hardline.parts.line').get_item},
+
+					}
+
+				}
+
+			end
+
+		end,
+	},
 
 	-- toggletermの設定
 	{'akinsho/toggleterm.nvim',
@@ -25,7 +65,6 @@ require('jetpack.packer').add {
 
         config = function()
 
-			-- vscode-neovimから起動していない場合に真
 			if not vim.g.vscode then
 
 				require('toggleterm').setup{}
@@ -252,6 +291,7 @@ require('jetpack.packer').add {
 	'echasnovski/mini.surround',
 	'echasnovski/mini.files',
 
+
 	-- lsp関連
 	{'neovim/nvim-lspconfig',
 
@@ -328,35 +368,6 @@ require('mini.surround').setup{
 
 -- vscode以外から起動した場合に真
 if not vim.g.vscode then
-
-	-- hardlineの設定
-	require('hardline').setup{
-
-		bufferline = true,
-
-		-- テーマの設定
-		theme = 'one',
-
-		sections = {
-
-			-- 現在のモード
-			{class = 'mode' , item = require('hardline.parts.mode').get_item},
-
-			-- ファイルの種類
-			{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
-
-			-- カレントバッファのパス
-			{class = 'med' , item = require('hardline.parts.filename').get_item},
-
-			-- セパレーター
-			{class = 'med' , item = '%='},
-
-			-- カレント行の位置
-			{class = 'mode' , item = require('hardline.parts.line').get_item},
-
-		}
-
-	}
 
 	-- mini.filesの設定
 	require('mini.files').setup{}
