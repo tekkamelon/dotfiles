@@ -143,9 +143,7 @@ require('jetpack.packer').add {
 
 		dependencies = 'nvim-treesitter/nvim-treesitter',
 
-		event = 'VimEnter',
-
-		ft = {'markdown'},
+		ft = 'markdown',
 
 		config = function()
 
