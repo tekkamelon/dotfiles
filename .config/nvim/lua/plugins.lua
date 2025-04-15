@@ -258,6 +258,40 @@ require('jetpack.packer').add {
 
 	},
 
+	-- mini.statuslineの設定
+	-- {'echasnovski/mini.statusline',
+
+	-- 	event = 'UIEnter',
+
+	-- 	config = function()
+
+	-- 		require('mini.statusline').setup{
+
+	-- 			use_icons = false,
+
+	-- 		}
+
+	-- 	end
+
+	-- },
+
+	-- mini.tablineの設定
+	-- {'echasnovski/mini.tabline',
+
+	-- 	event = 'UIEnter',
+
+	-- 	config = function()
+
+	-- 		require('mini.tabline').setup{
+
+	-- 			show_icons = false,
+
+	-- 		}
+
+	-- 	end
+
+	-- },
+
 	'echasnovski/mini.comment',
 	'echasnovski/mini.files',
 
