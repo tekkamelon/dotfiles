@@ -17,11 +17,11 @@ require('jetpack.packer').add {
 	-- lua製プラグイン
 	{'ojroques/nvim-hardline',
 
-		event = 'VeryLazy',
+		opt = false,
 
 		config = function()
 
-				require('plugins.hardline')
+			require('plugins.hardline')
 
 		end
 
@@ -299,13 +299,13 @@ require('jetpack.packer').add {
 	-- lsp関連
 	{'neovim/nvim-lspconfig',
 
-		event = 'VeryLazy',
+		opt = false,
 
 	},
 
 	{'williamboman/mason.nvim',
 
-		event = 'VeryLazy',
+		opt = false,
 
 		config = function()
 
@@ -317,7 +317,7 @@ require('jetpack.packer').add {
 
 	{'williamboman/mason-lspconfig.nvim',
 
-		event = 'VeryLazy',
+		opt = false,
 
 		-- 依存関係のプラグイン
 		dependencies = {
