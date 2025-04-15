@@ -259,8 +259,41 @@ require('jetpack.packer').add {
 	},
 
 	'echasnovski/mini.comment',
-	'echasnovski/mini.surround',
 	'echasnovski/mini.files',
+
+	-- mini.surroundの設定
+	{'echasnovski/mini.surround',
+
+		event = 'VimEnter',
+
+		config = function()
+
+			require('mini.surround').setup{
+
+				-- キーマッピングの設定
+				mappings = {
+
+					add = 'ca',
+					delete = 'cd',
+					find = 'cf',
+					find_left = 'cF',
+					highlight = 'ch',
+					replace = 'cr',
+					update_n_lines = 'cn',
+
+					suffix_last ='l',
+					suffix_next = 'n',
+
+				},
+
+				-- 矩形選択時に各行を囲む
+				respect_selection_type = true,
+
+			}
+
+		end,
+
+	},
 
 
 	-- lsp関連
@@ -310,30 +343,6 @@ require('mini.comment').setup{
 
 	-- 空白行を無視
 	options = {ignore_blank_line = true,},
-
-}
-
--- mini.surroundの設定 
-require('mini.surround').setup{
-
-	-- キーマッピングの設定
-	mappings = {
-
-		add = 'ca',
-		delete = 'cd',
-		find = 'cf',
-		find_left = 'cF',
-		highlight = 'ch',
-		replace = 'cr',
-		update_n_lines = 'cn',
-
-		suffix_last ='l',
-		suffix_next = 'n',
-
-	},
-
-	-- 矩形選択時に各行を囲む
-	respect_selection_type = true,
 
 }
 
