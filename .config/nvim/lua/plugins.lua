@@ -21,14 +21,10 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then
-
 				require('plugins.hardline')
 
-			end
+		end
 
-		end,
 	},
 
 	-- toggletermの設定
@@ -39,6 +35,7 @@ require('jetpack.packer').add {
 
         config = function()
 
+			-- vscode以外から起動した場合に真
 			if not vim.g.vscode then
 
 				require('toggleterm').setup{}

@@ -1,30 +1,36 @@
 -- hardline.lua
 
 
-require('hardline').setup{
+-- vscodeから起動していなければ真
+if not vim.g.vscode then
 
-	bufferline = true,
+	require('hardline').setup{
 
-	-- テーマの設定
-	theme = 'one',
+		bufferline = true,
 
-	sections = {
+		-- テーマの設定
+		theme = 'one',
 
-		-- 現在のモード
-		{class = 'mode' , item = require('hardline.parts.mode').get_item},
+		sections = {
 
-		-- ファイルの種類
-		{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
+			-- 現在のモード
+			{class = 'mode' , item = require('hardline.parts.mode').get_item},
 
-		-- カレントバッファのパス
-		{class = 'med' , item = require('hardline.parts.filename').get_item},
+			-- ファイルの種類
+			{class = 'high' , item = require('hardline.parts.filetype').get_item, hide = 60},
 
-		-- セパレーター
-		{class = 'med' , item = '%='},
+			-- カレントバッファのパス
+			{class = 'med' , item = require('hardline.parts.filename').get_item},
 
-		-- カレント行の位置
-		{class = 'mode' , item = require('hardline.parts.line').get_item},
+			-- セパレーター
+			{class = 'med' , item = '%='},
+
+			-- カレント行の位置
+			{class = 'mode' , item = require('hardline.parts.line').get_item},
+
+		}
 
 	}
 
-}
+end
+
