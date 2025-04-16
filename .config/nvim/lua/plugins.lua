@@ -15,18 +15,6 @@ require('jetpack.packer').add {
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
 
 	-- lua製プラグイン
-	{'ojroques/nvim-hardline',
-
-		opt = false,
-
-		config = function()
-
-			require('plugins.hardline')
-
-		end
-
-	},
-
 	-- toggletermの設定
 	{'akinsho/toggleterm.nvim',
 
@@ -259,38 +247,38 @@ require('jetpack.packer').add {
 	},
 
 	-- mini.statuslineの設定
-	-- {'echasnovski/mini.statusline',
+	{'echasnovski/mini.statusline',
 
-	-- 	event = 'UIEnter',
+		event = 'UIEnter',
 
-	-- 	config = function()
+		config = function()
 
-	-- 		require('mini.statusline').setup{
+			require('mini.statusline').setup{
 
-	-- 			use_icons = false,
+				use_icons = false,
 
-	-- 		}
+			}
 
-	-- 	end
+		end
 
-	-- },
+	},
 
 	-- mini.tablineの設定
-	-- {'echasnovski/mini.tabline',
+	{'echasnovski/mini.tabline',
 
-	-- 	event = 'UIEnter',
+		event = 'UIEnter',
 
-	-- 	config = function()
+		config = function()
 
-	-- 		require('mini.tabline').setup{
+			require('mini.tabline').setup{
 
-	-- 			show_icons = false,
+				show_icons = false,
 
-	-- 		}
+			}
 
-	-- 	end
+		end
 
-	-- },
+	},
 
 	'echasnovski/mini.comment',
 	'echasnovski/mini.files',
