@@ -282,7 +282,23 @@ require('jetpack.packer').add {
 
 	},
 
-	'echasnovski/mini.comment',
+	{'echasnovski/mini.comment',
+
+		event = 'VimEnter',
+
+		config = function()
+
+			require('mini.comment').setup{
+
+				-- 空白行を無視
+				options = {ignore_blank_line = true,},
+
+			}
+
+		end,
+
+	},
+
 	'echasnovski/mini.files',
 
 	-- mini.surroundの設定
@@ -351,14 +367,6 @@ require('jetpack.packer').add {
 
 	},
 
-
-}
-
--- mini.commentの設定
-require('mini.comment').setup{
-
-	-- 空白行を無視
-	options = {ignore_blank_line = true,},
 
 }
 
