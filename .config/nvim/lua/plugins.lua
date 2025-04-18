@@ -70,7 +70,7 @@ require('jetpack.packer').add {
 	-- eyelinerの設定
 	{'jinh0/eyeliner.nvim',
 
-		event = 'VimEnter',
+		event = 'UIEnter',
 
 		config = function()
 
@@ -319,15 +319,9 @@ require('jetpack.packer').add {
 
 
 	-- lsp関連
-	{'neovim/nvim-lspconfig',
-
-		opt = false,
-
-	},
+	'neovim/nvim-lspconfig',
 
 	{'williamboman/mason.nvim',
-
-		opt = false,
 
 		config = function()
 
@@ -338,8 +332,6 @@ require('jetpack.packer').add {
 	},
 
 	{'williamboman/mason-lspconfig.nvim',
-
-		opt = false,
 
 		-- 依存関係のプラグイン
 		dependencies = {
