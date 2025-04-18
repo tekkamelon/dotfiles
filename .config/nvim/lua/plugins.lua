@@ -10,7 +10,7 @@ require('jetpack.packer').add {
 	{'tani/vim-jetpack' , opt = true},
 
 	-- vim script製プラグイン
-	{'thinca/vim-partedit' , event = 'VimEnter'},
+	{'thinca/vim-partedit' , event = 'VisualEnter'},
 	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
 
@@ -141,6 +141,8 @@ require('jetpack.packer').add {
 
 		dependencies = 'nvim-treesitter/nvim-treesitter',
 
+		event = 'UIEnter',
+
 		ft = 'markdown',
 
 		config = function()
@@ -153,7 +155,7 @@ require('jetpack.packer').add {
 
 	{'lewis6991/gitsigns.nvim',
 
-		event = {'BufReadPre', 'BufNewFile'},
+		event = 'UIEnter',
 
 		config = function()
 
