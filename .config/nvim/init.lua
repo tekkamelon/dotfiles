@@ -142,7 +142,12 @@ local function yank_highlight()
 
 end
 
-yank_highlight()
+-- ハイライトの設定を遅延読み込み
+vim.defer_fn(function()
+
+    yank_highlight()
+
+end, 0)
 
 -- leaderの設定 
 vim.g.mapleader = " "
