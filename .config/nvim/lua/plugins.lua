@@ -182,7 +182,6 @@ require('jetpack.packer').add {
 
 
 	-- mini.nvimのモジュール
-	-- mini.pairsの設定
 	{'echasnovski/mini.pairs',
 
 		event = 'InsertEnter',
@@ -282,6 +281,7 @@ require('jetpack.packer').add {
 
 	},
 
+	-- mini.commentの設定
 	{'echasnovski/mini.comment',
 
 		event = 'VimEnter',
@@ -299,7 +299,21 @@ require('jetpack.packer').add {
 
 	},
 
-	'echasnovski/mini.files',
+	-- mini.filesの設定
+	{'echasnovski/mini.files',
+
+		config = function()
+
+			-- vscode以外から起動した場合に真
+			if not vim.g.vscode then
+
+				require('mini.files')
+
+			end
+
+		end,
+
+	},
 
 	-- mini.surroundの設定
 	{'echasnovski/mini.surround',
@@ -338,7 +352,6 @@ require('jetpack.packer').add {
 
 	-- lsp関連
 	'neovim/nvim-lspconfig',
-
 	{'williamboman/mason.nvim',
 
 		config = function()
@@ -369,14 +382,6 @@ require('jetpack.packer').add {
 
 
 }
-
--- vscode以外から起動した場合に真
-if not vim.g.vscode then
-
-	-- mini.filesの設定
-	require('mini.files').setup{}
-
-end
 
 -- プラグインのキーマップ設定を読み込み
 require('keymaps.plugins')
