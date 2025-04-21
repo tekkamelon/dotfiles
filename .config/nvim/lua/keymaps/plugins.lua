@@ -1,4 +1,4 @@
--- general.lua
+-- plugins.lua
 
 
 -- キーマップの設定
@@ -47,52 +47,35 @@ M.setup_neovim = function()
 	-- インサートモード時の<Tab>キーの動作を定義
 	vim_keymap("i", '<Tab>', function()
 
-		-- ローカル変数を宣言
+		-- copilot.luaのsuggestモジュールを読み込み
 		local suggest = require("copilot.suggestion")
 
-			-- copilotがサジェストしていれば真
-			if suggest.is_visible() then
+		-- サジェストが表示されていれば真
+		if suggest.is_visible() then
 
-				-- サジェストを受け入れ
-				suggest.accept()
+			-- サジェストを受け入れる
+			return suggest.accept()
 
-			else
+		end
 
-				-- 通常の<Tab>キーの動作を実行
-				vim.api.nvim_feedkeys(
+		-- 通常の<Tab>キーの動作を実行
+		return "<Tab>"
 
-					-- キーコードをneovimが理解可能な形式に変換
-					vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false
-
-				)
-
-			end
-
-		end,
-
-		{
-
-			-- コマンドラインへの表示をオフ
-			silent = true,
-
-		}
-
-	)
+	end, { expr = true, silent = true })
 
 	-- mini.filesのトグルの設定
 	local MiniFiles = require('mini.files')
 	local minifiles_toggle = function()
 
 		-- ファイラが開いていれば真
-		if not MiniFiles.close()
+		if not MiniFiles.close() then
 
 			-- カレントバッファのディレクトリを表示
-			then MiniFiles.open(vim.api.nvim_buf_get_name(0))
+			MiniFiles.open(vim.api.nvim_buf_get_name(0))
 
 		end
 
 	end
-
 
 	-- キーマップ設定のテーブルを作成
 	local kmaps = {
