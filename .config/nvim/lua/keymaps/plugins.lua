@@ -6,8 +6,11 @@
 local vim_keymap = vim.keymap.set
 local options = {noremap = true, silent = true}
 
--- vscode-neovimから起動した際に真,それ以外で偽
-if vim.g.vscode then
+-- 関数を宣言
+local M = {}
+
+-- vscode-neovimから呼び出した場合の設定
+M.setup_vscode = function()
 
 	local kmaps = {
 
@@ -35,7 +38,10 @@ if vim.g.vscode then
 
 	end
 
-else
+end
+
+-- 通常のneovimから呼び出した場合の設定
+M.setup_neovim = function()
 
 	-- copilot.luaの設定
 	-- インサートモード時の<Tab>キーの動作を定義
@@ -154,6 +160,17 @@ else
 		vim_keymap(kmap[1], kmap[2], kmap[3], kmap[4] or options)
 
 	end
+
+end
+
+-- vscode-neovimから起動した際に真,それ以外で偽
+if vim.g.vscode then
+
+    M.setup_vscode()
+
+else
+
+    M.setup_neovim()
 
 end
 
