@@ -137,6 +137,7 @@ require('jetpack.packer').add {
 
 	},
 
+	-- render-markdownの設定
 	{'MeanderingProgrammer/render-markdown.nvim',
 
 		dependencies = 'nvim-treesitter/nvim-treesitter',
@@ -153,6 +154,7 @@ require('jetpack.packer').add {
 
 	},
 
+	-- gitsignsの設定
 	{'lewis6991/gitsigns.nvim',
 
 		event = 'UIEnter',
@@ -182,6 +184,7 @@ require('jetpack.packer').add {
 
 
 	-- mini.nvimのモジュール
+	-- mini.pairsの設定
 	{'echasnovski/mini.pairs',
 
 		event = 'InsertEnter',
@@ -254,11 +257,15 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('mini.statusline').setup{
+			if not vim.g.vscode then
 
-				use_icons = false,
+				require('mini.statusline').setup{
 
-			}
+					use_icons = false,
+
+				}
+
+			end
 
 		end
 
@@ -271,11 +278,15 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('mini.tabline').setup{
+			if not vim.g.vscode then
 
-				show_icons = false,
+				require('mini.tabline').setup{
 
-			}
+					show_icons = false,
+
+				}
+
+			end
 
 		end
 
@@ -304,7 +315,6 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			-- vscode以外から起動した場合に真
 			if not vim.g.vscode then
 
 				require('mini.files')
@@ -352,16 +362,23 @@ require('jetpack.packer').add {
 
 	-- lsp関連
 	'neovim/nvim-lspconfig',
+
+	-- masonの設定
 	{'williamboman/mason.nvim',
 
 		config = function()
 
-			require('mason').setup{}
+			if not vim.g.vscode then
+
+				require('mason').setup{}
+
+			end
 
 		end,
 
 	},
 
+	-- mason-lspconfigの設定
 	{'williamboman/mason-lspconfig.nvim',
 
 		-- 依存関係のプラグイン
@@ -374,7 +391,11 @@ require('jetpack.packer').add {
 
 		config = function()
 
-			require('plugins.mason-lsp')
+			if not vim.g.vscode then
+
+				require('plugins.mason-lsp')
+
+			end
 
 		end,
 
