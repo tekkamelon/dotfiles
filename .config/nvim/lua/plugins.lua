@@ -159,6 +159,8 @@ require('jetpack.packer').add {
 
 		event = 'UIEnter',
 
+		lock = true,
+
 		config = function()
 
 			-- vscode以外から起動した場合に真
