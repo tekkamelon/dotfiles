@@ -381,28 +381,28 @@ require('jetpack.packer').add {
 	},
 
 	-- mason-lspconfigの設定
-	{'williamboman/mason-lspconfig.nvim',
+ 	{'williamboman/mason-lspconfig.nvim',
 
-		-- 依存関係のプラグイン
-		dependencies = {
+		-- バージョンを固定	
+		-- これを記入しないと設定が壊れる
+ 		branch = "v1.x",
+ 		frozen = true,
 
-			'neovim/nvim-lspconfig',
-			'williamboman/mason.nvim'
+ 		-- 依存関係のプラグイン
+ 		dependencies = {
 
-		},
+ 			'neovim/nvim-lspconfig',
+ 			'williamboman/mason.nvim'
 
-		config = function()
+ 		},
 
-			if not vim.g.vscode then
+ 		config = function()
 
-				require('plugins.mason-lsp')
+ 			require('plugins.mason-lsp')
 
-			end
+ 		end,
 
-		end,
-
-	},
-
+ 	},
 
 }
 
