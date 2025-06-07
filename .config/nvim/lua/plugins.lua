@@ -84,18 +84,19 @@ require('jetpack.packer').add {
 
 	 },
 
-	-- copilot.luaの設定
-	{'zbirenbaum/copilot.lua',
+	-- neocodeiumの設定
+	{'monkoose/neocodeium',
 
-		cmd = 'Copilot',
+		cmd = 'NeoCodeium',
 
 		event = 'InsertEnter',
 
 		config = function()
 
-			require('plugins.copilot')
+			require('plugins.neocodeium')
 
 		end,
+
 	},
 
 	-- CopilotChatの設定
