@@ -28,3 +28,6 @@ vim.keymap.set("i", "<C-F>", function()
 
 end)
 
+-- サジェストのキャンセル
+vim.keymap.set("i", "<C-q>", neocodeium.clear)
+
