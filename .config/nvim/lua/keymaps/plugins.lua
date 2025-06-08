@@ -43,26 +43,6 @@ end
 -- 通常のneovimから呼び出した場合の設定
 M.setup_neovim = function()
 
-	-- copilot.luaの設定
-	-- インサートモード時の<Tab>キーの動作を定義
-	vim_keymap("i", '<Tab>', function()
-
-		-- copilot.luaのsuggestモジュールを読み込み
-		local suggest = require("copilot.suggestion")
-
-		-- サジェストが表示されていれば真
-		if suggest.is_visible() then
-
-			-- サジェストを受け入れる
-			return suggest.accept()
-
-		end
-
-		-- 通常の<Tab>キーの動作を実行
-		return "<Tab>"
-
-	end, { expr = true, silent = true })
-
 	-- mini.filesのトグルの設定
 	local MiniFiles = require('mini.files')
 	local minifiles_toggle = function()
@@ -125,7 +105,7 @@ M.setup_neovim = function()
 		-- ファイラをトグル
 		{'n', '<C-n>', minifiles_toggle},
 
-		-- copilot
+		-- copilotchat
 		-- チャット用バッファをトグル
 		{{'n', 'v'}, '<leader>cc', ':CopilotChatToggle<CR>'},
 		-- チャットをリセット
