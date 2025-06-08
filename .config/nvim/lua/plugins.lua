@@ -1,5 +1,5 @@
 -- lug_config.lua
--- neovim >= 0.9.0
+-- neovim >= 0.10.0
 
 
 -- プラグインのリスト
@@ -387,7 +387,7 @@ require('jetpack.packer').add {
 		-- バージョンを固定	
 		-- これを記入しないと設定が壊れる
  		branch = "v1.x",
- 		frozen = true,
+ 		lock = true,
 
  		-- 依存関係のプラグイン
  		dependencies = {
