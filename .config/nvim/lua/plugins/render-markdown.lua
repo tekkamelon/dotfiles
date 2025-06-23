@@ -3,8 +3,9 @@
 
 require('render-markdown').setup{
 
-	render_modes = true,
+	render_modes = false,
 
+	-- 見出しの設定
 	heading = {enabled = false},
 	sign = {enabled = false},
 
@@ -21,12 +22,14 @@ require('render-markdown').setup{
 	-- テキストの設定
 	bullet = {
 
-		icons = {'● ', '○ ', '● ', '○ '},
+		-- icons = {'● ', '○ ', '● ', '○ '},
+
+		-- 箇条書きの処理を無効化または調整
+		enabled = false,
 
 	},
 
 	-- リンクの設定
-
 	link = {
 
 		-- アイコンの設定
