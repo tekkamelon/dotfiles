@@ -55,6 +55,9 @@ export PATH=$PATH:/usr/sbin/
 export PATH=$PATH:$HOME/.local/bin/
 export PATH="$PATH:$JAVA_HOME/bin"
 export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
+# npmのバイナリのパス
+npm_path=$(echo "${HOME}"/.npm/_npx/*/node_modules/.bin/)
+export PATH="$PATH:$npm_path"
 # ====== 環境変数及びパスの設定ここまで ======
 
 
