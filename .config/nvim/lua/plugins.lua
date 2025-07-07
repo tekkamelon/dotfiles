@@ -39,6 +39,9 @@ require('jetpack.packer').add {
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
 
+		-- 安定版に固定
+		tag = '0.1.6',
+
 		-- 依存関係のプラグイン
         dependencies = 'nvim-lua/plenary.nvim',
 
