@@ -110,13 +110,20 @@ require("lazy").setup({
 			'MunifTanjim/nui.nvim',
 			'echasnovski/mini.icons',
 		},
-		build = "make BUILD_FROM_SOURCE=true",
+		build = "make",
 		config = function()
 
 			-- vscode以外から起動した場合に真
 			if not vim.g.vscode then
 				require('avante').setup{
 					provider = "copilot",
+
+					copilot = {
+
+						model = "gpt-4,1"
+
+					},
+
 					opts = {
 						windows = {
 							position = 'bottom',
@@ -136,6 +143,11 @@ require("lazy").setup({
 						},
 					},
 
+					file_selector = {
+
+						provider = "telescope"
+
+					},
 
 				}
 			end
