@@ -84,16 +84,24 @@ require('jetpack.packer').add {
 
 	 },
 
-	-- neocodeiumの設定
-	{'monkoose/neocodeium',
+	{'supermaven-inc/supermaven-nvim',
 
-		cmd = 'NeoCodeium',
+		cmd = {
+
+			'SupermavenStart',
+			'SupermavenRestart',
+			'SupermavenToggle',
+			'SupermavenStatus',
+			'SupermavenUseFree',
+			'SupermavenLogout',
+
+		},
 
 		event = 'InsertEnter',
 
 		config = function()
 
-			require('plugins.neocodeium')
+			require('plugins.supermaven')
 
 		end,
 
