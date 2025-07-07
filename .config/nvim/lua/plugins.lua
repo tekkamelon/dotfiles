@@ -87,24 +87,40 @@ require('jetpack.packer').add {
 
 	 },
 
-	{'supermaven-inc/supermaven-nvim',
+	-- {'supermaven-inc/supermaven-nvim',
 
-		cmd = {
+	-- 	cmd = {
 
-			'SupermavenStart',
-			'SupermavenRestart',
-			'SupermavenToggle',
-			'SupermavenStatus',
-			'SupermavenUseFree',
-			'SupermavenLogout',
+	-- 		'SupermavenStart',
+	-- 		'SupermavenRestart',
+	-- 		'SupermavenToggle',
+	-- 		'SupermavenStatus',
+	-- 		'SupermavenUseFree',
+	-- 		'SupermavenLogout',
 
-		},
+	-- 	},
+
+	-- 	event = 'InsertEnter',
+
+	-- 	config = function()
+
+	-- 		require('plugins.supermaven')
+
+	-- 	end,
+
+	-- },
+
+	{'monkoose/neocodeium',
+
+		tag = 'v1.14.1',
+
+		cmd = 'Neocodeium',
 
 		event = 'InsertEnter',
 
 		config = function()
 
-			require('plugins.supermaven')
+			require('plugins.neocodeium')
 
 		end,
 
