@@ -35,9 +35,13 @@ require('jetpack.packer').add {
 	},
 
 	'nvim-lua/plenary.nvim',
+	'MunifTanjim/nui.nvim',
 
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
+
+ 		branch = "dev",
+ 		lock = true,
 
 		-- 依存関係のプラグイン
         dependencies = 'nvim-lua/plenary.nvim',
@@ -100,17 +104,61 @@ require('jetpack.packer').add {
 	},
 
 	-- CopilotChatの設定
-	{'CopilotC-Nvim/CopilotChat.nvim',
+	-- {'CopilotC-Nvim/CopilotChat.nvim',
 
-		cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
+	-- 	cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
 
-		config = function()
+	-- 	config = function()
 
-			require('plugins.copilotchat')
+	-- 		require('plugins.copilotchat')
 
-		end,
+	-- 	end,
+
+	-- },
+	{'yetone/avante.nvim',
+
+		dependencies = {
+
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			'echasnovski/mini.icons',
+
+		},
+
+		run = "make BUILD_FROM_SOURCE=true",
+
+        config = function()
+
+			-- vscode以外から起動した場合に真
+			if not vim.g.vscode then
+
+				require('avante').setup{
+
+					provider = "copilot",
+
+					opts = {
+
+						windows = {
+
+						  position = 'bottom',
+						  width = 100,
+						  height = 40,
+
+						},
+
+					},
+
+				}
+
+			end
+
+        end,
+
 
 	},
+
+		event = 'VimEnter',
 
 	-- treesitterの設定
     {'nvim-treesitter/nvim-treesitter',
