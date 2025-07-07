@@ -7,7 +7,7 @@ if not vim.g.vscode then
 	require('CopilotChat').setup{
 
 		-- デフォルトの言語モデルを変更
-		model = "gpt-4o",
+		model = "gpt-4.1",
 
 		-- チャット用のバッファの設定
 		window = {
