@@ -26,8 +26,9 @@ if not vim.g.vscode then
 		-- 除外するファイルのパターン
 		ignore_filetypes = {
 
-			"gitcommit",
-			"markdown",
+			-- "gitcommit",
+			-- "markdown",
+			"copilot-chat",
 
 		},
 
