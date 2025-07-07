@@ -112,6 +112,7 @@ require("lazy").setup({
 		},
 		build = "make BUILD_FROM_SOURCE=true",
 		config = function()
+
 			-- vscode以外から起動した場合に真
 			if not vim.g.vscode then
 				require('avante').setup{
@@ -123,6 +124,19 @@ require("lazy").setup({
 							height = 40,
 						},
 					},
+
+					-- キーマップの設定
+					mappings = {
+
+						-- チャットバッファのトグル
+						toggle = {
+
+							default = "<space>cc",
+
+						},
+					},
+
+
 				}
 			end
 		end,

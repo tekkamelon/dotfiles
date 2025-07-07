@@ -107,13 +107,13 @@ M.setup_neovim = function()
 
 		-- copilotchat
 		-- チャット用バッファをトグル
-		{{'n', 'v'}, '<leader>cc', ':CopilotChatToggle<CR>'},
+		-- {{'n', 'v'}, '<leader>cc', ':CopilotChatToggle<CR>'},
 		-- チャットをリセット
-		{{'n', 'v'}, '<leader>cr', ':CopilotChatReset<CR>'},
+		-- {{'n', 'v'}, '<leader>cr', ':CopilotChatReset<CR>'},
 		-- 言語モデルを変更
-		{{'n', 'v'}, '<leader>cm', ':CopilotChatModels<CR>'},
+		-- {{'n', 'v'}, '<leader>cm', ':CopilotChatModels<CR>'},
 		-- 会話内容を保存
-		{{'n', 'v'}, '<leader>cs', ':CopilotChatSave'},
+		-- {{'n', 'v'}, '<leader>cs', ':CopilotChatSave'},
 
 	}
 
