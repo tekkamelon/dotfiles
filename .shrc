@@ -48,6 +48,8 @@ export EDITOR=nvim
 export CALIBRE_USE_DARK_PALETTE=1
 export W3MIMGDISPLAY_PATH=/usr/lib/w3m/w3mimgdisplay
 export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto/
+OPENROUTER_API_KEY="$(cat ~/.openrouter.txt)"
+export OPENROUTER_API_KEY
 
 # パスの設定
 export PATH=$PATH:/opt/processing-3.5.4/
@@ -57,7 +59,7 @@ export PATH="$PATH:$JAVA_HOME/bin"
 export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
 # npmのバイナリのパス
 npm_path=$(echo "${HOME}"/.npm/_npx/*/node_modules/.bin/)
-export PATH="$PATH:$npm_path"
+export PATH="$PATH:${npm_path}"
 # ====== 環境変数及びパスの設定ここまで ======
 
 
