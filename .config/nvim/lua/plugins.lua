@@ -46,8 +46,7 @@ require('jetpack.packer').add {
 		-- 依存関係のプラグイン
         dependencies = 'nvim-lua/plenary.nvim',
 
-		-- 起動に使用するコマンド
-		cmd = 'Telescope',
+		event = 'UIEnter',
 
 		config = function()
 
@@ -59,7 +58,7 @@ require('jetpack.packer').add {
 
 						-- プロンプトの設定
 						prompt_prefix = " 🔎 ",
-						selection_caret = " ➤  "
+						selection_caret = " ➤  ",
 
 					},
 
@@ -142,6 +141,8 @@ require('jetpack.packer').add {
 
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
+
+		dependencies = 'nvim-telescope/telescope.nvim' ,
 
 		cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
 
