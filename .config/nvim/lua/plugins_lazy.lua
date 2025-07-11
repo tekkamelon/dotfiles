@@ -122,7 +122,7 @@ require("lazy").setup({
 			windows = {
 			position = "bottom",
 			wrap = true,
-			width = 30,
+			width = 50,
 			},
 	},
 
@@ -131,7 +131,7 @@ require("lazy").setup({
 		"MunifTanjim/nui.nvim",
 		"zbirenbaum/copilot.lua",
 	}
-	}
+	},
 
 	-- treesitterの設定
 	{
