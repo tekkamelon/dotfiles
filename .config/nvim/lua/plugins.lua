@@ -1,4 +1,4 @@
--- lug_config.lua
+-- plugins.lua
 -- neovim >= 0.10.0
 
 
@@ -13,6 +13,12 @@ require('jetpack.packer').add {
 	{'thinca/vim-partedit' , event = 'VisualEnter'},
 	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
+
+	-- 依存関係用プラグイン
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope-ui-select.nvim',
+	'MunifTanjim/nui.nvim',
+	'rcarriga/nvim-notify',
 
 	-- lua製プラグイン
 	-- toggletermの設定
@@ -34,46 +40,40 @@ require('jetpack.packer').add {
 
 	},
 
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope-ui-select.nvim',
+	-- noiceの設定
+	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
+	{ 'folke/noice.nvim',
 
-	{'gelguy/wilder.nvim',
+		lock = true,
+
+		event = 'UIEnter',
 
 		config = function()
 
 			if not vim.g.vscode then
 
-				-- 起動するコマンド
-				local wilder = require('wilder')
-				wilder.setup{
+				require('noice').setup{
 
-					modes = {':', '/', '?'}
+					-- 通知の設定
+					messages = {
+
+						enabled = false,
+
+					},
+
+					notify = {
+
+
+						enabled = true,
+						view = "mini",
+
+					},
 
 				}
 
-				-- 外観の設定
-				wilder.set_option(
-
-					'renderer', wilder.popupmenu_renderer(
-
-					-- コマンドパレット風に設定
-					wilder.popupmenu_palette_theme({
-
-						border = 'single',
-						max_height = '50%',
-						min_height = 0,
-						prompt_position = 'top',
-						reverse = 0,
-
-					})
-
-					)
-
-				)
-
 			end
 
-		end,
+		end
 
 	},
 
@@ -139,29 +139,6 @@ require('jetpack.packer').add {
 		end,
 
 	 },
-
-	-- {'supermaven-inc/supermaven-nvim',
-
-	-- 	cmd = {
-
-	-- 		'SupermavenStart',
-	-- 		'SupermavenRestart',
-	-- 		'SupermavenToggle',
-	-- 		'SupermavenStatus',
-	-- 		'SupermavenUseFree',
-	-- 		'SupermavenLogout',
-
-	-- 	},
-
-	-- 	event = 'InsertEnter',
-
-	-- 	config = function()
-
-	-- 		require('plugins.supermaven')
-
-	-- 	end,
-
-	-- },
 
 	{'monkoose/neocodeium',
 
