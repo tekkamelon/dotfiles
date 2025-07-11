@@ -37,6 +37,46 @@ require('jetpack.packer').add {
 	'nvim-lua/plenary.nvim',
 	'nvim-telescope/telescope-ui-select.nvim',
 
+	{'gelguy/wilder.nvim',
+
+		config = function()
+
+			if not vim.g.vscode then
+
+				-- 起動するコマンド
+				local wilder = require('wilder')
+				wilder.setup{
+
+					modes = {':', '/', '?'}
+
+				}
+
+				-- 外観の設定
+				wilder.set_option(
+
+					'renderer', wilder.popupmenu_renderer(
+
+					-- コマンドパレット風に設定
+					wilder.popupmenu_palette_theme({
+
+						border = 'single',
+						max_height = '50%',
+						min_height = 0,
+						prompt_position = 'top',
+						reverse = 0,
+
+					})
+
+					)
+
+				)
+
+			end
+
+		end,
+
+	},
+
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
 
