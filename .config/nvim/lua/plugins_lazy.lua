@@ -100,59 +100,38 @@ require("lazy").setup({
 	-- },
 
 	{
-		'yetone/avante.nvim',
-		event = 'VeryLazy',
-		lazy = false,
-		version = false,
-		dependencies = {
-			'nvim-treesitter/nvim-treesitter',
-			'nvim-lua/plenary.nvim',
-			'MunifTanjim/nui.nvim',
-			'echasnovski/mini.icons',
-		},
-		build = "make",
-		config = function()
+	"yetone/avante.nvim",
+	event = "VeryLazy",
+	lazy = false,
+	version = false,
+	opts = {
+			provider = "copilot",
+			auto_suggestions_provider = "copilot",
+		
+			-- 動作設定
+			behaviour = {
+			auto_suggestions = false,
+			auto_set_highlight_group = true,
+			auto_set_keymaps = true,
+			auto_apply_diff_after_generation = false,
+			support_paste_from_clipboard = false,
+			minimize_diff = true,
+			},
 
-			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then
-				require('avante').setup{
-					provider = "copilot",
-
-					copilot = {
-
-						model = "gpt-4,1"
-
-					},
-
-					opts = {
-						windows = {
-							position = 'bottom',
-							width = 100,
-							height = 40,
-						},
-					},
-
-					-- キーマップの設定
-					mappings = {
-
-						-- チャットバッファのトグル
-						toggle = {
-
-							default = "<space>cc",
-
-						},
-					},
-
-					file_selector = {
-
-						provider = "telescope"
-
-					},
-
-				}
-			end
-		end,
+			-- ウィンドウ設定
+			windows = {
+			position = "bottom",
+			wrap = true,
+			width = 30,
+			},
 	},
+
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"MunifTanjim/nui.nvim",
+		"zbirenbaum/copilot.lua",
+	}
+	}
 
 	-- treesitterの設定
 	{
