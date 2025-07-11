@@ -35,6 +35,7 @@ require('jetpack.packer').add {
 	},
 
 	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope-ui-select.nvim',
 
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
@@ -62,7 +63,20 @@ require('jetpack.packer').add {
 
 					},
 
+					-- telescope-ui-selectの設定
+					extensions = {
+
+						["ui-select"] = {
+
+							  require("telescope.themes").get_dropdown{}
+
+						}
+
+  					}
+
 				}
+
+				require("telescope").load_extension("ui-select")
 
 			end
 
