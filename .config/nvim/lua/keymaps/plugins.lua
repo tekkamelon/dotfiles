@@ -91,6 +91,10 @@ M.setup_neovim = function()
 		-- ファイル内文字列を検索
 		-- "$ sudo apt install ripgrep -y"で使用可能
 		{'n', '<leader>fg', ':Telescope live_grep hidden=true previewer=true theme=get_dropdown<CR>'},
+		-- カレントバッファ内文字列を検索
+		{'n', '<leader>fc', ':Telescope current_buffer_fuzzy_find hidden=true previewer=true theme=get_dropdown<CR>'},
+		-- コマンドを検索
+		{'n', '<leader>fl', ':Telescope commands hidden=false previewer=false<CR>'},
 
 		-- toggleterm
 		-- 下方,右側,フロートウィンドウのターミナルのトグル
