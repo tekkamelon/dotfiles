@@ -85,11 +85,47 @@ if not vim.g.vscode then
 
 		},
 
+		-- チャットバッファの設定
 		window = {
 
 			layout = 'horizontal',
 			width = 0.5,
 			height = 0.4,
+
+		},
+
+		show_help = "yes",
+
+		-- プロンプトのテンプレート
+		prompts = {
+
+			Explain = {
+
+				prompt = "/COPILOT_EXPLAIN #buffer このコードについて解説してください",
+				description = "コードの解説をしてもらう",
+
+			},
+
+			Fix = {
+
+				prompt = "/COPILOT_FIX #buffer このコードのエラーを修正してください",
+				description = "コードの修正をしてもらう",
+
+			},
+
+			Comment = {
+
+				prompt = "#buffer このコードに適切なコメントを入れてください",
+				description = "コードにコメントを記述してもらう",
+
+			},
+
+			Optimize = {
+
+				prompt = "/COPILOT_REFACTOR #buffer このコードをより効率よく書ける箇所を教えてください",
+				description = "コードを最適化してもらう",
+
+			},
 
 		},
 
