@@ -161,7 +161,15 @@ require('jetpack.packer').add {
 
 		dependencies = 'nvim-telescope/telescope.nvim' ,
 
-		cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
+		cmd = {
+
+			'CopilotChat',
+			'CopilotChatOpen',
+			'CopilotChatToggle',
+			'CopilotChatModels',
+			'CopilotChatPrompts',
+
+		},
 
 		config = function()
 
