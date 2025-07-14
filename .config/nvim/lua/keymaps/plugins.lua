@@ -118,6 +118,8 @@ M.setup_neovim = function()
 		{{'n', 'v'}, '<leader>cm', ':CopilotChatModels<CR>'},
 		-- 会話内容を保存
 		{{'n', 'v'}, '<leader>cs', ':CopilotChatSave'},
+		-- テンプレートプロンプトを呼び出す
+		{{'n', 'v'}, '<leader>cp', ':CopilotChatPrompt<CR>'},
 
 	}
 
