@@ -1,4 +1,4 @@
--- lug_config.lua
+-- plugins.lua
 -- neovim >= 0.10.0
 
 
@@ -13,6 +13,12 @@ require('jetpack.packer').add {
 	{'thinca/vim-partedit' , event = 'VisualEnter'},
 	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
+
+	-- 依存関係用プラグイン
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope-ui-select.nvim',
+	'MunifTanjim/nui.nvim',
+	'rcarriga/nvim-notify',
 
 	-- lua製プラグイン
 	-- toggletermの設定
@@ -34,20 +40,32 @@ require('jetpack.packer').add {
 
 	},
 
-	'nvim-lua/plenary.nvim',
-	'MunifTanjim/nui.nvim',
+	-- noiceの設定
+	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
+	{ 'folke/noice.nvim',
+
+		lock = true,
+
+		event = 'UIEnter',
+
+		config = function()
+
+			require('plugins.noice')
+
+		end
+
+	},
 
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
 
- 		branch = "dev",
- 		lock = true,
+		-- 安定版に固定
+		tag = '0.1.6',
 
 		-- 依存関係のプラグイン
         dependencies = 'nvim-lua/plenary.nvim',
 
-		-- 起動に使用するコマンド
-		cmd = 'Telescope',
+		event = 'UIEnter',
 
 		config = function()
 
@@ -59,11 +77,24 @@ require('jetpack.packer').add {
 
 						-- プロンプトの設定
 						prompt_prefix = " 🔎 ",
-						selection_caret = " ➤  "
+						selection_caret = " ➤  ",
 
 					},
 
+					-- telescope-ui-selectの設定
+					extensions = {
+
+						["ui-select"] = {
+
+							  require("telescope.themes").get_dropdown{}
+
+						}
+
+  					}
+
 				}
+
+				require("telescope").load_extension("ui-select")
 
 			end
 
@@ -88,8 +119,9 @@ require('jetpack.packer').add {
 
 	 },
 
-	-- neocodeiumの設定
 	{'monkoose/neocodeium',
+
+		tag = 'v1.14.1',
 
 		cmd = 'NeoCodeium',
 
@@ -105,61 +137,50 @@ require('jetpack.packer').add {
 
 	-- CopilotChatの設定
 	-- {'CopilotC-Nvim/CopilotChat.nvim',
-
-	-- 	cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
-
-	-- 	config = function()
-
-	-- 		require('plugins.copilotchat')
-
-	-- 	end,
-
-	-- },
-	{'yetone/avante.nvim',
+	{'deathbeam/CopilotChat.nvim',
 
 		dependencies = {
 
-			'nvim-treesitter/nvim-treesitter',
+			'nvim-telescope/telescope.nvim' ,
 			'nvim-lua/plenary.nvim',
-			'MunifTanjim/nui.nvim',
-			'echasnovski/mini.icons',
 
 		},
 
-		run = "make BUILD_FROM_SOURCE=true",
+		branch = "tools",
 
-        config = function()
+		cmd = {
 
-			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then
+			'CopilotChat',
+			'CopilotChatOpen',
+			'CopilotChatToggle',
+			'CopilotChatModels',
+			'CopilotChatPrompts',
 
-				require('avante').setup{
+		},
 
-					provider = "copilot",
+		config = function()
 
-					opts = {
+			-- require('plugins.copilotchat')
+			require('plugins.integrated_copilotchat')
 
-						windows = {
-
-						  position = 'bottom',
-						  width = 100,
-						  height = 40,
-
-						},
-
-					},
-
-				}
-
-			end
-
-        end,
-
+		end,
 
 	},
 
-		event = 'VimEnter',
+	-- mcphubの設定
+	{'ravitemer/mcphub.nvim',
 
+		dependencies = 'nvim-lua/plenary.nvim',
+
+		-- build = 'sudo npm install -g mcp-hub@latest',
+
+		config = function()
+
+			require('mcphub').setup{}
+
+		end,
+
+	},
 	-- treesitterの設定
     {'nvim-treesitter/nvim-treesitter',
 
