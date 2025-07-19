@@ -5,7 +5,7 @@
 if not vim.g.vscode then
 
 	-- CopilotChatプラグインのセットアップ
-	require("CopilotChat").setup {
+	require("CopilotChat").setup{
 
 		-- openrouterのモデル
 		-- model = "deepseek/deepseek-chat-v3-0324:free",
@@ -24,7 +24,6 @@ if not vim.g.vscode then
 
 				-- 入力データを準備する関数
 				prepare_input = require("CopilotChat.config.providers").copilot.prepare_input,
-				-- prepare_input = custom_prepare_input,
 
 				-- 出力データを整形する関数
 				prepare_output = require("CopilotChat.config.providers").copilot.prepare_output,
@@ -106,6 +105,13 @@ if not vim.g.vscode then
 
 			},
 
+			Review = {
+
+				prompt = "/COPILOT_REVIEW #buffer このコードをレビューしてください",
+				description = "コードをレビューしてもらう",
+
+			},
+
 			Fix = {
 
 				prompt = "/COPILOT_FIX #buffer このコードのエラーを修正してください",
@@ -113,17 +119,24 @@ if not vim.g.vscode then
 
 			},
 
-			Comment = {
-
-				prompt = "#buffer このコードに適切なコメントを入れてください",
-				description = "コードにコメントを記述してもらう",
-
-			},
-
 			Optimize = {
 
 				prompt = "/COPILOT_REFACTOR #buffer このコードをより効率よく書ける箇所を教えてください",
 				description = "コードを最適化してもらう",
+
+			},
+
+			Tests = {
+
+				prompt = "#buffer このコードに適切なテストを追加してください",
+				description = "コードにテストを追加してもらう",
+
+			},
+
+			Comment = {
+
+				prompt = "#buffer このコードに適切なコメントを入れてください",
+				description = "コードにコメントを記述してもらう",
 
 			},
 
