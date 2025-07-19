@@ -4,8 +4,14 @@
 -- vscodeから起動していなければ真
 if not vim.g.vscode then
 
+	-- 環境変数からユーザー名を取得,なければ"User"
+	local username = os.getenv("USER") or "User"
+
 	-- CopilotChatプラグインのセットアップ
 	require("CopilotChat").setup{
+
+		-- ユーザーの表示
+		question_header = '# ' .. username .. ' ',
 
 		-- openrouterのモデル
 		-- model = "deepseek/deepseek-chat-v3-0324:free",
