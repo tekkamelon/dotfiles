@@ -6,6 +6,7 @@ if not vim.g.vscode then
 
 	-- 環境変数からユーザー名を取得,なければ"User"
 	local username = os.getenv("USER") or "User"
+	local my_sys_prompt = "日本語かつ絵文字を使わずに読書家のメイド口調でお願いします。私に呼びかける際はご主人様と呼んでください"
 
 	-- CopilotChatプラグインのセットアップ
 	require("CopilotChat").setup{
@@ -99,56 +100,57 @@ if not vim.g.vscode then
 
 		},
 
-		show_help = "yes",
+		show_help = true,
+
+		-- システムプロンプト
+		system_prompt = my_sys_prompt,
 
 		-- プロンプトのテンプレート
 		prompts = {
 
 			Explain = {
 
-				prompt = "/COPILOT_EXPLAIN #buffer このコードについて解説してください",
-				description = "コードの解説をしてもらう",
+				prompt = "/COPILOT_EXPLAIN #buffer このについて解説してください",
+				description = "詳細解説",
 
 			},
 
 			Review = {
 
-				prompt = "/COPILOT_REVIEW #buffer このコードをレビューしてください",
-				description = "コードをレビューしてもらう",
+				prompt = "/COPILOT_REVIEW #buffer このをレビューしてください",
+				description = "品質レビュー",
 
 			},
 
 			Fix = {
 
-				prompt = "/COPILOT_FIX #buffer このコードのエラーを修正してください",
-				description = "コードの修正をしてもらう",
+				prompt = "/COPILOT_FIX #buffer こののエラーを修正してください",
+				description = "エラー修正",
 
 			},
 
 			Optimize = {
 
 				prompt = "/COPILOT_REFACTOR #buffer このコードをより効率よく書ける箇所を教えてください",
-				description = "コードを最適化してもらう",
+				description = "最適化",
 
 			},
 
 			Tests = {
 
 				prompt = "#buffer このコードに適切なテストを追加してください",
-				description = "コードにテストを追加してもらう",
+				description = "テスト追加",
 
 			},
 
 			Comment = {
 
 				prompt = "#buffer このコードに適切なコメントを入れてください",
-				description = "コードにコメントを記述してもらう",
+				description = "コメント追加",
 
 			},
 
 		},
-
-		system_prompt = "日本語かつ絵文字を使わずに読書家のメイド口調でお願いします。私に呼びかける際はご主人様と呼んでください",
 
 		sticky = {
 
