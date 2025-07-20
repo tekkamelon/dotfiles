@@ -15,6 +15,7 @@ if not vim.g.vscode then
 		question_header = '# ' .. username .. ' ',
 
 		-- openrouterのモデル
+		-- GitHub cpolitが上限に達した場合はこちらを使用
 		-- model = "deepseek/deepseek-chat-v3-0324:free",
 
 		-- 30日間の無料トライアル
@@ -39,16 +40,14 @@ if not vim.g.vscode then
 				get_headers = function()
 
 					-- 環境変数からOPENROUTER_API_KEYを取得
-					local api_key = assert(os.getenv("OPENROUTER_API_KEY"), "OPENROUTER_API_KEY env not set")
+					local api_key = assert(os.getenv("OPENROUTER_API_KEY"), "環境変数 OPENROUTER_API_KEY が設定されていません")
 
-						-- 認証情報を含むヘッダーテーブルを返す
-						return {
+					return {
 
-							Authorization = "Bearer " .. api_key,
+						Authorization = "Bearer " .. api_key,
+						["Content-Type"] = "application/json",
 
-							["Content-Type"] = "application/json",
-
-						}
+					}
 
 				end,
 
@@ -68,15 +67,15 @@ if not vim.g.vscode then
 					if err then error(err) end
 
 						-- レスポンスボディからモデルデータを抽出,整形してテーブルとして返す
-						return vim.iter(response.body.data)
+						local models = response.body.data
+						local formatted_models = {}
 
-						:map(function(model)
+						for _, model in ipairs(models) do
 
-							return { id = model.id, name = model.name }
+							table.insert(formatted_models, { id = model.id, name = model.name })
+						end
 
-						end)
-
-						:totable()
+					return formatted_models
 
 				end,
 
@@ -110,42 +109,42 @@ if not vim.g.vscode then
 
 			Explain = {
 
-				prompt = "/COPILOT_EXPLAIN #buffer このについて解説してください",
+				prompt = "/COPILOT_EXPLAIN #buffer コードについて解説してください",
 				description = "詳細解説",
 
 			},
 
 			Review = {
 
-				prompt = "/COPILOT_REVIEW #buffer このをレビューしてください",
+				prompt = "/COPILOT_REVIEW #buffer コードをレビューしてください",
 				description = "品質レビュー",
 
 			},
 
 			Fix = {
 
-				prompt = "/COPILOT_FIX #buffer こののエラーを修正してください",
+				prompt = "/COPILOT_FIX #buffer コードのエラーを修正してください",
 				description = "エラー修正",
 
 			},
 
 			Optimize = {
 
-				prompt = "/COPILOT_REFACTOR #buffer このコードをより効率よく書ける箇所を教えてください",
+				prompt = "/COPILOT_REFACTOR #buffer コードをより効率よくしてください",
 				description = "最適化",
 
 			},
 
 			Tests = {
 
-				prompt = "#buffer このコードに適切なテストを追加してください",
+				prompt = "#buffer コードに適切なテストを追加してください",
 				description = "テスト追加",
 
 			},
 
 			Comment = {
 
-				prompt = "#buffer このコードに適切なコメントを入れてください",
+				prompt = "#buffer コードに適切なコメントを入れてください",
 				description = "コメント追加",
 
 			},
