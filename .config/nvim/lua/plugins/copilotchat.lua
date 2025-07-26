@@ -109,15 +109,17 @@ if not vim.g.vscode then
 
 			Explain = {
 
-				prompt = "/COPILOT_EXPLAIN #buffer コードについて解説してください",
+				prompt = "/COPILOT_EXPLAIN #buffer コードを日本語で解説してください",
 				description = "詳細解説",
+				system_prompt = my_sys_prompt,
 
 			},
 
 			Review = {
 
-				prompt = "/COPILOT_REVIEW #buffer コードをレビューしてください",
+				prompt = "/COPILOT_REVIEW #buffer コードを日本語でレビューしてください",
 				description = "品質レビュー",
+				system_prompt = my_sys_prompt,
 
 			},
 
@@ -125,6 +127,7 @@ if not vim.g.vscode then
 
 				prompt = "/COPILOT_FIX #buffer コードのエラーを修正してください",
 				description = "エラー修正",
+				system_prompt = my_sys_prompt,
 
 			},
 
@@ -132,6 +135,7 @@ if not vim.g.vscode then
 
 				prompt = "/COPILOT_REFACTOR #buffer コードをより効率よくしてください",
 				description = "最適化",
+				system_prompt = my_sys_prompt,
 
 			},
 
@@ -139,13 +143,16 @@ if not vim.g.vscode then
 
 				prompt = "#buffer コードに適切なテストを追加してください",
 				description = "テスト追加",
+				system_prompt = my_sys_prompt,
 
 			},
 
 			Comment = {
 
-				prompt = "#buffer コードに適切なコメントを入れてください",
+				prompt = "#buffer コードに日本語で適切なコメントを入れてください",
 				description = "コメント追加",
+				system_prompt = my_sys_prompt,
+
 
 			},
 
