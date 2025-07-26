@@ -48,6 +48,7 @@ export EDITOR=nvim
 export CALIBRE_USE_DARK_PALETTE=1
 export W3MIMGDISPLAY_PATH=/usr/lib/w3m/w3mimgdisplay
 export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto/
+# openrouterのAPIキー
 . "${HOME}"/.openrouter
 
 # パスの設定
