@@ -133,7 +133,7 @@ if not vim.g.vscode then
 
 			Optimize = {
 
-				prompt = "/COPILOT_REFACTOR #buffer コードをより効率よくしてください",
+				prompt = "/COPILOT_REFACTOR #buffer コードをより効率化してください",
 				description = "最適化",
 				system_prompt = my_sys_prompt,
 
