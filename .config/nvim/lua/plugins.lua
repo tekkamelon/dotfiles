@@ -119,7 +119,6 @@ require('jetpack.packer').add {
 
 	 },
 
-<<<<<<< HEAD
 	-- {'supermaven-inc/supermaven-nvim',
 
 	-- 	cmd = {
@@ -147,15 +146,7 @@ require('jetpack.packer').add {
 
 		tag = 'v1.14.1',
 
-		cmd = 'Neocodeium',
-=======
-	{'monkoose/neocodeium',
-
-		tag = 'v1.14.1',
-
 		cmd = 'NeoCodeium',
->>>>>>> develop
-
 		event = 'InsertEnter',
 
 		config = function()
