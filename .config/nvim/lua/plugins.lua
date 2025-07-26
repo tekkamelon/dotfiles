@@ -1,4 +1,4 @@
--- lug_config.lua
+-- plugins.lua
 -- neovim >= 0.10.0
 
 
@@ -13,6 +13,12 @@ require('jetpack.packer').add {
 	{'thinca/vim-partedit' , event = 'VisualEnter'},
 	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
 	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
+
+	-- 依存関係用プラグイン
+	'nvim-lua/plenary.nvim',
+	'nvim-telescope/telescope-ui-select.nvim',
+	'MunifTanjim/nui.nvim',
+	'rcarriga/nvim-notify',
 
 	-- lua製プラグイン
 	-- toggletermの設定
@@ -34,7 +40,21 @@ require('jetpack.packer').add {
 
 	},
 
-	'nvim-lua/plenary.nvim',
+	-- noiceの設定
+	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
+	{ 'folke/noice.nvim',
+
+		lock = true,
+
+		event = 'UIEnter',
+
+		config = function()
+
+			require('plugins.noice')
+
+		end
+
+	},
 
 	-- telescopeの設定
 	{'nvim-telescope/telescope.nvim' ,
@@ -45,8 +65,7 @@ require('jetpack.packer').add {
 		-- 依存関係のプラグイン
         dependencies = 'nvim-lua/plenary.nvim',
 
-		-- 起動に使用するコマンド
-		cmd = 'Telescope',
+		event = 'UIEnter',
 
 		config = function()
 
@@ -58,11 +77,24 @@ require('jetpack.packer').add {
 
 						-- プロンプトの設定
 						prompt_prefix = " 🔎 ",
-						selection_caret = " ➤  "
+						selection_caret = " ➤  ",
 
 					},
 
+					-- telescope-ui-selectの設定
+					extensions = {
+
+						["ui-select"] = {
+
+							  require("telescope.themes").get_dropdown{}
+
+						}
+
+  					}
+
 				}
+
+				require("telescope").load_extension("ui-select")
 
 			end
 
@@ -87,6 +119,7 @@ require('jetpack.packer').add {
 
 	 },
 
+<<<<<<< HEAD
 	-- {'supermaven-inc/supermaven-nvim',
 
 	-- 	cmd = {
@@ -115,6 +148,13 @@ require('jetpack.packer').add {
 		tag = 'v1.14.1',
 
 		cmd = 'Neocodeium',
+=======
+	{'monkoose/neocodeium',
+
+		tag = 'v1.14.1',
+
+		cmd = 'NeoCodeium',
+>>>>>>> develop
 
 		event = 'InsertEnter',
 
@@ -129,7 +169,17 @@ require('jetpack.packer').add {
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
 
-		cmd = {'CopilotChat', 'CopilotChatToggle', 'CopilotChatReset', 'CopilotChatModels'},
+		dependencies = 'nvim-telescope/telescope.nvim' ,
+
+		cmd = {
+
+			'CopilotChat',
+			'CopilotChatOpen',
+			'CopilotChatToggle',
+			'CopilotChatModels',
+			'CopilotChatPrompts',
+
+		},
 
 		config = function()
 
