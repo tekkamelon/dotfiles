@@ -18,7 +18,6 @@ if not vim.g.vscode then
 		-- GitHub cpolitが上限に達した場合はこちらを使用
 		-- model = "deepseek/deepseek-chat-v3-0324:free",
 
-		-- 30日間の無料トライアル
 		model = "claude-sonnet-4",
 
 		-- プロバイダーを明示的に指定
@@ -39,7 +38,7 @@ if not vim.g.vscode then
 				-- APIリクエスト用のヘッダーを生成する関数
 				get_headers = function()
 
-					-- 環境変数からOPENROUTER_API_KEYを取得
+					-- 環境変数からOPENROUTER_API_KEYを取得,存在しない場合はエラーメッセージを表示
 					local api_key = assert(os.getenv("OPENROUTER_API_KEY"), "環境変数 OPENROUTER_API_KEY が設定されていません")
 
 					return {
@@ -133,7 +132,7 @@ if not vim.g.vscode then
 
 			Optimize = {
 
-				prompt = "/COPILOT_REFACTOR #buffer コードをより効率化してください",
+				prompt = "/COPILOT_REFACTOR #buffer コードをより効率的にしてください",
 				description = "最適化",
 				system_prompt = my_sys_prompt,
 
