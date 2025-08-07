@@ -18,7 +18,8 @@ if not vim.g.vscode then
 		-- GitHub cpolitが上限に達した場合はこちらを使用
 		-- model = "deepseek/deepseek-chat-v3-0324:free",
 
-		model = "claude-sonnet-4",
+		-- デフォルトのモデル
+		model = "gpt-4.1",
 
 		-- プロバイダーを明示的に指定
 		provider = "openrouter",
