@@ -19,7 +19,8 @@ if not vim.g.vscode then
 		-- model = "deepseek/deepseek-chat-v3-0324:free",
 
 		-- デフォルトのモデル
-		model = "gpt-4.1",
+		-- model = "gpt-4.1",
+		model = "gpt-5-mini",
 
 		-- プロバイダーを明示的に指定
 		provider = "openrouter",
@@ -117,7 +118,7 @@ if not vim.g.vscode then
 
 			Review = {
 
-				prompt = "/COPILOT_REVIEW #buffer コードを日本語でレビューしてください",
+				prompt = "/COPILOT_REVIEW #buffer コードを日本語でレビューし,改善したコードの差分を提供してください",
 				description = "品質レビュー",
 				system_prompt = my_sys_prompt,
 
@@ -125,7 +126,7 @@ if not vim.g.vscode then
 
 			Fix = {
 
-				prompt = "/COPILOT_FIX #buffer コードのエラーを修正してください",
+				prompt = "/COPILOT_FIX #buffer コードのエラーを修正し差分を提供してください",
 				description = "エラー修正",
 				system_prompt = my_sys_prompt,
 
@@ -133,7 +134,7 @@ if not vim.g.vscode then
 
 			Optimize = {
 
-				prompt = "/COPILOT_REFACTOR #buffer コードをより効率的にしてください",
+				prompt = "/COPILOT_REFACTOR #buffer コードをより効率的にし差分を提供してください",
 				description = "最適化",
 				system_prompt = my_sys_prompt,
 
