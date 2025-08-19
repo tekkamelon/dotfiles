@@ -90,7 +90,7 @@ require('jetpack.packer').add {
 
 						}
 
-  					}
+					}
 
 				}
 
@@ -119,34 +119,12 @@ require('jetpack.packer').add {
 
 	 },
 
-	-- {'supermaven-inc/supermaven-nvim',
-
-	-- 	cmd = {
-
-	-- 		'SupermavenStart',
-	-- 		'SupermavenRestart',
-	-- 		'SupermavenToggle',
-	-- 		'SupermavenStatus',
-	-- 		'SupermavenUseFree',
-	-- 		'SupermavenLogout',
-
-	-- 	},
-
-	-- 	event = 'InsertEnter',
-
-	-- 	config = function()
-
-	-- 		require('plugins.supermaven')
-
-	-- 	end,
-
-	-- },
-
 	{'monkoose/neocodeium',
 
 		tag = 'v1.14.1',
 
 		cmd = 'NeoCodeium',
+
 		event = 'InsertEnter',
 
 		config = function()
@@ -175,6 +153,35 @@ require('jetpack.packer').add {
 		config = function()
 
 			require('plugins.copilotchat')
+
+		end,
+
+	},
+
+	-- mcphubの設定
+	-- `sudo npm install -g mcp-hub`でインストール
+	{'ravitemer/mcphub.nvim',
+
+		event = 'VimEnter',
+
+		config = function()
+
+			require('mcphub').setup{
+
+				extensions = {
+
+					copilotchat = {
+
+						enabled = true,
+						convert_tools_to_functions = true,
+						convert_resources_to_functions = true,
+						add_mcp_prefix = false,
+
+        			}
+
+				}
+
+			}
 
 		end,
 
