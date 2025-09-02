@@ -2,6 +2,7 @@
 -- neovim >= 0.10.0
 
 
+-- Jetpackの設定
 -- プラグインのリスト
 -- Jetpackの設定
 vim.cmd('packadd vim-jetpack')
@@ -119,6 +120,7 @@ require('jetpack.packer').add {
 
 	 },
 
+	-- neocodeiumの設定
 	{'monkoose/neocodeium',
 
 		tag = 'v1.14.1',
@@ -134,6 +136,19 @@ require('jetpack.packer').add {
 		end,
 
 	},
+
+	-- minuetの設定
+	-- {'milanglacier/minuet-ai.nvim',
+
+	-- 	event = 'InsertEnter',
+
+	-- 	config = function()
+
+	-- 		require('plugins.minuet')
+
+	-- 	end
+
+	-- },
 
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
