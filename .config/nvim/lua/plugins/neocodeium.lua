@@ -31,7 +31,7 @@ vim.keymap.set("i", "<Tab>", function()
 
 	else
 
-		-- サジェストされていない場合はタブを入力
+		-- サジェストされていない場合はタブを入力
 		-- キーコードをneovimが解釈可能な形式に変換
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 
