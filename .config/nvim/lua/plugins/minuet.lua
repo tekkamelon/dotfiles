@@ -1,7 +1,6 @@
 -- minuet-ai.lua
 -- neovim >= 0.10.0
 
-
 -- vscodeから起動していなければ真
 if not vim.g.vscode then
 
@@ -11,6 +10,7 @@ if not vim.g.vscode then
 		virtualtext = {
 
 			auto_trigger_ft = {},
+
 			keymap = {
 
 				next = '<C-f>',
@@ -28,6 +28,8 @@ if not vim.g.vscode then
 
 		-- 遅延
 		debounce = 600,
+
+		show_on_completion_menu = true,
 
 		provider_options = {
 
@@ -90,9 +92,13 @@ if not vim.g.vscode then
 	-- 行単位のサジェストの受け入れ
 	vim.keymap.set("i", "<C-s>", minuet_vtext.action.accept_line)
 
+	-- n行のサジェストの受け入れ
+	vim.keymap.set("i", "<C-e>", minuet_vtext.action.accept_n_lines)
+
 	-- サジェストのキャンセル
 	vim.keymap.set("i", "<C-q>", minuet_vtext.action.dismiss)
 
+	-- 補完を有効化
 	vim.cmd('Minuet virtualtext enable')
 
 end
