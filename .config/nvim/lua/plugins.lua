@@ -1,7 +1,6 @@
 -- plugins.lua
 -- neovim >= 0.10.0
 
-
 -- Jetpackの設定
 -- プラグインのリスト
 -- Jetpackの設定
@@ -121,34 +120,34 @@ require('jetpack.packer').add {
 	 },
 
 	-- neocodeiumの設定
-	{'monkoose/neocodeium',
+	-- {'monkoose/neocodeium',
 
-		tag = 'v1.14.1',
+	-- 	tag = 'v1.14.1',
 
-		cmd = 'NeoCodeium',
-
-		event = 'InsertEnter',
-
-		config = function()
-
-			require('plugins.neocodeium')
-
-		end,
-
-	},
-
-	-- minuetの設定
-	-- {'milanglacier/minuet-ai.nvim',
+	-- 	cmd = 'NeoCodeium',
 
 	-- 	event = 'InsertEnter',
 
 	-- 	config = function()
 
-	-- 		require('plugins.minuet')
+	-- 		require('plugins.neocodeium')
 
-	-- 	end
+	-- 	end,
 
 	-- },
+
+	-- minuetの設定
+	{'milanglacier/minuet-ai.nvim',
+
+		event = 'InsertEnter',
+
+		config = function()
+
+			require('plugins.minuet')
+
+		end
+
+	},
 
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
