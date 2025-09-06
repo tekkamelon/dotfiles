@@ -11,16 +11,26 @@ if not vim.g.vscode then
 	-- CopilotChatプラグインのセットアップ
 	require("CopilotChat").setup{
 
-		-- ユーザーの表示
-		question_header = '# ' .. username .. ' ',
+		headers = {
+
+			-- ユーザー名の表示
+			user = '## ' .. username .. ' ',
+
+			-- アシスタント名の表示
+			assistant = '## assistant '
+
+		},
+
+		-- デフォルトの言語
+		language = 'Japanese',
+
+		auto_fold = false,
 
 		-- openrouterのモデル
-		-- GitHub cpolitが上限に達した場合はこちらを使用
-		-- model = "deepseek/deepseek-chat-v3-0324:free",
+		model = "qwen/qwen3-coder:free",
 
-		-- デフォルトのモデル
-		-- model = "gpt-4.1",
-		model = "gpt-5-mini",
+		-- github copilotのモデル
+		-- model = "gpt-5-mini",
 
 		-- プロバイダーを明示的に指定
 		provider = "openrouter",
@@ -71,6 +81,7 @@ if not vim.g.vscode then
 						local models = response.body.data
 						local formatted_models = {}
 
+						-- 
 						for _, model in ipairs(models) do
 
 							table.insert(formatted_models, { id = model.id, name = model.name })
@@ -83,7 +94,7 @@ if not vim.g.vscode then
 				-- チャット補完APIのエンドポイントURLを返す関数
 				get_url = function()
 
-				return "https://openrouter.ai/api/v1/chat/completions"
+					return "https://openrouter.ai/api/v1/chat/completions"
 
 				end,
 
