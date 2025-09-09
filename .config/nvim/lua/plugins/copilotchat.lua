@@ -27,7 +27,7 @@ if not vim.g.vscode then
 		auto_fold = false,
 
 		-- openrouterのモデル
-		model = "qwen/qwen3-coder:free",
+		model = "deepseek/deepseek-chat-v3-0324:free",
 
 		-- github copilotのモデル
 		-- model = "gpt-5-mini",
