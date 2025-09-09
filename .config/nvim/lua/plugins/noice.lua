@@ -6,13 +6,14 @@ if not vim.g.vscode then
 
 	require('noice').setup{
 
-		-- 通知の設定
+		-- メッセージ
 		messages = {
 
-			enabled = false,
+			enabled = true,
 
 		},
 
+		-- 通知
 		notify = {
 
 			enabled = true,
@@ -20,6 +21,7 @@ if not vim.g.vscode then
 
 		},
 
+		-- コマンドライン
 		cmdline = {
 
 			enabled = true,
@@ -34,6 +36,27 @@ if not vim.g.vscode then
 				help = { pattern = "^:%s*he?l?p?%s+", icon = "📖" },
 
 			},
+
+		},
+
+		format = {
+
+			level = {
+
+				icons = {
+
+					error = "❌",
+					warn = " ⚠ ",
+					info = "💻"
+
+				},
+
+			},
+		},
+
+		popupmenu = {
+
+			kind_icons = false,
 
 		},
 
