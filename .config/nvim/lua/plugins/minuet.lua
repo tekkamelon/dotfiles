@@ -13,8 +13,11 @@ if not vim.g.vscode then
 
 			keymap = {
 
+				accept_line = '<C-s>',
+				accept_n_lines = '<C-e>',
 				next = '<C-f>',
 				prev = '<C-F>',
+				dismiss = '<C-q>',
 
 			},
 
@@ -36,13 +39,9 @@ if not vim.g.vscode then
 			openai_compatible = {
 
 				api_key = 'OPENROUTER_API_KEY',
-
 				end_point = 'https://openrouter.ai/api/v1/chat/completions',
-
 				model = 'meta-llama/llama-4-maverick:free',
-
 				name = 'Openrouter',
-
 				optional = {
 
 					max_tokens = 56,
@@ -67,8 +66,7 @@ if not vim.g.vscode then
 
 	local minuet_vtext = require('minuet.virtualtext')
 
-	-- キーマッピングの設定
-	-- サジェストの受け入れ
+	-- タブキーをサジェストの受け入れに設定
 	vim.keymap.set("i", "<Tab>", function()
 
 		-- サジェストの表示状態
@@ -88,15 +86,6 @@ if not vim.g.vscode then
 		end
 
 	end, { expr = true, silent = true })
-
-	-- 行単位のサジェストの受け入れ
-	vim.keymap.set("i", "<C-s>", minuet_vtext.action.accept_line)
-
-	-- n行のサジェストの受け入れ
-	vim.keymap.set("i", "<C-e>", minuet_vtext.action.accept_n_lines)
-
-	-- サジェストのキャンセル
-	vim.keymap.set("i", "<C-q>", minuet_vtext.action.dismiss)
 
 	-- 補完を有効化
 	vim.cmd('Minuet virtualtext enable')
