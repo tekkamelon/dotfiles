@@ -129,7 +129,7 @@ if not vim.g.vscode then
 
 			Review = {
 
-				prompt = "/COPILOT_REVIEW #buffer コードを日本語でレビューし,改善したコードの差分を提供してください",
+				prompt = "/COPILOT_REVIEW #buffer コードを日本語でレビューし,改善したコードの差分を提供してください.コードに行番号は不要です",
 				description = "品質レビュー",
 				system_prompt = my_sys_prompt,
 
@@ -137,7 +137,7 @@ if not vim.g.vscode then
 
 			Fix = {
 
-				prompt = "/COPILOT_FIX #buffer コードのエラーを修正し差分を提供してください",
+				prompt = "/COPILOT_FIX #buffer コードのエラーを修正し差分を提供してください.コードに行番号は不要です",
 				description = "エラー修正",
 				system_prompt = my_sys_prompt,
 
@@ -145,7 +145,7 @@ if not vim.g.vscode then
 
 			Optimize = {
 
-				prompt = "/COPILOT_REFACTOR #buffer コードをより効率的にし差分を提供してください",
+				prompt = "/COPILOT_REFACTOR #buffer コードをより効率的にし差分を提供してください.コードに行番号は不要です",
 				description = "最適化",
 				system_prompt = my_sys_prompt,
 
