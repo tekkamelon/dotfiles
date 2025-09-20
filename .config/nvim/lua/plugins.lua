@@ -453,7 +453,11 @@ require('jetpack.packer').add {
 
 
 	-- lsp関連
-	'neovim/nvim-lspconfig',
+	{'neovim/nvim-lspconfig',
+
+		tag = "v2.4.0"
+
+	},
 
 	-- masonの設定
 	{'williamboman/mason.nvim',
