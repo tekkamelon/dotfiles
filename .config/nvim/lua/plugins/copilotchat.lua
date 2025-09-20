@@ -27,7 +27,7 @@ if not vim.g.vscode then
 		auto_fold = false,
 
 		-- openrouterのモデル
-		model = "deepseek/deepseek-chat-v3-0324:free",
+		model = "x-ai/grok-4-fast:free",
 
 		-- チャットバッファの設定
 		window = {
