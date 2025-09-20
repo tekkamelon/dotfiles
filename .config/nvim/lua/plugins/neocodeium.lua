@@ -8,9 +8,10 @@ local neocodeium = require("neocodeium")
 -- 基本設定を初期化
 neocodeium.setup{
 
+	-- 
 	filetypes = {
 
-		-- markdownでの保管を無効化
+		-- markdownでの補完を無効化
 		markdown = false
 
 	},
