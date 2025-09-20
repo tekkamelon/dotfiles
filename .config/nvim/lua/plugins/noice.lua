@@ -9,7 +9,8 @@ if not vim.g.vscode then
 		-- メッセージ
 		messages = {
 
-			enabled = true,
+			-- これを"true"にするとキーボードマクロが機能しない
+			enabled = false,
 
 		},
 
