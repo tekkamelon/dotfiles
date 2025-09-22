@@ -6,6 +6,10 @@ if not vim.g.vscode then
 
 	-- 環境変数からユーザー名を取得,なければ"User"
 	local username = os.getenv("USER") or "User"
+	-- 環境変数からLLMを取得,なければ"gpt-5-mini"
+	local llm_model = os.getenv("OPENAI_MODEL") or "gpt-5-mini"
+
+	-- システムプロンプト
 	local my_sys_prompt = [[
 
 		# 口調など
@@ -50,8 +54,8 @@ if not vim.g.vscode then
 
 		auto_fold = false,
 
-		-- openrouterのモデル
-		model = "x-ai/grok-4-fast:free",
+		-- 使用するLLM
+		model = llm_model,
 
 		-- チャットバッファの設定
 		window = {
