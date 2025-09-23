@@ -1,0 +1,7 @@
+{
+  "theme": "Atom One",
+  "selectedAuthType": "oauth-personal",
+  "preferredEditor": "neovim",
+  "vimMode": true,
+  "contextFileName": "AGENTS.md"
+}
