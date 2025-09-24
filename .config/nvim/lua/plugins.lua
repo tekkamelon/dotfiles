@@ -149,6 +149,32 @@ require('jetpack.packer').add {
 
 	-- },
 
+	-- {'olimorris/codecompanion.nvim',
+
+	-- 	dependencies = {
+
+	-- 		'nvim-lua/plenary.nvim',
+	-- 		'nvim-treesitter/nvim-treesitter',
+
+	-- 	},
+
+	-- 	cmd = {
+
+	-- 		'CodeCompanion',
+	-- 		'CodeCompanionActons',
+	-- 		'CodeCompanionChat',
+	-- 		'CodeCompanionCmd',
+
+	-- 	},
+
+	-- 	config = function()
+
+	-- 		require('plugins.codecompanion')
+
+	-- 	end,
+
+	--  	},
+
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
 
