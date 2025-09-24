@@ -5,6 +5,22 @@ if not vim.g.vscode then
 
 	require('codecompanion').setup{
 
+		display = {
+
+			chat = {
+
+				-- チャットバッファの設定
+				window = {
+
+					layout = 'horizontal',
+					width = 0.5,
+					height = 0.4,
+
+				}
+
+			},
+		},
+
 		strategies = {
 
 			chat = {
@@ -20,6 +36,13 @@ if not vim.g.vscode then
 			},
 
 		},
+
+		opts = {
+
+			-- デフォルトの言語
+			language = "Japanese"
+
+    	},
 
 		adapters = {
 
