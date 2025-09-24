@@ -1,7 +1,17 @@
 {
-  "theme": "Atom One",
-  "selectedAuthType": "oauth-personal",
-  "preferredEditor": "neovim",
-  "vimMode": true,
-  "contextFileName": "AGENTS.md"
+  "context": {
+    "fileName": "AGENTS.md"
+  },
+  "general": {
+    "preferredEditor": "neovim",
+    "vimMode": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "ui": {
+    "theme": "Atom One"
+  }
 }
