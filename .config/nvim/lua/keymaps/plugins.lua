@@ -95,6 +95,8 @@ M.setup_neovim = function()
 		{'n', '<leader>fc', ':Telescope current_buffer_fuzzy_find hidden=true previewer=true theme=get_dropdown<CR>'},
 		-- コマンドを検索
 		{'n', '<leader>fl', ':Telescope commands hidden=false previewer=false<CR>'},
+		-- コマンド履歴
+		{'n', '<leader>fH', ':Telescope command_history theme=get_dropdown<CR>'},
 
 		-- toggleterm
 		-- 下方,右側,フロートウィンドウのターミナルのトグル
