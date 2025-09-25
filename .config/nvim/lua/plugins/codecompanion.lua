@@ -4,6 +4,9 @@
 
 if not vim.g.vscode then
 
+	-- システムプロンプトを読み込み
+	local my_sys_prompt = require('plugins.cc_config.sys_prompt')
+
 	require('codecompanion').setup{
 
 		display = {
@@ -27,13 +30,25 @@ if not vim.g.vscode then
 
 			chat = {
 
-			  adapter = "openrouter",
+				adapter = "openrouter",
+
+				opts = {
+
+					system_prompt = my_sys_prompt,
+
+				},
 
 			},
 
 			inline = {
 
-			  adapter = "openrouter",
+				adapter = "openrouter",
+
+				opts = {
+
+					system_prompt = my_sys_prompt,
+
+				},
 
 			},
 
