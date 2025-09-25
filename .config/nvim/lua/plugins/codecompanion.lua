@@ -19,19 +19,20 @@ if not vim.g.vscode then
 				}
 
 			},
+
 		},
 
 		strategies = {
 
 			chat = {
 
-			  adapter = "copilot",
+			  adapter = "openrouter",
 
 			},
 
 			inline = {
 
-			  adapter = "copilot",
+			  adapter = "openrouter",
 
 			},
 
@@ -43,6 +44,37 @@ if not vim.g.vscode then
 			language = "Japanese"
 
     	},
+
+		-- アダプター
+		adapters = {
+
+			-- OpenRouterの設定
+			openrouter = function()
+
+				return require("codecompanion.adapters").extend("openai_compatible", {
+
+					env = {
+
+						url = "https://openrouter.ai/api",
+						api_key = os.getenv("OPENROUTER_API_KEY"),
+						chat_url = "/v1/chat/completions",
+
+					},
+
+					schema = {
+						model = {
+
+							default = os.getenv("OPENAI_MODEL"),
+
+						},
+
+					},
+
+				})
+
+			end,
+
+		},
 
 	}
 
