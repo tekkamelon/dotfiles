@@ -44,28 +44,6 @@ if not vim.g.vscode then
 
     	},
 
-		adapters = {
-
-			-- copilotアダプタを上書き
-			copilot = function()
-
-			-- 既定のcopilotアダプタをベースに
-			return require("codecompanion.adapters").extend("copilot", {
-
-				schema = {
-
-					model = {
-
-					  default = "gpt-4.1",
-
-					},
-
-				},
-			})
-
-			end,
-		},
-
 	}
 
 end
