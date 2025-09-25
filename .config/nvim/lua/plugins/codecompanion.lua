@@ -1,4 +1,5 @@
 -- codecompanion.lua
+-- neovim >= 0.11.0
 
 
 if not vim.g.vscode then
@@ -62,6 +63,7 @@ if not vim.g.vscode then
 					},
 
 					schema = {
+
 						model = {
 
 							default = os.getenv("OPENAI_MODEL"),
@@ -74,6 +76,30 @@ if not vim.g.vscode then
 
 			end,
 
+			-- LM Studioの設定
+			lmstudio = function()
+
+				return require("codecompanion.adapters").extend("openai_compatible", {
+
+					env = {
+
+						url = "localhost:1234",
+
+					},
+
+					schema = {
+
+						model = {
+
+							default = "Qwen3-30B-A3B-Instruct-2507",
+
+						},
+
+					},
+
+				})
+
+			end,
 		},
 
 	}
