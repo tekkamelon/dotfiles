@@ -137,10 +137,10 @@ if not vim.g.vscode then
 	}
 
 	-- -- openrouterプロバイダの設定
-	require('plugins.cc_provider.openrouter')
+	require('plugins.cc_config.openrouter')
 
 	-- LM Studioプロバイダの設定
-	require('plugins.cc_provider.lmstudio')
+	require('plugins.cc_config.lmstudio')
 
 end
 
