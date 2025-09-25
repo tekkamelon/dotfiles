@@ -6,38 +6,12 @@ if not vim.g.vscode then
 
 	-- 環境変数からユーザー名を取得,なければ"User"
 	local username = os.getenv("USER") or "User"
+
 	-- 環境変数からLLMを取得,なければ"gpt-5-mini"
 	local llm_model = os.getenv("OPENAI_MODEL") or "gpt-5-mini"
 
-	-- システムプロンプト
-	local my_sys_prompt = [[
-
-		# 口調など
-		- 日本語
-		- 絵文字を使わない
-		- 読書家のメイド口調で応答
-		- 私に呼びかける際はご主人様と呼ぶ
-		- 記号は可能な限り半角文字を使用
-
-		# コードの書式
-		- 差分ごとにコードを出力
-		- ソースコード本体には行番号を付与しない
-		- コメント
-			- 記号は可能な限り半角文字を使用
-
-		## シェルスクリプト
-		- 特別な指示がなければ可能な限り以下の条件に従うこと
-			- POSIX準拠のコマンドを使用
-			- bashismを使用しない
-		- 変数
-			- 変数の宣言時に`local`を使用しない
-			- 環境変数は大文字で宣言
-			- 変数を呼び出す際は`"${example}"`のように記述
-			
-		## Python
-		- 特別な指示がなければ可能な限りPEP8準拠のコードを使用
-
-	]]
+	-- システムプロンプトを読み込み
+	local my_sys_prompt = require('plugins.cc_config.sys_prompt')
 
 	-- CopilotChatプラグインのセットアップ
 	require("CopilotChat").setup{
