@@ -5,6 +5,16 @@ require('render-markdown').setup{
 
 	render_modes = true,
 
+	-- ファイルタイプの設定
+	file_types = {
+
+		'markdown',
+		'vimwiki',
+		'codecompanion',
+		'copilot-chat',
+
+	},
+
 	-- 見出しの設定
 	heading = {enabled = false},
 	sign = {enabled = false},
