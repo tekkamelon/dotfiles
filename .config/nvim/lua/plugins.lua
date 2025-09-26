@@ -149,31 +149,31 @@ require('jetpack.packer').add {
 
 	-- },
 
-	-- {'olimorris/codecompanion.nvim',
+	{'olimorris/codecompanion.nvim',
 
-	-- 	dependencies = {
+		dependencies = {
 
-	-- 		'nvim-lua/plenary.nvim',
-	-- 		'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+			'nvim-treesitter/nvim-treesitter',
 
-	-- 	},
+		},
 
-	-- 	cmd = {
+		cmd = {
 
-	-- 		'CodeCompanion',
-	-- 		'CodeCompanionActons',
-	-- 		'CodeCompanionChat',
-	-- 		'CodeCompanionCmd',
+			'CodeCompanion',
+			'CodeCompanionActions',
+			'CodeCompanionChat',
+			'CodeCompanionCmd',
 
-	-- 	},
+		},
 
-	-- 	config = function()
+		config = function()
 
-	-- 		require('plugins.codecompanion')
+			require('plugins.codecompanion')
 
-	-- 	end,
+		end,
 
-	--  	},
+	},
 
 	-- CopilotChatの設定
 	{'CopilotC-Nvim/CopilotChat.nvim',
