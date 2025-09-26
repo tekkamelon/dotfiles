@@ -12,7 +12,7 @@ require('CopilotChat.config').providers.openrouter = {
 	-- リクエストヘッダーの取得
 	get_headers = function()
 
-		-- 環境変数からAPIキーを取得し、設定されていない場合はエラーを発生させる
+		-- 環境変数からAPIキーを取得,設定されていない場合はエラーメッセージを表示
 		local api_key = assert(os.getenv('OPENROUTER_API_KEY'), 'OPENROUTER_API_KEY env not set')
 
 		return {
@@ -69,7 +69,9 @@ require('CopilotChat.config').providers.openrouter = {
 	-- チャット補完APIのエンドポイントURLを返す
 	get_url = function()
 
-		return 'https://openrouter.ai/api/v1/chat/completions'
+		-- 環境変数からAPIエンドポイントを取得,設定されていない場合はopenrouterのAPIを利用
+		local api_url = os.getenv('OPENAI_BASE_URL') or 'https://openrouter.ai/api'
+		return api_url .. '/chat/completions'
 
 	end,
 
