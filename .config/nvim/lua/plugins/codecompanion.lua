@@ -4,6 +4,15 @@
 
 if not vim.g.vscode then
 
+	-- 環境変数からユーザー名を取得,なければ"User"
+	local username = os.getenv("USER") or "User"
+
+	-- 環境変数からLLMを取得
+	local llm_model = os.getenv("OPENAI_MODEL")
+
+	-- 環境変数からAPIキーを取得,設定されていない場合はエラーメッセージを表示
+	local api_key = assert(os.getenv("OPENROUTER_API_KEY"), 'OPENROUTER_API_KEY env not set')
+
 	-- システムプロンプトを読み込み
 	local my_sys_prompt = require('plugins.cc_config.sys_prompt')
 
@@ -38,6 +47,20 @@ if not vim.g.vscode then
 				opts = {
 
 					system_prompt = my_sys_prompt,
+
+				},
+
+				roles = {
+
+					-- ユーザー名の表示
+					user = username,
+
+					-- アシスタント名の表示
+					llm = function(adapter)
+
+						return "assistant(" .. adapter.formatted_name .. ")"
+
+					end,
 
 				},
 
@@ -87,7 +110,7 @@ if not vim.g.vscode then
 					env = {
 
 						url = "https://openrouter.ai/api",
-						api_key = os.getenv("OPENROUTER_API_KEY"),
+						api_key = api_key,
 						chat_url = "/v1/chat/completions",
 
 					},
@@ -96,7 +119,7 @@ if not vim.g.vscode then
 
 						model = {
 
-							default = os.getenv("OPENAI_MODEL"),
+							default = llm_model,
 
 						},
 
