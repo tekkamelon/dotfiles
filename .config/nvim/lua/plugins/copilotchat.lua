@@ -14,15 +14,15 @@ if not vim.g.vscode then
 	local my_sys_prompt = require('plugins.cc_config.sys_prompt')
 
 	-- CopilotChatプラグインのセットアップ
-	require("CopilotChat").setup{
+	require('CopilotChat').setup{
 
 		headers = {
 
 			-- ユーザー名の表示
-			user = '## ' .. username .. ' ',
+			user = '👤 ' .. username .. ' ',
 
 			-- アシスタント名の表示
-			assistant = '## assistant '
+			assistant = '💻  Assistant '
 
 		},
 
