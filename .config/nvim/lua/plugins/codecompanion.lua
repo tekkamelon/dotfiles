@@ -13,6 +13,9 @@ if not vim.g.vscode then
 
 			chat = {
 
+				-- 自動スクロールをオフ
+				auto_scroll = false,
+
 				-- チャットバッファの設定
 				window = {
 
@@ -52,6 +55,18 @@ if not vim.g.vscode then
 
 			},
 
+			agent = {
+
+				adapter = "openrouter",
+
+				opts = {
+
+					system_prompt = my_sys_prompt,
+
+				},
+
+			},
+
 		},
 
 		opts = {
@@ -67,7 +82,7 @@ if not vim.g.vscode then
 			-- OpenRouterの設定
 			openrouter = function()
 
-				return require("codecompanion.adapters").extend("openai_compatible", {
+				return require('codecompanion.adapters').extend("openai_compatible", {
 
 					env = {
 
@@ -94,7 +109,7 @@ if not vim.g.vscode then
 			-- LM Studioの設定
 			lmstudio = function()
 
-				return require("codecompanion.adapters").extend("openai_compatible", {
+				return require('codecompanion.adapters').extend("openai_compatible", {
 
 					env = {
 
@@ -115,6 +130,7 @@ if not vim.g.vscode then
 				})
 
 			end,
+
 		},
 
 	}
