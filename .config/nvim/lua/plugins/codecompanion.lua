@@ -4,7 +4,7 @@
 
 if not vim.g.vscode then
 
-	-- 環境変数からユーザー名を取得,なければ"User"
+	-- 環境変数からユーザー名を取得,なければ"User"
 	local username = os.getenv("USER") or "User"
 
 	-- 環境変数からLLMを取得
@@ -136,7 +136,7 @@ if not vim.g.vscode then
 
 					env = {
 
-						url = "localhost:1234",
+                        url = "http://localhost:1234/v1",
 
 					},
 
