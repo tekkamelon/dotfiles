@@ -11,7 +11,6 @@ require('render-markdown').setup{
 		'markdown',
 		'vimwiki',
 		'codecompanion',
-		'copilot-chat',
 
 	},
 
