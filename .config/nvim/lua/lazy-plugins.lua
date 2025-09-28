@@ -105,22 +105,6 @@ require("lazy").setup({
 	--   end,
 	-- },
 
-	-- {"olimorris/codecompanion.nvim",
-	-- 	dependencies = {
-	-- 		-- "nvim-lua/plenary.nvim",
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 	},
-	-- 	cmd = {
-	-- 		"CodeCompanion",
-	-- 		"CodeCompanionActions",
-	-- 		"CodeCompanionChat",
-	-- 		"CodeCompanionCmd",
-	-- 	},
-	-- 	config = function()
-	-- 		require("plugins.codecompanion")
-	-- 	end,
-	-- },
-
 	-- CopilotChatの設定
 	{"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = "nvim-telescope/telescope.nvim",
@@ -156,7 +140,8 @@ require("lazy").setup({
 
 	-- treesitterの設定
 	{"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		lazy = true,
 		config = function()
 			require("plugins.treesitter")
 		end,
@@ -218,7 +203,8 @@ require("lazy").setup({
 
 	-- mini.iconsの設定
 	{"echasnovski/mini.icons",
-		event = "VimEnter",
+		-- event = "VimEnter",
+		lazy = true,
 		config = function()
 			if not vim.g.vscode then
 				require("mini.icons").setup({
@@ -230,14 +216,13 @@ require("lazy").setup({
 	},
 
 	-- mini.completionの設定
-	{
-	"echasnovski/mini.completion",
-	event = "InsertEnter",
-	config = function()
-		if not vim.g.vscode then
-			require("mini.completion").setup({})
-		end
-	end,
+	{"echasnovski/mini.completion",
+		event = "InsertEnter",
+		config = function()
+			if not vim.g.vscode then
+				require("mini.completion").setup({})
+			end
+		end,
 	},
 
 	-- mini.statuslineの設定
@@ -253,8 +238,8 @@ require("lazy").setup({
 	},
 
 	-- mini.tablineの設定
-{"echasnovski/mini.tabline",
-	event = "UIEnter",
+	{"echasnovski/mini.tabline",
+		event = "UIEnter",
 		config = function()
 			if not vim.g.vscode then
 				require("mini.tabline").setup({
