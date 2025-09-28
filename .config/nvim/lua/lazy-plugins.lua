@@ -105,6 +105,34 @@ require("lazy").setup({
 	--   end,
 	-- },
 
+	-- avanteの設定
+	{"yetone/avante.nvim",
+		build = "make",
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			'echasnovski/mini.icons',
+		},
+		cmd = {
+			"AvanteAsk",
+			"AvanteBuild",
+			"AvanteChat",
+			"AvanteChatNew",
+			"AvanteHistory",
+			"AvanteRefresh",
+			"AvanteStop",
+			"AvanteSwitchProvider",
+			"AvanteToggle",
+			"AvanteModels",
+			"AvanteSwitchProvider",
+		},
+
+		config = function()
+			require("plugins.avante")
+		end,
+	},
+
 	-- CopilotChatの設定
 	{"CopilotC-Nvim/CopilotChat.nvim",
 		dependencies = "nvim-telescope/telescope.nvim",
@@ -203,8 +231,7 @@ require("lazy").setup({
 
 	-- mini.iconsの設定
 	{"echasnovski/mini.icons",
-		-- event = "VimEnter",
-		lazy = true,
+		event = "VimEnter",
 		config = function()
 			if not vim.g.vscode then
 				require("mini.icons").setup({
