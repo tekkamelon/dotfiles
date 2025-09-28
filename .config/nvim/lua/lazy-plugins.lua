@@ -24,10 +24,10 @@ require("lazy").setup({
 	{ "skanehira/jumpcursor.vim", event = "VimEnter" },
 
 	-- 依存関係用プラグイン
-	"nvim-lua/plenary.nvim",
-	"nvim-telescope/telescope-ui-select.nvim",
-	"MunifTanjim/nui.nvim",
-	"rcarriga/nvim-notify",
+	{"nvim-lua/plenary.nvim", lazy = true},
+	{"nvim-telescope/telescope-ui-select.nvim", lazy = true},
+	{"MunifTanjim/nui.nvim", lazy = true},
+	{"rcarriga/nvim-notify", lazy = true},
 
 	-- lua製プラグイン
 	-- toggletermの設定
@@ -54,8 +54,8 @@ require("lazy").setup({
 	-- telescopeの設定
 	{"nvim-telescope/telescope.nvim",
 		version = "0.1.6",
-		dependencies = { "nvim-lua/plenary.nvim" },
-		event = "UIEnter",
+		-- dependencies = { "nvim-lua/plenary.nvim" },
+		cmd = "Telescope",
 		config = function()
 			if not vim.g.vscode then
 				require("telescope").setup({
@@ -107,7 +107,7 @@ require("lazy").setup({
 
 	{"olimorris/codecompanion.nvim",
 		dependencies = {
-			"nvim-lua/plenary.nvim",
+			-- "nvim-lua/plenary.nvim",
 			"nvim-treesitter/nvim-treesitter",
 		},
 		cmd = {
@@ -313,16 +313,15 @@ require("lazy").setup({
 		version = "v2.4.0",
 	},
 
-	-- masonの設定
-	{"williamboman/mason.nvim",
-		config = function()
+-- masonの設定
+{"williamboman/mason.nvim",
+	event = { "BufReadPost", "BufNewFile" },
+	config = function()
 			if not vim.g.vscode then
 				require("mason").setup({})
 			end
 		end,
-	},
-
-	-- mason-lspconfigの設定
+},	-- mason-lspconfigの設定
 	{"williamboman/mason-lspconfig.nvim",
 		-- branch = "v1.x",
 		pin = true,
@@ -330,6 +329,7 @@ require("lazy").setup({
 			"neovim/nvim-lspconfig",
 			"williamboman/mason.nvim",
 		},
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("plugins.mason-lsp")
 		end,
