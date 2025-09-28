@@ -9,19 +9,21 @@ if not vim.g.vscode then
 	-- LSPのクライアントの設定
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-	require('mason-lspconfig').setup_handlers{
+	require('mason-lspconfig').setup({
 
-		function(server_name)
+		handlers = {
 
-			lspconfig[server_name].setup{
+			function(server_name)
 
-				capabilities = capabilities,
+				lspconfig[server_name].setup{
 
-			}
+					capabilities = capabilities,
 
-		end,
+				}
+
+			end,
 
 	}
+	})
 
 end
-
