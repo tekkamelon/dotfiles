@@ -157,5 +157,6 @@ vim.g.mapleader = " "
 require('keymaps.general')
 
 -- プラグインの設定を読み込み
-require('plugins')
+-- require('plugins')
+require('lazy-plugins')
 
