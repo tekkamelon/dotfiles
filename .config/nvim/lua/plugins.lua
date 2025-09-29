@@ -1,5 +1,5 @@
 -- plugins.lua
--- neovim >= 0.10.0
+-- Neovim >= 0.11.0
 
 -- Jetpackの設定
 -- プラグインのリスト
@@ -103,10 +103,8 @@ require('jetpack.packer').add {
 	},
 
 	-- eyelinerの設定
-	{'jinh0/eyeliner.nvim',
-
-		event = 'UIEnter',
-
+	{"jinh0/eyeliner.nvim",
+		event = "VeryLazy",
 		config = function()
 
 			require('eyeliner').setup{
@@ -136,21 +134,9 @@ require('jetpack.packer').add {
 
 	},
 
-	-- minuetの設定
-	-- {'milanglacier/minuet-ai.nvim',
-
-	-- 	event = 'InsertEnter',
-
-	-- 	config = function()
-
-	-- 		require('plugins.minuet')
-
-	-- 	end
-
-	-- },
-
-	{'olimorris/codecompanion.nvim',
-
+	-- avanteの設定
+	{"yetone/avante.nvim",
+		build = "make",
 		dependencies = {
 
 			'nvim-lua/plenary.nvim',
@@ -166,7 +152,6 @@ require('jetpack.packer').add {
 			'CodeCompanionCmd',
 
 		},
-
 		config = function()
 
 			require('plugins.codecompanion')
@@ -174,21 +159,6 @@ require('jetpack.packer').add {
 		end,
 
 	},
-
-	-- CopilotChatの設定
-	-- {"CopilotC-Nvim/CopilotChat.nvim",
-	-- 	dependencies = "nvim-telescope/telescope.nvim",
-	-- 	cmd = {
-	-- 		"CopilotChat",
-	-- 		"CopilotChatOpen",
-	-- 		"CopilotChatToggle",
-	-- 		"CopilotChatModels",
-	-- 		"CopilotChatPrompts",
-	-- 	},
-	-- 	config = function()
-	-- 		require("plugins.copilotchat")
-	-- 	end,
-	-- },
 
 	-- nvim-windowの設定
 	{"yorickpeterse/nvim-window",
