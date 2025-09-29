@@ -111,19 +111,7 @@ M.setup_neovim = function()
 		-- ファイラをトグル
 		{'n', '<C-n>', minifiles_toggle},
 
-		-- copilotchat
-		-- チャット用バッファをトグル
-		{{'n', 'v'}, '<leader>cc', ':CopilotChatToggle<CR>'},
-		-- チャットをリセット
-		{{'n', 'v'}, '<leader>cr', ':CopilotChatReset<CR>'},
-		-- 言語モデルを変更
-		{{'n', 'v'}, '<leader>cm', ':CopilotChatModels<CR>'},
-		-- 会話内容を保存
-		{{'n', 'v'}, '<leader>cs', ':CopilotChatSave'},
-		-- テンプレートプロンプトを呼び出す
-		{{'n', 'v'}, '<leader>cp', ':CopilotChatPrompt<CR>'},
-
-	}
+}
 
 	-- テーブルの内容をループし代入
 	for _, kmap in ipairs(kmaps) do
