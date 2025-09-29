@@ -1,4 +1,4 @@
--- lazy-plugins.lua
+-- plugins.lua
 -- Neovim >= 0.11.0
 
 
@@ -78,7 +78,6 @@ require("lazy").setup({
 	-- eyelinerの設定
 	{"jinh0/eyeliner.nvim",
 		event = "VeryLazy",
-		-- event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("eyeliner").setup({
 				highlight_on_key = false,
@@ -95,15 +94,6 @@ require("lazy").setup({
 			require("plugins.neocodeium")
 		end,
 	},
-
-	-- minuetの設定
-	-- {
-	--   "milanglacier/minuet-ai.nvim",
-	--   event = "InsertEnter",
-	--   config = function()
-	--	 require("plugins.minuet")
-	--   end,
-	-- },
 
 	-- avanteの設定
 	{"yetone/avante.nvim",
@@ -127,26 +117,10 @@ require("lazy").setup({
 			"AvanteModels",
 			"AvanteSwitchProvider",
 		},
-
 		config = function()
 			require("plugins.avante")
 		end,
 	},
-
-	-- CopilotChatの設定
-	-- {"CopilotC-Nvim/CopilotChat.nvim",
-	-- 	dependencies = "nvim-telescope/telescope.nvim",
-	-- 	cmd = {
-	-- 		"CopilotChat",
-	-- 		"CopilotChatOpen",
-	-- 		"CopilotChatToggle",
-	-- 		"CopilotChatModels",
-	-- 		"CopilotChatPrompts",
-	-- 	},
-	-- 	config = function()
-	-- 		require("plugins.copilotchat")
-	-- 	end,
-	-- },
 
 	-- nvim-windowの設定
 	{"yorickpeterse/nvim-window",
