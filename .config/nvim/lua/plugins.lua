@@ -134,19 +134,19 @@ require("lazy").setup({
 	},
 
 	-- CopilotChatの設定
-	{"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = "nvim-telescope/telescope.nvim",
-		cmd = {
-			"CopilotChat",
-			"CopilotChatOpen",
-			"CopilotChatToggle",
-			"CopilotChatModels",
-			"CopilotChatPrompts",
-		},
-		config = function()
-			require("plugins.copilotchat")
-		end,
-	},
+	-- {"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	dependencies = "nvim-telescope/telescope.nvim",
+	-- 	cmd = {
+	-- 		"CopilotChat",
+	-- 		"CopilotChatOpen",
+	-- 		"CopilotChatToggle",
+	-- 		"CopilotChatModels",
+	-- 		"CopilotChatPrompts",
+	-- 	},
+	-- 	config = function()
+	-- 		require("plugins.copilotchat")
+	-- 	end,
+	-- },
 
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
