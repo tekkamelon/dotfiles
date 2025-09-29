@@ -190,6 +190,19 @@ require('jetpack.packer').add {
 	-- 	end,
 	-- },
 
+	-- nvim-windowの設定
+	{"yorickpeterse/nvim-window",
+		event = "BufAdd",
+		keys = {
+			{
+				"<leader>u",
+				"<cmd>lua require('nvim-window').pick()<cr>",
+				desc = "nvim-window: Jump to window"
+			},
+		},
+		config = true,
+	},
+
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
 	{'ravitemer/mcphub.nvim',
