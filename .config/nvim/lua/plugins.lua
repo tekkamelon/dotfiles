@@ -1,481 +1,347 @@
--- plugins.lua
--- neovim >= 0.10.0
+-- lazy-plugins.lua
+-- Neovim >= 0.11.0
 
 
--- プラグインのリスト
--- Jetpackの設定
-vim.cmd('packadd vim-jetpack')
-require('jetpack.packer').add {
+-- lazy.nvimのブートストラップ処理
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-	{'tani/vim-jetpack' , opt = true},
+if not vim.loop.fs_stat(lazypath) then
+	vim.fn.system({
+		"git",
+		"clone",
+		"--filter=blob:none",
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
+	})
+end
+vim.opt.rtp:prepend(lazypath)
 
+require("lazy").setup({
 	-- vim script製プラグイン
-	{'thinca/vim-partedit' , event = 'VisualEnter'},
-	{'haya14busa/vim-edgemotion' , event = 'VimEnter'},
-	{'skanehira/jumpcursor.vim' , event = 'VimEnter'},
+	{ "thinca/vim-partedit", event = "VeryLazy" },
+	{ "haya14busa/vim-edgemotion", event = "VeryLazy" },
+	{ "skanehira/jumpcursor.vim", event = "VeryLazy" },
 
 	-- 依存関係用プラグイン
-	'nvim-lua/plenary.nvim',
-	'nvim-telescope/telescope-ui-select.nvim',
-	'MunifTanjim/nui.nvim',
-	'rcarriga/nvim-notify',
+	{"nvim-lua/plenary.nvim", lazy = true},
+	{"nvim-telescope/telescope-ui-select.nvim", lazy = true},
+	{"MunifTanjim/nui.nvim", lazy = true},
+	{"rcarriga/nvim-notify", lazy = true},
 
 	-- lua製プラグイン
 	-- toggletermの設定
-	{'akinsho/toggleterm.nvim',
-
-		-- 起動に使用するコマンド
-        cmd = {'ToggleTerm', 'ToggleTermSendCurrentLine', 'ToggleTermSendVisualLines'},
-
-        config = function()
-
+	{"akinsho/toggleterm.nvim",
+		cmd = { "ToggleTerm", "ToggleTermSendCurrentLine", "ToggleTermSendVisualLines" },
+		config = function()
 			-- vscode以外から起動した場合に真
 			if not vim.g.vscode then
-
-				require('toggleterm').setup{}
-
+				require("toggleterm").setup({})
 			end
-
-        end,
-
+		end,
 	},
 
 	-- noiceの設定
 	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
-	{ 'folke/noice.nvim',
-
-		lock = true,
-
-		event = 'UIEnter',
-
+	{"folke/noice.nvim",
+		pin = true,
+		event = "UIEnter",
 		config = function()
-
-			require('plugins.noice')
-
-		end
-
+			require("plugins.noice")
+		end,
 	},
 
 	-- telescopeの設定
-	{'nvim-telescope/telescope.nvim' ,
-
-		-- 安定版に固定
-		tag = '0.1.6',
-
-		-- 依存関係のプラグイン
-        dependencies = 'nvim-lua/plenary.nvim',
-
-		event = 'UIEnter',
-
+	{"nvim-telescope/telescope.nvim",
+		version = "0.1.6",
+		cmd = "Telescope",
 		config = function()
-
 			if not vim.g.vscode then
-
-				require('telescope').setup{
-
+				require("telescope").setup({
 					defaults = {
-
 						-- プロンプトの設定
 						prompt_prefix = " 🔎 ",
-						selection_caret = " ➤  ",
-
+						selection_caret = " ➤	 ",
 					},
-
 					-- telescope-ui-selectの設定
 					extensions = {
-
 						["ui-select"] = {
-
-							  require("telescope.themes").get_dropdown{}
-
-						}
-
-  					}
-
-				}
-
+							require("telescope.themes").get_dropdown({}),
+						},
+					},
+				})
 				require("telescope").load_extension("ui-select")
-
 			end
-
 		end,
-
 	},
 
 	-- eyelinerの設定
-	{'jinh0/eyeliner.nvim',
-
-		event = 'UIEnter',
-
+	{"jinh0/eyeliner.nvim",
+		event = "VeryLazy",
+		-- event = { "BufReadPost", "BufNewFile" },
 		config = function()
-
-			require('eyeliner').setup{
-
+			require("eyeliner").setup({
 				highlight_on_key = false,
-
-			}
-
+			})
 		end,
+	},
 
-	 },
+	-- neocodeiumの設定
+	{"monkoose/neocodeium",
+		-- version = "v1.14.1",
+		cmd = "NeoCodeium",
+		event = "InsertEnter",
+		config = function()
+			require("plugins.neocodeium")
+		end,
+	},
 
-	{'monkoose/neocodeium',
+	-- minuetの設定
+	-- {
+	--   "milanglacier/minuet-ai.nvim",
+	--   event = "InsertEnter",
+	--   config = function()
+	--	 require("plugins.minuet")
+	--   end,
+	-- },
 
-		tag = 'v1.14.1',
-
-		cmd = 'NeoCodeium',
-
-		event = 'InsertEnter',
+	-- avanteの設定
+	{"yetone/avante.nvim",
+		build = "make",
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			'echasnovski/mini.icons',
+		},
+		cmd = {
+			"AvanteAsk",
+			"AvanteBuild",
+			"AvanteChat",
+			"AvanteChatNew",
+			"AvanteHistory",
+			"AvanteRefresh",
+			"AvanteStop",
+			"AvanteSwitchProvider",
+			"AvanteToggle",
+			"AvanteModels",
+			"AvanteSwitchProvider",
+		},
 
 		config = function()
-
-			require('plugins.neocodeium')
-
+			require("plugins.avante")
 		end,
-
 	},
 
 	-- CopilotChatの設定
-	-- {'CopilotC-Nvim/CopilotChat.nvim',
-	{'deathbeam/CopilotChat.nvim',
-
-		dependencies = {
-
-			'nvim-telescope/telescope.nvim' ,
-			'nvim-lua/plenary.nvim',
-
-		},
-
-		branch = "tools",
-
+	{"CopilotC-Nvim/CopilotChat.nvim",
+		dependencies = "nvim-telescope/telescope.nvim",
 		cmd = {
-
-			'CopilotChat',
-			'CopilotChatOpen',
-			'CopilotChatToggle',
-			'CopilotChatModels',
-			'CopilotChatPrompts',
-
+			"CopilotChat",
+			"CopilotChatOpen",
+			"CopilotChatToggle",
+			"CopilotChatModels",
+			"CopilotChatPrompts",
 		},
-
 		config = function()
-
-			-- require('plugins.copilotchat')
-			require('plugins.integrated_copilotchat')
-
+			require("plugins.copilotchat")
 		end,
-
 	},
 
 	-- mcphubの設定
-	{'ravitemer/mcphub.nvim',
-
-		dependencies = 'nvim-lua/plenary.nvim',
-
-		-- build = 'sudo npm install -g mcp-hub@latest',
-
+	-- `sudo npm install -g mcp-hub`でインストール
+	{"ravitemer/mcphub.nvim",
+		event = "VimEnter",
 		config = function()
-
-			require('mcphub').setup{}
-
+			require("mcphub").setup({
+				extensions = {
+					copilotchat = {
+						enabled = true,
+						convert_tools_to_functions = true,
+						convert_resources_to_functions = true,
+						add_mcp_prefix = false,
+					},
+				},
+			})
 		end,
-
 	},
+
 	-- treesitterの設定
-    {'nvim-treesitter/nvim-treesitter',
-
-		event = 'VimEnter',
-
+	{"nvim-treesitter/nvim-treesitter",
+		-- event = "VeryLazy",
+		lazy = true,
 		config = function()
-
-			require('plugins.treesitter')
-
+			require("plugins.treesitter")
 		end,
-
 	},
 
 	-- hlchunkの設定
-	{'shellRaining/hlchunk.nvim',
-
-	 	event = 'VimEnter',
-
+{"shellRaining/hlchunk.nvim",
+	event = "VimEnter",
 		config = function()
-
-			require('plugins.hlchunk')
-
+			require("plugins.hlchunk")
 		end,
-
-	},
+},
 
 	-- render-markdownの設定
-	{'MeanderingProgrammer/render-markdown.nvim',
-
-		dependencies = 'nvim-treesitter/nvim-treesitter',
-
-		event = 'UIEnter',
-
-		ft = 'markdown',
-
-		config = function()
-
-			require('plugins.render-markdown')
-
-		end,
-
+	{
+	"MeanderingProgrammer/render-markdown.nvim",
+	dependencies = "nvim-treesitter/nvim-treesitter",
+	event = "VeryLazy",
+	ft = "markdown",
+	config = function()
+		require("plugins.render-markdown")
+	end,
 	},
 
 	-- gitsignsの設定
-	{'lewis6991/gitsigns.nvim',
-
-		event = 'UIEnter',
-
-		lock = true,
-
-		config = function()
-
-			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then
-
-				require('gitsigns').setup{
-
-					signs = {
-
-						change = { text = '>>' },
-
-					},
-
-					numhl = true,
-
-				}
-
-			end
-
+	{"lewis6991/gitsigns.nvim",
+		event = "UIEnter",
+			pin = true,
+			config = function()
+				-- vscode以外から起動した場合に真
+				if not vim.g.vscode then
+					require("gitsigns").setup({
+						signs = {
+							change = { text = ">>" },
+						},
+						numhl = true,
+					})
+				end
 		end,
-
 	},
-
 
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
-	{'echasnovski/mini.pairs',
-
-		event = 'InsertEnter',
-
+	{"echasnovski/mini.pairs",
+		event = "InsertEnter",
 		config = function()
-
-			require('mini.pairs').setup{
-
+			require("mini.pairs").setup({
 				mappings = {
-
 					-- "<>"の設定
-					['<'] = { action = 'open', pair = '<>', neigh_pattern = '[^\\].' },
-					['>'] = { action = 'close', pair = '<>', neigh_pattern = '[^\\].' },
-
+					["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
+					[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
 					-- "「」"の設定
-					['「'] = { action = 'open', pair = '「」', neigh_pattern = '[^\\].' },
-					['」'] = { action = 'close', pair = '「」', neigh_pattern = '[^\\].' },
-
+					["「"] = { action = "open", pair = "「」", neigh_pattern = "[^\\]." },
+					["」"] = { action = "close", pair = "「」", neigh_pattern = "[^\\]." },
 				},
-
-			}
-
+			})
 		end,
-
 	},
 
 	-- mini.iconsの設定
-    {'echasnovski/mini.icons',
-
-        event = "VimEnter",
-
-        config = function()
-
+	{"echasnovski/mini.icons",
+		event = "VimEnter",
+		config = function()
 			if not vim.g.vscode then
-
-				require('mini.icons').setup{
-
+				require("mini.icons").setup({
 					-- アイコンのスタイルを"ascii"に設定
-					style = 'ascii',
-
-				}
-
+					style = "ascii",
+				})
 			end
-
-        end,
-
-    },
+		end,
+	},
 
 	-- mini.completionの設定
-	{'echasnovski/mini.completion',
-
-		event = 'InsertEnter',
-
+	{"echasnovski/mini.completion",
+		event = "InsertEnter",
 		config = function()
-
 			if not vim.g.vscode then
-
-				require('mini.completion').setup{}
-
+				require("mini.completion").setup({})
 			end
-
 		end,
-
 	},
 
 	-- mini.statuslineの設定
-	{'echasnovski/mini.statusline',
-
-		event = 'UIEnter',
-
+	{"echasnovski/mini.statusline",
+		event = "UIEnter",
 		config = function()
-
 			if not vim.g.vscode then
-
-				require('mini.statusline').setup{
-
+				require("mini.statusline").setup({
 					use_icons = false,
-
-				}
-
+				})
 			end
-
-		end
-
+		end,
 	},
 
 	-- mini.tablineの設定
-	{'echasnovski/mini.tabline',
-
-		event = 'UIEnter',
-
+	{"echasnovski/mini.tabline",
+		event = "UIEnter",
 		config = function()
-
 			if not vim.g.vscode then
-
-				require('mini.tabline').setup{
-
+				require("mini.tabline").setup({
 					show_icons = false,
-
-				}
-
+				})
 			end
-
-		end
-
+		end,
 	},
 
 	-- mini.commentの設定
-	{'echasnovski/mini.comment',
-
-		event = 'VimEnter',
-
+	{"echasnovski/mini.comment",
+		event = "VeryLazy",
 		config = function()
-
-			require('mini.comment').setup{
-
+			require("mini.comment").setup({
 				-- 空白行を無視
-				options = {ignore_blank_line = true,},
-
-			}
-
+				options = { ignore_blank_line = true },
+			})
 		end,
-
-	},
+},
 
 	-- mini.filesの設定
-	{'echasnovski/mini.files',
-
+	{"echasnovski/mini.files",
+		event = "VeryLazy",
 		config = function()
-
 			if not vim.g.vscode then
-
-				require('mini.files')
-
+				require("mini.files")
 			end
-
 		end,
-
 	},
 
 	-- mini.surroundの設定
-	{'echasnovski/mini.surround',
-
-		event = 'VimEnter',
-
+	{"echasnovski/mini.surround",
+		event = "VeryLazy",
 		config = function()
-
-			require('mini.surround').setup{
-
+			require("mini.surround").setup({
 				-- キーマッピングの設定
 				mappings = {
-
-					add = 'ca',
-					delete = 'cd',
-					find = 'cf',
-					find_left = 'cF',
-					highlight = 'ch',
-					replace = 'cr',
-					update_n_lines = 'cn',
-
-					suffix_last ='l',
-					suffix_next = 'n',
-
+					add = "ca",
+					delete = "cd",
+					find = "cf",
+					find_left = "cF",
+					highlight = "ch",
+					replace = "cr",
+					update_n_lines = "cn",
+					suffix_last = "l",
+					suffix_next = "n",
 				},
-
 				-- 矩形選択時に各行を囲む
 				respect_selection_type = true,
-
-			}
-
+			})
 		end,
-
 	},
-
 
 	-- lsp関連
-	'neovim/nvim-lspconfig',
+	{"neovim/nvim-lspconfig", lazy = true},
 
 	-- masonの設定
-	{'williamboman/mason.nvim',
-
+	{"williamboman/mason.nvim",
+		lazy = true,
 		config = function()
-
-			if not vim.g.vscode then
-
-				require('mason').setup{}
-
-			end
-
-		end,
-
+				if not vim.g.vscode then
+					require("mason").setup({})
+				end
+			end,
 	},
-
 	-- mason-lspconfigの設定
- 	{'williamboman/mason-lspconfig.nvim',
-
-		-- バージョンを固定	
-		-- これを記入しないと設定が壊れる
- 		branch = "v1.x",
- 		lock = true,
-
- 		-- 依存関係のプラグイン
- 		dependencies = {
-
- 			'neovim/nvim-lspconfig',
- 			'williamboman/mason.nvim'
-
- 		},
-
- 		config = function()
-
- 			require('plugins.mason-lsp')
-
- 		end,
-
- 	},
-
-}
+	{"williamboman/mason-lspconfig.nvim",
+		pin = true,
+		event = "VeryLazy",
+		config = function()
+			require("plugins.mason-lsp")
+		end,
+	},
+})
 
 -- プラグインのキーマップ設定を読み込み
-require('keymaps.plugins')
+require("keymaps.plugins")
 
