@@ -40,20 +40,6 @@ end
 -- 通常のneovimから呼び出した場合の設定
 M.setup_neovim = function()
 
-	-- mini.filesのトグルの設定
-	local MiniFiles = require('mini.files')
-	local minifiles_toggle = function()
-
-		-- ファイラが開いていれば真
-		if not MiniFiles.close() then
-
-			-- カレントバッファのディレクトリを表示
-			MiniFiles.open(vim.api.nvim_buf_get_name(0))
-
-		end
-
-	end
-
 	-- キーマップ設定のテーブルを作成
 	local kmaps = {
 
@@ -103,10 +89,6 @@ M.setup_neovim = function()
 		-- ノーマルモード時に現在カーソルのある行を,ビジュアルモード時に選択範囲をターミナルに送る
 		{'n', '<leader>ts', ':ToggleTermSendCurrentLine<CR>'},
 		{'v', '<leader>ts', ':ToggleTermSendVisualLines<CR>'},
-
-		-- mini.files
-		-- ファイラをトグル
-		{'n', '<C-n>', minifiles_toggle},
 
 		-- hop
 		-- バッファ内のすべての文字にラベルを付ける
