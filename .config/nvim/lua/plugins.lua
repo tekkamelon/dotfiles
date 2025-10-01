@@ -27,12 +27,22 @@ require("lazy").setup({
 	{"nvim-telescope/telescope-ui-select.nvim", lazy = true},
 	{"MunifTanjim/nui.nvim", lazy = true},
 	{"rcarriga/nvim-notify", lazy = true},
+	{"neovim/nvim-lspconfig", lazy = true},
+	{"nvim-treesitter/nvim-treesitter",
+		lazy = true,
+		config = function()
+			require("plugins.treesitter")
+		end,
+	},
 
 	-- lua製プラグイン
-
 	-- toggletermの設定
 	{"akinsho/toggleterm.nvim",
-		cmd = { "ToggleTerm", "ToggleTermSendCurrentLine", "ToggleTermSendVisualLines" },
+		cmd = {
+			"ToggleTerm",
+			"ToggleTermSendCurrentLine",
+			"ToggleTermSendVisualLines"
+		},
 		config = function()
 			-- vscode以外から起動した場合に真
 			if not vim.g.vscode then
@@ -96,12 +106,13 @@ require("lazy").setup({
 	{"yetone/avante.nvim",
 		build = "make",
 		dependencies = {
-			'nvim-treesitter/nvim-treesitter',
-			'nvim-lua/plenary.nvim',
-			'MunifTanjim/nui.nvim',
-			'echasnovski/mini.icons',
-			'nvim-telescope/telescope.nvim',
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"echasnovski/mini.icons",
+			"nvim-telescope/telescope.nvim",
 		},
+
 		cmd = {
 			"AvanteAsk",
 			"AvanteBuild",
@@ -146,15 +157,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- treesitterの設定
-	{"nvim-treesitter/nvim-treesitter",
-		-- event = "VeryLazy",
-		lazy = true,
-		config = function()
-			require("plugins.treesitter")
-		end,
-	},
-
 	-- hlchunkの設定
 	{"shellRaining/hlchunk.nvim",
 		event = "VimEnter",
@@ -164,14 +166,11 @@ require("lazy").setup({
 	},
 
 	-- render-markdownの設定
-	{
-	"MeanderingProgrammer/render-markdown.nvim",
-	dependencies = "nvim-treesitter/nvim-treesitter",
-	event = "VeryLazy",
-	ft = "markdown",
-	config = function()
-		require("plugins.render-markdown")
-	end,
+	{"MeanderingProgrammer/render-markdown.nvim",
+		ft = "markdown",
+		config = function()
+			require("plugins.render-markdown")
+		end,
 	},
 
 	-- gitsignsの設定
@@ -231,7 +230,8 @@ require("lazy").setup({
 
 	-- mini.iconsの設定
 	{"echasnovski/mini.icons",
-		event = "VimEnter",
+		-- event = "VimEnter",
+		lazy = true,
 		config = function()
 			if not vim.g.vscode then
 				require("mini.icons").setup({
@@ -287,6 +287,7 @@ require("lazy").setup({
 	-- mini.filesの設定
 	{"echasnovski/mini.files",
 		event = "VeryLazy",
+		dependencies = "echasnovski/mini.icons",
 		config = function()
 			require("plugins.mini-files")
 		end,
@@ -314,8 +315,6 @@ require("lazy").setup({
 	},
 
 	-- lsp関連
-	{"neovim/nvim-lspconfig", lazy = true},
-
 	-- masonの設定
 	{"williamboman/mason.nvim",
 		lazy = true,
