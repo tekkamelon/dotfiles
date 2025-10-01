@@ -1,4 +1,4 @@
--- lazy-plugins.lua
+-- plugins.lua
 -- Neovim >= 0.11.0
 
 
@@ -19,9 +19,8 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- vim script製プラグイン
-	{ "thinca/vim-partedit", event = "VeryLazy" },
-	{ "haya14busa/vim-edgemotion", event = "VeryLazy" },
-	{ "skanehira/jumpcursor.vim", event = "VeryLazy" },
+	{"thinca/vim-partedit", event = "VeryLazy"},
+	{"haya14busa/vim-edgemotion", event = "VeryLazy"},
 
 	-- 依存関係用プラグイン
 	{"nvim-lua/plenary.nvim", lazy = true},
@@ -30,6 +29,7 @@ require("lazy").setup({
 	{"rcarriga/nvim-notify", lazy = true},
 
 	-- lua製プラグイン
+
 	-- toggletermの設定
 	{"akinsho/toggleterm.nvim",
 		cmd = { "ToggleTerm", "ToggleTermSendCurrentLine", "ToggleTermSendVisualLines" },
@@ -78,7 +78,6 @@ require("lazy").setup({
 	-- eyelinerの設定
 	{"jinh0/eyeliner.nvim",
 		event = "VeryLazy",
-		-- event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("eyeliner").setup({
 				highlight_on_key = false,
@@ -96,44 +95,44 @@ require("lazy").setup({
 		end,
 	},
 
-	-- minuetの設定
-	-- {
-	--   "milanglacier/minuet-ai.nvim",
-	--   event = "InsertEnter",
-	--   config = function()
-	--	 require("plugins.minuet")
-	--   end,
-	-- },
-
-	-- {"olimorris/codecompanion.nvim",
-	-- 	dependencies = {
-	-- 		-- "nvim-lua/plenary.nvim",
-	-- 		"nvim-treesitter/nvim-treesitter",
-	-- 	},
-	-- 	cmd = {
-	-- 		"CodeCompanion",
-	-- 		"CodeCompanionActions",
-	-- 		"CodeCompanionChat",
-	-- 		"CodeCompanionCmd",
-	-- 	},
-	-- 	config = function()
-	-- 		require("plugins.codecompanion")
-	-- 	end,
-	-- },
-
-	-- CopilotChatの設定
-	{"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = "nvim-telescope/telescope.nvim",
+	-- avanteの設定
+	{"yetone/avante.nvim",
+		build = "make",
+		dependencies = {
+			'nvim-treesitter/nvim-treesitter',
+			'nvim-lua/plenary.nvim',
+			'MunifTanjim/nui.nvim',
+			'echasnovski/mini.icons',
+		},
 		cmd = {
-			"CopilotChat",
-			"CopilotChatOpen",
-			"CopilotChatToggle",
-			"CopilotChatModels",
-			"CopilotChatPrompts",
+			"AvanteAsk",
+			"AvanteBuild",
+			"AvanteChat",
+			"AvanteChatNew",
+			"AvanteHistory",
+			"AvanteRefresh",
+			"AvanteStop",
+			"AvanteSwitchProvider",
+			"AvanteToggle",
+			"AvanteModels",
+			"AvanteSwitchProvider",
 		},
 		config = function()
-			require("plugins.copilotchat")
+			require("plugins.avante")
 		end,
+	},
+
+	-- nvim-windowの設定
+	{"yorickpeterse/nvim-window",
+		event = "BufAdd",
+		keys = {
+			{
+				"<leader>u",
+				"<cmd>lua require('nvim-window').pick()<cr>",
+				desc = "nvim-window: Jump to window"
+			},
+		},
+		config = true,
 	},
 
 	-- mcphubの設定
@@ -156,7 +155,8 @@ require("lazy").setup({
 
 	-- treesitterの設定
 	{"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		lazy = true,
 		config = function()
 			require("plugins.treesitter")
 		end,
@@ -198,6 +198,27 @@ require("lazy").setup({
 		end,
 	},
 
+	-- hopの設定
+	{"smoka7/hop.nvim",
+		cmd = {
+
+			"HopWord",
+			"HopAnywhere",
+			"HopChar1",
+			"HopChar2",
+			"HopLine",
+			"HopWordMW",
+			"HopChar1MW",
+			"HopChar2MW",
+			"HopLineMW",
+
+		},
+		version = "*",
+		opts = {
+			keys = 'etovxqpdygfblzhckisuran'
+		}
+	},
+
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
 	{"echasnovski/mini.pairs",
@@ -230,14 +251,13 @@ require("lazy").setup({
 	},
 
 	-- mini.completionの設定
-	{
-	"echasnovski/mini.completion",
-	event = "InsertEnter",
-	config = function()
-		if not vim.g.vscode then
-			require("mini.completion").setup({})
-		end
-	end,
+	{"echasnovski/mini.completion",
+		event = "InsertEnter",
+		config = function()
+			if not vim.g.vscode then
+				require("mini.completion").setup({})
+			end
+		end,
 	},
 
 	-- mini.statuslineの設定
@@ -253,8 +273,8 @@ require("lazy").setup({
 	},
 
 	-- mini.tablineの設定
-{"echasnovski/mini.tabline",
-	event = "UIEnter",
+	{"echasnovski/mini.tabline",
+		event = "UIEnter",
 		config = function()
 			if not vim.g.vscode then
 				require("mini.tabline").setup({
