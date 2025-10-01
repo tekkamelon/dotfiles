@@ -53,7 +53,7 @@ require("lazy").setup({
 
 	-- telescopeの設定
 	{"nvim-telescope/telescope.nvim",
-		version = "0.1.6",
+		lazy = true,
 		cmd = "Telescope",
 		config = function()
 			if not vim.g.vscode then
@@ -103,6 +103,7 @@ require("lazy").setup({
 			'nvim-lua/plenary.nvim',
 			'MunifTanjim/nui.nvim',
 			'echasnovski/mini.icons',
+			'nvim-telescope/telescope.nvim',
 		},
 		cmd = {
 			"AvanteAsk",
@@ -138,16 +139,13 @@ require("lazy").setup({
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
 	{"ravitemer/mcphub.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		config = function()
 			require("mcphub").setup({
 				extensions = {
-					copilotchat = {
-						enabled = true,
-						convert_tools_to_functions = true,
-						convert_resources_to_functions = true,
-						add_mcp_prefix = false,
-					},
+					avante = {
+						make_slash_commands = true,
+					}
 				},
 			})
 		end,
@@ -163,12 +161,12 @@ require("lazy").setup({
 	},
 
 	-- hlchunkの設定
-{"shellRaining/hlchunk.nvim",
-	event = "VimEnter",
-		config = function()
-			require("plugins.hlchunk")
-		end,
-},
+	{"shellRaining/hlchunk.nvim",
+		event = "VimEnter",
+			config = function()
+				require("plugins.hlchunk")
+			end,
+	},
 
 	-- render-markdownの設定
 	{
