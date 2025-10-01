@@ -15,7 +15,7 @@ if not vim.g.vscode then
 		-- プロバイダの設定
 		providers = {
 			openrouter = {
-				-- OpenAIから継承
+				-- OpenAI互換
 				__inherited_from = 'openai',
 				-- エンドポイントURL
 				endpoint = os.getenv('OPENAI_BASE_URL') or 'https://openrouter.ai/api/v1',
@@ -23,6 +23,12 @@ if not vim.g.vscode then
 				api_key_name = 'OPENROUTER_API_KEY',
 				-- 使用モデル
 				model = llm_model,
+			},
+			lmstudio = {
+				__inherited_from = 'openai',
+				endpoint = 'http://localhost:1234/v1',
+				api_key_name = '',
+				model = 'qwen3-coder-30b-a3b-instruct',
 			},
 		},
 
