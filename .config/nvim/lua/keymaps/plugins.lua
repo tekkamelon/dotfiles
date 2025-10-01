@@ -112,6 +112,14 @@ M.setup_neovim = function()
 		-- バッファ内のすべての文字にラベルを付ける
 		{'n', '<leader>h', ':HopAnywhere<CR>'},
 
+		-- avante
+		-- チャットバッファをトグル
+		{'n', '<leader>cc', ':AvanteToggle<CR>'},
+		-- LLMを変更
+		{'n', '<leader>am', ':AvanteModels<CR>'},
+		-- チャット内容をクリア
+		{'n', '<leader>ar', ':AvanteClear<CR>'},
+
 }
 
 	-- テーブルの内容をループし代入
