@@ -297,9 +297,7 @@ require("lazy").setup({
 	{"echasnovski/mini.files",
 		event = "VeryLazy",
 		config = function()
-			if not vim.g.vscode then
-				require("mini.files")
-			end
+			require("plugins.mini-files")
 		end,
 	},
 
