@@ -22,9 +22,6 @@ M.setup_vscode = function()
 		{'<C-l>', '<Plug>(edgemotion-k)'},
 		{'<C-Up>', '<Plug>(edgemotion-k)'},
 
-		-- jumpcursor
-		{'<leader>h', '<Plug>(jumpcursor-jump)'},
-
 		-- mini.comment
 		-- コメントアウト
 		{'<leader>g', 'gcc', {remap = true}},
@@ -110,6 +107,10 @@ M.setup_neovim = function()
 		-- mini.files
 		-- ファイラをトグル
 		{'n', '<C-n>', minifiles_toggle},
+
+		-- hop
+		-- バッファ内のすべての文字にラベルを付ける
+		{'n', '<leader>h', ':HopAnywhere<CR>'},
 
 }
 
