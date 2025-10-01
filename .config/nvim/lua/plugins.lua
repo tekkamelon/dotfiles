@@ -78,16 +78,13 @@ require("lazy").setup({
 	-- eyelinerの設定
 	{"jinh0/eyeliner.nvim",
 		event = "VeryLazy",
-		config = function()
-			require("eyeliner").setup({
-				highlight_on_key = false,
-			})
-		end,
+		opts = {
+			highlight_on_key = false
+		}
 	},
 
 	-- neocodeiumの設定
 	{"monkoose/neocodeium",
-		-- version = "v1.14.1",
 		cmd = "NeoCodeium",
 		event = "InsertEnter",
 		config = function()
@@ -140,15 +137,13 @@ require("lazy").setup({
 	-- `sudo npm install -g mcp-hub`でインストール
 	{"ravitemer/mcphub.nvim",
 		event = "VeryLazy",
-		config = function()
-			require("mcphub").setup({
-				extensions = {
-					avante = {
-						make_slash_commands = true,
-					}
-				},
-			})
-		end,
+		opts = {
+			extensions = {
+				avante = {
+					make_slash_commands = true,
+				}
+			},
+		},
 	},
 
 	-- treesitterの設定
@@ -221,18 +216,17 @@ require("lazy").setup({
 	-- mini.pairsの設定
 	{"echasnovski/mini.pairs",
 		event = "InsertEnter",
-		config = function()
-			require("mini.pairs").setup({
-				mappings = {
-					-- "<>"の設定
-					["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
-					[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
-					-- "「」"の設定
-					["「"] = { action = "open", pair = "「」", neigh_pattern = "[^\\]." },
-					["」"] = { action = "close", pair = "「」", neigh_pattern = "[^\\]." },
-				},
-			})
-		end,
+		opts= {
+			mappings = {
+				-- "<>"の設定
+				["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
+				[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
+				-- "「」"の設定
+				["「"] = { action = "open", pair = "「」", neigh_pattern = "[^\\]." },
+				["」"] = { action = "close", pair = "「」", neigh_pattern = "[^\\]." },
+			},
+
+		}
 	},
 
 	-- mini.iconsの設定
@@ -285,13 +279,10 @@ require("lazy").setup({
 	-- mini.commentの設定
 	{"echasnovski/mini.comment",
 		event = "VeryLazy",
-		config = function()
-			require("mini.comment").setup({
-				-- 空白行を無視
-				options = { ignore_blank_line = true },
-			})
-		end,
-},
+		opts = {
+			options = { ignore_blank_line = true },
+		},
+	},
 
 	-- mini.filesの設定
 	{"echasnovski/mini.files",
@@ -304,24 +295,22 @@ require("lazy").setup({
 	-- mini.surroundの設定
 	{"echasnovski/mini.surround",
 		event = "VeryLazy",
-		config = function()
-			require("mini.surround").setup({
-				-- キーマッピングの設定
-				mappings = {
-					add = "ca",
-					delete = "cd",
-					find = "cf",
-					find_left = "cF",
-					highlight = "ch",
-					replace = "cr",
-					update_n_lines = "cn",
-					suffix_last = "l",
-					suffix_next = "n",
-				},
-				-- 矩形選択時に各行を囲む
-				respect_selection_type = true,
-			})
-		end,
+		opts = {
+			-- キーマップの設定
+			mappings = {
+				add = "ca",
+				delete = "cd",
+				find = "cf",
+				find_left = "cF",
+				highlight = "ch",
+				replace = "cr",
+				update_n_lines = "cn",
+				suffix_last = "l",
+				suffix_next = "n",
+			},
+			-- 矩形選択時に各行を囲む
+			respect_selection_type = true,
+		},
 	},
 
 	-- lsp関連
@@ -336,6 +325,7 @@ require("lazy").setup({
 				end
 			end,
 	},
+
 	-- mason-lspconfigの設定
 	{"williamboman/mason-lspconfig.nvim",
 		pin = true,
