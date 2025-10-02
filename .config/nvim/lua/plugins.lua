@@ -90,7 +90,7 @@ require("lazy").setup({
 
 	-- eyelinerの設定
 	{"jinh0/eyeliner.nvim",
-		event = { "BufReadPost", "BufNewFile" },
+		event = "VeryLazy",
 		opts = {
 			highlight_on_key = false
 		}
@@ -151,7 +151,7 @@ require("lazy").setup({
 
 	-- hlchunkの設定
 	{"shellRaining/hlchunk.nvim",
-		event = { "BufReadPost", "BufNewFile" },
+		event = "VeryLazy",
 		config = function()
 			require("plugins.hlchunk")
 		end,
@@ -167,7 +167,12 @@ require("lazy").setup({
 
 	-- gitsignsの設定
 	{"lewis6991/gitsigns.nvim",
-		event = { "BufReadPost", "BufNewFile" },
+		event = {
+			"TextChanged",
+			"TextChangedI",
+			"TextChangedP",
+			"BufWritePost",
+		},
 			pin = true,
 			config = function()
 				-- vscode以外から起動した場合に真
@@ -316,10 +321,7 @@ require("lazy").setup({
 	-- mason-lspconfigの設定
 	{"williamboman/mason-lspconfig.nvim",
 		pin = true,
-		event = {
-			"BufReadPre",
-			"BufReadPost",
-		},
+		event = "VeryLazy",
 		config = function()
 			require("plugins.mason-lsp")
 		end,
