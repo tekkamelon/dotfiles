@@ -1,4 +1,5 @@
 -- mason-lspconfig
+-- Neovim >= 0.11.0
 
 
 if not vim.g.vscode then
@@ -9,19 +10,47 @@ if not vim.g.vscode then
 	-- LSPのクライアントの設定
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-	require('mason-lspconfig').setup_handlers{
+	-- 診断設定をグローバルに定義
+	vim.diagnostic.config({
+	    virtual_text = {
+	        -- プレフィックスアイコン
+	        prefix = '●',
+	        -- ソースを表示(複数ある場合)
+	        source = "if_many",
+	        -- 深刻度でソート
+	        severity_sort = true,
+	    },
+	    -- フロートウィンドウの設定
+	    float = {
+	        border = 'rounded',
+	        source = true,
+	    },
+	    signs = true,
+	    -- サイン列を表示
+	    underline = true,
+	    -- アンダーライン
+	    update_in_insert = false,
+	    -- インサートモード中は更新せず
+	    severity_sort = true,
+	})
 
-		function(server_name)
+	require('mason-lspconfig').setup({
 
-			lspconfig[server_name].setup{
+		handlers = {
 
-				capabilities = capabilities,
+			function(server_name)
 
-			}
+				lspconfig[server_name].setup{
 
-		end,
+					capabilities = capabilities,
 
-	}
+					-- 診断設定をここにオーバーライド可能(必要に応じて)
+				}
+
+			end,
+
+		}
+
+	})
 
 end
-
