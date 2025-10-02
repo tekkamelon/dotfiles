@@ -87,7 +87,7 @@ require("lazy").setup({
 
 	-- eyelinerの設定
 	{"jinh0/eyeliner.nvim",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			highlight_on_key = false
 		}
@@ -105,26 +105,13 @@ require("lazy").setup({
 	-- avanteの設定
 	{"yetone/avante.nvim",
 		build = "make",
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
 			"MunifTanjim/nui.nvim",
 			"echasnovski/mini.icons",
 			"nvim-telescope/telescope.nvim",
-		},
-
-		cmd = {
-			"AvanteAsk",
-			"AvanteBuild",
-			"AvanteChat",
-			"AvanteChatNew",
-			"AvanteHistory",
-			"AvanteRefresh",
-			"AvanteStop",
-			"AvanteSwitchProvider",
-			"AvanteToggle",
-			"AvanteModels",
-			"AvanteSwitchProvider",
 		},
 		config = function()
 			require("plugins.avante")
@@ -147,7 +134,7 @@ require("lazy").setup({
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
 	{"ravitemer/mcphub.nvim",
-		event = "VeryLazy",
+		cmd = "MCPHub",
 		opts = {
 			extensions = {
 				avante = {
@@ -159,10 +146,10 @@ require("lazy").setup({
 
 	-- hlchunkの設定
 	{"shellRaining/hlchunk.nvim",
-		event = "VimEnter",
-			config = function()
-				require("plugins.hlchunk")
-			end,
+		event = { "BufReadPost", "BufNewFile" },
+		config = function()
+			require("plugins.hlchunk")
+		end,
 	},
 
 	-- render-markdownの設定
@@ -175,7 +162,7 @@ require("lazy").setup({
 
 	-- gitsignsの設定
 	{"lewis6991/gitsigns.nvim",
-		event = "UIEnter",
+		event = { "BufReadPost", "BufNewFile" },
 			pin = true,
 			config = function()
 				-- vscode以外から起動した場合に真
@@ -193,21 +180,18 @@ require("lazy").setup({
 	-- hopの設定
 	{"smoka7/hop.nvim",
 		cmd = {
-
-			"HopWord",
-			"HopAnywhere",
 			"HopChar1",
 			"HopChar2",
+			"HopWord",
 			"HopLine",
-			"HopWordMW",
-			"HopChar1MW",
-			"HopChar2MW",
-			"HopLineMW",
-
+			"HopLineStart",
+			"HopAnywhere",
+			"HopVertical",
+			"HopPattern",
 		},
 		version = "*",
 		opts = {
-			keys = 'etovxqpdygfblzhckisuran'
+			keys = 'zxcvbqwertyuiopasdfghjkl'
 		}
 	},
 
@@ -230,7 +214,6 @@ require("lazy").setup({
 
 	-- mini.iconsの設定
 	{"echasnovski/mini.icons",
-		-- event = "VimEnter",
 		lazy = true,
 		config = function()
 			if not vim.g.vscode then
@@ -278,7 +261,7 @@ require("lazy").setup({
 
 	-- mini.commentの設定
 	{"echasnovski/mini.comment",
-		event = "VeryLazy",
+		keys = "<leader>g",
 		opts = {
 			options = { ignore_blank_line = true },
 		},
@@ -286,7 +269,7 @@ require("lazy").setup({
 
 	-- mini.filesの設定
 	{"echasnovski/mini.files",
-		event = "VeryLazy",
+		keys = "<C-n>",
 		dependencies = "echasnovski/mini.icons",
 		config = function()
 			require("plugins.mini-files")
@@ -295,7 +278,7 @@ require("lazy").setup({
 
 	-- mini.surroundの設定
 	{"echasnovski/mini.surround",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			-- キーマップの設定
 			mappings = {
