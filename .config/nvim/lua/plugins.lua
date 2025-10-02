@@ -19,7 +19,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- vim script製プラグイン
-	{"thinca/vim-partedit", event = "VeryLazy"},
+	{"thinca/vim-partedit",
+		-- ビジュアルモードへの移行時に起動
+		event = "ModeChanged *:[vV\x16]*"
+	},
 	{"haya14busa/vim-edgemotion", event = "VeryLazy"},
 
 	-- 依存関係用プラグイン
@@ -105,7 +108,7 @@ require("lazy").setup({
 	-- avanteの設定
 	{"yetone/avante.nvim",
 		build = "make",
-		event = { "BufReadPost", "BufNewFile" },
+		event = "ModeChanged",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
@@ -120,6 +123,7 @@ require("lazy").setup({
 
 	-- nvim-windowの設定
 	{"yorickpeterse/nvim-window",
+		-- バッファが追加されたときに起動
 		event = "BufAdd",
 		keys = {
 			{
@@ -134,7 +138,7 @@ require("lazy").setup({
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
 	{"ravitemer/mcphub.nvim",
-		cmd = "MCPHub",
+		event = "ModeChanged",
 		opts = {
 			extensions = {
 				avante = {
