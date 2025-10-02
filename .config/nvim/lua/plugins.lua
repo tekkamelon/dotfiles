@@ -109,6 +109,7 @@ require("lazy").setup({
 	{"yetone/avante.nvim",
 		build = "make",
 		event = "ModeChanged",
+		keys = "<leader>a",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-lua/plenary.nvim",
@@ -315,7 +316,10 @@ require("lazy").setup({
 	-- mason-lspconfigの設定
 	{"williamboman/mason-lspconfig.nvim",
 		pin = true,
-		event = "VeryLazy",
+		event = {
+			"BufReadPre",
+			"BufReadPost",
+		},
 		config = function()
 			require("plugins.mason-lsp")
 		end,
