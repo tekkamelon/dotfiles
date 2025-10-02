@@ -1,4 +1,4 @@
--- avante.lua
+-- ,avante.lua
 -- Neovim >= 0.11.0
 
 if not vim.g.vscode then
@@ -47,9 +47,12 @@ if not vim.g.vscode then
 		config = {
 
 			selector = {
-				-- セレクタプロバイダとしてTelescopeを使用
 				provider = "telescope",
 			},
+			-- 検索エンジン
+			web_search_engine = {
+				provider = "brave",
+			}
 
 		},
 
@@ -65,6 +68,13 @@ if not vim.g.vscode then
 				height = 12,
 			}
 		},
+
+		custom_tools = function()
+        return {
+            require("mcphub.extensions.avante").mcp_tool(),
+        }
+
+    end,
 	}
 end
 
