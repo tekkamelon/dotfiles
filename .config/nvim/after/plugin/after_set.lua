@@ -45,6 +45,22 @@ end
 vim.api.nvim_set_hl(0, 'EyelinerPrimary', {fg = 'red', bold = true, underline = true})
 vim.api.nvim_set_hl(0, 'EyelinerSecondary', {fg = 'orange', bold = true, underline = true})
 
+-- mini.statuslineの設定
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeNormal', {fg = 'white', bg = 'green', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeInsert', {fg = 'white', bg = 'pink', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeVisual', {fg = 'white', bg = 'darkorange', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniStatuslineModeCommand', {fg = 'white', bg = 'blue', bold = true, underline = true})
+
+-- mini.tablineの設定
+vim.api.nvim_set_hl(0, 'MiniTablineCurrent', {fg = 'lime', bg = 'black', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniTablineVisible', {fg = 'teal', bg = '#2e3234', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniTablineHidden', {fg = 'white', bg = '#2e3234', bold = false, underline = false})
+vim.api.nvim_set_hl(0, 'MiniTablineModifiedCurrent', {fg = 'red', bg = 'black', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniTablineModifiedVisible', {fg = 'orange', bg = '#2e3234', bold = true, underline = true})
+vim.api.nvim_set_hl(0, 'MiniTablineModifiedHidden', {fg = 'pink', bg = '#2e3234', bold = false, underline = false})
+
+
+
 -- カラースキームが"industry"であれば真
 if vim.g.colors_name == "industry" then
 
