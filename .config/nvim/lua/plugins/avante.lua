@@ -23,12 +23,22 @@ if not vim.g.vscode then
 				api_key_name = 'OPENROUTER_API_KEY',
 				-- 使用モデル
 				model = llm_model,
+				disabled_tools = {
+					"rag_search",
+					"git_diff",
+					"git_commit"
+				}
 			},
 			lmstudio = {
 				__inherited_from = 'openai',
 				endpoint = 'http://localhost:1234/v1',
 				api_key_name = '',
 				model = 'qwen3-coder-30b-a3b-instruct',
+				disabled_tools = {
+					"rag_search",
+					"git_diff",
+					"git_commit"
+				}
 			},
 		},
 
@@ -45,7 +55,6 @@ if not vim.g.vscode then
 		},
 
 		config = {
-
 			selector = {
 				provider = "telescope",
 			},
@@ -53,7 +62,6 @@ if not vim.g.vscode then
 			web_search_engine = {
 				provider = "brave",
 			}
-
 		},
 
 		-- ウィンドウ設定
