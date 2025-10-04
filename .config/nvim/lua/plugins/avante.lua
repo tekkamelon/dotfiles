@@ -2,8 +2,8 @@
 -- Neovim >= 0.11.0
 
 if not vim.g.vscode then
-	-- 環境変数からLLMを取得,なければ"x-ai/grok-4-fast:free"
-	local llm_model = os.getenv("OPENAI_MODEL") or "x-ai/grok-4-fast:free"
+	-- 環境変数からLLMを取得,なければ"qwen/qwen3-coder:free"
+	local llm_model = os.getenv("OPENAI_MODEL") or "qwen/qwen3-coder:free"
 
 	require('avante').setup{
 
