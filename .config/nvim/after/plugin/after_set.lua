@@ -52,6 +52,8 @@ local highlight_groups = {
     MiniStatuslineModeInsert = {fg = 'white', bg = 'pink', bold = true, underline = true},
     MiniStatuslineModeVisual = {fg = 'white', bg = 'darkorange', bold = true, underline = true},
     MiniStatuslineModeCommand = {fg = 'white', bg = 'blue', bold = true, underline = true},
+	-- LSPなどの表示
+    MiniStatuslineDevinfo = {fg = 'white', bg = 'darkblue', bold = true, underline = false},
 
     -- mini.tablineの設定
     MiniTablineCurrent = {fg = 'lime', bg = 'black', bold = true, underline = true},
@@ -59,7 +61,8 @@ local highlight_groups = {
     MiniTablineHidden = {fg = 'white', bg = '#2e3234', bold = false, underline = false},
     MiniTablineModifiedCurrent = {fg = 'red', bg = 'black', bold = true, underline = true},
     MiniTablineModifiedVisible = {fg = 'orange', bg = '#2e3234', bold = true, underline = true},
-    MiniTablineModifiedHidden = {fg = 'pink', bg = '#2e3234', bold = false, underline = false}
+    MiniTablineModifiedHidden = {fg = 'pink', bg = '#2e3234', bold = false, underline = false},
+    MiniStatuslineModeOther = {fg = 'white', bg = 'black', bold = true, underline = false},
 }
 
 -- テーブルからハイライトを一括設定
