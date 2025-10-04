@@ -3,7 +3,7 @@
 
 if not vim.g.vscode then
 	-- 環境変数からLLMを取得,なければOpenRouterのfreeモデル
-	local llm_model = os.getenv("OPENAI_MODEL") or "z-ai/glm-4.5-air:free"
+	local llm_model = vim.env.OPENAI_MODEL or "z-ai/glm-4.5-air:free"
 
 	require('avante').setup {
 
@@ -18,7 +18,7 @@ if not vim.g.vscode then
 				-- OpenAI互換
 				__inherited_from = 'openai',
 				-- エンドポイントURL
-				endpoint = os.getenv('OPENAI_BASE_URL') or 'https://openrouter.ai/api/v1',
+				endpoint = vim.env.OPENAI_BASE_URL or 'https://openrouter.ai/api/v1',
 				-- APIキー名
 				api_key_name = 'OPENROUTER_API_KEY',
 				-- 使用モデル
@@ -31,7 +31,7 @@ if not vim.g.vscode then
 			},
 			lmstudio = {
 				__inherited_from = 'openai',
-				endpoint = 'http://localhost:1234/v1',
+				endpoint = vim.env.LMSTUDIO_API_URL or 'http://localhost:1234/v1',
 				api_key_name = '',
 				model = 'qwen3-coder-30b-a3b-instruct',
 				disabled_tools = {
