@@ -321,7 +321,7 @@ require("lazy").setup({
 	-- mason-lspconfigの設定
 	{"williamboman/mason-lspconfig.nvim",
 		pin = true,
-		event = "VeryLazy",
+		event = "FileType",
 		config = function()
 			require("plugins.mason-lsp")
 		end,
