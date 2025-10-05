@@ -39,7 +39,7 @@ end
 
 -- ハイライト設定をテーブルで一括管理
 local highlight_groups = {
-	-- eyelinerのハイライトの色を設定
+	-- eyelinerの設定
 	EyelinerPrimary = { fg = 'red', bold = true, underline = true },
 	EyelinerSecondary = { fg = 'orange', bold = true, underline = true },
 
@@ -59,6 +59,9 @@ local highlight_groups = {
 	MiniTablineModifiedVisible = { fg = 'orange', bg = '#2e3234', bold = true, underline = true },
 	MiniTablineModifiedHidden = { fg = 'pink', bg = '#2e3234', bold = false, underline = false },
 	MiniStatuslineModeOther = { fg = 'white', bg = 'black', bold = true, underline = false },
+
+	-- avanteの設定
+	AvanteThirdTitle = { fg = 'lime', bg = 'black', bold = true, underline = true },
 }
 
 -- テーブルからハイライトを一括設定
