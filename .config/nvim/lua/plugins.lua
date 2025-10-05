@@ -219,6 +219,17 @@ require("lazy").setup({
 		}
 	},
 
+	-- nvim-colorizerの設定
+	{
+		"norcalli/nvim-colorizer.lua",
+		cmd = {
+			"ColorizerAttachToBuffer",
+			"ColorizerDetachFromBuffer",
+			"ColorizerReloadAllBuffers",
+			"ColorizerToggle",
+		}
+	},
+
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
 	{
