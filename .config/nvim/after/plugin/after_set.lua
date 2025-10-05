@@ -44,15 +44,15 @@ local highlight_groups = {
 	EyelinerSecondary = { fg = 'orange', bold = true, underline = true },
 
 	-- mini.statuslineの設定
-	MiniStatuslineModeNormal = { fg = 'white', bg = 'green', bold = true, underline = true },
-	MiniStatuslineModeInsert = { fg = 'white', bg = 'pink', bold = true, underline = true },
+	MiniStatuslineModeNormal = { fg = 'black', bg = '#b8d200', bold = true, underline = true },
+	MiniStatuslineModeInsert = { fg = 'white', bg = '#0981D1', bold = true, underline = true },
 	MiniStatuslineModeVisual = { fg = 'white', bg = 'darkorange', bold = true, underline = true },
-	MiniStatuslineModeCommand = { fg = 'white', bg = 'blue', bold = true, underline = true },
+	MiniStatuslineModeCommand = { fg = 'white', bg = '#00aaaa', bold = true, underline = true },
 	-- LSPなどの表示
 	MiniStatuslineDevinfo = { fg = 'white', bg = 'purple', bold = true, underline = false },
 
 	-- mini.tablineの設定
-	MiniTablineCurrent = { fg = 'lime', bg = 'black', bold = true, underline = true },
+	MiniTablineCurrent = { fg = '#b8d200', bg = 'black', bold = true, underline = true },
 	MiniTablineVisible = { fg = 'teal', bg = '#2e3234', bold = true, underline = true },
 	MiniTablineHidden = { fg = 'white', bg = '#2e3234', bold = false, underline = false },
 	MiniTablineModifiedCurrent = { fg = 'red', bg = 'black', bold = true, underline = true },
@@ -61,7 +61,14 @@ local highlight_groups = {
 	MiniStatuslineModeOther = { fg = 'white', bg = 'black', bold = true, underline = false },
 
 	-- avanteの設定
-	AvanteThirdTitle = { fg = 'lime', bg = 'black', bold = true, underline = true },
+	-- ファイル,コード選択のタイトル
+	AvanteSubtitle = { fg = '#2e3234', bg = '#00aaaa', bold = true, underline = true },
+	-- プロンプトのタイトル
+	AvanteThirdTitle = { fg = '#2e3234', bg = '#b8d200', bold = true, underline = true },
+	-- ビジュアルモード時のプロンプトの入力欄
+	AvantePromptInput = { fg = 'white', bg = '#2e3234', bold = true, underline = false },
+	-- ビジュアルモード時のヒント
+	AvanteInlineHint = { fg = 'lightgrey', bg = 'black', bold = false, underline = false },
 }
 
 -- テーブルからハイライトを一括設定
