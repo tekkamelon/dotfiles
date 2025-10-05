@@ -1,11 +1,11 @@
--- ,avante.lua
+-- avante.lua
 -- Neovim >= 0.11.0
 
 if not vim.g.vscode then
 	-- 環境変数からLLMを取得,なければOpenRouterのfreeモデル
 	local llm_model = os.getenv("OPENAI_MODEL") or "z-ai/glm-4.5-air:free"
 
-	require('avante').setup{
+	require('avante').setup {
 
 		-- デフォルトプロバイダ
 		provider = "openrouter",
@@ -74,15 +74,18 @@ if not vim.g.vscode then
 			input = {
 				prefix = "> ",
 				height = 12,
+			},
+			ask = {
+				-- チャットバッファをデフォルトでノーマルモードに設定
+				start_insert = false,
+				border = "rounded"
 			}
 		},
 
 		custom_tools = function()
-        return {
-            require("mcphub.extensions.avante").mcp_tool(),
-        }
-
-    end,
+			return {
+				require("mcphub.extensions.avante").mcp_tool(),
+			}
+		end,
 	}
 end
-
