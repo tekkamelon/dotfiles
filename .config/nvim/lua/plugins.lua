@@ -19,19 +19,21 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	-- vim script製プラグイン
-	{"thinca/vim-partedit",
+	{
+		"thinca/vim-partedit",
 		-- ビジュアルモードへの移行時に起動
 		event = "ModeChanged *:[vV\x16]*"
 	},
-	{"haya14busa/vim-edgemotion", event = "VeryLazy"},
+	{ "haya14busa/vim-edgemotion",               event = "VeryLazy" },
 
 	-- 依存関係用プラグイン
-	{"nvim-lua/plenary.nvim", lazy = true},
-	{"nvim-telescope/telescope-ui-select.nvim", lazy = true},
-	{"MunifTanjim/nui.nvim", lazy = true},
-	{"rcarriga/nvim-notify", lazy = true},
-	{"neovim/nvim-lspconfig", lazy = true},
-	{"nvim-treesitter/nvim-treesitter",
+	{ "nvim-lua/plenary.nvim",                   lazy = true },
+	{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
+	{ "MunifTanjim/nui.nvim",                    lazy = true },
+	{ "rcarriga/nvim-notify",                    lazy = true },
+	{ "neovim/nvim-lspconfig",                   lazy = true },
+	{
+		"nvim-treesitter/nvim-treesitter",
 		lazy = true,
 		config = function()
 			require("plugins.treesitter")
@@ -40,7 +42,8 @@ require("lazy").setup({
 
 	-- lua製プラグイン
 	-- toggletermの設定
-	{"akinsho/toggleterm.nvim",
+	{
+		"akinsho/toggleterm.nvim",
 		cmd = {
 			"ToggleTerm",
 			"ToggleTermSendCurrentLine",
@@ -56,7 +59,8 @@ require("lazy").setup({
 
 	-- noiceの設定
 	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
-	{"folke/noice.nvim",
+	{
+		"folke/noice.nvim",
 		pin = true,
 		event = "UIEnter",
 		config = function()
@@ -65,7 +69,8 @@ require("lazy").setup({
 	},
 
 	-- telescopeの設定
-	{"nvim-telescope/telescope.nvim",
+	{
+		"nvim-telescope/telescope.nvim",
 		lazy = true,
 		cmd = "Telescope",
 		config = function()
@@ -89,7 +94,8 @@ require("lazy").setup({
 	},
 
 	-- eyelinerの設定
-	{"jinh0/eyeliner.nvim",
+	{
+		"jinh0/eyeliner.nvim",
 		event = "VeryLazy",
 		opts = {
 			highlight_on_key = false
@@ -97,7 +103,8 @@ require("lazy").setup({
 	},
 
 	-- neocodeiumの設定
-	{"monkoose/neocodeium",
+	{
+		"monkoose/neocodeium",
 		cmd = "NeoCodeium",
 		event = "InsertEnter",
 		config = function()
@@ -106,7 +113,8 @@ require("lazy").setup({
 	},
 
 	-- avanteの設定
-	{"yetone/avante.nvim",
+	{
+		"yetone/avante.nvim",
 		build = "make",
 		event = "ModeChanged",
 		keys = "<leader>a",
@@ -123,7 +131,8 @@ require("lazy").setup({
 	},
 
 	-- nvim-windowの設定
-	{"yorickpeterse/nvim-window",
+	{
+		"yorickpeterse/nvim-window",
 		-- バッファが追加されたときに起動
 		event = "BufAdd",
 		keys = {
@@ -138,7 +147,8 @@ require("lazy").setup({
 
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
-	{"ravitemer/mcphub.nvim",
+	{
+		"ravitemer/mcphub.nvim",
 		event = "ModeChanged",
 		opts = {
 			extensions = {
@@ -150,7 +160,8 @@ require("lazy").setup({
 	},
 
 	-- hlchunkの設定
-	{"shellRaining/hlchunk.nvim",
+	{
+		"shellRaining/hlchunk.nvim",
 		event = "VeryLazy",
 		config = function()
 			require("plugins.hlchunk")
@@ -158,7 +169,8 @@ require("lazy").setup({
 	},
 
 	-- render-markdownの設定
-	{"MeanderingProgrammer/render-markdown.nvim",
+	{
+		"MeanderingProgrammer/render-markdown.nvim",
 		ft = "markdown",
 		config = function()
 			require("plugins.render-markdown")
@@ -166,29 +178,31 @@ require("lazy").setup({
 	},
 
 	-- gitsignsの設定
-	{"lewis6991/gitsigns.nvim",
+	{
+		"lewis6991/gitsigns.nvim",
 		event = {
 			"TextChanged",
 			"TextChangedI",
 			"TextChangedP",
 			"BufWritePost",
 		},
-			pin = true,
-			config = function()
-				-- vscode以外から起動した場合に真
-				if not vim.g.vscode then
-					require("gitsigns").setup({
-						signs = {
-							change = { text = ">>" },
-						},
-						numhl = true,
-					})
-				end
+		pin = true,
+		config = function()
+			-- vscode以外から起動した場合に真
+			if not vim.g.vscode then
+				require("gitsigns").setup({
+					signs = {
+						change = { text = ">>" },
+					},
+					numhl = true,
+				})
+			end
 		end,
 	},
 
 	-- hopの設定
-	{"smoka7/hop.nvim",
+	{
+		"smoka7/hop.nvim",
 		cmd = {
 			"HopChar1",
 			"HopChar2",
@@ -207,9 +221,10 @@ require("lazy").setup({
 
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
-	{"echasnovski/mini.pairs",
+	{
+		"echasnovski/mini.pairs",
 		event = "InsertEnter",
-		opts= {
+		opts = {
 			mappings = {
 				-- "<>"の設定
 				["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
@@ -223,7 +238,8 @@ require("lazy").setup({
 	},
 
 	-- mini.iconsの設定
-	{"echasnovski/mini.icons",
+	{
+		"echasnovski/mini.icons",
 		lazy = true,
 		config = function()
 			if not vim.g.vscode then
@@ -236,7 +252,8 @@ require("lazy").setup({
 	},
 
 	-- mini.completionの設定
-	{"echasnovski/mini.completion",
+	{
+		"echasnovski/mini.completion",
 		event = "InsertEnter",
 		config = function()
 			if not vim.g.vscode then
@@ -246,7 +263,8 @@ require("lazy").setup({
 	},
 
 	-- mini.statuslineの設定
-	{"echasnovski/mini.statusline",
+	{
+		"echasnovski/mini.statusline",
 		event = "UIEnter",
 		config = function()
 			if not vim.g.vscode then
@@ -258,7 +276,8 @@ require("lazy").setup({
 	},
 
 	-- mini.tablineの設定
-	{"echasnovski/mini.tabline",
+	{
+		"echasnovski/mini.tabline",
 		event = "UIEnter",
 		config = function()
 			if not vim.g.vscode then
@@ -270,7 +289,8 @@ require("lazy").setup({
 	},
 
 	-- mini.commentの設定
-	{"echasnovski/mini.comment",
+	{
+		"echasnovski/mini.comment",
 		keys = "<leader>g",
 		opts = {
 			options = { ignore_blank_line = true },
@@ -278,7 +298,8 @@ require("lazy").setup({
 	},
 
 	-- mini.filesの設定
-	{"echasnovski/mini.files",
+	{
+		"echasnovski/mini.files",
 		keys = "<C-n>",
 		dependencies = "echasnovski/mini.icons",
 		config = function()
@@ -287,7 +308,8 @@ require("lazy").setup({
 	},
 
 	-- mini.surroundの設定
-	{"echasnovski/mini.surround",
+	{
+		"echasnovski/mini.surround",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = {
 			-- キーマップの設定
@@ -309,17 +331,19 @@ require("lazy").setup({
 
 	-- lsp関連
 	-- masonの設定
-	{"williamboman/mason.nvim",
+	{
+		"williamboman/mason.nvim",
 		lazy = true,
 		config = function()
-				if not vim.g.vscode then
-					require("mason").setup({})
-				end
-			end,
+			if not vim.g.vscode then
+				require("mason").setup({})
+			end
+		end,
 	},
 
 	-- mason-lspconfigの設定
-	{"williamboman/mason-lspconfig.nvim",
+	{
+		"williamboman/mason-lspconfig.nvim",
 		pin = true,
 		event = "FileType",
 		config = function()
@@ -330,4 +354,3 @@ require("lazy").setup({
 
 -- プラグインのキーマップ設定を読み込み
 require("keymaps.plugins")
-
