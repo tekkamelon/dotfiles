@@ -52,12 +52,12 @@ local highlight_groups = {
 	MiniStatuslineDevinfo = { fg = 'white', bg = 'purple', bold = true, underline = false },
 
 	-- mini.tablineの設定
-	MiniTablineCurrent = { fg = '#b8d200', bg = 'black', bold = true, underline = true },
-	MiniTablineVisible = { fg = 'teal', bg = '#2e3234', bold = true, underline = true },
-	MiniTablineHidden = { fg = 'white', bg = '#2e3234', bold = false, underline = false },
-	MiniTablineModifiedCurrent = { fg = 'red', bg = 'black', bold = true, underline = true },
+	MiniTablineCurrent = { fg = 'black', bg = '#b8d200', bold = true, underline = true },
+	MiniTablineVisible = { fg = 'white', bg = '#2e3234', bold = true, underline = false },
+	MiniTablineHidden = { fg = 'grey', bg = '#2e3234', bold = false, underline = false },
+	MiniTablineModifiedCurrent = { fg = 'white', bg = 'red', bold = true, underline = true },
 	MiniTablineModifiedVisible = { fg = 'orange', bg = '#2e3234', bold = true, underline = true },
-	MiniTablineModifiedHidden = { fg = 'pink', bg = '#2e3234', bold = false, underline = false },
+	MiniTablineModifiedHidden = { fg = 'yellow', bg = '#2e3234', bold = false, underline = true },
 	MiniStatuslineModeOther = { fg = 'white', bg = 'black', bold = true, underline = false },
 
 	-- avanteの設定
