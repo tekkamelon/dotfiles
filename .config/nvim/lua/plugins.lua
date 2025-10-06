@@ -51,9 +51,8 @@ require("lazy").setup({
 		},
 		config = function()
 			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then
-				require("toggleterm").setup({})
-			end
+			if not vim.g.vscode then end
+			require("toggleterm").setup({})
 		end,
 	},
 
@@ -193,14 +192,13 @@ require("lazy").setup({
 		pin = true,
 		config = function()
 			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then
-				require("gitsigns").setup({
-					signs = {
-						change = { text = ">>" },
-					},
-					numhl = true,
-				})
-			end
+			if not vim.g.vscode then end
+			require("gitsigns").setup({
+				signs = {
+					change = { text = ">>" },
+				},
+				numhl = true,
+			})
 		end,
 	},
 
@@ -257,12 +255,11 @@ require("lazy").setup({
 		"echasnovski/mini.icons",
 		lazy = true,
 		config = function()
-			if not vim.g.vscode then
-				require("mini.icons").setup({
-					-- アイコンのスタイルを"ascii"に設定
-					style = "ascii",
-				})
-			end
+			if not vim.g.vscode then end
+			require("mini.icons").setup({
+				-- アイコンのスタイルを"ascii"に設定
+				style = "ascii",
+			})
 		end,
 	},
 
@@ -271,9 +268,8 @@ require("lazy").setup({
 		"echasnovski/mini.completion",
 		event = "InsertEnter",
 		config = function()
-			if not vim.g.vscode then
-				require("mini.completion").setup({})
-			end
+			if not vim.g.vscode then end
+			require("mini.completion").setup({})
 		end,
 	},
 
@@ -282,11 +278,10 @@ require("lazy").setup({
 		"echasnovski/mini.statusline",
 		event = "UIEnter",
 		config = function()
-			if not vim.g.vscode then
-				require("mini.statusline").setup({
-					use_icons = false,
-				})
-			end
+			if not vim.g.vscode then end
+			require("mini.statusline").setup({
+				use_icons = false,
+			})
 		end,
 	},
 
@@ -295,11 +290,10 @@ require("lazy").setup({
 		"echasnovski/mini.tabline",
 		event = "UIEnter",
 		config = function()
-			if not vim.g.vscode then
-				require("mini.tabline").setup({
-					show_icons = false,
-				})
-			end
+			if not vim.g.vscode then end
+			require("mini.tabline").setup({
+				show_icons = false,
+			})
 		end,
 	},
 
@@ -350,9 +344,8 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		lazy = true,
 		config = function()
-			if not vim.g.vscode then
-				require("mason").setup({})
-			end
+			if not vim.g.vscode then end
+			require("mason").setup({})
 		end,
 	},
 
