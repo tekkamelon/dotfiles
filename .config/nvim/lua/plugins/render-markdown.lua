@@ -1,8 +1,9 @@
 -- render-markdown.lua
 
 
-require('render-markdown').setup{
+require('render-markdown').setup {
 
+	-- 挿入モードではレンダリングしない
 	render_modes = true,
 
 	-- ファイルタイプの設定
@@ -10,20 +11,26 @@ require('render-markdown').setup{
 
 		'markdown',
 		'vimwiki',
-		'codecompanion',
+		'Avante'
 
 	},
 
 	-- 見出しの設定
-	heading = {enabled = false},
-	sign = {enabled = false},
+	heading = {
+		width = "block",
+		left_pad = 0,
+		right_pad = 3,
+		icons = {},
+		enabled = false,
+	},
+	sign = { enabled = true },
 
 	-- コードブロックの設定
 	code = {
 
 		width = "block",
 		left_pad = 0,
-		right_pad = 0,
+		right_pad = 3,
 		highlight = '',
 
 	},
@@ -31,10 +38,10 @@ require('render-markdown').setup{
 	-- テキストの設定
 	bullet = {
 
-		icons = {'● ', '○ ', '● ', '○ '},
+		icons = { '● ', '○ ', '● ', '○ ' },
 
 		-- 箇条書きの処理を無効化または調整
-		enabled = false,
+		enabled = true,
 
 	},
 
@@ -57,4 +64,3 @@ require('render-markdown').setup{
 	},
 
 }
-
