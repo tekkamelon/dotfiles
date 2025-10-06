@@ -171,7 +171,11 @@ require("lazy").setup({
 	-- render-markdownの設定
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
-		ft = "markdown",
+		ft = {
+			"markdown",
+			"vimwiki",
+			"Avante"
+		},
 		config = function()
 			require("plugins.render-markdown")
 		end,
