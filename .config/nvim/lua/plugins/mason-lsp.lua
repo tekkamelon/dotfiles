@@ -1,72 +1,67 @@
 -- mason-lspconfig
 -- Neovim >= 0.11.0
 
+if vim.g.vscode then return end
 
-if not vim.g.vscode then
-	-- lspconfigを読み込み
-	local lspconfig = require('lspconfig')
+local lspconfig = require('lspconfig')
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-	-- LSPのクライアントの設定
-	local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-	-- 診断設定をグローバルに定義
-	vim.diagnostic.config({
-		virtual_text = {
-			-- プレフィックスアイコン
-			prefix = '●',
-			-- ソースを表示(複数ある場合)
-			source = "if_many",
-			-- 深刻度でソート
-			severity_sort = true,
-		},
-		-- フロートウィンドウの設定
-		float = {
-			border = 'rounded',
-			source = true,
-		},
-		signs = true,
-		-- サイン列を表示
-		underline = true,
-		-- アンダーライン
-		update_in_insert = false,
-		-- インサートモード中は更新せず
+-- 診断設定をグローバルに定義
+vim.diagnostic.config({
+	virtual_text = {
+		prefix = '●',
+		source = "if_many",
 		severity_sort = true,
-	})
-	vim.api.nvim_create_autocmd("LspAttach", {
-		group = vim.api.nvim_create_augroup("my.lsp", {}),
-		callback = function(args)
-			local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+	},
+	float = {
+		border = 'rounded',
+		source = true,
+	},
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
+})
 
-			-- 補完の設定
-			if client:supports_method('textDocument/completion') then
-				-- 文字を入力する度に補完を表示(遅くなる可能性あり)
-				local chars = {}; for i = 32, 126 do table.insert(chars, string.char(i)) end
-				client.server_capabilities.completionProvider.triggerCharacters = chars
-				-- 補完を有効化
-				vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-			end
+-- LSP Attach時の設定
+local function on_lsp_attach(args)
+	local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
 
-			-- フォーマット
-			if not client:supports_method('textDocument/willSaveWaitUntil')
-				and client:supports_method('textDocument/formatting') then
-				vim.api.nvim_create_autocmd('BufWritePre', {
-					group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
-					buffer = args.buf,
-					callback = function()
-						vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 3000 })
-					end,
-				})
-			end
-		end,
-	})
+	-- 補完の設定
+	if client:supports_method('textDocument/completion') then
+		-- ASCII文字32-126をトリガーキャラクタに設定
+		local trigger_chars = {}
+		for i = 32, 126 do trigger_chars[#trigger_chars + 1] = string.char(i) end
+		client.server_capabilities.completionProvider.triggerCharacters = trigger_chars
+		-- 補完を有効化
+		vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+	end
 
-	require('mason-lspconfig').setup({
-		handlers = {
-			function(server_name)
-				lspconfig[server_name].setup {
-					capabilities = capabilities,
-				}
+	-- フォーマット設定
+	if not client:supports_method('textDocument/willSaveWaitUntil') and
+		client:supports_method('textDocument/formatting') then
+		vim.api.nvim_create_autocmd('BufWritePre', {
+			group = vim.api.nvim_create_augroup('my.lsp', { clear = false }),
+			buffer = args.buf,
+			callback = function()
+				vim.lsp.buf.format({ bufnr = args.buf, id = client.id, timeout_ms = 3000 })
 			end,
-		}
-	})
+		})
+	end
 end
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = vim.api.nvim_create_augroup("my.lsp", {}),
+	callback = on_lsp_attach,
+})
+
+-- Mason-lspconfig設定
+require('mason-lspconfig').setup({
+	handlers = {
+		function(server_name)
+			lspconfig[server_name].setup {
+				capabilities = capabilities,
+			}
+		end,
+	}
+})
