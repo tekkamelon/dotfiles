@@ -45,6 +45,11 @@ require('render-markdown').setup {
 
 	},
 
+	-- テーブルの設定
+	pipe_table = {
+		style = 'width'
+	},
+
 	-- リンクの設定
 	link = {
 
