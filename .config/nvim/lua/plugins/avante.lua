@@ -5,6 +5,9 @@ if vim.g.vscode then return end
 
 -- 環境変数からLLMを取得,なければOpenRouterのfreeモデル
 local llm_model = vim.env.OPENAI_MODEL or "z-ai/glm-4.5-air:free"
+if not vim.env.OPENAI_MODEL then
+	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'z-ai/glm-4.5-air:free'を使用します.", vim.log.levels.WARN)
+end
 
 require('avante').setup {
 
