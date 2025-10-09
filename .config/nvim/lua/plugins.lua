@@ -50,8 +50,8 @@ require("lazy").setup({
 			"ToggleTermSendVisualLines"
 		},
 		config = function()
-			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then end
+			-- vscode-neovimから起動した場合は実行しない
+			if vim.g.vscode then return end
 			require("toggleterm").setup({})
 		end,
 	},
@@ -73,22 +73,21 @@ require("lazy").setup({
 		lazy = true,
 		cmd = "Telescope",
 		config = function()
-			if not vim.g.vscode then
-				require("telescope").setup({
-					defaults = {
-						-- プロンプトの設定
-						prompt_prefix = " 🔎 ",
-						selection_caret = " ➤	 ",
+			if vim.g.vscode then return end
+			require("telescope").setup({
+				defaults = {
+					-- プロンプトの設定
+					prompt_prefix = " 🔎 ",
+					selection_caret = " ➤	 ",
+				},
+				-- telescope-ui-selectの設定
+				extensions = {
+					["ui-select"] = {
+						require("telescope.themes").get_dropdown({}),
 					},
-					-- telescope-ui-selectの設定
-					extensions = {
-						["ui-select"] = {
-							require("telescope.themes").get_dropdown({}),
-						},
-					},
-				})
-				require("telescope").load_extension("ui-select")
-			end
+				},
+			})
+			require("telescope").load_extension("ui-select")
 		end,
 	},
 
@@ -192,7 +191,7 @@ require("lazy").setup({
 		pin = true,
 		config = function()
 			-- vscode以外から起動した場合に真
-			if not vim.g.vscode then end
+			if vim.g.vscode then return end
 			require("gitsigns").setup({
 				signs = {
 					change = { text = ">>" },
@@ -255,7 +254,7 @@ require("lazy").setup({
 		"echasnovski/mini.icons",
 		lazy = true,
 		config = function()
-			if not vim.g.vscode then end
+			if vim.g.vscode then return end
 			require("mini.icons").setup({
 				-- アイコンのスタイルを"ascii"に設定
 				style = "ascii",
@@ -268,7 +267,7 @@ require("lazy").setup({
 		"echasnovski/mini.completion",
 		event = "InsertEnter",
 		config = function()
-			if not vim.g.vscode then end
+			if vim.g.vscode then return end
 			require("mini.completion").setup({})
 		end,
 	},
@@ -278,7 +277,7 @@ require("lazy").setup({
 		"echasnovski/mini.statusline",
 		event = "UIEnter",
 		config = function()
-			if not vim.g.vscode then end
+			if vim.g.vscode then return end
 			require("mini.statusline").setup({
 				use_icons = false,
 			})
@@ -290,7 +289,7 @@ require("lazy").setup({
 		"echasnovski/mini.tabline",
 		event = "UIEnter",
 		config = function()
-			if not vim.g.vscode then end
+			if vim.g.vscode then return end
 			require("mini.tabline").setup({
 				show_icons = false,
 			})
@@ -344,7 +343,7 @@ require("lazy").setup({
 		"williamboman/mason.nvim",
 		lazy = true,
 		config = function()
-			if not vim.g.vscode then end
+			if vim.g.vscode then return end
 			require("mason").setup({})
 		end,
 	},
