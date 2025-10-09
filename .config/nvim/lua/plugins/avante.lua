@@ -56,7 +56,7 @@ require('avante').setup {
 		{
 			name = "review",
 			description = "品質レビュー",
-			prompt = "現在のコードを日本語でレビューし,改善したコードを提供して下さい",
+			prompt = "現在のコードを日本語でレビュー,良い点と改善すべき点を指摘してください",
 		},
 		{
 			name = "fix",
@@ -76,8 +76,13 @@ require('avante').setup {
 		{
 			name = "comment",
 			description = "コメント追加",
-			prompt = "コードに日本語で適切なコメントを入れてください",
+			prompt = "コードに日本語で適切なコメントを入れてください.ただし,コードとコメントの行を分けてください",
 		},
+		{
+			name = "words",
+			description = "用語解説",
+			prompt = "選択範囲の解説を日本語かつ2から3行程度で書き込んでください",
+		}
 	},
 
 	-- 動作設定
