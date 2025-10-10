@@ -82,7 +82,12 @@ require('avante').setup {
 			name = "words",
 			description = "用語解説",
 			prompt = "選択範囲の解説を日本語かつ2から3行程度で書き込んでください",
-		}
+		},
+		{
+			name = "matome",
+			description = "各章ごとのまとめ",
+			prompt = "各章ごとの内容をまとめ最終行以降に記述して下さい",
+		},
 	},
 
 	-- 動作設定
