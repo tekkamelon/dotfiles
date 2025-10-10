@@ -17,14 +17,47 @@ local DISABLED_TOOLS = {
 }
 
 require('avante').setup {
-	-- 無効化するツール定義
-	-- デフォルトプロバイダ
-	provider = "openrouter",
+
+	-- OpenAI互換
+	provider = "openai",
+
 	-- 自動提案のプロバイダ
 	auto_suggestions_provider = "openrouter",
 
 	-- プロバイダの設定
 	providers = {
+		-- OpenAI互換(OpenRouterの複数モデル)
+		openai = {
+			-- エンドポイントURL
+			endpoint = vim.env.OPENAI_BASE_URL or 'https://openrouter.ai/api/v1',
+			-- APIキー名
+			api_key_name = 'OPENROUTER_API_KEY',
+			-- 使用モデル
+			model = llm_model,
+			disabled_tools = DISABLED_TOOLS,
+		},
+		["openrouter/glm-4.5-air"] = {
+			__inherited_from = 'openai',
+			model = 'z-ai/glm-4.5-air:free',
+		},
+		["openrouter/deepseek/deepseek-chat-v3-0324:free"] = {
+			__inherited_from = 'openai',
+			model = 'deepseek/deepseek-chat-v3-0324:free',
+		},
+		["openrouter/llama-4-maverick:free"] = {
+			__inherited_from = 'openai',
+			model = 'meta-llama/llama-4-maverick:free',
+		},
+		["openrouter/llama-4-scout:free"] = {
+			__inherited_from = 'openai',
+			model = 'meta-llama/llama-4-scout:free',
+		},
+		["openrouter/qwen3-coder:free"] = {
+			__inherited_from = 'openai',
+			model = 'qwen/qwen3-coder:free',
+		},
+
+		-- OpenRouter
 		openrouter = {
 			-- OpenAI互換
 			__inherited_from = 'openai',
@@ -36,6 +69,8 @@ require('avante').setup {
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
 		},
+
+		-- LM Studio
 		lmstudio = {
 			__inherited_from = 'openai',
 			endpoint = vim.env.LMSTUDIO_API_URL or 'http://localhost:1234/v1',
