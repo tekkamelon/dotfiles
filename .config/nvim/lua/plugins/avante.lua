@@ -3,14 +3,21 @@
 
 if vim.g.vscode then return end
 
--- 環境変数からLLMを取得,なければOpenRouterのfreeモデル
+-- 環境変数からLLMを取得,なければOpenRouterのfreeモデル
 local llm_model = vim.env.OPENAI_MODEL or "z-ai/glm-4.5-air:free"
 if not vim.env.OPENAI_MODEL then
 	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'z-ai/glm-4.5-air:free'を使用します.", vim.log.levels.WARN)
 end
 
-require('avante').setup {
+-- 無効化するツール
+local DISABLED_TOOLS = {
+	"rag_search",
+	"git_diff",
+	"git_commit"
+}
 
+require('avante').setup {
+	-- 無効化するツール定義
 	-- デフォルトプロバイダ
 	provider = "openrouter",
 	-- 自動提案のプロバイダ
@@ -27,22 +34,14 @@ require('avante').setup {
 			api_key_name = 'OPENROUTER_API_KEY',
 			-- 使用モデル
 			model = llm_model,
-			disabled_tools = {
-				"rag_search",
-				"git_diff",
-				"git_commit"
-			}
+			disabled_tools = DISABLED_TOOLS,
 		},
 		lmstudio = {
 			__inherited_from = 'openai',
 			endpoint = vim.env.LMSTUDIO_API_URL or 'http://localhost:1234/v1',
 			api_key_name = '',
 			model = 'qwen3-coder-30b-a3b-instruct',
-			disabled_tools = {
-				"rag_search",
-				"git_diff",
-				"git_commit"
-			}
+			disabled_tools = DISABLED_TOOLS,
 		},
 	},
 
@@ -100,6 +99,8 @@ require('avante').setup {
 		auto_set_keymaps = true,
 		-- 差分を最小化
 		minimize_diff = true,
+		-- 差分を自動適用しない
+		auto_apply_diff_after_generation = false,
 	},
 
 	config = {
@@ -128,7 +129,7 @@ require('avante').setup {
 			-- チャットバッファをデフォルトでノーマルモードに設定
 			start_insert = false,
 			border = "rounded"
-		}
+		},
 	},
 
 	custom_tools = function()
