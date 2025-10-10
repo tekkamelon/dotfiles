@@ -108,7 +108,8 @@ require('avante').setup {
 		},
 		-- 検索エンジン
 		web_search_engine = {
-			provider = "brave",
+			provider = "tavily",
+			proxy = nil,
 		}
 	},
 
