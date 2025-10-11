@@ -128,21 +128,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- nvim-windowの設定
-	{
-		"yorickpeterse/nvim-window",
-		-- バッファが追加されたときに起動
-		event = "BufAdd",
-		keys = {
-			{
-				"<leader>u",
-				"<cmd>lua require('nvim-window').pick()<cr>",
-				desc = "nvim-window: Jump to window"
-			},
-		},
-		config = true,
-	},
-
 	-- mcphubの設定
 	-- `sudo npm install -g mcp-hub`でインストール
 	{
@@ -211,6 +196,7 @@ require("lazy").setup({
 			"HopLine",
 			"HopLineStart",
 			"HopAnywhere",
+			"HopAnywhereMW",
 			"HopVertical",
 			"HopPattern",
 		},
