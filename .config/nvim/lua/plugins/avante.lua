@@ -120,7 +120,7 @@ require('avante').setup {
 		{
 			name = "matome",
 			description = "各章ごとのまとめ",
-			prompt = "各章ごとの内容をまとめ最終行以降に記述して下さい",
+			prompt = "各章ごとの内容をまとめつつ,得られた総合的な知見を最終行以降に記述して下さい",
 		},
 	},
 
