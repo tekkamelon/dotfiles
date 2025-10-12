@@ -1,17 +1,13 @@
 {
-  "context": {
-    "fileName": "AGENTS.md"
-  },
-  "general": {
-    "preferredEditor": "neovim",
-    "vimMode": true
-  },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
     }
   },
-  "ui": {
-    "theme": "Atom One"
+  "general": {
+    "vimMode": true
+  },
+  "context": {
+    "fileName": ["AGENTS.md"]
   }
 }
