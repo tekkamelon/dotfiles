@@ -10,32 +10,25 @@ if not vim.env.OPENAI_MODEL then
 end
 
 -- 無効化するツール
-local DISABLED_TOOLS = {
-	"rag_search",
-	"git_diff",
-	"git_commit"
-}
+local DISABLED_TOOLS = { "rag_search", "git_diff", "git_commit" }
 
 require('avante').setup {
 
 	-- OpenAI互換
 	provider = "openai",
 
-	-- 自動提案のプロバイダ
 	auto_suggestions_provider = "openrouter",
 
-	-- プロバイダの設定
 	providers = {
-		-- OpenAI互換(OpenRouterの複数モデル)
+		-- OpenAI互換の基本設定
 		openai = {
-			-- エンドポイントURL
 			endpoint = vim.env.OPENAI_BASE_URL or 'https://openrouter.ai/api/v1',
-			-- APIキー名
 			api_key_name = 'OPENROUTER_API_KEY',
-			-- 使用モデル
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
 		},
+
+		-- OpenRouterの利用可能なモデル一覧
 		["openrouter/glm-4.5-air"] = {
 			__inherited_from = 'openai',
 			model = 'z-ai/glm-4.5-air:free',
@@ -57,15 +50,12 @@ require('avante').setup {
 			model = 'qwen/qwen3-coder:free',
 		},
 
-		-- OpenRouter
+		-- OpenRouter (プロバイダとして明示)
 		openrouter = {
 			-- OpenAI互換
 			__inherited_from = 'openai',
-			-- エンドポイントURL
 			endpoint = vim.env.OPENAI_BASE_URL or 'https://openrouter.ai/api/v1',
-			-- APIキー名
 			api_key_name = 'OPENROUTER_API_KEY',
-			-- 使用モデル
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
 		},
@@ -80,7 +70,6 @@ require('avante').setup {
 		},
 	},
 
-	-- プロンプトのテンプレート
 	shortcuts = {
 		{
 			name = "explain",
@@ -124,17 +113,11 @@ require('avante').setup {
 		},
 	},
 
-	-- 動作設定
 	behaviour = {
-		-- 自動提案を無効
 		auto_suggestions = false,
-		-- ハイライトグループを自動設定
 		auto_set_highlight_group = true,
-		-- キーマップを自動設定
 		auto_set_keymaps = true,
-		-- 差分を最小化
 		minimize_diff = true,
-		-- 差分を自動適用しない
 		auto_apply_diff_after_generation = false,
 	},
 
@@ -149,19 +132,14 @@ require('avante').setup {
 		}
 	},
 
-	-- ウィンドウ設定
 	windows = {
-		-- テキストを折り返す
 		wrap = true,
-		-- ウィンドウ幅
 		width = 36,
-		-- チャットバッファの設定
 		input = {
 			prefix = "> ",
 			height = 12,
 		},
 		ask = {
-			-- チャットバッファをデフォルトでノーマルモードに設定
 			start_insert = false,
 			border = "rounded"
 		},
