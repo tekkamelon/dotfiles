@@ -26,14 +26,17 @@ require('avante').setup {
 			api_key_name = 'OPENROUTER_API_KEY',
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
+			extra_request_body = {
+				temperature = 0.35,
+			},
 		},
 
-		-- OpenRouterの利用可能なモデル一覧
-		["openrouter/glm-4.5-air"] = {
+		-- OpenRouterで利用するモデル一覧
+		["openrouter/glm-4.5-air:free"] = {
 			__inherited_from = 'openai',
 			model = 'z-ai/glm-4.5-air:free',
 		},
-		["openrouter/deepseek/deepseek-chat-v3-0324:free"] = {
+		["openrouter/deepseek-chat-v3-0324:free"] = {
 			__inherited_from = 'openai',
 			model = 'deepseek/deepseek-chat-v3-0324:free',
 		},
@@ -50,7 +53,7 @@ require('avante').setup {
 			model = 'qwen/qwen3-coder:free',
 		},
 
-		-- OpenRouter (プロバイダとして明示)
+		-- OpenRouter(プロバイダとして明示)
 		openrouter = {
 			-- OpenAI互換
 			__inherited_from = 'openai',
@@ -58,6 +61,9 @@ require('avante').setup {
 			api_key_name = 'OPENROUTER_API_KEY',
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
+			extra_request_body = {
+				temperature = 0.35,
+			},
 		},
 
 		-- LM Studio
@@ -67,6 +73,9 @@ require('avante').setup {
 			api_key_name = '',
 			model = 'qwen3-coder-30b-a3b-instruct',
 			disabled_tools = DISABLED_TOOLS,
+			extra_request_body = {
+				temperature = 0.35,
+			},
 		},
 	},
 
