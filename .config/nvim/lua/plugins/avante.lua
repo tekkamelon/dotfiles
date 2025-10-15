@@ -10,14 +10,24 @@ if not vim.env.OPENAI_MODEL then
 end
 
 -- 無効化するツール
-local DISABLED_TOOLS = { "rag_search", "git_diff", "git_commit" }
+local DISABLED_TOOLS = {
+	"rag_search",
+	"git_diff",
+	"git_commit",
+	"move_path",
+	"copy_path",
+	"delete_path",
+	"create_dir"
+}
 
 require('avante').setup {
 
-	-- OpenAI互換
 	provider = "openai",
-
 	auto_suggestions_provider = "openrouter",
+
+	---@alias Mode "agentic" | "legacy"
+	---@type Mode
+	mode = "agentic",
 
 	providers = {
 		-- OpenAI互換の基本設定
@@ -53,7 +63,7 @@ require('avante').setup {
 			model = 'qwen/qwen3-coder:free',
 		},
 
-		-- OpenRouter(プロバイダとして明示)
+		-- OpenRouter
 		openrouter = {
 			-- OpenAI互換
 			__inherited_from = 'openai',
@@ -66,15 +76,29 @@ require('avante').setup {
 			},
 		},
 
+		-- Groq
+		groq = {
+			__inherited_from = "openai",
+			api_key_name = "GROQ_API_KEY",
+			endpoint = "https://api.groq.com/openai/v1/",
+			model = "meta-llama/llama-4-scout-17b-16e-instruct",
+			disable_tools = true,
+			extra_request_body = {
+				temperature = 0.35,
+				max_tokens = 8192,
+			},
+		},
+
 		-- LM Studio
 		lmstudio = {
 			__inherited_from = 'openai',
 			endpoint = vim.env.LMSTUDIO_API_URL or 'http://localhost:1234/v1',
 			api_key_name = '',
 			model = 'qwen3-coder-30b-a3b-instruct',
-			disabled_tools = DISABLED_TOOLS,
+			disable_tools = true,
 			extra_request_body = {
 				temperature = 0.35,
+				max_tokens = 8192,
 			},
 		},
 	},
@@ -152,6 +176,10 @@ require('avante').setup {
 			start_insert = false,
 			border = "rounded"
 		},
+	},
+
+	suggestion = {
+		debounce = 800,
 	},
 
 	custom_tools = function()
