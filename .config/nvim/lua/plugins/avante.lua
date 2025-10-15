@@ -82,10 +82,21 @@ require('avante').setup {
 			api_key_name = "GROQ_API_KEY",
 			endpoint = "https://api.groq.com/openai/v1/",
 			model = "meta-llama/llama-4-scout-17b-16e-instruct",
-			disable_tools = true,
+			disable_tools = DISABLED_TOOLS,
 			extra_request_body = {
 				temperature = 0.35,
 				max_tokens = 8192,
+			},
+		},
+
+		-- Gemini
+		gemini = {
+			api_key_name = "GEMINI_API_KEY",
+			endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
+			model = "gemini-2.5-pro",
+			disable_tools = DISABLED_TOOLS,
+			extra_request_body = {
+				temperature = 0.35,
 			},
 		},
 
