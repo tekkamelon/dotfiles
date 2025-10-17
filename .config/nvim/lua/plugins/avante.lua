@@ -3,11 +3,39 @@
 
 if vim.g.vscode then return end
 
--- 環境変数からLLMを取得,なければOpenRouterのfreeモデル
-local llm_model = vim.env.OPENAI_MODEL or "z-ai/glm-4.5-air:free"
-if not vim.env.OPENAI_MODEL then
-	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'z-ai/glm-4.5-air:free'を使用します.", vim.log.levels.WARN)
+-- 環境変数からLLMモデルを取得,設定されていない場合は通知
+local model_from_env = vim.env.OPENAI_MODEL
+local llm_model = model_from_env or "z-ai/glm-4.5-air:free"
+if not model_from_env then
+	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'" .. llm_model .. "'を使用します.", vim.log.levels.WARN)
 end
+
+-- APIキー設定チェック関数
+local function check_api_keys()
+	-- APIキー設定をチェックする関数
+	-- 必要なAPIキーが設定されているか確認
+	local required_keys = {
+		OPENROUTER_API_KEY = "OpenRouter",
+		GROQ_API_KEY = "Groq",
+		GEMINI_API_KEY = "Gemini",
+	}
+
+	-- 設定されていないAPIキーを格納するテーブル
+	local missing_keys = {}
+	for key, _ in pairs(required_keys) do
+		if not vim.env[key] then
+			table.insert(missing_keys, required_keys[key])
+		end
+	end
+
+	-- 設定されていないAPIキーがある場合に通知を表示
+	if #missing_keys > 0 then
+		vim.notify("以下のAPIキーが設定されていません: " .. table.concat(missing_keys, ", "), vim.log.levels.WARN)
+	end
+end
+
+-- 起動時にAPIキー設定をチェック
+check_api_keys()
 
 -- 無効化するツール
 local DISABLED_TOOLS = {
@@ -22,7 +50,8 @@ local DISABLED_TOOLS = {
 
 require('avante').setup {
 
-	provider = "openai",
+	-- デフォルトのプロバイダー
+	provider = "gemini",
 	auto_suggestions_provider = "openrouter",
 
 	---@alias Mode "agentic" | "legacy"
@@ -62,6 +91,10 @@ require('avante').setup {
 			__inherited_from = 'openai',
 			model = 'qwen/qwen3-coder:free',
 		},
+		["openrouter/deepcoder-14b-preview:free"] = {
+			__inherited_from = 'openai',
+			model = 'agentica-org/deepcoder-14b-preview:free',
+		},
 
 		-- OpenRouter
 		openrouter = {
@@ -94,7 +127,7 @@ require('avante').setup {
 			api_key_name = "GEMINI_API_KEY",
 			endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
 			model = "gemini-2.5-pro",
-			disable_tools = DISABLED_TOOLS,
+			-- disable_tools = DISABLED_TOOLS,
 			extra_request_body = {
 				temperature = 0.35,
 			},
@@ -106,6 +139,7 @@ require('avante').setup {
 			endpoint = vim.env.LMSTUDIO_API_URL or 'http://localhost:1234/v1',
 			api_key_name = '',
 			model = 'qwen3-coder-30b-a3b-instruct',
+			-- すべてのツールを無効化
 			disable_tools = true,
 			extra_request_body = {
 				temperature = 0.35,
@@ -128,12 +162,12 @@ require('avante').setup {
 		{
 			name = "fix",
 			description = "品質レビュー",
-			prompt = "現在発生しているエラーを修正したコードを提供して下さい",
+			prompt = "現在発生しているエラーを修正して下さい",
 		},
 		{
 			name = "refactor",
 			description = "最適化",
-			prompt = "現在のコードをより効率を向上させたコードを提供して下さい",
+			prompt = "現在のコードをより効率を向上させたコードに変更して下さい",
 		},
 		{
 			name = "test",
