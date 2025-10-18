@@ -101,12 +101,23 @@ require("lazy").setup({
 	},
 
 	-- neocodeiumの設定
+	-- {
+	-- 	"monkoose/neocodeium",
+	-- 	cmd = "NeoCodeium",
+	-- 	event = "InsertEnter",
+	-- 	config = function()
+	-- 		require("plugins.neocodeium")
+	-- 	end,
+	-- },
+
+	-- minuet-aiの設定
 	{
-		"monkoose/neocodeium",
-		cmd = "NeoCodeium",
+
+		"milanglacier/minuet-ai.nvim",
+		cmd = "Minuet",
 		event = "InsertEnter",
 		config = function()
-			require("plugins.neocodeium")
+			require("plugins.minuet")
 		end,
 	},
 
