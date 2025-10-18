@@ -1,60 +1,60 @@
 -- minuet-ai.lua
 -- neovim >= 0.10.0
 
+
 -- vscodeから起動していなければ真
-if not vim.g.vscode then
+if vim.g.vscode then return end
 
-	require('minuet').setup{
+require('minuet').setup {
 
-		-- 仮想テキストの設定 
-		virtualtext = {
+	-- 仮想テキストの設定
+	virtualtext = {
 
-			auto_trigger_ft = {},
+		auto_trigger_ft = {},
 
-			keymap = {
+		-- キーマップ
+		keymap = {
 
-				accept_line = '<C-s>',
-				accept_n_lines = '<C-e>',
-				next = '<C-f>',
-				prev = '<C-F>',
-				dismiss = '<C-q>',
-
-			},
+			accept_line = '<C-s>',
+			accept_n_lines = '<C-e>',
+			next = '<C-f>',
+			prev = '<C-F>',
+			dismiss = '<C-q>',
 
 		},
 
-		provider = 'openai_compatible',
-		request_timeout = 2.5,
+	},
 
-		-- APIリクエストの制限(ミリ秒)
-		throttle = 1500,
+	-- geminiに設定
+	provider = 'gemini',
+	request_timeout = 2.5,
 
-		-- 遅延
-		debounce = 600,
+	-- APIリクエストの制限(ミリ秒)
+	throttle = 1500,
+	-- 遅延
+	debounce = 600,
 
-		show_on_completion_menu = true,
+	show_on_completion_menu = true,
 
-		provider_options = {
+	-- プロバイダの設定
+	provider_options = {
 
-			openai_compatible = {
+		-- openrouter
+		openai_fim_compatible = {
 
-				api_key = 'OPENROUTER_API_KEY',
-				end_point = 'https://openrouter.ai/api/v1/chat/completions',
-				model = 'meta-llama/llama-4-maverick:free',
-				name = 'Openrouter',
-				optional = {
+			api_key = 'OPENROUTER_API_KEY',
+			end_point = 'https://openrouter.ai/api/v1/chat/completions',
+			-- モデルを指定
+			model = 'z-ai/glm-4.5-air:free',
+			name = 'Openrouter',
+			stream = false,
+			optional = {
 
-					max_tokens = 56,
+				-- プロバイダのソート順
+				provider = {
 
-					top_p = 0.9,
-
-					-- プロバイダのソート順
-					provider = {
-
-						-- スループットを優先
-						sort = 'throughput',
-
-					},
+					-- スループットを優先
+					sort = 'throughput',
 
 				},
 
@@ -62,32 +62,52 @@ if not vim.g.vscode then
 
 		},
 
-	}
+		-- Groq
+		openai_compatible = {
+			api_key = 'GROQ_API_KEY',
+			end_point = 'https://api.groq.com/openai/v1/chat/completions',
+			model = 'moonshotai/kimi-k2-instruct-0905',
+			stream = true,
+			optional = {
 
-	local minuet_vtext = require('minuet.virtualtext')
+				-- 生成されるテキストの多様性を制御
+				temperature = 0.35,
 
-	-- タブキーをサジェストの受け入れに設定
-	vim.keymap.set("i", "<Tab>", function()
+			},
 
-		-- サジェストの表示状態
-		local suggest = minuet_vtext.action.is_visible()
+		},
 
-		-- サジェストを表示している場合
-		if suggest then
+		-- gemini
+		provider_options = {
+			gemini = {
+				model = 'gemini-2.0-flash',
+				stream = true,
+				api_key = 'GEMINI_API_KEY',
+				end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
+				optional = {},
+			},
+		}
 
-			minuet_vtext.action.accept()
+	},
 
-		else
+}
 
-			-- サジェストされていない場合はタブを入力
-			-- キーコードをneovimが解釈可能な形式に変換
-			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+local minuet_vtext = require('minuet.virtualtext')
 
-		end
+-- タブキーをサジェストの受け入れに設定
+vim.keymap.set("i", "<Tab>", function()
+	-- サジェストの表示状態
+	local suggest = minuet_vtext.action.is_visible()
 
-	end, { expr = true, silent = true })
+	-- サジェストを表示している場合
+	if suggest then
+		minuet_vtext.action.accept()
+	else
+		-- サジェストされていない場合はタブを入力
+		-- キーコードをneovimが解釈可能な形式に変換
+		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
+	end
+end, { expr = true, silent = true })
 
-	-- 補完を有効化
-	vim.cmd('Minuet virtualtext enable')
-
-end
+-- 補完を有効化
+vim.cmd('Minuet virtualtext enable')
