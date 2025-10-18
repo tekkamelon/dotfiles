@@ -51,7 +51,7 @@ local DISABLED_TOOLS = {
 require('avante').setup {
 
 	-- デフォルトのプロバイダー
-	provider = "gemini",
+	provider = "openrouter",
 	auto_suggestions_provider = "openrouter",
 
 	---@alias Mode "agentic" | "legacy"
@@ -68,6 +68,7 @@ require('avante').setup {
 			extra_request_body = {
 				temperature = 0.35,
 			},
+
 		},
 
 		-- OpenRouterで利用するモデル一覧
@@ -94,6 +95,10 @@ require('avante').setup {
 		["openrouter/deepcoder-14b-preview:free"] = {
 			__inherited_from = 'openai',
 			model = 'agentica-org/deepcoder-14b-preview:free',
+		},
+		["openrouter/grok-4-fast"] = {
+			__inherited_from = 'openai',
+			model = 'x-ai/grok-4-fast',
 		},
 
 		-- OpenRouter
@@ -126,8 +131,8 @@ require('avante').setup {
 		gemini = {
 			api_key_name = "GEMINI_API_KEY",
 			endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-			model = "gemini-2.5-pro",
-			-- disable_tools = DISABLED_TOOLS,
+			model = "gemini-2.0-flash",
+			disable_tools = DISABLED_TOOLS,
 			extra_request_body = {
 				temperature = 0.35,
 			},
