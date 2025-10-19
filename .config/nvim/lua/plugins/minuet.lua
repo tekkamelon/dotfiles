@@ -46,7 +46,7 @@ require('minuet').setup {
 			end_point = 'https://openrouter.ai/api/v1/chat/completions',
 			-- モデルを指定
 			model = 'z-ai/glm-4.5-air:free',
-			name = 'Openrouter',
+			name = 'OpenRouter',
 			stream = false,
 			optional = {
 
@@ -67,6 +67,7 @@ require('minuet').setup {
 			api_key = 'GROQ_API_KEY',
 			end_point = 'https://api.groq.com/openai/v1/chat/completions',
 			model = 'moonshotai/kimi-k2-instruct-0905',
+			name = 'Groq',
 			stream = true,
 			optional = {
 
@@ -78,15 +79,16 @@ require('minuet').setup {
 		},
 
 		-- gemini
-		provider_options = {
-			gemini = {
-				model = 'gemini-2.0-flash',
-				stream = true,
-				api_key = 'GEMINI_API_KEY',
-				end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
-				optional = {},
-			},
-		}
+		-- provider_options = {
+		gemini = {
+			api_key = 'GEMINI_API_KEY',
+			model = 'gemini-2.0-flash',
+			name = 'Gemini',
+			stream = true,
+			end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
+			optional = {},
+		},
+		-- }
 
 	},
 
