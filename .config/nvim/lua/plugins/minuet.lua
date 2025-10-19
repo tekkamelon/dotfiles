@@ -7,10 +7,28 @@ if vim.g.vscode then return end
 
 require('minuet').setup {
 
+
 	-- 仮想テキストの設定
 	virtualtext = {
 
-		auto_trigger_ft = {},
+		-- 補完を自動起動するファイルタイプ
+		auto_trigger_ft = {
+
+			'bash',
+			'awk',
+			'lua',
+			'python',
+			'vim',
+			'conf'
+
+		},
+
+		-- 除外するファイルタイプ
+		auto_trigger_ignore_ft = {
+
+			'markdown',
+			'gitcommit',
+		},
 
 		-- キーマップ
 		keymap = {
@@ -25,8 +43,8 @@ require('minuet').setup {
 
 	},
 
-	-- geminiに設定
-	provider = 'gemini',
+	-- groqに設定
+	provider = 'openai_compatible',
 	request_timeout = 2.5,
 
 	-- APIリクエストの制限(ミリ秒)
@@ -112,4 +130,15 @@ vim.keymap.set("i", "<Tab>", function()
 end, { expr = true, silent = true })
 
 -- 補完を有効化
-vim.cmd('Minuet virtualtext enable')
+-- vim.cmd('Minuet virtualtext enable')
+
+-- バッファ切り替えの際にファイルタイプがmarkdown,git_commitであれば補完を無効化,それ以外で有効化
+vim.api.nvim_create_autocmd({ "FileType", "BufEnter" }, {
+
+	pattern = { "markdown", "gitcommit" },
+
+	callback = function()
+		vim.b.minuet_disabled = true
+	end,
+
+})
