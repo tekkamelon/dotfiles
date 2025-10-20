@@ -112,6 +112,7 @@ require('minuet').setup {
 
 }
 
+-- キーマップの処理
 local minuet_vtext = require('minuet.virtualtext')
 
 -- タブキーをサジェストの受け入れに設定
@@ -129,16 +130,28 @@ vim.keymap.set("i", "<Tab>", function()
 	end
 end, { expr = true, silent = true })
 
--- 既存バッファがmarkdownでなければ補完を有効化
-if vim.bo.filetype ~= "" and vim.bo.filetype ~= "markdown" and vim.bo.filetype ~= "gitcommit" then
+
+-- 除外するファイルタイプの処理
+local ignore_ft = {
+	'markdown',
+	'gitcommit',
+	'Avante',
+	'AvanteInput',
+	'AvantePromptInput',
+	'AvanteSelectedFiles',
+	'AvanteSelectedCode',
+}
+
+-- 起動時のバッファ
+if vim.bo.filetype ~= "" and not vim.tbl_contains(ignore_ft, vim.bo.filetype) then
 	vim.cmd("Minuet virtualtext enable")
 end
 
--- 新規バッファがmarrkdownでなければ補完を有効化
+-- 切替時のバッファ
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
 	callback = function()
-		if vim.bo.filetype ~= "markdown" and vim.bo.filetype ~= "gitcommit" then
+		if not vim.tbl_contains(ignore_ft, vim.bo.filetype) then
 			vim.cmd("Minuet virtualtext enable")
 		end
 	end,
