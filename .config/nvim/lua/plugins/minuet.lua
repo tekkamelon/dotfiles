@@ -130,7 +130,7 @@ vim.keymap.set("i", "<Tab>", function()
 end, { expr = true, silent = true })
 
 -- 既存バッファがmarkdownでなければ補完を有効化
-if vim.bo.filetype ~= "" and vim.bo.filetype ~= "markdown" then
+if vim.bo.filetype ~= "" and vim.bo.filetype ~= "markdown" and vim.bo.filetype ~= "gitcommit" then
 	vim.cmd("Minuet virtualtext enable")
 end
 
@@ -138,7 +138,7 @@ end
 vim.api.nvim_create_autocmd("BufEnter", {
 	pattern = "*",
 	callback = function()
-		if vim.bo.filetype ~= "markdown" then
+		if vim.bo.filetype ~= "markdown" and vim.bo.filetype ~= "gitcommit" then
 			vim.cmd("Minuet virtualtext enable")
 		end
 	end,
