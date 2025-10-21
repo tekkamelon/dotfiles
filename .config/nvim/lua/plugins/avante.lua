@@ -1,6 +1,9 @@
 -- avante.lua
 -- Neovim >= 0.11.0
 
+-- LLMの温度
+local temperature_param = 0.1
+
 if vim.g.vscode then return end
 
 -- 環境変数からLLMモデルを取得,設定されていない場合は通知
@@ -9,6 +12,7 @@ local llm_model = model_from_env or "z-ai/glm-4.5-air:free"
 if not model_from_env then
 	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'" .. llm_model .. "'を使用します.", vim.log.levels.WARN)
 end
+
 
 -- APIキー設定チェック関数
 local function check_api_keys()
@@ -53,7 +57,6 @@ require('avante').setup {
 	-- デフォルトのプロバイダー
 	provider = "openrouter",
 	auto_suggestions_provider = "openrouter",
-
 	---@alias Mode "agentic" | "legacy"
 	---@type Mode
 	mode = "agentic",
@@ -66,7 +69,7 @@ require('avante').setup {
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
 			extra_request_body = {
-				temperature = 0.35,
+				temperature = temperature_param,
 			},
 
 		},
@@ -110,7 +113,7 @@ require('avante').setup {
 			model = llm_model,
 			disabled_tools = DISABLED_TOOLS,
 			extra_request_body = {
-				temperature = 0.35,
+				temperature = temperature_param,
 			},
 		},
 
@@ -122,7 +125,7 @@ require('avante').setup {
 			model = "meta-llama/llama-4-scout-17b-16e-instruct",
 			disable_tools = DISABLED_TOOLS,
 			extra_request_body = {
-				temperature = 0.35,
+				temperature = temperature_param,
 				max_tokens = 8192,
 			},
 		},
@@ -134,7 +137,7 @@ require('avante').setup {
 			model = "gemini-2.0-flash",
 			disable_tools = DISABLED_TOOLS,
 			extra_request_body = {
-				temperature = 0.35,
+				temperature = temperature_param,
 			},
 		},
 
@@ -147,7 +150,7 @@ require('avante').setup {
 			-- すべてのツールを無効化
 			disable_tools = true,
 			extra_request_body = {
-				temperature = 0.35,
+				temperature = temperature_param,
 				max_tokens = 8192,
 			},
 		},
