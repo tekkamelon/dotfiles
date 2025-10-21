@@ -1,44 +1,46 @@
 -- minuet-ai.lua
 -- neovim >= 0.10.0
 
+-- LLMの温度
+local temperature_param = 0.1
 
 -- vscodeから起動していなければ真
 if vim.g.vscode then return end
 
 require('minuet').setup {
 
-
 	-- 仮想テキストの設定
 	virtualtext = {
 
 		-- 補完を自動起動するファイルタイプ
 		auto_trigger_ft = {
-
 			'bash',
 			'awk',
 			'lua',
 			'python',
 			'vim',
 			'conf'
-
 		},
 
 		-- 除外するファイルタイプ
 		auto_trigger_ignore_ft = {
-
 			'markdown',
 			'gitcommit',
+			'Avante',
+			'AvanteInput',
+			'AvantePromptInput',
+			'AvanteSelectedFiles',
+			'AvanteSelectedCode',
+			'TelescopePrompt'
 		},
 
 		-- キーマップ
 		keymap = {
-
 			accept_line = '<C-s>',
 			accept_n_lines = '<C-e>',
 			next = '<C-f>',
 			prev = '<C-F>',
 			dismiss = '<C-q>',
-
 		},
 
 	},
@@ -59,7 +61,6 @@ require('minuet').setup {
 
 		-- openrouter
 		openai_fim_compatible = {
-
 			api_key = 'OPENROUTER_API_KEY',
 			end_point = 'https://openrouter.ai/api/v1/chat/completions',
 			-- モデルを指定
@@ -67,17 +68,14 @@ require('minuet').setup {
 			name = 'OpenRouter',
 			stream = false,
 			optional = {
-
+				-- 温度
+				temperature = temperature_param,
 				-- プロバイダのソート順
 				provider = {
-
 					-- スループットを優先
 					sort = 'throughput',
-
 				},
-
 			},
-
 		},
 
 		-- Groq
@@ -85,15 +83,15 @@ require('minuet').setup {
 			api_key = 'GROQ_API_KEY',
 			end_point = 'https://api.groq.com/openai/v1/chat/completions',
 			model = 'moonshotai/kimi-k2-instruct-0905',
-			name = 'Groq',
-			stream = true,
+			name = 'Groq', stream = true,
 			optional = {
-
-				-- 生成されるテキストの多様性を制御
-				temperature = 0.35,
-
+				temperature = temperature_param,
+				-- プロバイダのソート順
+				provider = {
+					-- スループットを優先
+					sort = 'throughput',
+				},
 			},
-
 		},
 
 		-- gemini
@@ -104,7 +102,14 @@ require('minuet').setup {
 			name = 'Gemini',
 			stream = true,
 			end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
-			optional = {},
+			optional = {
+				temperature = temperature_param,
+				-- プロバイダのソート順
+				provider = {
+					-- スループットを優先
+					sort = 'throughput',
+				},
+			},
 		},
 		-- }
 
@@ -140,6 +145,7 @@ local ignore_ft = {
 	'AvantePromptInput',
 	'AvanteSelectedFiles',
 	'AvanteSelectedCode',
+	'TelescopePrompt'
 }
 
 -- 起動時のバッファ
