@@ -175,7 +175,7 @@ require('avante').setup {
 		{
 			name = "refactor",
 			description = "最適化",
-			prompt = "現在のコードをより効率を向上させたコードに変更して下さい",
+			prompt = "現在のコードを動作や出力を変えず,より効率を向上させたコードに変更して下さい",
 		},
 		{
 			name = "test",
@@ -188,9 +188,9 @@ require('avante').setup {
 			prompt = "コードに日本語で適切なコメントを入れてください.ただし,コードとコメントの行を分けてください",
 		},
 		{
-			name = "words",
+			name = "kaisetsu",
 			description = "用語解説",
-			prompt = "選択範囲の解説を日本語かつ2から3行程度で書き込んでください",
+			prompt = "選択範囲を日本語かつ簡潔に解説してください",
 		},
 		{
 			name = "matome",
