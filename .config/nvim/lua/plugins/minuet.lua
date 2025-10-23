@@ -4,6 +4,7 @@
 -- LLMの温度
 local temperature_param = 0.1
 
+
 -- vscodeから起動していなければ真
 if vim.g.vscode then return end
 
@@ -62,7 +63,7 @@ require('minuet').setup {
 		-- openrouter
 		openai_fim_compatible = {
 			api_key = 'OPENROUTER_API_KEY',
-			end_point = 'https://openrouter.ai/api/v1/chat/completions',
+			end_point = 'https://openrouter.ai/api/v1/completions',
 			-- モデルを指定
 			model = 'z-ai/glm-4.5-air:free',
 			name = 'OpenRouter',
@@ -86,16 +87,10 @@ require('minuet').setup {
 			name = 'Groq', stream = true,
 			optional = {
 				temperature = temperature_param,
-				-- プロバイダのソート順
-				provider = {
-					-- スループットを優先
-					sort = 'throughput',
-				},
 			},
 		},
 
 		-- gemini
-		-- provider_options = {
 		gemini = {
 			api_key = 'GEMINI_API_KEY',
 			model = 'gemini-2.0-flash',
@@ -104,14 +99,8 @@ require('minuet').setup {
 			end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
 			optional = {
 				temperature = temperature_param,
-				-- プロバイダのソート順
-				provider = {
-					-- スループットを優先
-					sort = 'throughput',
-				},
 			},
 		},
-		-- }
 
 	},
 
