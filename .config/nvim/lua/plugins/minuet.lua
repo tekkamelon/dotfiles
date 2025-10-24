@@ -1,6 +1,7 @@
 -- minuet-ai.lua
 -- neovim >= 0.10.0
 
+
 -- LLMの温度
 local temperature_param = 0.1
 
@@ -46,7 +47,7 @@ require('minuet').setup {
 
 	},
 
-	-- groqに設定
+	-- デフォルトのプロバイダ
 	provider = 'openai_compatible',
 	request_timeout = 2.5,
 
@@ -65,9 +66,10 @@ require('minuet').setup {
 			api_key = 'OPENROUTER_API_KEY',
 			end_point = 'https://openrouter.ai/api/v1/completions',
 			-- モデルを指定
-			model = 'z-ai/glm-4.5-air:free',
+			model = 'x-ai/grok-4-fast',
 			name = 'OpenRouter',
-			stream = false,
+			-- falseだとタイムアウトする
+			stream = true,
 			optional = {
 				-- 温度
 				temperature = temperature_param,
