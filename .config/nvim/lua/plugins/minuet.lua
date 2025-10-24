@@ -71,12 +71,7 @@ require('minuet').setup {
 			optional = {
 				-- 温度
 				temperature = temperature_param,
-				-- プロバイダのソート順
-				provider = {
-					-- スループットを優先
-					sort = 'throughput',
-				},
-			},
+			}
 		},
 
 		-- Groq
@@ -84,7 +79,8 @@ require('minuet').setup {
 			api_key = 'GROQ_API_KEY',
 			end_point = 'https://api.groq.com/openai/v1/chat/completions',
 			model = 'moonshotai/kimi-k2-instruct-0905',
-			name = 'Groq', stream = true,
+			name = 'Groq',
+			stream = true,
 			optional = {
 				temperature = temperature_param,
 			},
@@ -97,9 +93,6 @@ require('minuet').setup {
 			name = 'Gemini',
 			stream = true,
 			end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
-			optional = {
-				temperature = temperature_param,
-			},
 		},
 
 	},
