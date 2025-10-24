@@ -79,10 +79,6 @@ require('avante').setup {
 			__inherited_from = 'openai',
 			model = 'z-ai/glm-4.5-air:free',
 		},
-		["openrouter/deepseek-chat-v3-0324:free"] = {
-			__inherited_from = 'openai',
-			model = 'deepseek/deepseek-chat-v3-0324:free',
-		},
 		["openrouter/llama-4-maverick:free"] = {
 			__inherited_from = 'openai',
 			model = 'meta-llama/llama-4-maverick:free',
@@ -90,14 +86,6 @@ require('avante').setup {
 		["openrouter/llama-4-scout:free"] = {
 			__inherited_from = 'openai',
 			model = 'meta-llama/llama-4-scout:free',
-		},
-		["openrouter/qwen3-coder:free"] = {
-			__inherited_from = 'openai',
-			model = 'qwen/qwen3-coder:free',
-		},
-		["openrouter/deepcoder-14b-preview:free"] = {
-			__inherited_from = 'openai',
-			model = 'agentica-org/deepcoder-14b-preview:free',
 		},
 		["openrouter/grok-4-fast"] = {
 			__inherited_from = 'openai',
