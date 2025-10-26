@@ -5,6 +5,18 @@
 -- LLMの温度
 local temperature_param = 0.1
 
+-- 除外するファイルタイプ一覧
+local ignore_ft = {
+	'markdown',
+	'gitcommit',
+	'Avante',
+	'AvanteInput',
+	'AvantePromptInput',
+	'AvanteSelectedFiles',
+	'AvanteSelectedCode',
+	'TelescopePrompt',
+	'minifiles',
+}
 
 -- vscodeから起動していなければ真
 if vim.g.vscode then return end
@@ -26,14 +38,7 @@ require('minuet').setup {
 
 		-- 除外するファイルタイプ
 		auto_trigger_ignore_ft = {
-			'markdown',
-			'gitcommit',
-			'Avante',
-			'AvanteInput',
-			'AvantePromptInput',
-			'AvanteSelectedFiles',
-			'AvanteSelectedCode',
-			'TelescopePrompt'
+			ignore_ft,
 		},
 
 		-- キーマップ
@@ -118,19 +123,6 @@ vim.keymap.set("i", "<Tab>", function()
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Tab>", true, false, true), "n", false)
 	end
 end, { expr = true, silent = true })
-
-
--- 除外するファイルタイプの処理
-local ignore_ft = {
-	'markdown',
-	'gitcommit',
-	'Avante',
-	'AvanteInput',
-	'AvantePromptInput',
-	'AvanteSelectedFiles',
-	'AvanteSelectedCode',
-	'TelescopePrompt'
-}
 
 -- 起動時のバッファ
 if vim.bo.filetype ~= "" and not vim.tbl_contains(ignore_ft, vim.bo.filetype) then
