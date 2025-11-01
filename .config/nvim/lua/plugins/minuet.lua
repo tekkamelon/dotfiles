@@ -54,32 +54,16 @@ require('minuet').setup {
 
 	-- デフォルトのプロバイダ
 	provider = 'openai_compatible',
-	request_timeout = 2.5,
-
+	-- タイムアウト時間
+	request_timeout = 100,
 	-- APIリクエストの制限(ミリ秒)
 	throttle = 1500,
 	-- 遅延
 	debounce = 600,
-
 	show_on_completion_menu = true,
 
 	-- プロバイダの設定
 	provider_options = {
-
-		-- openrouter
-		openai_fim_compatible = {
-			api_key = 'OPENROUTER_API_KEY',
-			end_point = 'https://openrouter.ai/api/v1/completions',
-			-- モデルを指定
-			model = 'x-ai/grok-4-fast',
-			name = 'OpenRouter',
-			-- falseだとタイムアウトする
-			stream = true,
-			optional = {
-				-- 温度
-				temperature = temperature_param,
-			}
-		},
 
 		-- Groq
 		openai_compatible = {
@@ -100,6 +84,15 @@ require('minuet').setup {
 			name = 'Gemini',
 			stream = true,
 			end_point = 'https://generativelanguage.googleapis.com/v1beta/models',
+		},
+
+		-- lm-studio
+		openai_fim_compatible = {
+			api_key = 'TERM',
+			end_point = 'http://localhost:1234/v1/completions',
+			model = 'qwen3-coder-30b-a3b-instruct',
+			name = 'LMStudio',
+			stream = false,
 		},
 
 	},
