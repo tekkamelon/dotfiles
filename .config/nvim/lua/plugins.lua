@@ -100,16 +100,6 @@ require("lazy").setup({
 		}
 	},
 
-	-- neocodeiumの設定
-	-- {
-	-- 	"monkoose/neocodeium",
-	-- 	cmd = "NeoCodeium",
-	-- 	event = "InsertEnter",
-	-- 	config = function()
-	-- 		require("plugins.neocodeium")
-	-- 	end,
-	-- },
-
 	-- minuet-aiの設定
 	{
 
@@ -226,6 +216,34 @@ require("lazy").setup({
 			"ColorizerReloadAllBuffers",
 			"ColorizerToggle",
 		}
+	},
+
+	-- img-clipの設定
+	-- `sudo apt install xclip`で使用可能
+	{
+		"HakonHarnes/img-clip.nvim",
+		event = "VeryLazy",
+		opts = {
+
+			-- ファイルとして保存(base64ではない)
+			embed_image_as_base64 = false,
+			-- ファイル名を毎回聞かない
+			prompt_for_filename = false,
+			drag_and_drop = {
+				insert_mode = true,
+			},
+			-- 相対パス
+			use_absolute_path = false,
+			-- 現在のファイルからの相対パス
+			relative_to_current_file = true,
+		},
+		keys = {
+			{
+				"<leader>p",
+				"<cmd>PasteImage<cr>",
+				desc = "Paste image from system clipboard"
+			},
+		},
 	},
 
 	-- mini.nvimのモジュール
