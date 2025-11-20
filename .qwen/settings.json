@@ -1,7 +1,18 @@
 {
-  "preferredEditor": "neovim",
-  "vimMode": true,
-  "theme": "Qwen Dark",
-  "selectedAuthType": "openai",
-  "contextFileName": "AGENTS.md"
+  "context": {
+    "fileName": "AGENTS.md"
+  },
+  "general": {
+    "preferredEditor": "neovim",
+    "vimMode": true
+  },
+  "security": {
+    "auth": {
+      "selectedType": "openai"
+    }
+  },
+  "ui": {
+    "theme": "Qwen Dark"
+  },
+  "$version": 2
 }
