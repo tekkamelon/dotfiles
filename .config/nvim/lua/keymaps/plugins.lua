@@ -106,7 +106,7 @@ M.setup_neovim = function()
 
 	-- img-clipとの連携の設定
 	-- クリップボードから画像を貼り付けるためのキーマップを設定
-	vim_keymap({ "n", "i" }, "<leader>p", function()
+	vim_keymap({ "n" }, "<leader>p", function()
 		-- ファイルタイプがAvanteInputまたはAvanteの場合,Avanteのクリップボード機能を使用
 		if vim.bo.filetype == "AvanteInput" or vim.bo.filetype == "Avante" then
 			require("avante.clipboard").paste_image()
