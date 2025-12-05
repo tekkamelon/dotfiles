@@ -91,6 +91,14 @@ require('avante').setup {
 			__inherited_from = 'openai',
 			model = 'x-ai/grok-4-fast',
 		},
+		["openrouter/grok-4.1-fast"] = {
+			__inherited_from = 'openai',
+			model = 'x-ai/grok-4.1-fast',
+		},
+		["openrouter/grok-code-fast-1"] = {
+			__inherited_from = 'openai',
+			model = 'x-ai/grok-code-fast-1',
+		},
 
 		-- OpenRouter
 		openrouter = {
