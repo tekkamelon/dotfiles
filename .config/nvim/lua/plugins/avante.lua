@@ -83,9 +83,9 @@ require('avante').setup {
 			__inherited_from = 'openai',
 			model = 'meta-llama/llama-4-maverick:free',
 		},
-		["openrouter/llama-4-scout:free"] = {
+		["mistralai/devstral-2512:free"] = {
 			__inherited_from = 'openai',
-			model = 'meta-llama/llama-4-scout:free',
+			model = 'mistralai/devstral-2512:free',
 		},
 		["openrouter/grok-4-fast"] = {
 			__inherited_from = 'openai',
