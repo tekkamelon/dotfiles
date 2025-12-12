@@ -35,7 +35,7 @@ floating_modifier $mod
 
 # start a terminal
 # bindsym $mod+Return exec stterm -f "VL Gothic-11"
-bindsym $mod+Return exec xfce4-terminal
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
