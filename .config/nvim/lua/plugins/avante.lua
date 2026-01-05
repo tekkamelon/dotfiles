@@ -44,12 +44,12 @@ check_api_keys()
 -- 無効化するツール
 local DISABLED_TOOLS = {
 	"rag_search",
-	"git_diff",
+	-- "git_diff",
 	"git_commit",
 	"move_path",
 	"copy_path",
 	"delete_path",
-	"create_dir"
+	-- "create_dir"
 }
 
 require('avante').setup {
@@ -75,21 +75,17 @@ require('avante').setup {
 		},
 
 		-- OpenRouterで利用するモデル一覧
-		["openrouter/glm-4.5-air:free"] = {
-			__inherited_from = 'openai',
-			model = 'z-ai/glm-4.5-air:free',
-		},
-		["openrouter/llama-4-maverick:free"] = {
-			__inherited_from = 'openai',
-			model = 'meta-llama/llama-4-maverick:free',
-		},
 		["mistralai/devstral-2512:free"] = {
 			__inherited_from = 'openai',
 			model = 'mistralai/devstral-2512:free',
 		},
-		["openrouter/grok-4-fast"] = {
+		["openrouter/glm-4.5-air:free"] = {
 			__inherited_from = 'openai',
-			model = 'x-ai/grok-4-fast',
+			model = 'z-ai/glm-4.5-air:free',
+		},
+		["openrouter/glm-4.7"] = {
+			__inherited_from = 'openai',
+			model = 'z-ai/glm-4.7',
 		},
 		["openrouter/grok-4.1-fast"] = {
 			__inherited_from = 'openai',
