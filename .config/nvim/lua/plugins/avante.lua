@@ -55,11 +55,21 @@ local DISABLED_TOOLS = {
 require('avante').setup {
 
 	-- デフォルトのプロバイダー
-	provider = "openrouter",
+	-- `AvanteSwitchProvider opencode`で切り替え
+	provider = "opencode",
 	auto_suggestions_provider = "openrouter",
 	---@alias Mode "agentic" | "legacy"
 	---@type Mode
 	mode = "agentic",
+
+	-- CLIコーディングエージェント
+	acp_providers = {
+		-- モデルは`~.config/opencode/opencode.json`で指定
+		["opencode"] = {
+			command = "opencode",
+			args = { "acp" }
+		},
+	},
 
 	providers = {
 		-- OpenAI互換の基本設定
