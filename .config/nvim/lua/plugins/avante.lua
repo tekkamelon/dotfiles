@@ -55,6 +55,9 @@ local opencode_available = check_opencode()
 -- "check_opencode"関数の真偽値を判定,真であれば"opencode",偽であれば"openrouter"
 local provider_name = opencode_available and "opencode" or "openrouter"
 
+-- プロバイダを通知
+vim.notify("プロバイダ: " .. provider_name, vim.log.levels.INFO)
+
 -- 無効化するツール
 local DISABLED_TOOLS = {
 	"rag_search",
@@ -68,8 +71,8 @@ local DISABLED_TOOLS = {
 
 require('avante').setup {
 
-	-- デフォルトのプロバイダー
-	-- opencodeが利用可能ならopencode、そうでなければopenrouter
+	-- デフォルトのプロバイダ
+	-- opencodeが利用可能ならopencode,そうでなければopenrouter
 	provider = provider_name,
 	auto_suggestions_provider = "openrouter",
 	---@alias Mode "agentic" | "legacy"
