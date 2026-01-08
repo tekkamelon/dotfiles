@@ -38,8 +38,22 @@ local function check_api_keys()
 	end
 end
 
+-- opencodeコマンドチェック関数
+local function check_opencode()
+	if vim.fn.executable('opencode') == 1 then
+		return true
+	else
+		return false
+	end
+end
+
 -- 起動時にAPIキー設定をチェック
 check_api_keys()
+
+local opencode_available = check_opencode()
+
+-- "check_opencode"関数の真偽値を判定,真であれば"opencode",偽であれば"openrouter"
+local provider_name = opencode_available and "opencode" or "openrouter"
 
 -- 無効化するツール
 local DISABLED_TOOLS = {
@@ -55,8 +69,8 @@ local DISABLED_TOOLS = {
 require('avante').setup {
 
 	-- デフォルトのプロバイダー
-	-- `AvanteSwitchProvider opencode`で切り替え
-	provider = "opencode",
+	-- opencodeが利用可能ならopencode、そうでなければopenrouter
+	provider = provider_name,
 	auto_suggestions_provider = "openrouter",
 	---@alias Mode "agentic" | "legacy"
 	---@type Mode
