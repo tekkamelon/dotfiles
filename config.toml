@@ -1,0 +1,10 @@
+model_provider = "openrouter"
+model = "z-ai/glm-4.5-air:free"
+
+[model_providers.openrouter]
+name = "OpenRouter"
+base_url = "https://openrouter.ai/api/v1"
+env_key = "OPENROUTER_API_KEY"
+
+[projects."/home/tekkamelon/Documents/github/sh-mpd"]
+trust_level = "trusted"
