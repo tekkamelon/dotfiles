@@ -157,6 +157,19 @@ if vim.g.vscode then
 	vim.opt.cmdheight = 1
 end
 
+vim.opt.autoread = true
+
+-- バッファの自動再読み込み
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
+	pattern = "*",
+	callback = function() vim.cmd("silent! checktime") end,
+})
+
+vim.api.nvim_create_autocmd("FileChangedShellPost", {
+	pattern = "*",
+	callback = function() print("File changed on disk. Reloaded.") end,
+})
+
 -- キーマップ設定を読み込み
 require('keymaps.general')
 
