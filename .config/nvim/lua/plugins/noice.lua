@@ -2,65 +2,63 @@
 
 
 -- vscodeから起動していなければ真
-if not vim.g.vscode then
+if vim.g.vscode then return end
+require('noice').setup {
 
-	require('noice').setup{
+	-- メッセージ
+	messages = {
 
-		-- メッセージ
-		messages = {
+		-- これを"true"にするとキーボードマクロが機能しない
+		enabled = false,
 
-			-- これを"true"にするとキーボードマクロが機能しない
-			enabled = false,
+	},
 
-		},
+	-- 通知
+	notify = {
 
-		-- 通知
-		notify = {
+		enabled = true,
+		view = "mini",
 
-			enabled = true,
-			view = "mini",
+	},
 
-		},
+	-- コマンドライン
+	cmdline = {
 
-		-- コマンドライン
-		cmdline = {
-
-			enabled = true,
-
-			format = {
-
-				-- 各種プロンプトの設定
-				cmdline = { pattern = "^:", icon = ":", lang = "vim" },
-				search_down = { kind = "search", pattern = "^/", icon = "🔎 /", lang = "regex" },
-				search_up = { kind = "search", pattern = "^%?", icon = "🔍 ?", lang = "regex" },
-				lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "🌙 ", lang = "lua" },
-				help = { pattern = "^:%s*he?l?p?%s+", icon = "📖" },
-
-			},
-
-		},
+		enabled = true,
 
 		format = {
 
-			level = {
+			-- 各種プロンプトの設定
+			cmdline = { pattern = "^:", icon = ":", lang = "vim" },
+			search_down = { kind = "search", pattern = "^/", icon = "🔎 /", lang = "regex" },
+			search_up = { kind = "search", pattern = "^%?", icon = "🔍 ?", lang = "regex" },
+			lua = { pattern = { "^:%s*lua%s+", "^:%s*lua%s*=%s*", "^:%s*=%s*" }, icon = "🌙 ", lang = "lua" },
+			help = { pattern = "^:%s*he?l?p?%s+", icon = "📖" },
 
-				icons = {
+		},
 
-					error = "❌",
-					warn = " ⚠ ",
-					info = "💻"
+	},
 
-				},
+	format = {
+
+		level = {
+
+			icons = {
+
+				error = "❌",
+				warn = " ⚠ ",
+				info = "💻"
 
 			},
-		},
-
-		popupmenu = {
-
-			kind_icons = false,
 
 		},
+	},
 
-	}
+	popupmenu = {
 
-end
+		kind_icons = false,
+
+	},
+
+}
+-- end
