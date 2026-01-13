@@ -243,7 +243,12 @@ exec --no-startup-id ~/.fehbg
 # pulseaudioの起動
 exec --no-startup-id pulseaudio -D
 
+# ポリシーキット認証エージェントの起動
+exec --no-startup-id lxpolkit
 # ディスプレイの再レイアウト
 # exec --no-startup-id sleep 1; ~/.screenlayout/pop-layout.sh
+
+# 通知の設定
+exec --no-startup-id /usr/lib/x86_64-linux-gnu/xfce4/notifyd/xfce4-notifyd
 # ====== 自動実行するソフトの設定ここまで ======
 
