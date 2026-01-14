@@ -26,6 +26,7 @@ alias lva='ls -1 -v -a'
 alias lvd='ls -d .*'
 alias fzf='fzf --reverse'
 alias shhf='history | cut -f2- | sort | uniq | fzf --prompt="${USER} > " | sh'
+alias bell='paplay /usr/share/sounds/freedesktop/stereo/complete.oga'
 
 # "fastfetch"がパスの通ったディレクトリにあれば真
 if type fastfetch > /dev/null 2>&1 ; then
@@ -48,6 +49,9 @@ export EDITOR=nvim
 export CALIBRE_USE_DARK_PALETTE=1
 export W3MIMGDISPLAY_PATH=/usr/lib/w3m/w3mimgdisplay
 export JAVA_HOME=/usr/lib/jvm/java-11-amazon-corretto/
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
 # 各種APIキーの設定
 . "${HOME}"/.env
 
@@ -60,6 +64,7 @@ export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
 # npmのバイナリのパス
 npm_path="${HOME}/.npm/_npx/*/node_modules/.bin/"
 export PATH="$PATH:${npm_path}"
+
 # ====== 環境変数及びパスの設定ここまで ======
 
 
