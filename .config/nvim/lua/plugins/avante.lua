@@ -56,7 +56,7 @@ local opencode_available = check_opencode()
 local provider_name = opencode_available and "opencode" or "openrouter"
 
 -- プロバイダを通知
-vim.notify("プロバイダ: " .. provider_name, vim.log.levels.INFO)
+vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
 
 -- 無効化するツール
 local DISABLED_TOOLS = {
@@ -89,6 +89,12 @@ require('avante').setup {
 			command = "opencode",
 			args = { "acp" }
 		},
+
+		["qwen"] = {
+			command = "qwen",
+			args = { "--experimental-acp" }
+		},
+
 	},
 
 	providers = {
