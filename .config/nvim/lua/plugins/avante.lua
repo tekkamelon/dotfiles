@@ -90,8 +90,8 @@ require('avante').setup {
 			args = { "acp" }
 		},
 
-		["qwen"] = {
-			command = "qwen",
+		["gemini-cli"] = {
+			command = "gemini",
 			args = { "--experimental-acp" }
 		},
 
@@ -183,8 +183,6 @@ require('avante').setup {
 			},
 		},
 	},
-
-
 
 	behaviour = {
 		auto_suggestions = false,
