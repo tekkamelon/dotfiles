@@ -127,7 +127,14 @@ require("lazy").setup({
 		"yetone/avante.nvim",
 		build = "make",
 		event = { "ModeChanged *:[vV\x16]*" },
-		cmd = { "AvanteToggle" },
+		cmd = {
+			"AvanteAsk",
+			"AvanteChat",
+			"AvanteChatNew",
+			"AvanteToggle",
+			"AvanteModels",
+			"AvanteSwitchProvider"
+		},
 		keys = "<leader>a",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
