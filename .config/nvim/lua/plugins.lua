@@ -73,7 +73,7 @@ require("lazy").setup({
 	{
 		"folke/noice.nvim",
 		pin = true,
-		event = "UIEnter",
+		event = "VeryLazy",
 		config = function()
 			require("plugins.noice")
 		end,
@@ -146,6 +146,7 @@ require("lazy").setup({
 	{
 		"ravitemer/mcphub.nvim",
 		lazy = true,
+		cmd = "MCPHub",
 		opts = {
 			extensions = {
 				avante = {
@@ -158,7 +159,7 @@ require("lazy").setup({
 	-- hlchunkの設定
 	{
 		"shellRaining/hlchunk.nvim",
-		event = "VeryLazy",
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("plugins.hlchunk")
 		end,
@@ -180,12 +181,7 @@ require("lazy").setup({
 	-- gitsignsの設定
 	{
 		"lewis6991/gitsigns.nvim",
-		event = {
-			"TextChanged",
-			"TextChangedI",
-			"TextChangedP",
-			"BufWritePost",
-		},
+		event = { "BufReadPost", "BufNewFile" },
 		pin = true,
 		config = function()
 			-- vscode以外から起動した場合に真
@@ -295,7 +291,7 @@ require("lazy").setup({
 	-- mini.statuslineの設定
 	{
 		"echasnovski/mini.statusline",
-		event = "UIEnter",
+		event = "VeryLazy",
 		config = function()
 			if vim.g.vscode then return end
 			require("mini.statusline").setup({
@@ -307,7 +303,7 @@ require("lazy").setup({
 	-- mini.tablineの設定
 	{
 		"echasnovski/mini.tabline",
-		event = "UIEnter",
+		event = "VeryLazy",
 		config = function()
 			if vim.g.vscode then return end
 			require("mini.tabline").setup({
@@ -362,7 +358,11 @@ require("lazy").setup({
 	{
 		"williamboman/mason-lspconfig.nvim",
 		pin = true,
-		event = "FileType",
+		-- event = "FileType",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{ "mason-org/mason.nvim", opts = {} },
+		},
 		config = function()
 			require("plugins.mason-lsp")
 		end,
