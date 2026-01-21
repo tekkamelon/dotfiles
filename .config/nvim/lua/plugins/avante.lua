@@ -177,6 +177,10 @@ require('avante').setup {
 		debounce = 800,
 	},
 
+	selection = {
+		enabled = false,
+	},
+
 	custom_tools = function()
 		return {
 			require("mcphub.extensions.avante").mcp_tool(),
