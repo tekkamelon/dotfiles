@@ -24,7 +24,10 @@ require("lazy").setup({
 		-- ビジュアルモードへの移行時に起動
 		event = "ModeChanged *:[vV\x16]*"
 	},
-	{ "haya14busa/vim-edgemotion",               event = "VeryLazy" },
+	{
+		"haya14busa/vim-edgemotion",
+		event = { "BufReadPost", "BufNewFile" },
+	},
 
 	-- 依存関係用プラグイン
 	{ "nvim-lua/plenary.nvim",                   lazy = true },
@@ -37,6 +40,15 @@ require("lazy").setup({
 		lazy = true,
 		config = function()
 			require("plugins.treesitter")
+		end,
+	},
+	-- masonの設定
+	{
+		"williamboman/mason.nvim",
+		lazy = true,
+		config = function()
+			if vim.g.vscode then return end
+			require("mason").setup({})
 		end,
 	},
 
@@ -94,15 +106,14 @@ require("lazy").setup({
 	-- eyelinerの設定
 	{
 		"jinh0/eyeliner.nvim",
-		event = "VeryLazy",
+		keys = { "h", "j", "k", "l", "f", "w", "b", "e", "ge" },
 		opts = {
 			highlight_on_key = false
-		}
+		},
 	},
 
 	-- minuet-aiの設定
 	{
-
 		"milanglacier/minuet-ai.nvim",
 		cmd = "Minuet",
 		event = "InsertEnter",
@@ -115,7 +126,8 @@ require("lazy").setup({
 	{
 		"yetone/avante.nvim",
 		build = "make",
-		event = "ModeChanged",
+		event = { "ModeChanged *:[vV\x16]*" },
+		cmd = { "AvanteToggle" },
 		keys = "<leader>a",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -133,7 +145,7 @@ require("lazy").setup({
 	-- `sudo npm install -g mcp-hub`でインストール
 	{
 		"ravitemer/mcphub.nvim",
-		event = "ModeChanged",
+		lazy = true,
 		opts = {
 			extensions = {
 				avante = {
@@ -222,7 +234,7 @@ require("lazy").setup({
 	-- `sudo apt install xclip`で使用可能
 	{
 		"HakonHarnes/img-clip.nvim",
-		event = "VeryLazy",
+		cmd = { "PasteImage", "ImgClip" },
 		opts = {
 
 			-- ファイルとして保存(base64ではない)
@@ -346,16 +358,6 @@ require("lazy").setup({
 	},
 
 	-- lsp関連
-	-- masonの設定
-	{
-		"williamboman/mason.nvim",
-		lazy = true,
-		config = function()
-			if vim.g.vscode then return end
-			require("mason").setup({})
-		end,
-	},
-
 	-- mason-lspconfigの設定
 	{
 		"williamboman/mason-lspconfig.nvim",
