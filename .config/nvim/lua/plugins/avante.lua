@@ -7,53 +7,23 @@ local temperature_param = 0.1
 if vim.g.vscode then return end
 
 -- 環境変数からLLMモデルを取得,設定されていない場合は通知
-local model_from_env = vim.env.OPENAI_MODEL
-local llm_model = model_from_env or "z-ai/glm-4.5-air:free"
-if not model_from_env then
+local llm_model = vim.env.OPENAI_MODEL or "z-ai/glm-4.5-air:free"
+if not vim.env.OPENAI_MODEL then
 	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'" .. llm_model .. "'を使用します.", vim.log.levels.WARN)
 end
 
-
 -- APIキー設定チェック関数
 local function check_api_keys()
-	-- APIキー設定をチェックする関数
-	-- 必要なAPIキーが設定されているか確認
-	local required_keys = {
-		OPENROUTER_API_KEY = "OpenRouter",
-		GROQ_API_KEY = "Groq",
-		GEMINI_API_KEY = "Gemini",
-	}
-
-	-- 設定されていないAPIキーを格納するテーブル
-	local missing_keys = {}
-	for key, _ in pairs(required_keys) do
-		if not vim.env[key] then
-			table.insert(missing_keys, required_keys[key])
-		end
-	end
-
-	-- 設定されていないAPIキーがある場合に通知を表示
-	if #missing_keys > 0 then
-		vim.notify("以下のAPIキーが設定されていません: " .. table.concat(missing_keys, ", "), vim.log.levels.WARN)
-	end
-end
-
--- opencodeコマンドチェック関数
-local function check_opencode()
-	if vim.fn.executable('opencode') == 1 then
-		return true
-	else
-		return false
+	if not vim.env.OPENROUTER_API_KEY then
+		vim.notify("OPENROUTER_API_KEYが設定されていません", vim.log.levels.WARN)
 	end
 end
 
 -- 起動時にAPIキー設定をチェック
 check_api_keys()
 
-local opencode_available = check_opencode()
-
--- "check_opencode"関数の真偽値を判定,真であれば"opencode",偽であれば"openrouter"
-local provider_name = opencode_available and "opencode" or "openrouter"
+-- "opencode"コマンドにPATHが通っているかを確認しプロバイダを設定
+local provider_name = vim.fn.executable('opencode') == 1 and "opencode" or "openrouter"
 
 -- プロバイダを通知
 vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
@@ -117,7 +87,7 @@ require('avante').setup {
 		},
 		["openrouter/glm-4.5-air:free"] = {
 			__inherited_from = 'openai',
-			model = 'z-ai/glm-4.5-air:free',
+			model = llm_model,
 		},
 		["openrouter/glm-4.7"] = {
 			__inherited_from = 'openai',
@@ -142,19 +112,6 @@ require('avante').setup {
 			disabled_tools = DISABLED_TOOLS,
 			extra_request_body = {
 				temperature = temperature_param,
-			},
-		},
-
-		-- Groq
-		groq = {
-			__inherited_from = "openai",
-			api_key_name = "GROQ_API_KEY",
-			endpoint = "https://api.groq.com/openai/v1/",
-			model = "meta-llama/llama-4-scout-17b-16e-instruct",
-			disable_tools = DISABLED_TOOLS,
-			extra_request_body = {
-				temperature = temperature_param,
-				max_tokens = 8192,
 			},
 		},
 
