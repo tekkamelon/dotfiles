@@ -4,73 +4,78 @@
 -- モジュールを遅延読み込み
 vim.loader.enable()
 
--- 共通設定関数
-local function set_global_options(options)
-	for key, value in pairs(options) do
-		vim.g[key] = value
-	end
-end
-
--- 統一設定関数
+-- 設定の統合と一括適用
 local function setup_options()
 	-- 無効化する標準プラグイン
-	local disabled_plugins = {
-		did_install_default_menus = true,
-		did_load_ftplugin = true,
-		loaded_2html_plugin = true,
-		loaded_getscript = true,
-		loaded_getscriptPlugin = true,
-		loaded_gzip = true,
-		loaded_man = true,
-		loaded_matchit = true,
-		loaded_netrw = true,
-		loaded_netrwFileHandlers = true,
-		loaded_netrwPlugin = true,
-		loaded_netrwSettings = true,
-		loaded_remote_plugins = true,
-		loaded_rrhelper = true,
-		loaded_shada_plugin = true,
-		loaded_spellfile_plugin = true,
-		loaded_tarPlugin = true,
-		loaded_tutor_mode_plugin = true,
-		loaded_vimball = true,
-		loaded_vimballPlugin = true,
-		loaded_zipPlugin = true,
-		skip_loading_mswin = true,
+	local disabled_builtins = {
+		'2html_plugin',
+		'getscript',
+		'getscriptPlugin',
+		'gzip',
+		'man',
+		'matchit',
+		'netrw',
+		'netrwFileHandlers',
+		'netrwPlugin',
+		'netrwSettings',
+		'remote_plugins',
+		'rrhelper',
+		'shada_plugin',
+		'spellfile_plugin',
+		'tarPlugin',
+		'tutor_mode_plugin',
+		'vimball',
+		'vimballPlugin',
+		'zipPlugin',
 	}
 
-	-- 全体設定
-	local global_settings = {
-		leader_key = ' ',
-		hostname = vim.fn.hostname(),
+	-- 無効化プラグインを一括設定
+	for _, plugin in ipairs(disabled_builtins) do
+		vim.g['loaded_' .. plugin] = 1
+	end
+
+	-- グローバル変数とvimオプションを統合して一括設定
+	local config = {
+		-- グローバル変数
+		g = {
+			did_install_default_menus = 0,
+			did_load_ftplugin = 0,
+			skip_loading_mswin = 1,
+			mapleader = ' ',
+		},
+		-- vimオプション
+		opt = {
+			-- 基本設定
+			termguicolors = true,
+			background = 'dark',
+			number = true,
+			cursorline = true,
+			cmdheight = 0,
+			autoread = true,
+
+			-- インデント設定
+			tabstop = 4,
+			shiftwidth = 4,
+
+			-- ウィンドウ分割設定
+			splitbelow = true,
+			splitright = true,
+
+			-- その他設定
+			directory = '/tmp',
+		}
 	}
 
-	-- vimオプション設定
-	local vim_options = {
-		-- 基本設定
-		termguicolors = true,
-		background = 'dark',
-		number = true,
-		cursorline = true,
+	-- 設定を一括適用
+	for scope, settings in pairs(config) do
+		for key, value in pairs(settings) do
+			vim[scope][key] = value
+		end
+	end
 
-		-- インデント設定
-		tabstop = 4,
-		shiftwidth = 4,
-
-		-- ウィンドウ分割設定
-		splitbelow = true,
-		splitright = true,
-
-		-- その他設定
-		directory = '/tmp',
-	}
-
-	-- 一括設定適用
-	set_global_options(disabled_plugins)
-	set_global_options(global_settings)
-
-	for key, value in pairs(vim_options) do
-		vim.opt[key] = value
+	-- VSCode環境の場合のみcmdheightを上書き
+	if vim.g.vscode then
+		vim.opt.cmdheight = 1
 	end
 end
 
@@ -78,96 +83,69 @@ end
 setup_options()
 
 
--- 自動コマンドの設定
-local create_autocmd = vim.api.nvim_create_autocmd
+-- 自動コマンドの統合設定
+local autocmd_group = vim.api.nvim_create_augroup('UserConfig', { clear = true })
 
--- バッファイベントの定義
-local buf_events = { 'BufNewFile', 'BufRead' }
-local buf_new_event = 'BufNewFile'
-
--- 自動コマンドの設定テーブル
-local autocmd_configs = {
+local autocmds = {
 	-- filetype設定
-	{ buf_events,    { pattern = { '*conf*', '*rc' }, command = 'set filetype=conf' } },
-	{ buf_events,    { pattern = '.*shrc', command = 'set filetype=sh' } },
-	{ buf_events,    { pattern = '.vimrc', command = 'set filetype=vim' } },
-	{ buf_events,    { pattern = '.tmux.conf', command = 'set filetype=tmux' } },
+	{ { 'BufNewFile', 'BufRead' }, { pattern = { '*conf*', '*rc' }, callback = function() vim.bo.filetype = 'conf' end } },
+	{ { 'BufNewFile', 'BufRead' }, { pattern = '.*shrc', callback = function() vim.bo.filetype = 'sh' end } },
+	{ { 'BufNewFile', 'BufRead' }, { pattern = '.vimrc', callback = function() vim.bo.filetype = 'vim' end } },
+	{ { 'BufNewFile', 'BufRead' }, { pattern = '.tmux.conf', callback = function() vim.bo.filetype = 'tmux' end } },
 
 	-- テンプレート読み込み
-	{ buf_new_event, { pattern = '*.sh', command = [[0r $HOME/Templates/sh.txt]] } },
-	{ buf_new_event, { pattern = '*.awk', command = [[0r $HOME/Templates/awk.txt]] } },
-	{ buf_new_event, { pattern = '*.py', command = [[0r $HOME/Templates/python.txt]] } },
-	{ buf_new_event, { pattern = '*.c', command = [[0r $HOME/Templates/c.txt]] } },
+	{ 'BufNewFile',                { pattern = '*.sh', callback = function() vim.cmd('0r $HOME/Templates/sh.txt') end } },
+	{ 'BufNewFile',                { pattern = '*.awk', callback = function() vim.cmd('0r $HOME/Templates/awk.txt') end } },
+	{ 'BufNewFile',                { pattern = '*.py', callback = function() vim.cmd('0r $HOME/Templates/python.txt') end } },
+	{ 'BufNewFile',                { pattern = '*.c', callback = function() vim.cmd('0r $HOME/Templates/c.txt') end } },
 
 	-- ターミナル設定
-	{ 'TermOpen',    { pattern = '*', command = 'setlocal norelativenumber | setlocal nonumber' } }
+	{ 'TermOpen', {
+		pattern = '*',
+		callback = function()
+			vim.wo.relativenumber = false
+			vim.wo.number = false
+		end
+	} },
+
+	-- バッファの自動再読み込み
+	{ { 'FocusGained', 'BufEnter', 'CursorHold' }, { pattern = '*', callback = function() vim.cmd('silent! checktime') end } },
+	{ 'FileChangedShellPost', {
+		pattern = '*',
+		callback = function()
+			print(
+				'File changed on disk. Reloaded.')
+		end
+	} },
 }
 
 -- 一括で自動コマンドを作成
-for _, config in ipairs(autocmd_configs) do
-	create_autocmd(config[1], config[2])
+for _, autocmd in ipairs(autocmds) do
+	autocmd.group = autocmd_group
+	vim.api.nvim_create_autocmd(autocmd[1], autocmd[2])
 end
 
 
--- カラースキームの設定
--- ホスト名に基づくカラースキーム設定をテーブルで管理
-local colorscheme_settings = {
+-- カラースキームを設定
+local function setup_colorscheme()
+	local hostname = vim.fn.hostname()
+	local colorscheme_map = {
+		['pop-os'] = { scheme = 'iceberg', termguicolors = true },
+		['tekkamelon-pcg-2c7n'] = { scheme = 'default', termguicolors = false }
+	}
 
-	['default'] = { scheme = 'industry', termguicolors = true },
-	['pop-os'] = { scheme = 'iceberg', termguicolors = true },
-	['tekkamelon-pcg-2c7n'] = { scheme = 'default', termguicolors = false }
-
-}
-
--- "hostname"に現在のマシンのホスト名を代入
-local hostname = vim.fn.hostname()
-
--- "settings"にホスト名に応じたテーブルの値を代入
-local settings = colorscheme_settings[hostname] or colorscheme_settings['default']
-
--- 設定を適用
-vim.cmd.colorscheme(settings.scheme)
-vim.opt.termguicolors = settings.termguicolors
-
--- ヤンクした範囲のハイライト
-local function yank_highlight()
-	-- ハイライトグループを"IncSearch",表示時間を200ミリ秒
-	local config = { higroup = "IncSearch", timeout = 200 }
-
-	-- テキストのヤンクで実行
-	vim.api.nvim_create_autocmd('TextYankPost', {
-		callback = function()
-			vim.highlight.on_yank(config)
-		end
-	})
+	local config = colorscheme_map[hostname] or { scheme = 'industry', termguicolors = true }
+	vim.cmd.colorscheme(config.scheme)
+	vim.opt.termguicolors = config.termguicolors
 end
 
--- ハイライトの設定を遅延読み込み
-vim.defer_fn(function()
-	yank_highlight()
-end, 0)
+setup_colorscheme()
 
--- leaderの設定
-vim.g.mapleader = " "
-
--- コマンドラインの高さを設定
-vim.opt.cmdheight = 0
--- VSCode環境の場合、コマンドラインの高さを1に設定
-if vim.g.vscode then
-	vim.opt.cmdheight = 1
-end
-
-vim.opt.autoread = true
-
--- バッファの自動再読み込み
-vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
-	pattern = "*",
-	callback = function() vim.cmd("silent! checktime") end,
-})
-
-vim.api.nvim_create_autocmd("FileChangedShellPost", {
-	pattern = "*",
-	callback = function() print("File changed on disk. Reloaded.") end,
+-- ヤンク時のハイライトの設定
+vim.api.nvim_create_autocmd('TextYankPost', {
+	callback = function()
+		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 200 })
+	end
 })
 
 -- キーマップ設定を読み込み
