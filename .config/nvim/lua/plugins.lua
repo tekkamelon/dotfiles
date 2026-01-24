@@ -5,16 +5,17 @@
 -- lazy.nvimのブートストラップ処理
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
-end
+-- if not vim.loop.fs_stat(lazypath) then
+-- 	vim.fn.system({
+-- 		"git",
+-- 		"clone",
+-- 		"--filter=blob:none",
+-- 		"https://github.com/folke/lazy.nvim.git",
+-- 		"--branch=stable",
+-- 		lazypath,
+-- 	})
+-- end
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -236,7 +237,6 @@ require("lazy").setup({
 		"HakonHarnes/img-clip.nvim",
 		cmd = { "PasteImage", "ImgClip" },
 		opts = {
-
 			-- ファイルとして保存(base64ではない)
 			embed_image_as_base64 = false,
 			-- ファイル名を毎回聞かない
@@ -338,7 +338,7 @@ require("lazy").setup({
 	-- mini.surroundの設定
 	{
 		"echasnovski/mini.surround",
-		event = { "BufReadPost", "BufNewFile" },
+		keys = { "c", "l", "n" },
 		opts = {
 			-- キーマップの設定
 			mappings = {
@@ -362,11 +362,7 @@ require("lazy").setup({
 	{
 		"williamboman/mason-lspconfig.nvim",
 		pin = true,
-		-- event = "FileType",
 		event = { "BufReadPost", "BufNewFile" },
-		dependencies = {
-			{ "mason-org/mason.nvim", opts = {} },
-		},
 		config = function()
 			require("plugins.mason-lsp")
 		end,
