@@ -150,9 +150,6 @@ require('avante').setup {
 	},
 
 	config = {
-		selector = {
-			provider = "telescope",
-		},
 		-- 検索エンジン
 		web_search_engine = {
 			provider = "tavily",
@@ -179,6 +176,10 @@ require('avante').setup {
 
 	selection = {
 		enabled = false,
+	},
+
+	selector = {
+		provider = "telescope",
 	},
 
 	custom_tools = function()
