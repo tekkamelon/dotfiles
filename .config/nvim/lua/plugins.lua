@@ -138,10 +138,7 @@ require("lazy").setup({
 		keys = "<leader>a",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
 			"echasnovski/mini.icons",
-			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
 			require("plugins.avante")
@@ -366,7 +363,7 @@ require("lazy").setup({
 		"williamboman/mason-lspconfig.nvim",
 		pin = true,
 		-- event = "FileType",
-		event = { "BufReadPre", "BufNewFile" },
+		event = { "BufReadPost", "BufNewFile" },
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
 		},
