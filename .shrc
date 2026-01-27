@@ -16,7 +16,7 @@ alias vi='nvim'
 alias vp='nvim - -R -u "${HOME}/.config/nvim/light_init.lua"'
 
 # コマンドのエイリアス
-alias bc='bc -q'
+alias bc='bc -q -l'
 alias info='info --vi-keys'
 alias ll='ls -alF'
 alias la='ls -A'
@@ -64,7 +64,6 @@ export PATH=$PATH:${HOME}/.local/nvim-linux64/bin/
 # npmのバイナリのパス
 npm_path="${HOME}/.npm/_npx/*/node_modules/.bin/"
 export PATH="$PATH:${npm_path}"
-
 # ====== 環境変数及びパスの設定ここまで ======
 
 
@@ -76,6 +75,7 @@ check_hostname="${echo_hostname%"${check_thinkpad}"}"
 # ホスト名が"pop-os"であれば真
 if [ "${echo_hostname}" = "pop-os" ] ; then
 
+	# walのキャッシュを読み取る
 	cat ~/.cache/wal/sequences 2> /dev/null
 
 	. "${HOME}/.cargo/env"
