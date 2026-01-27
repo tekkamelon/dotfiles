@@ -6,7 +6,7 @@ local temperature_param = 0.1
 
 if vim.g.vscode then return end
 
--- 環境変数からLLMモデルを取得,設定されていない場合は通知
+-- 環境変数からLLMを取得,設定されていない場合は通知
 local llm_model = vim.env.OPENAI_MODEL or "z-ai/glm-4.5-air:free"
 if not vim.env.OPENAI_MODEL then
 	vim.notify("環境変数'OPENAI_MODEL'が設定されていません.デフォルト値'" .. llm_model .. "'を使用します.", vim.log.levels.WARN)
@@ -22,11 +22,19 @@ end
 -- 起動時にAPIキー設定をチェック
 check_api_keys()
 
--- "opencode"コマンドにPATHが通っているかを確認しプロバイダを設定
-local provider_name = vim.fn.executable('opencode') == 1 and "opencode" or "openrouter"
+-- 環境変数からプロバイダ名を取得,なければ"openrouter"
+local provider_name = vim.env.AVANTE_PROVIDER or "openrouter"
 
--- プロバイダを通知
+-- 起動時にプロバイダを通知
 vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
+
+-- -- プロバイダがopencodeの場合は起動時に新規チャットを開始
+if provider_name == "opencode" then
+	-- 確実に起動を待つために1秒遅延
+	vim.defer_fn(function()
+		vim.cmd("AvanteChatNew")
+	end, 1000)
+end
 
 -- 無効化するツール
 local DISABLED_TOOLS = {
@@ -159,7 +167,7 @@ require('avante').setup {
 
 	windows = {
 		wrap = true,
-		width = 36,
+		width = 37,
 		input = {
 			prefix = "> ",
 			height = 12,
