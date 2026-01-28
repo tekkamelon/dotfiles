@@ -73,6 +73,15 @@ require('avante').setup {
 			args = { "--experimental-acp" }
 		},
 
+		-- openrouterを使用,LLMは環境変数で設定
+		["qwen-code"] = {
+			command = "qwen",
+			args = { "--acp", "--auth-type", "openai", "--openai-base-url", "https://openrouter.ai/api/v1" },
+			env = {
+				OPENAI_API_KEY = os.getenv("OPENROUTER_API_KEY"),
+			},
+		},
+
 	},
 
 	providers = {
@@ -127,7 +136,7 @@ require('avante').setup {
 		gemini = {
 			api_key_name = "GEMINI_API_KEY",
 			endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
-			model = "gemini-2.0-flash",
+			model = "gemini-2.5-flash",
 			disable_tools = DISABLED_TOOLS,
 			extra_request_body = {
 				temperature = temperature_param,
@@ -170,7 +179,7 @@ require('avante').setup {
 		width = 37,
 		input = {
 			prefix = "> ",
-			height = 12,
+			height = 15,
 		},
 		ask = {
 			start_insert = false,
