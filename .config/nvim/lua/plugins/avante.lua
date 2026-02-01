@@ -76,15 +76,7 @@ require('avante').setup {
 		-- openrouterを使用,LLMは環境変数で設定
 		["qwen-code"] = {
 			command = "qwen",
-			args = {
-				"--acp",
-				-- "--auth-type",
-				-- "openai",
-				-- "--openai-base-url", "https://openrouter.ai/api/v1"
-			},
-			env = {
-				OPENAI_API_KEY = os.getenv("OPENROUTER_API_KEY"),
-			},
+			args = { "--acp" },
 		},
 
 	},
