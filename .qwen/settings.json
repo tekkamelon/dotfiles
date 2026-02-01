@@ -8,11 +8,14 @@
   },
   "security": {
     "auth": {
-      "selectedType": "openai"
+      "selectedType": "qwen-oauth"
     }
   },
   "ui": {
     "theme": "Qwen Dark"
   },
-  "$version": 2
+  "$version": 2,
+  "model": {
+    "name": "coder-model"
+  }
 }
