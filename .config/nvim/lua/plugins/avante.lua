@@ -39,11 +39,11 @@ end
 -- 無効化するツール
 local DISABLED_TOOLS = {
 	"rag_search",
-	-- "git_diff",
-	"git_commit",
-	"move_path",
-	"copy_path",
 	"delete_path",
+	"git_commit",
+	-- "git_diff",
+	-- "move_path",
+	-- "copy_path",
 	-- "create_dir"
 }
 
@@ -76,7 +76,12 @@ require('avante').setup {
 		-- openrouterを使用,LLMは環境変数で設定
 		["qwen-code"] = {
 			command = "qwen",
-			args = { "--acp", "--auth-type", "openai", "--openai-base-url", "https://openrouter.ai/api/v1" },
+			args = {
+				"--acp",
+				-- "--auth-type",
+				-- "openai",
+				-- "--openai-base-url", "https://openrouter.ai/api/v1"
+			},
 			env = {
 				OPENAI_API_KEY = os.getenv("OPENROUTER_API_KEY"),
 			},
