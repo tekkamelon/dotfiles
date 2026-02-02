@@ -1,4 +1,5 @@
 -- copilot.lua
+-- Neovim >= 0.11.0
 
 
 -- vscodeから起動していなければ真
@@ -39,12 +40,14 @@ if not vim.g.vscode then
 		},
 
 		-- nesの設定
+		-- "copilot-lsp"プラグインをインストール
 		nes = {
 
+			-- 有効化
 			enabled = true,
 			keymap = {
 
-				accept_and_goto = "<leader>p",
+				accept_and_goto = "<C-i>",
 				accept = false,
 				dismiss = "<Esc>",
 
