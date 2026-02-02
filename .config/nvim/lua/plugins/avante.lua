@@ -28,23 +28,10 @@ local provider_name = vim.env.AVANTE_PROVIDER or "openrouter"
 -- 起動時にプロバイダを通知
 vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
 
--- -- プロバイダがopencodeの場合は起動時に新規チャットを開始
-if provider_name == "opencode" then
-	-- 確実に起動を待つために1秒遅延
-	vim.defer_fn(function()
-		vim.cmd("AvanteChatNew")
-	end, 1000)
-end
-
 -- 無効化するツール
 local DISABLED_TOOLS = {
 	"rag_search",
 	"delete_path",
-	"git_commit",
-	-- "git_diff",
-	-- "move_path",
-	-- "copy_path",
-	-- "create_dir"
 }
 
 -- カスタムプロンプトを読み込み
@@ -155,6 +142,7 @@ require('avante').setup {
 		},
 	},
 
+	-- 各種自動設定
 	behaviour = {
 		auto_suggestions = false,
 		auto_set_highlight_group = true,
