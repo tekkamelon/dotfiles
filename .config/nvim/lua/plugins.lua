@@ -1,7 +1,6 @@
 -- plugins.lua
 -- Neovim >= 0.11.0
 
-
 -- lazy.nvimのブートストラップ処理
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
@@ -113,13 +112,13 @@ require("lazy").setup({
 		},
 	},
 
-	-- minuet-aiの設定
+	-- copilot.luaの設定
 	{
-		"milanglacier/minuet-ai.nvim",
-		cmd = "Minuet",
+		"zbirenbaum/copilot.lua",
+		cmd = "Copilot",
 		event = "InsertEnter",
 		config = function()
-			require("plugins.minuet")
+			require("plugins.copilot")
 		end,
 	},
 
@@ -231,25 +230,6 @@ require("lazy").setup({
 		}
 	},
 
-	-- img-clipの設定
-	-- `sudo apt install xclip`で使用可能
-	-- {
-	-- 	"HakonHarnes/img-clip.nvim",
-	-- 	cmd = { "PasteImage", "ImgClip" },
-	-- 	opts = {
-	-- 		-- ファイルとして保存(base64ではない)
-	-- 		embed_image_as_base64 = false,
-	-- 		-- ファイル名を毎回聞かない
-	-- 		prompt_for_filename = false,
-	-- 		drag_and_drop = {
-	-- 			insert_mode = true,
-	-- 		},
-	-- 		-- 相対パス
-	-- 		use_absolute_path = false,
-	-- 		-- 現在のファイルからの相対パス
-	-- 		relative_to_current_file = true,
-	-- 	},
-	-- },
 
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
