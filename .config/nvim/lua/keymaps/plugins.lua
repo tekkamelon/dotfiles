@@ -11,25 +11,30 @@ local M = {}
 
 -- vscode-neovimから呼び出した場合の設定
 M.setup_vscode = function()
+	-- キーマップ設定のテーブルを作成
 	local kmaps = {
 
 		-- vim-edgemotion
 		-- 下キーで1つ下のコードブロック
-		{ '<C-j>',     '<Plug>(edgemotion-j)' },
-		{ '<C-Down>',  '<Plug>(edgemotion-j)' },
+		{ { 'n', 'v' }, '<C-j>',     '<Plug>(edgemotion-j)' },
+		{ { 'n', 'v' }, '<C-Down>',  '<Plug>(edgemotion-j)' },
 		-- 上キーで1つ上のコードブロック
-		{ '<C-l>',     '<Plug>(edgemotion-k)' },
-		{ '<C-Up>',    '<Plug>(edgemotion-k)' },
+		{ { 'n', 'v' }, '<C-l>',     '<Plug>(edgemotion-k)' },
+		{ { 'n', 'v' }, '<C-Up>',    '<Plug>(edgemotion-k)' },
 
 		-- mini.comment
 		-- コメントアウト
-		{ '<leader>g', 'gcc',                 { remap = true } },
+		{ { 'n', 'v' }, '<leader>g', 'gcc',                 { remap = true } },
+
+		-- hop
+		-- 全ウィンドウのすべての文字にラベルを付ける
+		{ 'n',          '<leader>h', ':HopAnywhereMW<CR>' },
 
 	}
 
 	-- テーブルの内容をループし代入
 	for _, kmap in ipairs(kmaps) do
-		vim_keymap({ 'n', 'v' }, kmap[1], kmap[2], kmap[3] or options)
+		vim_keymap(kmap[1], kmap[2], kmap[3], kmap[4] or options)
 	end
 end
 
@@ -103,18 +108,6 @@ M.setup_neovim = function()
 	for _, kmap in ipairs(kmaps) do
 		vim_keymap(kmap[1], kmap[2], kmap[3], kmap[4] or options)
 	end
-
-	-- img-clipとの連携の設定
-	-- クリップボードから画像を貼り付けるためのキーマップを設定
-	-- vim_keymap({ "n" }, "<leader>p", function()
-	-- 	-- ファイルタイプがAvanteInputまたはAvanteの場合,Avanteのクリップボード機能を使用
-	-- 	if vim.bo.filetype == "AvanteInput" or vim.bo.filetype == "Avante" then
-	-- 		require("avante.clipboard").paste_image()
-	-- 	else
-	-- 		-- それ以外の場合はimg-clipプラグインを使用して画像を貼り付け
-	-- 		require("img-clip").paste_image()
-	-- 	end
-	-- end, { desc = "Paste image from clipboard" })
 end
 
 -- vscode-neovimから起動した際に真,それ以外で偽
