@@ -85,23 +85,12 @@ require("lazy").setup({
 	{
 		"nvim-telescope/telescope.nvim",
 		lazy = true,
-		cmd = "Telescope",
+		cmd = {
+			"Telescope",
+			"TelescopeAvanteProvider"
+		},
 		config = function()
-			if vim.g.vscode then return end
-			require("telescope").setup({
-				defaults = {
-					-- プロンプトの設定
-					prompt_prefix = " 🔎 ",
-					selection_caret = " ➤	 ",
-				},
-				-- telescope-ui-selectの設定
-				extensions = {
-					["ui-select"] = {
-						require("telescope.themes").get_dropdown({}),
-					},
-				},
-			})
-			require("telescope").load_extension("ui-select")
+			require("plugins.telescope")
 		end,
 	},
 
@@ -129,14 +118,15 @@ require("lazy").setup({
 	{
 		"yetone/avante.nvim",
 		build = "make",
-		event = { "ModeChanged *:[vV\x16]*" },
+		-- コマンドモードまたはビジュアルモードへの移行時に起動
+		event = { "ModeChanged *:[cvV\x16]*" },
 		cmd = {
 			"AvanteAsk",
 			"AvanteChat",
 			"AvanteChatNew",
 			"AvanteToggle",
 			"AvanteModels",
-			"AvanteSwitchProvider"
+			"AvanteSwitchProvider",
 		},
 		keys = {
 			"<leader>a",
