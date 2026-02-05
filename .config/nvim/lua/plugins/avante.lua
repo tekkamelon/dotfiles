@@ -81,6 +81,7 @@ require('avante').setup {
 			["openrouter/glm-4.7"] = 'z-ai/glm-4.7',
 			["openrouter/grok-4.1-fast"] = 'x-ai/grok-4.1-fast',
 			["openrouter/grok-code-fast-1"] = 'x-ai/grok-code-fast-1',
+			["openrouter/qwen3-coder-next"] = 'qwen/qwen3-coder-next',
 		}
 
 		-- OpenRouterプロバイダを動的に生成
@@ -138,7 +139,7 @@ require('avante').setup {
 		width = 37,
 		input = {
 			prefix = "> ",
-			height = 20,
+			height = 17,
 		},
 		ask = {
 			start_insert = false,
