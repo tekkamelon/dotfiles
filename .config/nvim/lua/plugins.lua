@@ -5,15 +5,15 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 -- lazy.nvimが存在しない場合はGitHubからクローン
-if not vim.loop.fs_stat(lazypath) then
-	vim.fn.system({
-		"git",
-		"clone",
-		"--filter=blob:none",
-		"https://github.com/folke/lazy.nvim.git",
-		"--branch=stable",
-		lazypath,
-	})
+local lazystat = vim.uv.fs_stat(lazypath)
+if not lazystat or lazystat.type ~= "directory" then
+	local clone_cmd = { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
+		lazypath }
+	vim.system(clone_cmd, { text = true }, function(obj)
+		if obj.code ~= 0 then
+			vim.notify("Failed to clone lazy.nvim: " .. (obj.stderr or ""), vim.log.levels.ERROR)
+		end
+	end)
 end
 
 vim.opt.rtp:prepend(lazypath)
@@ -345,5 +345,10 @@ require("lazy").setup({
 	},
 })
 
--- プラグインのキーマップ設定を読み込み
-require("keymaps.plugins")
+-- キーマップをUIEnterで遅延読み込み
+vim.api.nvim_create_autocmd('UIEnter', {
+	once = true,
+	callback = function()
+		require("keymaps.plugins")
+	end
+})

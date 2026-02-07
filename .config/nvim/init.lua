@@ -149,8 +149,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	end
 })
 
--- キーマップ設定を読み込み
-require('keymaps.general')
+-- キーマップをUIEnterで遅延読み込み
+vim.api.nvim_create_autocmd('UIEnter', {
+	once = true,
+	callback = function()
+		require('keymaps.general')
+	end
+})
 
--- プラグインの設定を読み込み
 require('plugins')
