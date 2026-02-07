@@ -99,7 +99,7 @@ M.setup_neovim = function()
 		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
 		-- LLMを変更
 		{ 'n',          '<leader>am', ':TelescopeAvanteProvider<CR>' },
-		-- { 'n',          '<leader>am', ':AvanteSwitchProvider ' },
+		{ 'n',          '<leader>aM', ':AvanteModels<CR>' },
 		-- チャット内容をクリア
 		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
 
