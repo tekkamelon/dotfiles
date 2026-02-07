@@ -14,9 +14,10 @@ local function setup_options()
 		'gzip',
 		'man',
 		'matchit',
-		'netrw',
-		'netrwFileHandlers',
-		'netrwPlugin',
+		-- netrwの設定
+		-- 'netrw',
+		-- 'netrwFileHandlers',
+		-- 'netrwPlugin',
 		'netrwSettings',
 		'remote_plugins',
 		'rrhelper',
@@ -94,10 +95,10 @@ local autocmds = {
 	{ { 'BufNewFile', 'BufRead' }, { pattern = '.tmux.conf', callback = function() vim.bo.filetype = 'tmux' end } },
 
 	-- テンプレート読み込み
-	{ 'BufNewFile',                { pattern = '*.sh', callback = function() vim.cmd('0r $HOME/Templates/sh.txt') end } },
 	{ 'BufNewFile',                { pattern = '*.awk', callback = function() vim.cmd('0r $HOME/Templates/awk.txt') end } },
 	{ 'BufNewFile',                { pattern = '*.py', callback = function() vim.cmd('0r $HOME/Templates/python.txt') end } },
 	{ 'BufNewFile',                { pattern = '*.c', callback = function() vim.cmd('0r $HOME/Templates/c.txt') end } },
+	{ 'BufNewFile',                { pattern = '*.sh', callback = function() vim.cmd('0r $HOME/Templates/sh.txt') end } },
 
 	-- ターミナル設定
 	{ 'TermOpen', {
