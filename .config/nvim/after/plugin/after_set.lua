@@ -8,6 +8,10 @@ vim.api.nvim_create_autocmd('FileType', { pattern = '*', command = 'setlocal for
 -- カーソルラインをアンダーラインに設定
 vim.api.nvim_set_hl(0, 'CursorLine', { underline = true })
 
+-- APIをローカル変数にキャッシュ
+local nvim_set_hl = vim.api.nvim_set_hl
+local colors_name = vim.g.colors_name
+
 -- カラースキームごとのポップアップメニューの設定
 local colorscheme_settings = {
 
@@ -28,12 +32,12 @@ local colorscheme_settings = {
 }
 
 -- ローカル変数"colorscheme"に現在のカラースキームを代入"
-local settings = colorscheme_settings[vim.g.colors_name]
+local settings = colorscheme_settings[colors_name]
 
 if settings then
 	-- テーブルから現在のハイライトを呼び出す
 	for group, colors in pairs(settings) do
-		vim.api.nvim_set_hl(0, group, colors)
+		nvim_set_hl(0, group, colors)
 	end
 end
 
@@ -73,17 +77,19 @@ local highlight_groups = {
 
 -- テーブルからハイライトを一括設定
 for group, colors in pairs(highlight_groups) do
-	vim.api.nvim_set_hl(0, group, colors)
+	nvim_set_hl(0, group, colors)
 end
 
 -- カラースキームが"industry"であれば真
-if vim.g.colors_name == "industry" then
+if colors_name == "industry" then
 	local ts_start = vim.treesitter.start
+	local bo = vim.bo
 
 	-- 除外するfiletype
 	local excluded_types = {
 
 		help = true,
+		python = true,
 		bash = true,
 		awk = true,
 		html = true
@@ -93,7 +99,7 @@ if vim.g.colors_name == "industry" then
 	-- 関数"vim.treesitter.start"をオーバーライド
 	vim.treesitter.start = function(bufnr, lang)
 		-- 現在のfiletypeを取得
-		local ft = vim.bo[bufnr or 0].filetype
+		local ft = bo[bufnr or 0].filetype
 
 		-- 除外するfiletypeが含まれていれば真
 		if excluded_types[ft] or excluded_types[lang] then
