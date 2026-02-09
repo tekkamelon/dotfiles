@@ -17,6 +17,15 @@
     "environment": {
       "BRAVE_API_KEY": "${BRAVE_API_KEY}"
     }
+  },
+  "playwright": {
+    "type": "local",
+    "command": [
+      "npx",
+      "-y",
+      "@playwright/mcp"
+    ],
+    "enabled": true
   }
 }
 }
