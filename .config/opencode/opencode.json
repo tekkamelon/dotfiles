@@ -25,6 +25,9 @@
       "-y",
       "@playwright/mcp"
     ],
+	"args": [
+		"--browser", "firefox"
+	],
     "enabled": true
   }
 }
