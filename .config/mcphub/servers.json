@@ -1,0 +1,44 @@
+{
+  "mcpServers": {
+    "brave-search": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "command": "npx",
+      "description": "Brave検索エンジンを使用するMCPサーバー",
+      "disabled": false,
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "name": "Brave Search"
+    },
+    "fetch": {
+      "args": [
+        "mcp-server-fetch"
+      ],
+      "command": "uvx"
+    },
+    "filesystem": {
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "${HOME}"
+      ],
+      "command": "npx",
+      "description": "ファイルシステムにアクセスするMCPサーバー",
+      "name": "Filesystem Server"
+    },
+	"playwright": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest",
+        "--browser",
+        "firefox"
+      ],
+      "enabled": true
+    }
+  },
+  "nativeMCPServers": {}
+}
