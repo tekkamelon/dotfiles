@@ -58,6 +58,11 @@ require('avante').setup {
 			args = { "--acp" },
 		},
 
+		["goose-cli"] = {
+			command = "goose",
+			args = { "acp" },
+		},
+
 	},
 
 	providers = (function()
