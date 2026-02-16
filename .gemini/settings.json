@@ -1,15 +1,23 @@
 {
+  "context": {
+    "fileName": "AGENTS.md"
+  },
+  "general": {
+    "preferredEditor": "neovim",
+    "vimMode": true
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--browser", "firefox"]
+    }
+  },
   "security": {
     "auth": {
       "selectedType": "oauth-personal"
     }
   },
-  "general": {
-    "vimMode": true
-  },
-  "context": {
-    "fileName": [
-      "AGENTS.md"
-    ]
+  "ui": {
+    "theme": "Atom One"
   }
 }
