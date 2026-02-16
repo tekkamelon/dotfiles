@@ -93,6 +93,7 @@ local autocmds = {
 	{ { 'BufNewFile', 'BufRead' }, { pattern = '.*shrc', callback = function() vim.bo.filetype = 'sh' end } },
 	{ { 'BufNewFile', 'BufRead' }, { pattern = '.vimrc', callback = function() vim.bo.filetype = 'vim' end } },
 	{ { 'BufNewFile', 'BufRead' }, { pattern = '.tmux.conf', callback = function() vim.bo.filetype = 'tmux' end } },
+	{ { 'BufNewFile', 'BufRead' }, { pattern = '.env*', callback = function() vim.bo.filetype = 'env' end } },
 
 	-- テンプレート読み込み
 	{ 'BufNewFile',                { pattern = '*.awk', callback = function() vim.cmd('0r $HOME/Templates/awk.txt') end } },

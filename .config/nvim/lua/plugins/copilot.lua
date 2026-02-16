@@ -36,6 +36,8 @@ if not vim.g.vscode then
 			AvantePromptInput = false,
 			AvanteSelectedFiles = false,
 			AvanteSelectedCode = false,
+			env = false,
+
 
 		},
 
