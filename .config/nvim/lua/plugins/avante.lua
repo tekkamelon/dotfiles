@@ -58,7 +58,7 @@ require('avante').setup {
 			args = { "--acp" },
 		},
 
-		["goose-cli"] = {
+		["goose"] = {
 			command = "goose",
 			args = { "acp" },
 		},
