@@ -119,6 +119,40 @@ local autocmds = {
 				'File changed on disk. Reloaded.')
 		end
 	} },
+
+	-- ヤンク時のハイライトの設定
+	{ 'TextYankPost', {
+		pattern = '*',
+		callback = function()
+			vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 200 })
+		end
+	} },
+
+	-- キーマップをUIEnterで遅延読み込み
+	{ 'UIEnter', {
+		pattern = '*',
+		once = true,
+		callback = function()
+			require('keymaps.general')
+		end
+	} },
+
+	-- マクロ記録開始時にcmdheightを1に設定
+	{ 'RecordingEnter', {
+		pattern = '*',
+		callback = function()
+			vim.o.cmdheight = 1
+		end
+	} },
+
+	-- マクロ記録終了時にcmdheightを0に戻す
+	{ 'RecordingLeave', {
+		pattern = '*',
+		callback = function()
+			vim.o.cmdheight = 0
+		end
+	} },
+
 }
 
 -- 一括で自動コマンドを作成
@@ -126,7 +160,6 @@ for _, autocmd in ipairs(autocmds) do
 	autocmd.group = autocmd_group
 	vim.api.nvim_create_autocmd(autocmd[1], autocmd[2])
 end
-
 
 -- カラースキームを設定
 local function setup_colorscheme()
@@ -143,19 +176,5 @@ end
 
 setup_colorscheme()
 
--- ヤンク時のハイライトの設定
-vim.api.nvim_create_autocmd('TextYankPost', {
-	callback = function()
-		vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 200 })
-	end
-})
-
--- キーマップをUIEnterで遅延読み込み
-vim.api.nvim_create_autocmd('UIEnter', {
-	once = true,
-	callback = function()
-		require('keymaps.general')
-	end
-})
-
+-- プラグインの読み込み
 require('plugins')
