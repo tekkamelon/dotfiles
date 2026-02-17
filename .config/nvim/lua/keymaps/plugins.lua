@@ -103,6 +103,10 @@ M.setup_neovim = function()
 		-- チャット内容をクリア
 		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
 
+		-- mini.map
+		-- ミニマップをトグル
+		{ 'n',          '<leader>mm', ':lua require("mini.map").toggle()<CR>' },
+
 	}
 
 	-- テーブルの内容をループし代入
