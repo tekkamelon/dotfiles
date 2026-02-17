@@ -333,6 +333,16 @@ require("lazy").setup({
 		},
 	},
 
+	-- mini.mapの設定
+	{
+		"echasnovski/mini.map",
+		lazy = true,
+		config = function()
+			if vim.g.vscode then return end
+			require("plugins.minimap")
+		end,
+	},
+
 	-- lsp関連
 	-- mason-lspconfigの設定
 	{
