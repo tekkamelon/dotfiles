@@ -87,6 +87,7 @@ require('avante').setup {
 			["openrouter/grok-4.1-fast"] = 'x-ai/grok-4.1-fast',
 			["openrouter/grok-code-fast-1"] = 'x-ai/grok-code-fast-1',
 			["openrouter/qwen3-coder-next"] = 'qwen/qwen3-coder-next',
+			["openrouter/qwen3-vl-235b-a22b-thinking"] = 'qwen/qwen3-vl-235b-a22b-thinking',
 		}
 
 		-- OpenRouterプロバイダを動的に生成
