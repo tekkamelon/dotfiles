@@ -19,6 +19,14 @@ check_api_keys()
 -- 環境変数からプロバイダ名を取得,なければ"openrouter/glm-4.5-air:free"を使用
 local provider_name = vim.env.AVANTE_PROVIDER or "openrouter/glm-4.5-air:free"
 
+-- 環境変数でプロバイダを指定した場合,Avanteのキャッシュを削除して強制的に適用
+if vim.env.AVANTE_PROVIDER then
+	local avante_config_path = vim.fn.expand("~/.config/avante.nvim/config.json")
+	if vim.fn.filereadable(avante_config_path) == 1 then
+		vim.fn.delete(avante_config_path)
+	end
+end
+
 -- 起動時にプロバイダを通知
 vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
 
