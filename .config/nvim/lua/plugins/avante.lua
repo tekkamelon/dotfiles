@@ -108,7 +108,7 @@ require('avante').setup {
 			api_key_name = "GEMINI_API_KEY",
 			endpoint = "https://generativelanguage.googleapis.com/v1beta/models",
 			model = "gemini-2.5-flash",
-			disable_tools = DISABLED_TOOLS,
+			disabled_tools = DISABLED_TOOLS,
 			extra_request_body = {
 				temperature = temperature_param,
 			},
@@ -121,7 +121,7 @@ require('avante').setup {
 			api_key_name = '',
 			model = 'qwen3-coder-30b-a3b-instruct',
 			-- すべてのツールを無効化
-			disable_tools = true,
+			disabled_tools = true,
 			extra_request_body = {
 				temperature = temperature_param,
 				max_tokens = 8192,
