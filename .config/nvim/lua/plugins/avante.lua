@@ -71,6 +71,11 @@ require('avante').setup {
 			args = { "acp" },
 		},
 
+		["cline"] = {
+			command = "cline",
+			args = { "--acp" },
+		},
+
 	},
 
 	providers = (function()
