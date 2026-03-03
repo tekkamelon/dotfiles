@@ -314,7 +314,7 @@ require("lazy").setup({
 	-- mini.surroundの設定
 	{
 		"echasnovski/mini.surround",
-		keys = { "c", "l", "n" },
+		event = "ModeChanged *:[vV\x16]*",
 		opts = {
 			-- キーマップの設定
 			mappings = {
