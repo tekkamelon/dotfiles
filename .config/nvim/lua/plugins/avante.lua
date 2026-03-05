@@ -48,8 +48,8 @@ require('avante').setup {
 	mode = "agentic",
 
 	-- CLIコーディングエージェント
+	-- 各種使用するモデルはそれぞれの設定ファイルに記載
 	acp_providers = {
-		-- モデルは`~.config/opencode/opencode.json`で指定
 		["opencode"] = {
 			command = "opencode",
 			args = { "acp" }
@@ -76,6 +76,10 @@ require('avante').setup {
 			args = { "--acp" },
 		},
 
+		["openhands"] = {
+			command = "openhands",
+			args = { "acp" },
+		},
 	},
 
 	providers = (function()
