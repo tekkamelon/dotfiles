@@ -27,6 +27,12 @@
         "firefox"
       ]
     },
+	"fetch": {
+	  "command": "uvx",
+	  "args": [
+		  "mcp-server-fetch"
+	  ]
+	},
     "wifi-cam": {
       "command": "uv",
       "args": [
