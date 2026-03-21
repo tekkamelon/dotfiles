@@ -104,12 +104,36 @@ require('avante').setup {
 			["openrouter/grok-4.1-fast"] = 'x-ai/grok-4.1-fast',
 			["openrouter/grok-code-fast-1"] = 'x-ai/grok-code-fast-1',
 			["openrouter/qwen3-coder-next"] = 'qwen/qwen3-coder-next',
+			["openrouter/qwen/qwen3-vl-30b-a3b-thinking"] = 'qwen/qwen3-vl-30b-a3b-thinking',
 			["openrouter/qwen3-vl-235b-a22b-thinking"] = 'qwen/qwen3-vl-235b-a22b-thinking',
 		}
 
 		-- OpenRouterプロバイダを動的に生成
 		for provider_key, model in pairs(openrouter_models) do
 			providers[provider_key] = vim.tbl_extend("force", openrouter_base, { model = model })
+		end
+
+		-- さくらのAI Engineの共通設定
+		local sakura_base = {
+			__inherited_from = 'openai',
+			api_key_name = "SAKURA_API_KEY",
+			endpoint = "https://api.ai.sakura.ad.jp/v1",
+			disabled_tools = DISABLED_TOOLS,
+			extra_request_body = {
+				temperature = temperature_param,
+			},
+		}
+
+		-- 使用するモデル
+		local sakura_models = {
+			["sakura/kimi-k2.5"] = "preview/Kimi-K2.5",
+			["sakura/gpt-oss-120b"] = "gpt-oss-120b",
+			["sakura/Qwen3-Coder-30B-A3B-Instruct"] = "Qwen3-Coder-30B-A3B-Instruct",
+		}
+
+		-- プロバイダを動的に生成
+		for provider_key, model in pairs(sakura_models) do
+			providers[provider_key] = vim.tbl_extend("force", sakura_base, { model = model })
 		end
 
 		-- Gemini
