@@ -40,6 +40,8 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = true,
+		-- ブランチを指定
+		branch = "master",
 		config = function()
 			require("plugins.treesitter")
 		end,
@@ -146,7 +148,7 @@ require("lazy").setup({
 	{
 		"ravitemer/mcphub.nvim",
 		lazy = true,
-		cmd = "MCPHub",
+		-- cmd = "MCPHub",
 		opts = {
 			extensions = {
 				avante = {
@@ -352,6 +354,26 @@ require("lazy").setup({
 		config = function()
 			require("plugins.mason-lsp")
 		end,
+	},
+
+	-- img-clipの設定
+	{
+		"HakonHarnes/img-clip.nvim",
+		-- :PasteImageコマンドで起動
+		-- cmd = "PasteImage",
+		lazy = true,
+		opts = {
+			-- デフォルト設定
+			default = {
+				embed_image_as_base64 = false,
+				prompt_for_file_name = false,
+				drag_and_drop = {
+					insert_mode = true,
+				},
+				-- クリップボードからの貼り付けを有効化
+				use_absolute_path = true,
+			},
+		},
 	},
 })
 
