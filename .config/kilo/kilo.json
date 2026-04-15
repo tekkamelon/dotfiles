@@ -1,0 +1,55 @@
+{
+  "$schema": "https://app.kilo.ai/config.json",
+  "model": "kilo/x-ai/grok-code-fast-1:optimized:free",
+  "small_model": "kilo/x-ai/grok-code-fast-1:optimized:free",
+  "provider": {
+    "sakura-ai": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "sakura aipf",
+      "options": {
+        "baseURL": "https://api.ai.sakura.ad.jp/v1"
+      },
+      "models": {
+        "gpt-oss-120b": {},
+        "Qwen3-Coder-30B-A3B-Instruct": {},
+        "preview/Kimi-K2.5": {}
+      }
+    }
+  },
+  "permission": {
+    "*": "allow",
+    "bash": "allow"
+  },
+  "mcp": {
+    "brave-search": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@brave/brave-search-mcp-server"
+      ],
+      "enabled": true,
+      "environment": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest",
+        "--browser",
+        "firefox"
+      ],
+      "enabled": true
+    },
+    "fetch": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "mcp-server-fetch"
+      ],
+      "enabled": true
+    }
+  }
+}
