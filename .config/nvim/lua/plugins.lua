@@ -89,7 +89,7 @@ require("lazy").setup({
 		lazy = true,
 		cmd = {
 			"Telescope",
-			"TelescopeAvanteProvider"
+			-- "TelescopeAvanteProvider"
 		},
 		config = function()
 			require("plugins.telescope")
@@ -137,6 +137,8 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons",
+			-- telescope
+			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
 			require("plugins.avante")
