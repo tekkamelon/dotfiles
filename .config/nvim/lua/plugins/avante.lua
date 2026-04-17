@@ -16,8 +16,8 @@ end
 -- 起動時にAPIキー設定をチェック
 check_api_keys()
 
--- 環境変数からプロバイダ名を取得,なければ"openrouter/glm-4.5-air:free"を使用
-local provider_name = vim.env.AVANTE_PROVIDER or "openrouter/glm-4.5-air:free"
+-- 環境変数からプロバイダ名を取得,なければ"openrouter/minimax-m2.5:free"を使用
+local provider_name = vim.env.AVANTE_PROVIDER or "openrouter/minimax-m2.5:free"
 
 -- 起動時にプロバイダを通知
 vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
@@ -40,7 +40,8 @@ require('avante').setup {
 	mode = "agentic",
 
 	-- CLIコーディングエージェント
-	-- 各種使用するモデルはそれぞれの設定ファイルに記載
+	-- コマンドと引数を指定してプロバイダを定義
+	--  `:require("avante.api").switch_provider("opencode")` などで切り替え可能
 	acp_providers = {
 		["opencode"] = {
 			command = "opencode",
@@ -52,7 +53,6 @@ require('avante').setup {
 			args = { "--acp" }
 		},
 
-		-- OAuth認証必須
 		["qwen-code"] = {
 			command = "qwen",
 			args = { "--acp" },
@@ -70,6 +70,11 @@ require('avante').setup {
 
 		["openhands"] = {
 			command = "openhands",
+			args = { "acp" },
+		},
+
+		["kilocode"] = {
+			command = "kilocode",
 			args = { "acp" },
 		},
 	},
@@ -90,14 +95,11 @@ require('avante').setup {
 
 		-- OpenRouterで使用するLLM
 		local openrouter_models = {
-			["openrouter/step-3.5-flash-free"] = "stepfun/step-3.5-flash:free",
 			["openrouter/glm-4.5-air:free"] = 'z-ai/glm-4.5-air:free',
+			["openrouter/minimax-m2.5:free"] = 'minimax/minimax-m2.5:free',
 			["openrouter/glm-4.7"] = 'z-ai/glm-4.7',
 			["openrouter/grok-4.1-fast"] = 'x-ai/grok-4.1-fast',
 			["openrouter/grok-code-fast-1"] = 'x-ai/grok-code-fast-1',
-			["openrouter/qwen3-coder-next"] = 'qwen/qwen3-coder-next',
-			["openrouter/qwen/qwen3-vl-30b-a3b-thinking"] = 'qwen/qwen3-vl-30b-a3b-thinking',
-			["openrouter/qwen3-vl-235b-a22b-thinking"] = 'qwen/qwen3-vl-235b-a22b-thinking',
 		}
 
 		-- OpenRouterプロバイダを動的に生成
