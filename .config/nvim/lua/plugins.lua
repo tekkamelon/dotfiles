@@ -89,6 +89,7 @@ require("lazy").setup({
 		lazy = true,
 		cmd = {
 			"Telescope",
+			"TelescopeAvanteProvider"
 		},
 		config = function()
 			require("plugins.telescope")

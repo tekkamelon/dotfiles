@@ -97,9 +97,10 @@ M.setup_neovim = function()
 		-- avante
 		-- チャットバッファをトグル
 		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
+		-- プロバイダーを選択
+		{ 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
 		-- LLMを変更
-		-- { 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
-		{ 'n',          '<leader>ap', ':AvanteModels<CR>' },
+		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
 		-- チャット内容をクリア
 		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
 
