@@ -89,7 +89,6 @@ require("lazy").setup({
 		lazy = true,
 		cmd = {
 			"Telescope",
-			-- "TelescopeAvanteProvider"
 		},
 		config = function()
 			require("plugins.telescope")
@@ -137,7 +136,6 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons",
-			-- telescope
 			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
@@ -358,25 +356,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- img-clipの設定
-	-- {
-	-- 	"HakonHarnes/img-clip.nvim",
-	-- 	-- :PasteImageコマンドで起動
-	-- 	-- cmd = "PasteImage",
-	-- 	lazy = true,
-	-- 	opts = {
-	-- 		-- デフォルト設定
-	-- 		default = {
-	-- 			embed_image_as_base64 = false,
-	-- 			prompt_for_file_name = false,
-	-- 			drag_and_drop = {
-	-- 				insert_mode = true,
-	-- 			},
-	-- 			-- クリップボードからの貼り付けを有効化
-	-- 			use_absolute_path = true,
-	-- 		},
-	-- 	},
-	-- },
 })
 
 -- キーマップをUIEnterで遅延読み込み
