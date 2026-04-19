@@ -35,17 +35,8 @@ local function select_avante_provider(opts)
 
 	-- ACPプロバイダーリストを取得
 	local acp_providers = Config.acp_providers
-	if not acp_providers then
-		vim.notify('ACPプロバイダーが見つかりませんでした', vim.log.levels.WARN)
-		return
-	end
-
 	-- プロバイダー名のリストを取得
 	local providers = vim.tbl_keys(acp_providers)
-	if #providers == 0 then
-		vim.notify('プロバイダーが見つかりませんでした', vim.log.levels.WARN)
-		return
-	end
 
 	-- アルファベット順にソート
 	table.sort(providers)
