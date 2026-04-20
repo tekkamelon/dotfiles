@@ -144,21 +144,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- mcphubの設定
-	-- `sudo npm install -g mcp-hub`でインストール
-	{
-		"ravitemer/mcphub.nvim",
-		lazy = true,
-		-- cmd = "MCPHub",
-		opts = {
-			extensions = {
-				avante = {
-					make_slash_commands = true,
-				}
-			},
-		},
-	},
-
 	-- hlchunkの設定
 	{
 		"shellRaining/hlchunk.nvim",
