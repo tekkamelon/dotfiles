@@ -94,15 +94,15 @@ M.setup_neovim = function()
 		-- 全ウィンドウのすべての文字にラベルを付ける
 		{ 'n',          '<leader>h',  ':HopAnywhereMW<CR>' },
 
-		-- avante
+		-- agentic
 		-- チャットバッファをトグル
-		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
+		{ 'n',          '<leader>cc', ':lua require("agentic").toggle()<CR>' },
 		-- プロバイダーを選択
-		{ 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
-		-- LLMを変更
-		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
-		-- チャット内容をクリア
-		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
+		{ 'n',          '<leader>ap', ':lua require("agentic").switch_provider()<CR>' },
+		-- モデルを切り替え
+		{ 'n',          '<leader>aP', ':lua require("agentic").switch_model()<CR>' },
+		-- チャット内容をクリアして新規セッション
+		{ 'n',          '<leader>ar', ':lua require("agentic").new_session()<CR>' },
 
 		-- mini.map
 		-- ミニマップをトグル

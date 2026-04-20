@@ -14,4 +14,4 @@ require("telescope").setup({
 
 require("telescope").load_extension("ui-select")
 
-require("plugins.telescope-avante")
+require("plugins.telescope-agentic")

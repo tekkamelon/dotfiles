@@ -11,7 +11,8 @@ require('render-markdown').setup {
 
 		'markdown',
 		'vimwiki',
-		'Avante'
+		'Avante',
+		'Agentic'
 
 	},
 

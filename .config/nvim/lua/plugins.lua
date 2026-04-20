@@ -116,31 +116,23 @@ require("lazy").setup({
 	},
 
 
-	-- avanteの設定
+	-- agenticの設定
 	{
-		"yetone/avante.nvim",
-		build = "make",
-		-- コマンドモードまたはビジュアルモードへの移行時に起動
-		event = { "ModeChanged *:[cvV\x16]*" },
+		"carlos-algms/agentic.nvim",
 		cmd = {
-			"AvanteAsk",
-			"AvanteChat",
-			"AvanteChatNew",
-			"AvanteToggle",
-			"AvanteModels",
-			"AvanteSwitchProvider",
+			"AgenticToggle",
+			"AgenticOpen",
+			"AgenticClose",
 		},
 		keys = {
 			"<leader>a",
 			"<leader>c",
 		},
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons",
-			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
-			require("plugins.avante")
+			require("plugins.agentic")
 		end,
 	},
 
