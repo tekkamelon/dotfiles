@@ -41,7 +41,7 @@ require('avante').setup {
 
 	-- CLIコーディングエージェント
 	-- コマンドと引数を指定してプロバイダを定義
-	--  `:require("avante.api").switch_provider("opencode")` などで切り替え可能
+	--  `:lua require("avante.api").switch_provider("opencode")` などで切り替え可能
 	acp_providers = {
 		["opencode"] = {
 			command = "opencode",
@@ -55,7 +55,19 @@ require('avante').setup {
 
 		["qwen-code"] = {
 			command = "qwen",
-			args = { "--acp" },
+			args = {
+				-- 必須オプション
+				"--acp",
+				-- 以下の部分はopenrouterを使用する場合
+				"--auth-type", "openai",
+				-- その他のAPIを利用する場合はURL部分を書き換える
+				"--openai-base-url", "https://openrouter.ai/api/v1"
+			},
+			-- web認証であればおそらく不要
+			env = {
+				-- ここも環境により書き換える
+				OPENAI_API_KEY = os.getenv("OPENROUTER_API_KEY"),
+			},
 		},
 
 		["goose"] = {
