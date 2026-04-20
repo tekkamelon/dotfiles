@@ -1,10 +1,39 @@
 {
+  "env": {
+    "OPENROUTER_API_KEY": "${OPENROUTER_API_KEY}"
+  },
   "context": {
     "fileName": "AGENTS.md"
   },
   "general": {
     "preferredEditor": "neovim",
     "vimMode": true
+  },
+  "modelProviders": {
+    "openai": [
+      {
+        "id": "qwen/qwen3.6-plus",
+        "name": "Qwen 3.6 Plus",
+        "envKey": "OPENROUTER_API_KEY",
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.7
+          }
+        }
+      }
+    ]
+  },
+  "$version": 3,
+  "model": {
+    "name": "qwen/qwen3.6-plus"
+  },
+  "security": {
+    "auth": {
+      "selectedType": "openai"
+    }
   },
   "mcpServers": {
     "brave-search": {
@@ -27,37 +56,14 @@
         "firefox"
       ]
     },
-	"fetch": {
-	  "command": "uvx",
-	  "args": [
-		  "mcp-server-fetch"
-	  ]
-	},
-    "wifi-cam": {
-      "command": "uv",
+    "fetch": {
+      "command": "uvx",
       "args": [
-        "--directory",
-        "/mnt/omv/documents/AGENTS/tapo/embodied-claude/wifi-cam-mcp",
-        "run",
-        "wifi-cam-mcp"
-      ],
-      "env": {
-        "TAPO_CAMERA_HOST": "${TAPO_CAMERA_HOST}",
-        "TAPO_USERNAME": "${TAPO_USERNAME}",
-        "TAPO_PASSWORD": "${TAPO_PASSWORD}"
-      }
-    }
-  },
-  "security": {
-    "auth": {
-      "selectedType": "qwen-oauth"
+        "mcp-server-fetch"
+      ]
     }
   },
   "ui": {
     "theme": "Qwen Dark"
-  },
-  "$version": 3,
-  "model": {
-    "name": "coder-model"
   }
 }
