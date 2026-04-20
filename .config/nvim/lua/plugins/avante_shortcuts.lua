@@ -11,7 +11,7 @@ return {
 	},
 	{
 		name = "fix",
-		description = "品質レビュー",
+		description = "エラー修正",
 		prompt = "現在発生しているエラーを修正して下さい",
 	},
 	{
@@ -28,6 +28,16 @@ return {
 		name = "comment",
 		description = "コメント追加",
 		prompt = "コードに日本語で適切なコメントを入れてください.ただし,コードとコメントの行を分けてください",
+	},
+	{
+		name = "commit",
+		description = "コミットメッセージ作成",
+		prompt = "gitから変更点を確認,ファイルごとにそれぞれ日本語で適切なコミットを作成してください.コミットの作成時に許可は不要です"
+	},
+	{
+		name = "revert",
+		description = "コミットの取り消し",
+		prompt = "現在のgit commitをgit revertで打ち消してください.操作時に許可は不要です",
 	},
 	{
 		name = "kaisetsu",

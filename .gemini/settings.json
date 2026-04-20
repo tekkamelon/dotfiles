@@ -7,9 +7,39 @@
     "vimMode": true
   },
   "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "description": "Brave検索エンジンを使用するMCPサーバー",
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
     "playwright": {
       "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--browser", "firefox"]
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "firefox"
+      ]
+    },
+    "wifi-cam": {
+      "command": "uv",
+      "args": [
+        "--directory",
+        "/mnt/omv/documents/AGENTS/tapo/embodied-claude/wifi-cam-mcp",
+        "run",
+        "wifi-cam-mcp"
+      ],
+      "env": {
+        "TAPO_CAMERA_HOST": "${TAPO_CAMERA_HOST}",
+        "TAPO_USERNAME": "${TAPO_USERNAME}",
+        "TAPO_PASSWORD": "${TAPO_PASSWORD}"
+      }
     }
   },
   "security": {

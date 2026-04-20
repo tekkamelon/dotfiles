@@ -1,4 +1,7 @@
 {
+  "env": {
+    "OPENROUTER_API_KEY": "${OPENROUTER_API_KEY}"
+  },
   "context": {
     "fileName": "AGENTS.md"
   },
@@ -6,22 +9,61 @@
     "preferredEditor": "neovim",
     "vimMode": true
   },
-  "mcpServers": {
-    "playwright": {
-      "command": "npx",
-      "args": ["-y", "@playwright/mcp@latest", "--browser", "firefox"]
-    }
+  "modelProviders": {
+    "openai": [
+      {
+        "id": "qwen/qwen3.6-plus",
+        "name": "Qwen 3.6 Plus",
+        "envKey": "OPENROUTER_API_KEY",
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.7
+          }
+        }
+      }
+    ]
+  },
+  "$version": 3,
+  "model": {
+    "name": "qwen/qwen3.6-plus"
   },
   "security": {
     "auth": {
-      "selectedType": "qwen-oauth"
+      "selectedType": "openai"
+    }
+  },
+  "mcpServers": {
+    "brave-search": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-brave-search"
+      ],
+      "description": "Brave検索エンジンを使用するMCPサーバー",
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      }
+    },
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "firefox"
+      ]
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
     }
   },
   "ui": {
     "theme": "Qwen Dark"
-  },
-  "$version": 3,
-  "model": {
-    "name": "coder-model"
   }
 }

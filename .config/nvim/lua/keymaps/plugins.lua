@@ -97,11 +97,16 @@ M.setup_neovim = function()
 		-- avante
 		-- チャットバッファをトグル
 		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
+		-- プロバイダーを選択
+		{ 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
 		-- LLMを変更
-		{ 'n',          '<leader>am', ':TelescopeAvanteProvider<CR>' },
-		{ 'n',          '<leader>aM', ':AvanteModels<CR>' },
+		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
 		-- チャット内容をクリア
 		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
+
+		-- mini.map
+		-- ミニマップをトグル
+		{ 'n',          '<leader>mm', ':lua require("mini.map").toggle()<CR>' },
 
 	}
 

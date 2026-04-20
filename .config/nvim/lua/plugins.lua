@@ -40,6 +40,8 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = true,
+		-- ブランチを指定
+		branch = "master",
 		config = function()
 			require("plugins.treesitter")
 		end,
@@ -135,6 +137,7 @@ require("lazy").setup({
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"echasnovski/mini.icons",
+			"nvim-telescope/telescope.nvim",
 		},
 		config = function()
 			require("plugins.avante")
@@ -299,7 +302,7 @@ require("lazy").setup({
 	-- mini.surroundの設定
 	{
 		"echasnovski/mini.surround",
-		keys = { "c", "l", "n" },
+		event = "ModeChanged *:[vV\x16]*",
 		opts = {
 			-- キーマップの設定
 			mappings = {
@@ -318,6 +321,16 @@ require("lazy").setup({
 		},
 	},
 
+	-- mini.mapの設定
+	{
+		"echasnovski/mini.map",
+		lazy = true,
+		config = function()
+			if vim.g.vscode then return end
+			require("plugins.minimap")
+		end,
+	},
+
 	-- lsp関連
 	-- mason-lspconfigの設定
 	{
@@ -328,6 +341,7 @@ require("lazy").setup({
 			require("plugins.mason-lsp")
 		end,
 	},
+
 })
 
 -- キーマップをUIEnterで遅延読み込み
