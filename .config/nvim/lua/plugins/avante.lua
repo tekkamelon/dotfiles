@@ -13,8 +13,8 @@ end
 -- 起動時にAPIキー設定をチェック
 check_api_keys()
 
--- 環境変数からプロバイダ名を取得,なければ"openrouter/minimax-m2.5:free"を使用
-local provider_name = vim.env.AVANTE_PROVIDER or "openrouter/minimax-m2.5:free"
+-- 環境変数からプロバイダ名を取得,なければ"qwen-code"を使用
+local provider_name = vim.env.AVANTE_PROVIDER or "qwen-code"
 
 -- 起動時にプロバイダを通知
 vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
@@ -47,16 +47,7 @@ require('avante').setup {
 		["qwen-code"] = {
 			command = "qwen",
 			args = {
-				-- 必須オプション
 				"--acp",
-				-- 以下の部分はopenrouterを使用する場合
-				"--auth-type", "openai",
-				-- その他のAPIを利用する場合はURL部分を書き換える
-				"--openai-base-url", "https://openrouter.ai/api/v1"
-			},
-			env = {
-				-- ここも環境により書き換える
-				OPENAI_API_KEY = os.getenv("OPENROUTER_API_KEY"),
 			},
 		},
 
