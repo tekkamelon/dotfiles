@@ -26,6 +26,19 @@
         }
       },
       {
+        "id": "Qwen3-Coder-480B-A35B-Instruct-FP8",
+        "name": "Qwen 3 Coder 480B A35B Instruct FP8",
+        "envKey": "SAKURA_API_KEY",
+        "baseUrl": "https://api.ai.sakura.ad.jp/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.3
+          }
+        }
+      },
+      {
         "id": "minimax/minimax-m2.5:free",
         "name": "Minimax M2.5 Free",
         "envKey": "OPENROUTER_API_KEY",
@@ -42,7 +55,7 @@
   },
   "$version": 3,
   "model": {
-    "name": "Qwen3-Coder-30B-A3B-Instruct"
+    "name": "Qwen3-Coder-480B-A35B-Instruct-FP8"
   },
   "security": {
     "auth": {
