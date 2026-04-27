@@ -1,6 +1,6 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
-  "model": "kilo/x-ai/grok-code-fast-1:optimized:free",
+  "model": "opencode/minimax-m2.5-free",
   "small_model": "kilo/x-ai/grok-code-fast-1:optimized:free",
   "provider": {
     "sakura-ai": {
@@ -12,6 +12,7 @@
       "models": {
         "gpt-oss-120b": {},
         "Qwen3-Coder-30B-A3B-Instruct": {},
+		"Qwen3-Coder-480B-A35B-Instruct-FP8": {},
         "preview/Kimi-K2.5": {}
       }
     }
