@@ -40,7 +40,20 @@
       },
       {
         "id": "minimax/minimax-m2.5:free",
-        "name": "Minimax M2.5 Free",
+        "name": "OpenRouter:Minimax M2.5 Free",
+        "envKey": "OPENROUTER_API_KEY",
+        "baseUrl": "https://openrouter.ai/api/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.3
+          }
+        }
+      },
+      {
+        "id": "qwen/qwen3.6-35b-a3b",
+        "name": "Qwen 3.6 35B A3B",
         "envKey": "OPENROUTER_API_KEY",
         "baseUrl": "https://openrouter.ai/api/v1",
         "generationConfig": {
