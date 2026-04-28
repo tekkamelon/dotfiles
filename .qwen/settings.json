@@ -63,6 +63,19 @@
             "temperature": 0.3
           }
         }
+      },
+      {
+        "id": "minimax-m2.5-free",
+        "name": "OpenCode Zen:Minimax M2.5 Free",
+        "envKey": "OPENCODE_API_KEY",
+        "baseUrl": "https://opencode.ai/zen/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.3
+          }
+        }
       }
     ]
   },
