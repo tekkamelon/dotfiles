@@ -1,6 +1,6 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
-  "model": "opencode/minimax-m2.5-free",
+  "model": "minimaxai/minimax-m2.7",
   "small_model": "kilo/x-ai/grok-code-fast-1:optimized:free",
   "provider": {
     "sakura-ai": {
