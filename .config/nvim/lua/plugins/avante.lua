@@ -3,21 +3,17 @@
 
 if vim.g.vscode then return end
 
--- APIキー設定チェック関数
-local function check_api_keys()
-	if not vim.env.OPENROUTER_API_KEY then
-		vim.notify("OPENROUTER_API_KEYが設定されていません", vim.log.levels.WARN)
-	end
+-- 環境変数からプロバイダ名を取得
+local provider_name = vim.env.AVANTE_PROVIDER
+
+-- 変数の値があればコマンドがあるかをチェック,なければエラー通知
+if not provider_name then
+	vim.notify("AVANTE_PROVIDER environment variable is not set", vim.log.levels.ERROR)
+	return
+else
+	-- 起動時にプロバイダを通知
+	vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
 end
-
--- 起動時にAPIキー設定をチェック
-check_api_keys()
-
--- 環境変数からプロバイダ名を取得,なければ"qwen-code"を使用
-local provider_name = vim.env.AVANTE_PROVIDER or "qwen-code"
-
--- 起動時にプロバイダを通知
-vim.notify("provider: " .. provider_name, vim.log.levels.INFO)
 
 -- カスタムプロンプトを読み込み
 local shortcuts = require("plugins.avante_shortcuts")
