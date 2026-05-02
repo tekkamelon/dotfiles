@@ -2,63 +2,61 @@
 -- Neovim >= 0.11.0
 
 
--- vscodeから起動していなければ真
-if not vim.g.vscode then
-	require('copilot').setup {
+if vim.g.vscode then return end
 
-		-- サジェストの設定
-		suggestion = {
+require('copilot').setup {
 
-			enabled = true,
-			auto_trigger = true,
-			hide_during_completion = true,
-			debounce = 50,
+	-- サジェストの設定
+	suggestion = {
 
-			-- キーマッピングの設定
-			keymap = {
+		enabled = true,
+		auto_trigger = true,
+		hide_during_completion = true,
+		debounce = 50,
 
-				accept = false,
-				accept_word = "<C-s>",
-				next = "<C-f>",
-				prev = "<C-F>",
-				dismiss = "<C-q>",
+		-- キーマッピングの設定
+		keymap = {
 
-			},
+			accept = false,
+			accept_word = "<C-s>",
+			next = "<C-f>",
+			prev = "<C-F>",
+			dismiss = "<C-q>",
 
 		},
 
-		-- ファイルタイプの設定
-		filetype = {
+	},
 
-			gitcommit = true,
-			markdown = true,
-			AvanteInput = false,
-			AvantePromptInput = false,
-			AvanteSelectedFiles = false,
-			AvanteSelectedCode = false,
-			env = false,
+	-- ファイルタイプの設定
+	filetype = {
 
+		gitcommit = true,
+		markdown = true,
+		AvanteInput = false,
+		AvantePromptInput = false,
+		AvanteSelectedFiles = false,
+		AvanteSelectedCode = false,
+		env = false,
+
+	},
+
+	-- nesの設定
+	-- "copilot-lsp"プラグインをインストール
+	nes = {
+
+		-- 有効化
+		enabled = true,
+		keymap = {
+
+			accept_and_goto = "<C-i>",
+			accept = false,
+			dismiss = "<Esc>",
 
 		},
 
-		-- nesの設定
-		-- "copilot-lsp"プラグインをインストール
-		nes = {
+	},
 
-			-- 有効化
-			enabled = true,
-			keymap = {
-
-				accept_and_goto = "<C-i>",
-				accept = false,
-				dismiss = "<Esc>",
-
-			},
-
-		},
-
-	}
-end
+}
 
 -- キーマップを設定
 vim.keymap.set("i", '<Tab>', function()
