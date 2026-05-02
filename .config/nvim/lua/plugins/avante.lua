@@ -6,7 +6,7 @@ if vim.g.vscode then return end
 -- 環境変数からプロバイダ名を取得
 local provider_name = vim.env.AVANTE_PROVIDER
 
--- 変数の値があればコマンドがあるかをチェック,なければエラー通知
+-- 変数の値がなければエラー通知
 if not provider_name then
 	vim.notify("AVANTE_PROVIDER environment variable is not set", vim.log.levels.ERROR)
 	return
@@ -50,6 +50,10 @@ require('avante').setup {
 		["goose"] = {
 			command = "goose",
 			args = { "acp" },
+			-- 環境変数からAPIキーを渡さないと動作しない
+			env = {
+				NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY"),
+			},
 		},
 
 		["cline"] = {
