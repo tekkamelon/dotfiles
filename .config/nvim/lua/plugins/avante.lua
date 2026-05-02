@@ -53,6 +53,8 @@ require('avante').setup {
 			-- 環境変数からAPIキーを渡さないと動作しない
 			env = {
 				NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY"),
+				-- MCPサーバー用APIキー
+				BRAVE_API_KEY = os.getenv("BRAVE_API_KEY"),
 			},
 		},
 
