@@ -26,20 +26,6 @@
         "--browser",
         "firefox"
       ]
-    },
-    "wifi-cam": {
-      "command": "uv",
-      "args": [
-        "--directory",
-        "/mnt/omv/documents/AGENTS/tapo/embodied-claude/wifi-cam-mcp",
-        "run",
-        "wifi-cam-mcp"
-      ],
-      "env": {
-        "TAPO_CAMERA_HOST": "${TAPO_CAMERA_HOST}",
-        "TAPO_USERNAME": "${TAPO_USERNAME}",
-        "TAPO_PASSWORD": "${TAPO_PASSWORD}"
-      }
     }
   },
   "security": {
