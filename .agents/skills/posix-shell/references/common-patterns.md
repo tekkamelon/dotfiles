@@ -1,6 +1,6 @@
-# よく使うパターン集
+# Common Patterns
 
-## ロック（多重起動防止）
+## Lock (Prevent Multiple Instances)
 
 ```sh
 #!/bin/sh
@@ -9,7 +9,7 @@ set -eu
 LOCKFILE="/var/run/$(basename "$0").lock"
 
 acquire_lock() {
-    # mkdir はアトミックなのでロックに使える
+    # mkdir is atomic, usable as lock
     if ! mkdir "$LOCKFILE" 2>/dev/null; then
         die "Already running. Lock: $LOCKFILE"
     fi
@@ -17,10 +17,10 @@ acquire_lock() {
 }
 
 acquire_lock
-# 処理...
+# Process...
 ```
 
-## ログ出力（タイムスタンプ付き）
+## Logging (with Timestamp)
 
 ```sh
 LOG_LEVEL="${LOG_LEVEL:-INFO}"
@@ -36,7 +36,7 @@ log_error() { log ERROR "$@"; }
 die()       { log_error "$@"; exit 1; }
 ```
 
-## 設定ファイルの読み込み
+## Load Config File
 
 ```sh
 # config.sh:
@@ -46,12 +46,12 @@ die()       { log_error "$@"; exit 1; }
 load_config() {
     config_file="$1"
     [ -f "$config_file" ] || die "Config not found: $config_file"
-    # . でファイルを読み込む（sourceのPOSIX代替）
+    # Use . to source (POSIX alt to source)
     . "$config_file"
 }
 ```
 
-## 依存コマンドの確認
+## Check Dependencies
 
 ```sh
 require_commands() {
@@ -64,7 +64,7 @@ require_commands() {
 require_commands curl jq awk sed
 ```
 
-## リトライ処理
+## Retry Logic
 
 ```sh
 retry() {
@@ -87,7 +87,7 @@ retry() {
 retry 3 5 curl -sf "https://example.com/api"
 ```
 
-## 数値バリデーション
+## Numeric Validation
 
 ```sh
 is_integer() {
@@ -102,7 +102,7 @@ is_positive_integer() {
 }
 ```
 
-## 絶対パスへの変換
+## To Absolute Path
 
 ```sh
 to_absolute() {
@@ -114,7 +114,7 @@ to_absolute() {
 }
 ```
 
-## 進捗表示（シンプルなスピナー）
+## Progress Spinner (Simple)
 
 ```sh
 spinner() {
@@ -136,7 +136,7 @@ spinner $!
 wait $!
 ```
 
-## 環境変数の検証テンプレート
+## Environment Variable Validation Template
 
 ```sh
 #!/bin/sh
@@ -151,10 +151,10 @@ is_integer "$DB_PORT" || die "DB_PORT must be an integer: $DB_PORT"
     die "DB_PORT out of range: $DB_PORT"
 ```
 
-## 複数ファイルへの並列処理（waitを使う）
+## Parallel File Processing (with wait)
 
 ```sh
-# バックグラウンドジョブのPIDを追跡
+# Track background PIDs
 pids=""
 
 for file in "$@"; do
@@ -169,3 +169,4 @@ done
 
 [ "$failed" -eq 0 ] || die "$failed jobs failed"
 ```
+
