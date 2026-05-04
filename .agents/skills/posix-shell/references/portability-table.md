@@ -1,89 +1,90 @@
-# コマンド・構文ポータビリティ一覧
+# Command/Syntax Portability Table
 
-凡例: OK = POSIX準拠 / NG = bash/zsh固有 / 要注意 = 実装依存
+Legend: OK = POSIX / NG = Bash/zsh specific / Caution = Implementation dependent
 
-## 変数操作
+## Variable Operations
 
-| 書き方 | 意味 | POSIX? | 代替 |
-|--------|------|--------|------|
-| `${var:-val}` | 未定義または空のときval | OK | — |
-| `${var:=val}` | 未定義または空のときvalを代入 | OK | — |
-| `${var:?msg}` | 未定義または空のときエラー | OK | — |
-| `${var:+val}` | 定義かつ非空のときval | OK | — |
-| `${#var}` | 文字列長 | OK | — |
-| `${var#pat}` | 前方最短削除 | OK | — |
-| `${var##pat}` | 前方最長削除 | OK | — |
-| `${var%pat}` | 後方最短削除 | OK | — |
-| `${var%%pat}` | 後方最長削除 | OK | — |
-| `${var/a/b}` | 最初のaをbに置換 | NG | `echo "$var" \| sed 's/a/b/'` |
-| `${var//a/b}` | すべてのaをbに置換 | NG | `echo "$var" \| sed 's/a/b/g'` |
-| `${var,,}` | 小文字化 | NG | `printf '%s' "$var" \| tr '[:upper:]' '[:lower:]'` |
-| `${var^^}` | 大文字化 | NG | `printf '%s' "$var" \| tr '[:lower:]' '[:upper:]'` |
+| Syntax | Meaning | POSIX? | Alternative |
+|--------|---------|--------|-------------|
+| `${var:-val}` | val if unset/empty | OK | — |
+| `${var:=val}` | Assign val if unset/empty | OK | — |
+| `${var:?msg}` | Error if unset/empty | OK | — |
+| `${var:+val}` | val if set/non-empty | OK | — |
+| `${#var}` | String length | OK | — |
+| `${var#pat}` | Shortest prefix remove | OK | — |
+| `${var##pat}` | Longest prefix remove | OK | — |
+| `${var%pat}` | Shortest suffix remove | OK | — |
+| `${var%%pat}` | Longest suffix remove | OK | — |
+| `${var/a/b}` | First replace | NG | `echo "$var" \| sed 's/a/b/'` |
+| `${var//a/b}` | All replace | NG | `echo "$var" \| sed 's/a/b/g'` |
+| `${var,,}` | Lowercase | NG | `printf '%s' "$var" \| tr '[:upper:]' '[:lower:]'` |
+| `${var^^}` | Uppercase | NG | `printf '%s' "$var" \| tr '[:lower:]' '[:upper:]'` |
 
-## 条件式
+## Conditionals
 
-| 書き方 | 意味 | POSIX? | 代替 |
-|--------|------|--------|------|
-| `[ ... ]` | テスト | OK | — |
-| `[[ ... ]]` | 拡張テスト | NG | `[ ... ]` |
-| `[ "$a" = "$b" ]` | 文字列一致 | OK | — |
-| `[ "$a" == "$b" ]` | 文字列一致 | NG | `[ "$a" = "$b" ]` |
-| `[[ $a =~ regex ]]` | 正規表現マッチ | NG | `printf '%s' "$a" \| grep -E 'regex'` |
-| `(( expr ))` | 算術条件 | NG | `[ $((expr)) -ne 0 ]` |
+| Syntax | Meaning | POSIX? | Alternative |
+|--------|---------|--------|-------------|
+| `[ ... ]` | Test | OK | — |
+| `[[ ... ]]` | Extended test | NG | `[ ... ]` |
+| `[ "$a" = "$b" ]` | String eq | OK | — |
+| `[ "$a" == "$b" ]` | String eq | NG | `[ "$a" = "$b" ]` |
+| `[[ $a =~ regex ]]` | Regex match | NG | `printf '%s' "$a" \| grep -E 'regex'` |
+| `(( expr ))` | Arithmetic cond | NG | `[ $((expr)) -ne 0 ]` |
 
-## 算術
+## Arithmetic
 
-| 書き方 | POSIX? | 代替 |
-|--------|--------|------|
+| Syntax | POSIX? | Alternative |
+|--------|--------|-------------|
 | `$(( expr ))` | OK | — |
 | `(( n++ ))` | NG | `n=$((n + 1))` |
 | `let n=n+1` | NG | `n=$((n + 1))` |
 
-## 入出力
+## I/O
 
-| 書き方 | POSIX? | 代替 |
-|--------|--------|------|
-| `echo "text"` | 要注意 | `printf '%s\n' "text"` |
+| Syntax | POSIX? | Alternative |
+|--------|--------|-------------|
+| `echo "text"` | Caution | `printf '%s\n' "text"` |
 | `echo -n "text"` | NG | `printf '%s' "text"` |
 | `echo -e "a\nb"` | NG | `printf 'a\nb\n'` |
 | `read -r line` | OK | — |
 | `read -p "prompt" var` | NG | `printf 'prompt'; read -r var` |
-| `read -a arr` | NG | パース処理で代替 |
+| `read -a arr` | NG | Parse manually |
 
-## リダイレクト
+## Redirects
 
-| 書き方 | POSIX? | 備考 |
-|--------|--------|------|
-| `cmd > file` | OK | |
-| `cmd >> file` | OK | |
-| `cmd 2>&1` | OK | |
+| Syntax | POSIX? | Notes |
+|--------|--------|-------|
+| `cmd > file` | OK |  |
+| `cmd >> file` | OK |  |
+| `cmd 2>&1` | OK |  |
 | `cmd &> file` | NG | `cmd > file 2>&1` |
-| `cmd 2> /dev/null` | OK | |
-| `cmd > /dev/null 2>&1` | OK | |
+| `cmd 2> /dev/null` | OK |  |
+| `cmd > /dev/null 2>&1` | OK |  |
 
-## 配列
+## Arrays
 
-POSIXにはスカラー変数とポジショナルパラメータ (`$@`, `$*`) しかない。
+POSIX has only scalar vars and positional params (`$@`, `$*`).
 
-| 書き方 | POSIX? | 代替 |
-|--------|--------|------|
-| `arr=(a b c)` | NG | `set -- a b c` でポジショナルパラメータ活用 |
+| Syntax | POSIX? | Alternative |
+|--------|--------|-------------|
+| `arr=(a b c)` | NG | `set -- a b c` use positionals |
 | `${arr[@]}` | NG | `"$@"` |
 | `${#arr[@]}` | NG | `$#` |
 
-## プロセス置換
+## Process Substitution
 
-| 書き方 | POSIX? | 代替 |
-|--------|--------|------|
-| `<(cmd)` | NG | `mkfifo` か中間ファイル |
-| `>(cmd)` | NG | `mkfifo` か中間ファイル |
+| Syntax | POSIX? | Alternative |
+|--------|--------|-------------|
+| `<(cmd)` | NG | `mkfifo` or temp file |
+| `>(cmd)` | NG | `mkfifo` or temp file |
 
-## その他
+## Others
 
-| 書き方 | POSIX? | 代替 |
-|--------|--------|------|
+| Syntax | POSIX? | Alternative |
+|--------|--------|-------------|
 | `source file` | NG | `. file` |
 | `function foo()` | NG | `foo()` |
 | `foo() { ... }` | OK | — |
-| `$'...'` (ANSIクォート) | NG | `printf` で制御文字を生成 |
-| `{1..10}` (ブレース展開) | NG | `seq 1 10` か `while` ループ |
+| `$'...'` (ANSI) | NG | `printf` for control chars |
+| `{1..10}` (brace exp) | NG | `seq 1 10` or loop |
+
