@@ -248,13 +248,18 @@ require("lazy").setup({
 		end,
 	},
 
-	-- mini.completionの設定
+	-- blink.cmpの設定
 	{
-		"echasnovski/mini.completion",
+		"saghen/blink.cmp",
+		dependencies = {
+			"Kaiser-Yang/blink-cmp-avante",
+			"rafamadriz/friendly-snippets",
+		},
+		version = "1.*",
 		event = "InsertEnter",
 		config = function()
 			if vim.g.vscode then return end
-			require("mini.completion").setup({})
+			require("plugins.blink-cmp")
 		end,
 	},
 

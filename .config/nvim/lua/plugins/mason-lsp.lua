@@ -4,7 +4,9 @@
 if vim.g.vscode then return end
 
 local lspconfig = require('lspconfig')
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- blink.cmpのLSP capabilitiesをマージ
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 -- 診断設定をグローバルに定義
 vim.diagnostic.config({
@@ -26,16 +28,6 @@ vim.diagnostic.config({
 -- LSP Attach時の設定
 local function on_lsp_attach(args)
 	local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-	-- 補完の設定
-	if client:supports_method('textDocument/completion') then
-		-- ASCII文字32-126をトリガーキャラクタに設定
-		local trigger_chars = {}
-		for i = 32, 126 do trigger_chars[#trigger_chars + 1] = string.char(i) end
-		client.server_capabilities.completionProvider.triggerCharacters = trigger_chars
-		-- 補完を有効化
-		vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
-	end
 
 	-- フォーマット設定
 	if not client:supports_method('textDocument/willSaveWaitUntil') and
