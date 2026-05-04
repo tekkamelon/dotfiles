@@ -1,122 +1,122 @@
 ---
 name: posix-shell
 description: >
-  POSIX準拠のシェルスクリプトを書く際に使用するスキル。
-  ポータブルなsh/bashスクリプトの作成、移植性の確保、よくある非POSIX構文の回避、
-  エラーハンドリング、テスト可能な設計、デバッグ手法などをカバーする。
-  「シェルスクリプト」「sh」「bash」「POSIX」「シェル関数」「シェル変数」
-  「trap」「getopts」などのキーワードが含まれる場合は必ずこのスキルを参照すること。
-  スクリプトを書く・レビューする・デバッグするあらゆる場面で使用する。
+  Skill for writing POSIX-compliant shell scripts.
+  Covers portable sh/bash script creation, ensuring portability, avoiding common non-POSIX syntax,
+  error handling, testable design, debugging techniques, etc.
+  Always refer to this skill when keywords like "shell script", "sh", "bash", "POSIX", "shell functions", "shell variables",
+  "trap", "getopts" are included.
+  Use in all scenarios for writing, reviewing, and debugging scripts.
 ---
 
-# POSIX準拠シェルスクリプト作成スキル
+# POSIX-Compliant Shell Scripting Skill
 
-## 基本方針
+## Basic Policy
 
-すべてのスクリプトは `/bin/sh` で動作することを前提とする。
-Bash固有機能に依存しない書き方を徹底すること。
+All scripts assume execution under `/bin/sh`.
+Strictly avoid Bash-specific features.
 
-### シェバン (Shebang)
+### Shebang
 
 ```sh
 #!/bin/sh
-# ↑ /bin/bash ではなく /bin/sh を使う
+# ↑ Use /bin/sh, not /bin/bash
 ```
 
-bash固有機能を意図的に使う場合のみ `#!/usr/bin/env bash` を許容する。
-その場合はスクリプト冒頭に `# requires: bash` とコメントする。
+Only allow `#!/usr/bin/env bash` when intentionally using Bash-specific features.
+In that case, add `# requires: bash` comment at the top.
 
 ---
 
-## 必須のセーフガード
+## Essential Safeguards
 
-スクリプトの冒頭に必ず以下を記述する:
+Always include the following at the script beginning:
 
 ```sh
 #!/bin/sh
 set -eu
 
-# IFS をデフォルト値に明示固定（任意だが推奨）
+# Explicitly set IFS to default (optional but recommended)
 IFS=$(printf '\n\t')
 ```
 
-| オプション | 意味 |
-|-----------|------|
-| `-e` | コマンドが0以外を返したら即終了 |
-| `-u` | 未定義変数の参照をエラーにする |
-| `-o pipefail` | **bashのみ**。パイプライン中のエラーを捕捉 |
+| Option | Meaning |
+|--------|---------|
+| `-e`  | Exit if command returns non-zero |
+| `-u`  | Error on unset variable reference |
+| `-o pipefail` | **Bash only**. Catch pipeline errors |
 
-> POSIX shでは `-o pipefail` は使えない。詳細は `references/pipefail-alternatives.md` を参照。
+> POSIX sh does not support `-o pipefail`. See `references/pipefail-alternatives.md`.
 
 ---
 
-## POSIX非準拠な構文（絶対に使わない）
+## Non-POSIX Syntax (Never Use)
 
 ```sh
-# NG: bashism 一覧
+# NG: bashisms list
 
-[[ ... ]]          # → [ ... ] を使う
-(( n++ ))          # → n=$((n + 1)) を使う
-${var,,}           # → tr '[:upper:]' '[:lower:]' を使う
-${var^^}           # → tr '[:lower:]' '[:upper:]' を使う
-local var=val      # → local var; var=val に分ける（-eとの相性問題）
-echo -e "..."      # → printf を使う
-source file        # → . file を使う
-function foo() {}  # → foo() {} を使う
->&                 # → 2>&1 など明示的なリダイレクトを使う
-read -r -d ''      # → POSIX非準拠。代替手法を使う
+[[ ... ]]         # → Use [ ... ]
+(( n++ ))         # → Use n=$((n + 1))
+${var,,}          # → Use tr '[:upper:]' '[:lower:]'
+${var^^}          # → Use tr '[:lower:]' '[:upper:]'
+local var=val     # → Split to local var; var=val (compatibility with -e)
+echo -e "..."     # → Use printf
+source file       # → Use . file
+function foo() {} # → Use foo() {}
+>&                # → Explicit redirect like 2>&1
+read -r -d ''     # → Non-POSIX. Use alternatives
 ```
 
 ---
 
-## 変数と引用符
+## Variables and Quotes
 
 ```sh
-# 常にダブルクォートで囲む（単語分割・グロブ展開を防ぐ）
+# Always double-quote (prevents word splitting/glob expansion)
 echo "$var"
 rm -f "$file"
 
-# 空白を含む可能性があるすべての変数展開にクォートが必要
+# Quote all variable expansions that may contain spaces
 for f in "$@"; do
     echo "$f"
 done
 
-# デフォルト値
+# Default value
 name="${1:-world}"
 
-# 未定義チェック付きデフォルト値（変数が未定義または空のとき）
+# Default if unset or empty
 val="${VAR:-default}"
 
-# 未定義のときエラーを出して終了（-u より詳細なメッセージ）
+# Error if unset or empty
 : "${REQUIRED_VAR:?REQUIRED_VAR must be set}"
 ```
 
 ---
 
-## 条件分岐
+## Conditionals
 
 ```sh
-# [ ] の正しい使い方
-[ -z "$var" ]      # 空文字列
-[ -n "$var" ]      # 非空文字列
-[ "$a" = "$b" ]    # 文字列一致（== はPOSIX非準拠）
-[ "$a" != "$b" ]   # 文字列不一致
-[ "$n" -eq 0 ]     # 数値比較
-[ -f "$file" ]     # ファイルが存在して通常ファイル
-[ -d "$dir" ]      # ディレクトリが存在
-[ -r "$file" ]     # 読み取り可能
-[ -x "$file" ]     # 実行可能
+# Correct [ ] usage
+[ -z "$var" ]     # Empty string
+[ -n "$var" ]     # Non-empty
+[ "$a" = "$b" ]   # String equal (== non-POSIX)
+[ "$a" != "$b" ]  # String not equal
+[ "$n" -eq 0 ]    # Numeric eq
+[ -f "$file" ]    # Regular file exists
+[ -d "$dir" ]     # Directory exists
+[ -r "$file" ]    # Readable
+[ -x "$file" ]    # Executable
 
-# 複合条件（&& || をシェルレベルで使う）
+# Compound (use shell-level && || )
 [ -f "$f" ] && [ -r "$f" ]
 ```
 
 ---
 
-## 関数定義
+## Function Definitions
 
 ```sh
-# POSIX準拠の関数定義
+# POSIX-compliant function
 log() {
     printf '[%s] %s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "$*" >&2
 }
@@ -126,7 +126,7 @@ die() {
     exit 1
 }
 
-# localは関数内のみ使用可（ただし初期化は別行にする）
+# local only inside functions (init on separate line)
 parse_args() {
     local flag
     local value
@@ -136,35 +136,35 @@ parse_args() {
 }
 ```
 
-> `local var=val` の1行初期化は `-e` 環境で右辺のコマンド置換失敗を捕捉できないため、
-> 必ず `local var; var=$(cmd)` の2行に分ける。
+> `local var=val` single-line init fails to catch cmdsub errors under -e.
+> Always split: `local var; var=$(cmd)`
 
 ---
 
-## エラーハンドリングと trap
+## Error Handling and trap
 
 ```sh
 #!/bin/sh
 set -eu
 
-# 一時ファイルの確実なクリーンアップ
+# Reliable temp file cleanup
 TMPFILE=""
 
 cleanup() {
     [ -n "$TMPFILE" ] && rm -f "$TMPFILE"
 }
 
-trap cleanup EXIT        # 正常・異常問わず終了時に実行
-trap 'exit 1' INT TERM   # Ctrl+C やkillで受け取ったとき
+trap cleanup EXIT        # Run on normal/abnormal exit
+trap 'exit 1' INT TERM   # On Ctrl+C or kill
 
 TMPFILE=$(mktemp)
 
-# 処理...
+# Process...
 ```
 
 ---
 
-## 引数パース（getopts）
+## Argument Parsing (getopts)
 
 ```sh
 usage() {
@@ -191,27 +191,27 @@ while getopts ":vo:h" opt; do
 done
 
 shift $((OPTIND - 1))
-# $@ がオプション以外の残り引数
+# $@ now positional args after options
 ```
 
 ---
 
-## ヒアドキュメント
+## Here Documents
 
 ```sh
-# 標準的なヒアドキュメント
+# Standard here-doc
 cat <<'EOF'
-変数展開しない場合はシングルクォートで囲む
-$VAR はそのまま出力される
+No variable expansion with single quotes
+$VAR printed as-is
 EOF
 
-# インデント除去（タブのみ。スペースは不可）
+# Indent removal (tabs only, spaces no)
 cat <<-EOF
-	インデントされた内容
-	タブが除去される
+	Indented content
+	Tabs stripped
 EOF
 
-# 変数展開あり
+# With expansion
 cat <<EOF
 Hello, $name!
 Today is $(date).
@@ -220,91 +220,113 @@ EOF
 
 ---
 
-## テキスト処理のイディオム
+## Text Processing Idioms
 
 ```sh
-# 文字列の小文字変換（POSIX）
+# To lowercase (POSIX)
 lower=$(printf '%s' "$str" | tr '[:upper:]' '[:lower:]')
 
-# 文字列のトリム（前後の空白除去）
+# Trim leading/trailing whitespace
 trim() {
     printf '%s' "$1" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
 }
 
-# 行数カウント
+# Line count
 count=$(wc -l < "$file")
 
-# ファイルの各行を処理
+# Process each line
 while IFS= read -r line; do
     printf 'Line: %s\n' "$line"
 done < "$file"
 
-# コマンド出力の各行を処理（サブシェル問題に注意）
+# Process command output lines (note subshell issue)
 some_command | while IFS= read -r line; do
-    # 注意: このwhile内でのvariable変更は外に伝わらない
+    # Changes inside while don't propagate out
     printf '%s\n' "$line"
 done
 ```
 
 ---
 
-## パス・ファイル操作
+## Path/File Operations
 
 ```sh
-# スクリプト自身のディレクトリを取得
+# Script dir
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
-# ファイル名・拡張子の操作（basename/dirname）
+# basename/dirname
 filename=$(basename "$path")          # /a/b/c.txt → c.txt
 dir=$(dirname "$path")                # /a/b/c.txt → /a/b
 stem=$(basename "$path" .txt)         # /a/b/c.txt → c
 
-# mktemp で安全な一時ファイル
+# Safe temp files
 tmp=$(mktemp)
 tmpdir=$(mktemp -d)
 ```
 
 ---
 
-## デバッグ
+## Variable Expansion
+
+**Always** expand variables with double-quotes and braces: `"${var_name}"`.
+Never use bare `$var`, `"$var"`, or `${var}` without surrounding double-quotes.
 
 ```sh
-# 実行トレース（各コマンドを表示）
-set -x    # 開始
-set +x    # 停止
+# OK
+echo "${message}"
+cp "${src_file}" "${dest_dir}/"
+log_file="${output_dir}/app.log"
 
-# またはスクリプト全体をトレース実行
+# NG — do not use these forms
+echo $message          # no quotes, no braces
+echo "$message"        # quotes but no braces
+echo ${message}        # braces but no quotes
+```
+
+This rule applies to:
+- All variable references in commands and arguments
+- Variable assignments on the right-hand side (`dst="${base_dir}/sub"`)
+- Parameter expansions (`"${1:-default}"`, `"${var%.*}"`)
+- Command substitutions inside strings (`"${output_dir}/$(date +%Y%m%d)"`)
+
+Exception: variables inside `$(( ))` arithmetic expressions do not require quotes or braces.
+## Debugging
+
+```sh
+# Trace execution
+set -x    # Start
+set +x    # Stop
+
+# Or trace whole script
 sh -x ./script.sh
 
-# 構文チェックのみ（実行しない）
+# Syntax check only
 sh -n ./script.sh
 
-# shellcheck による静的解析（推奨）
+# shellcheck static analysis (recommended)
 shellcheck ./script.sh
 ```
 
 ---
 
-## チェックリスト
+## Checklist
 
-スクリプト完成前に以下を確認する:
+Before completion, verify:
 
-- [ ] `#!/bin/sh` で始まっているか
-- [ ] `set -eu` が冒頭にあるか
-- [ ] すべての変数展開がダブルクォートで囲まれているか
-- [ ] `[[ ]]` `(( ))` などのbashismを使っていないか
-- [ ] `echo` の代わりに `printf` を使っているか
-- [ ] `source` の代わりに `.` を使っているか
-- [ ] `local var=$(cmd)` を使っていないか（2行に分けているか）
-- [ ] 一時ファイルを `trap ... EXIT` で確実に消しているか
-- [ ] `shellcheck` をパスするか
+- [ ] Starts with `#!/bin/sh`
+- [ ] Has `set -eu` early
+- [ ] All var expansions double-quoted
+- [ ] No bashisms like `[[ ]] (( ))`
+- [ ] Uses `printf` not `echo`
+- [ ] Uses `.` not `source`
+- [ ] No `local var=$(cmd)` (split lines)
+- [ ] Temp files cleaned by `trap ... EXIT`
+- [ ] Passes `shellcheck`
 
 ---
 
-## 参照ファイル
+## References
 
-詳細なリファレンスは以下を参照:
-
-- `references/pipefail-alternatives.md` — pipefailなしでパイプエラーを検出する手法
-- `references/portability-table.md` — コマンド・構文のポータビリティ一覧
-- `references/common-patterns.md` — よく使うパターン集（ロック、ログ、設定ファイル読み込みなど）
+- `references/pipefail-alternatives.md` — Pipeline error detection without pipefail
+- `references/portability-table.md` — Command/syntax portability table
+- `references/common-patterns.md` — Common patterns (locks, logging, config loading, etc.)
