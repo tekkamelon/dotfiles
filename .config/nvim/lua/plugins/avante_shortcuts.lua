@@ -56,5 +56,10 @@ return {
 		name = "posix-shell",
 		description = "POSIX準拠のシェルスクリプトを書く際に使用するスキル",
 		prompt = "/posix-shell",
+	},
+	{
+		name = "gemini-cli-bridge",
+		description = "Gemini CLIを呼び出すスキル",
+		prompt = "/gemini-cli-bridge",
 	}
 }
