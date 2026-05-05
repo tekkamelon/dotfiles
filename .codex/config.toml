@@ -1,0 +1,27 @@
+model = "gpt-5.4-mini"
+model_reasoning_effort = "medium"
+[projects."/home/tekkamelon"]
+trust_level = "trusted"
+
+[tui.model_availability_nux]
+"gpt-5.5" = 4
+
+[features]
+terminal_resize_reflow = true
+
+[plugins."github@openai-curated"]
+enabled = true
+
+[mcp_servers.brave-search]
+command = "npx"
+args = ["-y", "@brave/brave-search-mcp-server"]
+env_vars = ["BRAVE_API_KEY"]
+
+[mcp_servers.playwright]
+command = "npx"
+args = ["-y", "@playwright/mcp@latest", "--browser", "firefox"]
+
+[mcp_servers.fetch]
+command = "uvx"
+args = ["mcp-server-fetch"]
+
