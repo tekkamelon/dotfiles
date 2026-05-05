@@ -4,7 +4,8 @@
 if vim.g.vscode then return end
 
 require("blink.cmp").setup({
-	keymap = { preset = "super-tab" },
+	-- Enterで補完を確定
+	keymap = { preset = "enter" },
 	appearance = {
 		nerd_font_variant = "mono",
 	},
