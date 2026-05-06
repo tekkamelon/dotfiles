@@ -48,6 +48,17 @@ IFS=$(printf '\n\t')
 
 > POSIX sh does not support `-o pipefail`. See `references/pipefail-alternatives.md`.
 
+### POSIXLY_CORRECT
+
+```sh
+export POSIXLY_CORRECT=1
+```
+
+Setting `POSIXLY_CORRECT=1` in the environment makes shells (dash, bash in POSIX mode, etc.) more strictly POSIX-compliant.
+This helps catch non-portable constructs during development and testing.
+
+> Note: This is a shell setting, not a `set` option. Use `export` or prefix when invoking shell.
+
 ---
 
 ## Non-POSIX Syntax (Never Use)
