@@ -18,6 +18,7 @@ gemini --prompt "プロンプト内容" --approval-mode plan
 
 - `--prompt` (または `-p`): 実行したい指示を渡します。
 - `--approval-mode plan`: 読み取り専用モードで実行し、ファイル変更を防止します（情報収集に最適）。
+- `gemini` コマンドが見つからない場合は、`/home/${HOME}/.npm-global/bin/` 以下に実行ファイルがないか確認します。
 
 ## メリット
 

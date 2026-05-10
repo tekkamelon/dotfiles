@@ -39,6 +39,7 @@ gemini --prompt "以下のソースコードのロジックを日本語で詳し
 
 ## Checklist
 - [ ] Is `gemini-cli` installed and accessible in the PATH?
+- [ ] If the `gemini` command is not found, check `/home/${HOME}/.npm-global/bin/` for the executable.
 - [ ] Is the prompt clear and specific?
 - [ ] For non-modifying tasks, is `--approval-mode plan` used?
 
