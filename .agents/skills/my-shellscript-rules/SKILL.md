@@ -2,7 +2,7 @@
 name: my-shellscript-rules
 description: >
   Personal shell scripting conventions focused on POSIX portability,
-  readability, and consistent style.
+  readability, and consistent style. Use this skill when writing shell scripts.
 ---
 
 # my-shellscript-rules
