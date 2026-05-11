@@ -6,7 +6,7 @@ description: >
   error handling, testable design, debugging techniques, etc.
   Always refer to this skill when keywords like "shell script", "sh", "bash", "POSIX", "shell functions", "shell variables",
   "trap", "getopts" are included.
-  Use in all scenarios for writing, reviewing, and debugging scripts.
+  Use this skill when writing shell scripts, and in all scenarios for writing, reviewing, and debugging scripts.
 ---
 
 # POSIX-Compliant Shell Scripting Skill
@@ -84,12 +84,14 @@ read -r -d ''     # → Non-POSIX. Use alternatives
 
 ```sh
 # Always double-quote (prevents word splitting/glob expansion)
-echo "$var"
-rm -f "$file"
+echo "${var}"
+rm -f "${file}"
 
 # Quote all variable expansions that may contain spaces
-for f in "$@"; do
-    echo "$f"
+for f in "${@}"; do
+
+    echo "${f}"
+
 done
 
 # Default value
@@ -129,21 +131,27 @@ val="${VAR:-default}"
 ```sh
 # POSIX-compliant function
 log() {
+
     printf '[%s] %s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "$*" >&2
+
 }
 
 die() {
+
     log "ERROR: $*"
     exit 1
+
 }
 
 # local only inside functions (init on separate line)
 parse_args() {
+
     local flag
     local value
-    flag="$1"
-    value="$2"
+    flag="${1}"
+    value="${2}"
     # ...
+
 }
 ```
 
@@ -162,7 +170,9 @@ set -eu
 TMPFILE=""
 
 cleanup() {
+
     [ -n "$TMPFILE" ] && rm -f "$TMPFILE"
+
 }
 
 trap cleanup EXIT        # Run on normal/abnormal exit
@@ -179,6 +189,7 @@ TMPFILE=$(mktemp)
 
 ```sh
 usage() {
+
     cat <<EOF
 Usage: $(basename "$0") [-v] [-o OUTPUT] FILE...
 Options:
@@ -186,12 +197,14 @@ Options:
   -o OUTPUT   output file (default: stdout)
   -h          show this help
 EOF
+
 }
 
 verbose=0
 output=""
 
 while getopts ":vo:h" opt; do
+
     case "$opt" in
         v) verbose=1 ;;
         o) output="$OPTARG" ;;
@@ -199,6 +212,7 @@ while getopts ":vo:h" opt; do
         :) die "Option -$OPTARG requires an argument" ;;
         \?) die "Unknown option: -$OPTARG" ;;
     esac
+
 done
 
 shift $((OPTIND - 1))
@@ -239,21 +253,33 @@ lower=$(printf '%s' "$str" | tr '[:upper:]' '[:lower:]')
 
 # Trim leading/trailing whitespace
 trim() {
+
     printf '%s' "$1" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+
 }
+
+
+# Explicitly pass - when paste reads from standard input
+# Required for compatibility with macOS paste
+printf '%s\n' "${line_a}" "${line_b}" | paste -s -d ',' - 
+
 
 # Line count
 count=$(wc -l < "$file")
 
 # Process each line
 while IFS= read -r line; do
+
     printf 'Line: %s\n' "$line"
+
 done < "$file"
 
 # Process command output lines (note subshell issue)
 some_command | while IFS= read -r line; do
+
     # Changes inside while don't propagate out
     printf '%s\n' "$line"
+
 done
 ```
 
