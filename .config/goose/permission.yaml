@@ -1,0 +1,9 @@
+user:
+  always_allow:
+  - analyze
+  - edit
+  - write
+  - shell
+  - brave-search__brave_web_search
+  ask_before: []
+  never_allow: []
