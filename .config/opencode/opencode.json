@@ -1,6 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "model": "nvidia/minimaxai/minimax-m2.7",
+  "model": "sakura-ai/preview/Kimi-K2.6",
   "small_model": "opencode/minimax-m2.5-free",
   "provider": {
 	"sakura-ai": {
@@ -13,7 +13,7 @@
 		"gpt-oss-120b": {},
 		"Qwen3-Coder-30B-A3B-Instruct": {},
 		"Qwen3-Coder-480B-A35B-Instruct-FP8": {},
-		"preview/Kimi-K2.5": {}
+		"preview/Kimi-K2.6": {}
 	  }
 	}
   },
