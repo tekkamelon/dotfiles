@@ -52,9 +52,9 @@ require('avante').setup {
 			args = { "acp" },
 			-- 環境変数からAPIキーを渡さないと動作しない
 			env = {
-				NVIDIA_API_KEY = os.getenv("NVIDIA_API_KEY"),
+				NVIDIA_API_KEY = vim.env.NVIDIA_API_KEY,
 				-- MCPサーバー用APIキー
-				BRAVE_API_KEY = os.getenv("BRAVE_API_KEY"),
+				BRAVE_API_KEY = vim.env.BRAVE_API_KEY,
 			},
 		},
 
@@ -118,3 +118,4 @@ require('avante').setup {
 
 	shortcuts = shortcuts,
 }
+
