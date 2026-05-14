@@ -48,7 +48,7 @@ extensions:
     bundled: true
     available_tools: []
   code_execution:
-    enabled: false
+    enabled: true
     type: platform
     name: code_execution
     description: Goose will make extension calls through code execution, saving tokens
@@ -126,5 +126,11 @@ extensions:
     bundled: null
     available_tools: []
 GOOSE_TELEMETRY_ENABLED: true
-GOOSE_PROVIDER: nvidia
-GOOSE_MODEL: minimaxai/minimax-m2.7
+GOOSE_PROVIDER: chatgpt_codex
+GOOSE_MODEL: gpt-5.3-codex
+CUSTOM_SAKURA-AI_API_KEY: SAKURA_API_KEY
+OPENAI_BASE_URL: https://openrouter.ai/api/v1
+OPENAI_HOST: https://api.ai.sakura.ad.jp/v1
+OPENAI_BASE_PATH: v1/chat/completions
+OPENAI_TIMEOUT: '600'
+CHATGPT_CODEX_REASONING_EFFORT: medium
