@@ -1,9 +1,9 @@
 {
-  "name": "custom_sakura-ai",
+  "name": "custom_sakura",
   "engine": "openai",
-  "display_name": "sakura-ai",
-  "description": "Custom sakura-ai provider",
-  "api_key_env": "CUSTOM_SAKURA-AI_API_KEY",
+  "display_name": "SAKURA",
+  "description": "Custom SAKURA provider",
+  "api_key_env": "CUSTOM_SAKURA_API_KEY",
   "base_url": "https://api.ai.sakura.ad.jp/v1",
   "models": [
     {
