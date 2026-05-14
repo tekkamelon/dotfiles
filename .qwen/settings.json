@@ -39,6 +39,19 @@
         }
       },
       {
+        "id": "preview/Kimi-K2.6",
+        "name": "Kimi K2.6",
+        "envKey": "SAKURA_API_KEY",
+        "baseUrl": "https://api.ai.sakura.ad.jp/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.3
+          }
+        }
+      },
+      {
         "id": "minimax/minimax-m2.5:free",
         "name": "OpenRouter:Minimax M2.5 Free",
         "envKey": "OPENROUTER_API_KEY",
@@ -76,10 +89,23 @@
             "temperature": 0.3
           }
         }
+      },
+      {
+        "id": "minimaxai/minimax-m2.7",
+        "name": "NVIDIA:Minimax M2.7",
+        "envKey": "NVIDIA_API_KEY",
+        "baseUrl": "https://integrate.api.nvidia.com/v1",
+        "generationConfig": {
+          "timeout": 120000,
+          "maxRetries": 3,
+          "samplingParams": {
+            "temperature": 0.3
+          }
+        }
       }
     ]
   },
-  "$version": 3,
+  "$version": 4,
   "model": {
     "name": "Qwen3-Coder-480B-A35B-Instruct-FP8"
   },
