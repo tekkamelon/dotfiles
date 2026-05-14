@@ -126,9 +126,11 @@ extensions:
     bundled: null
     available_tools: []
 GOOSE_TELEMETRY_ENABLED: true
-GOOSE_PROVIDER: chatgpt_codex
-GOOSE_MODEL: gpt-5.3-codex
-CUSTOM_SAKURA-AI_API_KEY: SAKURA_API_KEY
+# GOOSE_PROVIDER: chatgpt_codex
+# GOOSE_MODEL: gpt-5.3-codex
+GOOSE_PROVIDER: custom_sakura
+GOOSE_MODEL: preview/Kimi-K2.6
+CUSTOM_SAKURA_API_KEY: SAKURA_API_KEY
 OPENAI_BASE_URL: https://openrouter.ai/api/v1
 OPENAI_HOST: https://api.ai.sakura.ad.jp/v1
 OPENAI_BASE_PATH: v1/chat/completions
