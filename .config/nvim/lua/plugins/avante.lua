@@ -55,7 +55,7 @@ require('avante').setup {
 				NVIDIA_API_KEY = vim.env.NVIDIA_API_KEY,
 				OPENROUTER_API_KEY = vim.env.OPENROUTER_API_KEY,
 				SAKURA_API_KEY = vim.env.SAKURA_API_KEY,
-				CUSTOM_SAKURA_AI_API_KEY = vim.env.CUSTOM_SAKURA_AI_API_KEY,
+				CUSTOM_SAKURA_API_KEY = vim.env.SAKURA_API_KEY,
 				-- MCPサーバー用APIキー
 				BRAVE_API_KEY = vim.env.BRAVE_API_KEY,
 			},
