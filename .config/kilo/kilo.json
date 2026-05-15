@@ -39,10 +39,10 @@
       "command": [
         "npx",
         "@playwright/mcp@latest",
-        "--browser",
-        "firefox"
+		"--browser",
+		"firefox"
       ],
-      "enabled": true
+      "enabled": false
     },
     "fetch": {
       "type": "local",

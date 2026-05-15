@@ -96,7 +96,7 @@ extensions:
     bundled: true
     available_tools: []
   playwrightmcp:
-    enabled: true
+    enabled: false 
     type: stdio
     name: playwright mcp
     description: playwright mcp

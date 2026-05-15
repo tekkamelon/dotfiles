@@ -41,7 +41,7 @@
         "--browser",
         "firefox"
       ],
-      "enabled": true
+      "enabled": false
     },
     "fetch": {
       "type": "local",
