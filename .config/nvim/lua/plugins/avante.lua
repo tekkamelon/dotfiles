@@ -30,21 +30,15 @@ require('avante').setup {
 	-- コマンドと引数を指定してプロバイダを定義
 	--  avante起動前に`:lua require("avante.api").switch_provider("opencode")`などで切り替え可能
 	acp_providers = {
+
 		["opencode"] = {
 			command = "opencode",
 			args = { "acp" }
 		},
 
-		["gemini-cli"] = {
-			command = "gemini",
-			args = { "--acp" }
-		},
-
 		["qwen-code"] = {
 			command = "qwen",
-			args = {
-				"--acp",
-			},
+			args = { "--acp" },
 		},
 
 		["goose"] = {
@@ -75,6 +69,12 @@ require('avante').setup {
 			command = "kilocode",
 			args = { "acp" },
 		},
+
+		["zeroclaw"] = {
+			command = "zeroclaw",
+			args = { "acp" },
+		},
+
 	},
 
 	-- 各種自動設定
