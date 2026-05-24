@@ -120,8 +120,9 @@ require("lazy").setup({
 	{
 		"yetone/avante.nvim",
 		build = "make",
-		commit = "8c84af0",
-		pin = true,
+		tag = "v0.0.29",
+		-- commit = "8c84af0",
+		-- pin = true,
 		-- コマンドモードまたはビジュアルモードへの移行時に起動
 		event = { "ModeChanged *:[cvV\x16]*" },
 		cmd = {
