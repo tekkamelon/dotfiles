@@ -118,7 +118,7 @@ extensions:
     cmd: npx
     args:
     - -y
-    - '@modelcontextprotocol/server-brave-search'
+    - '@brave/brave-search-mcp-server'
     envs: {}
     env_keys:
     - BRAVE_API_KEY

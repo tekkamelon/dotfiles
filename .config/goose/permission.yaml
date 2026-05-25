@@ -4,6 +4,11 @@ user:
   - edit
   - write
   - shell
-  - brave-search__brave_web_search
+  - braveWebSearch
+  - braveVideoSearch
+  - braveImageSearch
+  - braveNewsSearch 
+  - braveLlmContext 
+  - bravePlaceSearch
   ask_before: []
   never_allow: []
