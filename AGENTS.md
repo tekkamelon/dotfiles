@@ -21,8 +21,6 @@
 - web検索で調査して構いません
     - tool
     - MCP
-    - Skills
-        - `gemini-cli-bridge`
 - 調査結果を`markdown`形式で出力
 
 ### コードの書式
