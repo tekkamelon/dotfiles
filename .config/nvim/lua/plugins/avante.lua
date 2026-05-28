@@ -70,6 +70,12 @@ require('avante').setup {
 			args = { "acp" },
 		},
 
+		-- 事前に"npx @zed-industries/codex-acp"を実行
+		["codex"] = {
+			command = "npx",
+			args = { "@zed-industries/codex-acp" },
+		},
+
 		["zeroclaw"] = {
 			command = "zeroclaw",
 			args = { "acp" },
