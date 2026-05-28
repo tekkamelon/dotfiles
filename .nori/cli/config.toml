@@ -1,5 +1,8 @@
-agent = "goose"
+agent = "kilo"
 [projects."/home/tekkamelon"]
+trust_level = "trusted"
+
+[projects."/home/tekkamelon/Documents/github/vroid_companion"]
 trust_level = "trusted"
 
 [cli]
@@ -14,5 +17,14 @@ slug = "goose"
 command = "goose"
 args = ["acp"]
 
+[[agents]]
+name = "kilocode"
+slug = "kilo"
+
+[agents.distribution.local]
+command = "kilocode"
+args = ["acp"]
+
 [default_models]
 goose = "preview/Kimi-K2.6"
+kilocode = "preview/Kimi-K2.6"
