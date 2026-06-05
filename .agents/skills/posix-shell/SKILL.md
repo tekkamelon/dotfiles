@@ -4,7 +4,7 @@ description: >
   Skill for writing POSIX-compliant shell scripts.
   Covers portable sh/bash script creation, ensuring portability, avoiding common non-POSIX syntax,
   error handling, testable design, debugging techniques, etc.
-  Always refer to this skill when keywords like "shell script", "sh", "bash", "POSIX", "shell functions", "shell variables",
+  Always refer to this skill when keywords like "シェルスクリプト", "shell script", "sh", "bash", "POSIX", "shell functions", "shell variables",
   "trap", "getopts" are included.
   Use this skill when writing shell scripts, and in all scenarios for writing, reviewing, and debugging scripts.
 ---

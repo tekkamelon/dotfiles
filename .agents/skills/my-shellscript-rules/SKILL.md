@@ -3,6 +3,9 @@ name: my-shellscript-rules
 description: >
   Personal shell scripting conventions focused on POSIX portability,
   readability, and consistent style. Use this skill when writing shell scripts.
+  Always refer to this skill when keywords like "シェルスクリプト", "shell script", "sh", "bash", "POSIX", "shell functions", "shell variables",
+  "trap", "getopts" are included.
+  Use this skill when writing shell scripts, and in all scenarios for writing, reviewing, and debugging scripts.
 ---
 
 # my-shellscript-rules
