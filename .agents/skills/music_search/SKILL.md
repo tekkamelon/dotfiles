@@ -14,7 +14,7 @@ Search for internet web radio stations based on user requests and add/play them 
 ## Prerequisites
 
 - `mpc` command must be installed.
-- `radio-browser-cli` command must be installed (already placed within this repository).
+- `radio-browser-cli` command must be installed(`/home/tekkamelon/.local/bin`)
 - MPD server must be running.
 
 ## Tools Used
