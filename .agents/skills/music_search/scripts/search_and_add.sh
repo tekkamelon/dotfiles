@@ -24,3 +24,9 @@ fi
 mpc --host="${HOST}" add "${url}"
 
 echo "キューに追加しました: ${url}"
+
+# キューに追加後再生
+mpc --host="${HOST}" playlist |
+
+# キューに追加した曲を再生
+grep -n . | tail -n 1 | cut -d: -f1 | xargs -I{} mpc --host="${HOST}" play {}
