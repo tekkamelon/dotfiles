@@ -1,146 +1,146 @@
 ---
 name: music_search
 description: >
-  指示に応じて要望に合致するウェブラジオをインターネットから検索し各種シェルコマンドで指定されたホスト上のmpdで再生再生するためのスキル
-  トリガーとなるワードは"mpc", "音楽を探す", "mpd", "webラジオ"及びそれに類するもの
+  Skill for searching internet web radio stations matching user requests and adding/playing them on an mpd host via shell commands.
+  Trigger words include "mpc", "search music", "mpd", "web radio", and similar terms.
 ---
 
 # music_search
 
 ## Purpose
 
-指示に応じてインターネット上のウェブラジオを検索し指定されたホスト上のmpdのキューに追加,再生する
+Search for internet web radio stations based on user requests and add/play them on a specified mpd host.
 
-## 前提条件
+## Prerequisites
 
-- `mpc` コマンドがインストールされていること
-- `radio-browser-cli` コマンドがインストールされていること (同リポジトリ内に配置済み)
-- MPDサーバが稼働していること
+- `mpc` command must be installed.
+- `radio-browser-cli` command must be installed (already placed within this repository).
+- MPD server must be running.
 
-## 利用ツール
+## Tools Used
 
-- `web_search` 系のツール : 曖昧な要望や特定のラジオ局名を調べるために使用
-- `radio-browser-cli` : Radio-Browser.info APIを利用してURLを取得
-- `mpc` : MPDのコマンドラインクライアント
+- `web_search` tools: Used for vague requests or to look up specific radio station names.
+- `radio-browser-cli`: Uses the Radio-Browser.info API to retrieve URLs.
+- `mpc`: Command-line client for MPD.
 
-## 検索ツールの使い分け
+## When to Use Which Search Tool
 
-### web_search 系ツール
+### web_search Tools
 
-曖昧な感情やシーンに基づく要望に対して使用する。
-具体例:
-- 睡眠時にぴったりな音楽
-- 朝に合う爽やかな音楽
-- 集中したい時に聴く音楽
+Use these for vague requests based on emotions or scenes.
+Examples:
+- Music perfect for sleeping
+- Refreshing music for the morning
+- Music to listen to when concentrating
 
-このような場合、まず web_search 系ツールでおすすめのラジオ局名やストリーミングURLを調査する。
+In these cases, first use web_search tools to investigate recommended radio station names or streaming URLs.
 
 ### radio-browser-cli
 
-具体的なジャンル、国名、タグが指定されている場合に使用する。
-具体例:
-- ジャズやlofiを流して
-- 日本の音楽を流して
-- クラシックのラジオを探して
+Use this when specific genres, countries, or tags are provided.
+Examples:
+- Play some jazz or lofi
+- Play Japanese music
+- Find a classical radio station
 
-また、web_search で特定のラジオ局名を取得した後、その局の URL を radio-browser-cli で取得することもある。
+Also, after obtaining a specific radio station name via web_search, you may use radio-browser-cli to get that station's URL.
 
-## radio-browser-cli の使い方
+## How to Use radio-browser-cli
 
-### ラジオ局の検索
+### Searching for Radio Stations
 
 ```bash
-radio-browser-cli search [オプション]
+radio-browser-cli search [OPTIONS]
 ```
 
-オプション:
-- `--name NAME` : ラジオ局名で検索
-- `--country COUNTRY` : 国名で検索 (例: Japan)
-- `--tag TAG` : ジャンル/タグで検索 (例: jazz)
-- `--language LANGUAGE` : 言語で検索 (例: japanese)
-- `--limit LIMIT` : 結果の最大表示数 (デフォルト: 20)
-- `--format {csv,tsv,urls,json,m3u}` : 出力形式 (デフォルト: csv)
+Options:
+- `--name NAME`: Search by radio station name.
+- `--country COUNTRY`: Search by country (e.g., Japan).
+- `--tag TAG`: Search by genre/tag (e.g., jazz).
+- `--language LANGUAGE`: Search by language (e.g., japanese).
+- `--limit LIMIT`: Maximum number of results (default: 20).
+- `--format {csv,tsv,urls,json,m3u}`: Output format (default: csv).
 
-### URLのみを取得する
+### Getting URLs Only
 
-`mpc add` に渡すためには `--format urls` を使用する
+Use `--format urls` for passing to `mpc add`.
 
 ```bash
 radio-browser-cli search --name "BBC" --format urls
 ```
 
-### 国の一覧を確認する
+### List of Countries
 
 ```bash
 radio-browser-cli countries
 ```
 
-### タグの一覧を確認する
+### List of Tags
 
 ```bash
 radio-browser-cli tags
 ```
 
-## mpc の使い方
+## How to Use mpc
 
-### ホストの指定
+### Specifying a Host
 
-- 環境変数 `MPD_HOST` を設定するか、`--host` オプションを使用する
-- ユーザー指定のホスト名があれば `mpc --host="ホスト名"` を使用する
+Either set the `MPD_HOST` environment variable or use the `--host` option.
+If a host is specified by the user, use `mpc --host="HOSTNAME"`.
 
 ```bash
-# 環境変数で指定
+# Using environment variable
 export MPD_HOST=localhost
 
-# コマンドオプションで指定
+# Using command option
 mpc --host="localhost"
 ```
 
-### キューへの追加
+### Adding to Queue
 
 ```bash
 mpc add "URL"
 ```
 
-## ワークフロー
+## Workflow
 
-1. ユーザーからの要望を判断する
-   - 曖昧な要望 (感情やシーン) -> web_search 系ツールで候補を調査
-   - 具体的なジャンル/国/タグ -> radio-browser-cli で直接検索
-2. ラジオ局名が分かっている場合 -> radio-browser-cli で URL を取得 (`--format urls`)
-3. `mpc add` で取得した URL を mpd のキューに追加する
-   - ホスト名が指定されている場合は `--host=` オプションを付与する
-4. 必要に応じて `mpc play` で再生を開始する
+1. Evaluate the user's request.
+   - Vague requests (emotions/scenes) -> Investigate candidates using web_search tools.
+   - Specific genres/countries/tags -> Search directly using radio-browser-cli.
+2. If a station name is known -> Retrieve the URL using radio-browser-cli (`--format urls`).
+3. Add the retrieved URL to the mpd queue using `mpc add`.
+   - If a host is specified, add the `--host=` option.
+4. Optionally start playback with `mpc play`.
 
-### 実行例
+### Example Execution
 
 ```bash
-# web_search で局名を調べた後、radio-browser-cli でURLを取得
+# After finding station name via web_search, get URL with radio-browser-cli
 url=$(radio-browser-cli search --name "BBC" --format urls | head -n 1)
 
-# ローカルのMPDに追加
+# Add to local MPD
 mpc add "${url}"
 
-# リモートのMPDに追加する場合
+# Add to remote MPD
 mpc --host="remote-host" add "${url}"
 ```
 
 ## Scripts
 
-シェルスクリプトは `scripts/` ディレクトリに配置されている。
+Shell scripts are placed in the `scripts/` directory.
 
 ### search_and_add.sh
 
-検索ワードを指定してラジオ局を検索し、mpd のキューに追加する。
+Searches for a radio station using a keyword and adds it to the mpd queue.
 
 ```bash
-scripts/search_and_add.sh "検索ワード" [ホスト名]
+scripts/search_and_add.sh "KEYWORD" [HOSTNAME]
 ```
 
-- 第1引数: 検索ワード (必須)
-- 第2引数: MPDホスト名 (オプション、デフォルト: localhost)
+- Arg 1: Search keyword (required)
+- Arg 2: MPD hostname (optional, default: localhost)
 
 ## Constitution
 
-- NEVER: 既存のキューをクリアしてはならない (`mpc clear` を使用しない)
-- `mpc add` のみを使用し、ユーザーの既存の再生キューを尊重すること
+- NEVER: Do not clear the existing queue (do not use `mpc clear`).
+- Use only `mpc add` to respect the user's existing playback queue.
