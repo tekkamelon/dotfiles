@@ -2,7 +2,7 @@
 name: music_search
 description: >
   Skill for searching internet web radio stations matching user requests and adding/playing them on an mpd host via shell commands.
-  Trigger words include "mpc", "search music", "mpd", "web radio", and similar terms.
+  Trigger words include "mpc", "search music", "mpd", "web radio", "webラジオ", "ウェブラジオ" and similar terms.
 ---
 
 # music_search
