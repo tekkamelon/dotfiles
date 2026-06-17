@@ -1,0 +1,5 @@
+[profiles.main]
+user_id = "@:matrix.org"
+
+[settings]  
+message_user_color = true
