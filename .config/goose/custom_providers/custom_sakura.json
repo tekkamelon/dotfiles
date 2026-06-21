@@ -37,6 +37,14 @@
       "output_token_cost": null,
       "currency": null,
       "supports_cache_control": null
+    },
+    {
+      "name": "preview/Qwen3.6-35B-A3B",
+      "context_limit": 128000,
+      "input_token_cost": null,
+      "output_token_cost": null,
+      "currency": null,
+      "supports_cache_control": null
     }
   ],
   "headers": null,
