@@ -39,8 +39,8 @@
         }
       },
       {
-        "id": "preview/Kimi-K2.6",
-        "name": "Kimi K2.6",
+        "id": "preview/Qwen3.6-35B-A3B",
+        "name": "preview/Qwen3.6-35B-A3B",
         "envKey": "SAKURA_API_KEY",
         "baseUrl": "https://api.ai.sakura.ad.jp/v1",
         "generationConfig": {
@@ -63,51 +63,12 @@
             "temperature": 0.3
           }
         }
-      },
-      {
-        "id": "qwen/qwen3.6-35b-a3b",
-        "name": "Qwen 3.6 35B A3B",
-        "envKey": "OPENROUTER_API_KEY",
-        "baseUrl": "https://openrouter.ai/api/v1",
-        "generationConfig": {
-          "timeout": 120000,
-          "maxRetries": 3,
-          "samplingParams": {
-            "temperature": 0.3
-          }
-        }
-      },
-      {
-        "id": "minimax-m2.5-free",
-        "name": "OpenCode Zen:Minimax M2.5 Free",
-        "envKey": "OPENCODE_API_KEY",
-        "baseUrl": "https://opencode.ai/zen/v1",
-        "generationConfig": {
-          "timeout": 120000,
-          "maxRetries": 3,
-          "samplingParams": {
-            "temperature": 0.3
-          }
-        }
-      },
-      {
-        "id": "minimaxai/minimax-m2.7",
-        "name": "NVIDIA:Minimax M2.7",
-        "envKey": "NVIDIA_API_KEY",
-        "baseUrl": "https://integrate.api.nvidia.com/v1",
-        "generationConfig": {
-          "timeout": 120000,
-          "maxRetries": 3,
-          "samplingParams": {
-            "temperature": 0.3
-          }
-        }
       }
     ]
   },
-  "$version": 4,
+  "$version": 3,
   "model": {
-    "name": "Qwen3-Coder-480B-A35B-Instruct-FP8"
+    "name": "preview/Qwen3.6-35B-A3B"
   },
   "security": {
     "auth": {
