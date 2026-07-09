@@ -25,6 +25,13 @@
 				"output":["text"] 
 			}
 		},
+		"preview/gemma-4-31B-it": {
+			"name": "gemma-4-31B-it",
+			"modalities": {
+				"input":["text", "image"],
+				"output":["text"]
+			}
+		},
 		"preview/Qwen3.6-35B-A3B": {
 			"name": "Qwen3.6-35B-A3B",
 			"modalities": {

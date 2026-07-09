@@ -96,7 +96,7 @@ extensions:
     bundled: true
     available_tools: []
   playwrightmcp:
-    enabled: false 
+    enabled: false
     type: stdio
     name: playwright mcp
     description: playwright mcp
@@ -126,13 +126,16 @@ extensions:
     bundled: null
     available_tools: []
 GOOSE_TELEMETRY_ENABLED: true
-# GOOSE_PROVIDER: chatgpt_codex
-# GOOSE_MODEL: gpt-5.3-codex
-GOOSE_PROVIDER: custom_sakura
-GOOSE_MODEL: preview/Kimi-K2.6
 CUSTOM_SAKURA_API_KEY: SAKURA_API_KEY
 OPENAI_BASE_URL: https://openrouter.ai/api/v1
 OPENAI_HOST: https://api.ai.sakura.ad.jp/v1
 OPENAI_BASE_PATH: v1/chat/completions
 OPENAI_TIMEOUT: '600'
 CHATGPT_CODEX_REASONING_EFFORT: medium
+providers:
+  custom_sakura:
+    enabled: true
+    model: preview/Kimi-K2.6
+    configured: true
+active_provider: custom_sakura
+GOOSE_MODE: auto
