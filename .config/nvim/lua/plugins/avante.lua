@@ -84,6 +84,14 @@ require('avante').setup {
 			command = "hermes",
 			args = { "acp" },
 		},
+
+		["grok"] = {
+			command = "grok",
+			args = {
+				"agent",
+				"stdio",
+			},
+		},
 	},
 
 	-- 各種自動設定

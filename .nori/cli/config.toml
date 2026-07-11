@@ -1,8 +1,11 @@
-agent = "kilo"
+agent = "goose"
 [projects."/home/tekkamelon"]
 trust_level = "trusted"
 
 [projects."/home/tekkamelon/Documents/github/vroid_companion"]
+trust_level = "trusted"
+
+[projects."/home/tekkamelon/Documents/github/sh-mpd"]
 trust_level = "trusted"
 
 [cli]
@@ -18,13 +21,13 @@ command = "goose"
 args = ["acp"]
 
 [[agents]]
-name = "kilocode"
-slug = "kilo"
+name = "grok"
+slug = "grok"
 
 [agents.distribution.local]
-command = "kilocode"
-args = ["acp"]
+command = "grok"
+args = ["agent", "stdio"]
 
 [default_models]
 goose = "preview/Kimi-K2.6"
-kilocode = "preview/Kimi-K2.6"
+grok = "grok-4.5"
