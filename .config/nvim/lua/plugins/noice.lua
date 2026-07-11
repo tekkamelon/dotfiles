@@ -21,6 +21,17 @@ require('noice').setup {
 
 	},
 
+	-- avante + grok ACP が送る独自 method (_x.ai/*) は未対応警告を出さない
+	routes = {
+		{
+			filter = {
+				event = "notify",
+				find = "Unknown notification method: _x%.ai/",
+			},
+			opts = { skip = true },
+		},
+	},
+
 	-- コマンドライン
 	cmdline = {
 
