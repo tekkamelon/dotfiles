@@ -1,0 +1,36 @@
+[cli]
+installer = "internal"
+auto_update = true
+
+[model.my-model]
+model = "preview/Kimi-K2.6"
+base_url = "https://api.ai.sakura.ad.jp/v1"
+name = "Kimi-K2.6"
+env_key = "${SAKURA_API_KEY}"
+
+[models]
+default = "grok-4.5"
+default_reasoning_effort = "low"
+
+[ui]
+max_thoughts_width = 120
+fork_secondary_model = "grok-build"
+yolo = false
+compact_mode = false
+theme = "rosepine-moon"
+permission_mode = "always-approve"
+
+[marketplace]
+official_marketplace_auto_installed = true
+
+[[marketplace.sources]]
+name = "xAI Official"
+git = "https://github.com/xai-org/plugin-marketplace.git"
+
+[mcp_servers.npx]
+command = "npx"
+args = [
+    "-y",
+    "@brave/brave-search-mcp-server",
+]
+enabled = true
