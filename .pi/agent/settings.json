@@ -1,0 +1,17 @@
+{
+  "lastChangelogVersion": "0.82.0",
+  "theme": "dark/dark",
+  "defaultProvider": "Sakura-AI-Engine",
+  "defaultModel": "preview/Kimi-K2.6",
+  "packages": [
+    "npm:pi-setup-custom-providers"
+  ],
+  "defaultThinkingLevel": "low",
+  "enabledModels": [
+    "Sakura-AI-Engine/gpt-oss-120b",
+    "Sakura-AI-Engine/preview/Kimi-K2.6",
+    "Sakura-AI-Engine/preview/gemma-4-31B-it",
+    "Sakura-AI-Engine/preview/Qwen3.6-35B-A3B",
+    "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4"
+  ]
+}
