@@ -124,6 +124,10 @@ require("lazy").setup({
 			"<leader>a",
 			"<leader>c",
 		},
+		dependencies = {
+			"echasnovski/mini.icons",
+			"nvim-telescope/telescope.nvim"
+		},
 		config = function()
 			require("plugins.agentic")
 		end,
