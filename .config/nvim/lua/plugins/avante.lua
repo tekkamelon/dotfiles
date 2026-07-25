@@ -92,6 +92,11 @@ require('avante').setup {
 				"stdio",
 			},
 		},
+
+		["pi"] = {
+			command = "pi-acp",
+			args = {},
+		},
 	},
 
 	-- 各種自動設定
