@@ -115,6 +115,14 @@ require("lazy").setup({
 		end,
 	},
 
+	-- img-clipの設定
+	{
+		"HakonHarnes/img-clip.nvim",
+		lazy = true,
+		config = function()
+			require("plugins.img-clip")
+		end,
+	},
 
 	-- avanteの設定
 	{
