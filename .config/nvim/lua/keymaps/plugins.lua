@@ -94,15 +94,31 @@ M.setup_neovim = function()
 		-- 全ウィンドウのすべての文字にラベルを付ける
 		{ 'n',          '<leader>h',  ':HopAnywhereMW<CR>' },
 
-		-- avante
+		-- agentic
 		-- チャットバッファをトグル
-		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
+		{ 'n',          '<leader>cc', function() require("agentic").toggle() end },
 		-- プロバイダーを選択
-		{ 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
-		-- LLMを変更
-		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
-		-- チャット内容をクリア
-		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
+		{ 'n',          '<leader>ap', function() require("agentic").switch_provider() end },
+		-- モデル (LLM) を選択
+		-- agentic 本体に公開 API がないため, セッション内のセレクタを直接呼ぶ
+		{
+			'n',
+			'<leader>aM',
+			function()
+				require("agentic.session_registry").get_session_for_tab_page(nil, function(session)
+					if not session or not session.config_options then
+						vim.notify("Agentic session is not ready", vim.log.levels.WARN)
+						return
+					end
+					-- チャット内 <localLeader>m と同じ処理
+					session.config_options:_show_model_selector()
+				end)
+			end,
+		},
+		-- セッションを復元
+		{ 'n',          '<leader>aR', function() require("agentic").restore_session() end },
+		-- 新規セッション (チャット内容をクリア)
+		{ 'n',          '<leader>ar', function() require("agentic").new_session() end },
 
 		-- mini.map
 		-- ミニマップをトグル

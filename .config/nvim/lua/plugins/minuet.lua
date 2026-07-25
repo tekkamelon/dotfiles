@@ -9,11 +9,11 @@ local temperature_param = 0.1
 local ignore_ft = {
 	'markdown',
 	'gitcommit',
-	'Avante',
-	'AvanteInput',
-	'AvantePromptInput',
-	'AvanteSelectedFiles',
-	'AvanteSelectedCode',
+	'AgenticChat',
+	'AgenticInput',
+	'AgenticCode',
+	'AgenticFiles',
+	'AgenticDiagnostics',
 	'TelescopePrompt',
 	'minifiles',
 }

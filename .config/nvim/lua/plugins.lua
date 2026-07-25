@@ -89,7 +89,6 @@ require("lazy").setup({
 		lazy = true,
 		cmd = {
 			"Telescope",
-			"TelescopeAvanteProvider"
 		},
 		config = function()
 			require("plugins.telescope")
@@ -116,34 +115,17 @@ require("lazy").setup({
 	},
 
 
-	-- avanteの設定
+	-- agenticの設定
 	{
-		"yetone/avante.nvim",
-		build = "make",
-		tag = "v0.0.29",
-		-- commit = "8c84af0",
-		-- pin = true,
+		"carlos-algms/agentic.nvim",
 		-- コマンドモードまたはビジュアルモードへの移行時に起動
 		event = { "ModeChanged *:[cvV\x16]*" },
-		cmd = {
-			"AvanteAsk",
-			"AvanteChat",
-			"AvanteChatNew",
-			"AvanteToggle",
-			"AvanteModels",
-			"AvanteSwitchProvider",
-		},
 		keys = {
 			"<leader>a",
 			"<leader>c",
 		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"echasnovski/mini.icons",
-			"nvim-telescope/telescope.nvim",
-		},
 		config = function()
-			require("plugins.avante")
+			require("plugins.agentic")
 		end,
 	},
 
@@ -162,7 +144,7 @@ require("lazy").setup({
 		ft = {
 			"markdown",
 			"vimwiki",
-			"Avante"
+			"AgenticChat",
 		},
 		config = function()
 			require("plugins.render-markdown")
@@ -253,7 +235,6 @@ require("lazy").setup({
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"Kaiser-Yang/blink-cmp-avante",
 			"rafamadriz/friendly-snippets",
 		},
 		version = "1.*",

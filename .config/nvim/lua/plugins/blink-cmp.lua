@@ -59,11 +59,56 @@ require("blink.cmp").setup({
 	},
 	sources = {
 		-- 使用する補完ソース
-		default = { "avante", "lsp", "path", "snippets", "buffer" },
+		default = { "lsp", "path", "snippets", "buffer" },
+		-- agentic プロンプト用: スラッシュコマンドと @ ファイル参照
+		per_filetype = {
+			AgenticInput = { "agentic_slash", "agentic_at" },
+		},
 		providers = {
-			avante = {
-				module = "blink-cmp-avante",
-				name = "Avante",
+			agentic_slash = {
+				module = "blink.cmp.sources.complete_func",
+				name = "AgenticSlash",
+				enabled = function()
+					local cursor = vim.api.nvim_win_get_cursor(0)
+					if cursor[1] ~= 1 then return false end
+					local before = vim.api.nvim_get_current_line():sub(1, cursor[2])
+					return before:match("^/[^%s]*$") ~= nil
+				end,
+				opts = {
+					complete_func = function()
+						return "v:lua.require'agentic.acp.slash_commands'.complete_func"
+					end,
+				},
+				transform_items = function(_, items)
+					for _, item in ipairs(items) do
+						if item.labelDetails then
+							item.labelDetails.detail = nil
+						end
+					end
+					return items
+				end,
+			},
+			agentic_at = {
+				module = "blink.cmp.sources.complete_func",
+				name = "AgenticAt",
+				enabled = function()
+					local col = vim.api.nvim_win_get_cursor(0)[2]
+					local before = vim.api.nvim_get_current_line():sub(1, col)
+					return (before:match("^@[^%s]*$") or before:match("[%s]@[^%s]*$")) ~= nil
+				end,
+				opts = {
+					complete_func = function()
+						return "v:lua.require'agentic.ui.file_picker'.complete_func"
+					end,
+				},
+				transform_items = function(_, items)
+					for _, item in ipairs(items) do
+						if item.labelDetails then
+							item.labelDetails.detail = nil
+						end
+					end
+					return items
+				end,
 			},
 		},
 	},

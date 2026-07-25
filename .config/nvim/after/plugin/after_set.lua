@@ -64,15 +64,9 @@ local highlight_groups = {
 	MiniTablineModifiedHidden = { fg = 'yellow', bg = '#2e3234', bold = false, underline = true },
 	MiniStatuslineModeOther = { fg = 'white', bg = 'black', bold = true, underline = false },
 
-	-- avanteの設定
-	-- ファイル,コード選択のタイトル
-	AvanteSubtitle = { fg = '#2e3234', bg = '#00aaaa', bold = true, underline = true },
-	-- プロンプトのタイトル
-	AvanteThirdTitle = { fg = '#2e3234', bg = '#b8d200', bold = true, underline = true },
-	-- ビジュアルモード時のプロンプトの入力欄
-	AvantePromptInput = { fg = 'white', bg = '#2e3234', bold = true, underline = false },
-	-- ビジュアルモード時のヒント
-	AvanteInlineHint = { fg = 'lightgrey', bg = 'black', bold = false, underline = false },
+	-- agenticの設定
+	-- ウィンドウタイトル
+	AgenticTitle = { fg = '#2e3234', bg = '#00aaaa', bold = true, underline = true },
 }
 
 -- テーブルからハイライトを一括設定

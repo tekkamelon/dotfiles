@@ -11,7 +11,7 @@ require('render-markdown').setup {
 
 		'markdown',
 		'vimwiki',
-		'Avante'
+		'AgenticChat',
 
 	},
 

@@ -21,7 +21,7 @@ require('noice').setup {
 
 	},
 
-	-- avante + grok ACP が送る独自 method (_x.ai/*) は未対応警告を出さない
+	-- grok ACP が送る独自 method (_x.ai/*) は未対応警告を出さない
 	routes = {
 		{
 			filter = {

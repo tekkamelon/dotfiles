@@ -32,13 +32,18 @@ require('copilot').setup {
 
 		gitcommit = true,
 		markdown = true,
-		AvanteInput = false,
-		AvantePromptInput = false,
-		AvanteSelectedFiles = false,
-		AvanteSelectedCode = false,
 		env = false,
 
 	},
+
+	-- AgenticInput は buftype = "nofile" のため, 既定の should_attach では拒否される
+	should_attach = function(bufnr, bufname)
+		if vim.bo[bufnr].filetype == "AgenticInput" then
+			return true
+		end
+		local default_should_attach = require("copilot.config.should_attach").default
+		return default_should_attach(bufnr, bufname)
+	end,
 
 	-- nesの設定
 	-- "copilot-lsp"プラグインをインストール
