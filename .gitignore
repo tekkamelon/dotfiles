@@ -1,2 +1,4 @@
 GEMINI.md
 *.orig
+
+.pi/agent/models.json
