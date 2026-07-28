@@ -3,7 +3,7 @@
     "Sakura-AI-Engine": {
       "baseUrl": "https://api.ai.sakura.ad.jp/v1",
       "api": "openai-completions",
-      "apiKey": "YOUR_API_KEY_HERE",
+      "apiKey": "${SAKURA_API_KEY}",
       "models": [
         {
           "id": "llm-jp-3.1-8x13b-instruct4",
@@ -76,6 +76,241 @@
         {
           "id": "gpt-oss-120b",
           "name": "gpt-oss-120b",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    },
+    "OpenRouter": {
+      "baseUrl": "https://openrouter.ai/api/v1",
+      "api": "openai-completions",
+      "apiKey": "${OPENROUTER_API_KEY}",
+      "models": [
+        {
+          "id": "qwen/qwen3.7-flash",
+          "name": "Qwen: Qwen3.7 Flash",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 1000000,
+          "maxTokens": 65536,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0.03,
+            "output": 0.13,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "inclusionai/ling-3.0-flash:free",
+          "name": "Ling-3.0-flash (free)",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 262144,
+          "maxTokens": 32768,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "poolside/laguna-s-2.1",
+          "name": "Poolside: Laguna S 2.1",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 1048576,
+          "maxTokens": 131072,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0.09999999999999999,
+            "output": 0.19999999999999998,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "poolside/laguna-s-2.1:free",
+          "name": "Poolside: Laguna S 2.1 (free)",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 262144,
+          "maxTokens": 32768,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "cohere/north-mini-code:free",
+          "name": "Cohere: North Mini Code (free)",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 256000,
+          "maxTokens": 64000,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "deepseek/deepseek-v4-pro",
+          "name": "DeepSeek: DeepSeek V4 Pro",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 1048576,
+          "maxTokens": 384000,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0.435,
+            "output": 0.87,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "deepseek/deepseek-v4-flash",
+          "name": "DeepSeek: DeepSeek V4 Flash",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 1048576,
+          "maxTokens": 393216,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0.14,
+            "output": 0.28,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "openrouter/free",
+          "name": "Free Models Router",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 200000,
+          "maxTokens": 16384,
+          "limitSource": "detected",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    },
+    "build-Nvidia": {
+      "baseUrl": "https://integrate.api.nvidia.com/v1",
+      "api": "openai-completions",
+      "apiKey": "${NVIDIA_API_KEY}",
+      "models": [
+        {
+          "id": "deepseek-ai/deepseek-v4-flash",
+          "name": "deepseek-ai/deepseek-v4-flash",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "limitSource": "inferred",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "deepseek-ai/deepseek-v4-pro",
+          "name": "deepseek-ai/deepseek-v4-pro",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "limitSource": "inferred",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "minimaxai/minimax-m3",
+          "name": "minimaxai/minimax-m3",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "moonshotai/kimi-k2.6",
+          "name": "moonshotai/kimi-k2.6",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "z-ai/glm-5.2",
+          "name": "z-ai/glm-5.2",
           "reasoning": false,
           "input": [
             "text"

@@ -10,18 +10,31 @@
   "defaultThinkingLevel": "low",
   "enabledModels": [
     "opencode/mimo-v2.5-free",
-    "openrouter/openrouter/free",
     "opencode/north-mini-code-free",
     "opencode/deepseek-v4-flash-free",
     "nvidia/minimaxai/minimax-m3",
     "nvidia/z-ai/glm-5.2",
+    "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4",
     "Sakura-AI-Engine/preview/Kimi-K2.6",
     "Sakura-AI-Engine/preview/gemma-4-31B-it",
     "Sakura-AI-Engine/preview/Qwen3.6-35B-A3B",
     "Sakura-AI-Engine/gpt-oss-120b",
-    "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4"
+    "OpenRouter/qwen/qwen3.7-flash",
+    "OpenRouter/inclusionai/ling-3.0-flash:free",
+    "OpenRouter/poolside/laguna-s-2.1",
+    "OpenRouter/poolside/laguna-s-2.1:free",
+    "OpenRouter/cohere/north-mini-code:free",
+    "OpenRouter/deepseek/deepseek-v4-pro",
+    "OpenRouter/deepseek/deepseek-v4-flash",
+    "OpenRouter/openrouter/free",
+    "build-Nvidia/deepseek-ai/deepseek-v4-flash",
+    "build-Nvidia/deepseek-ai/deepseek-v4-pro",
+    "build-Nvidia/minimaxai/minimax-m3",
+    "build-Nvidia/moonshotai/kimi-k2.6",
+    "build-Nvidia/z-ai/glm-5.2"
   ],
   "compaction": {
     "enabled": true
-  }
+  },
+  "editorPaddingX": 1
 }
