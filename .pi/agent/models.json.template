@@ -27,7 +27,8 @@
           "name": "preview/Kimi-K2.6",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 16384,
@@ -44,7 +45,8 @@
           "name": "preview/gemma-4-31B-it",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 16384,
@@ -61,7 +63,8 @@
           "name": "preview/Qwen3.6-35B-A3B",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 32768,
@@ -187,7 +190,8 @@
           "name": "DeepSeek: DeepSeek V4 Pro",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 1048576,
           "maxTokens": 384000,
@@ -204,7 +208,8 @@
           "name": "DeepSeek: DeepSeek V4 Flash",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 1048576,
           "maxTokens": 393216,
@@ -245,7 +250,8 @@
           "name": "deepseek-ai/deepseek-v4-flash",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 8192,
@@ -262,7 +268,8 @@
           "name": "deepseek-ai/deepseek-v4-pro",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 8192,
@@ -279,7 +286,8 @@
           "name": "minimaxai/minimax-m3",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 16384,
@@ -296,7 +304,8 @@
           "name": "moonshotai/kimi-k2.6",
           "reasoning": false,
           "input": [
-            "text"
+            "text",
+			"image"
           ],
           "contextWindow": 128000,
           "maxTokens": 16384,
@@ -311,6 +320,117 @@
         {
           "id": "z-ai/glm-5.2",
           "name": "z-ai/glm-5.2",
+          "reasoning": false,
+          "input": [
+            "text",
+			"image"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        }
+      ]
+    },
+    "OpenCodeZen": {
+      "baseUrl": "https://opencode.ai/zen/v1",
+      "api": "openai-completions",
+      "apiKey": "${OPENCODE_API_KEY}",
+      "models": [
+        {
+          "id": "deepseek-v4-flash-free",
+          "name": "deepseek-v4-flash-free",
+          "reasoning": false,
+          "input": [
+            "text",
+			"image"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 8192,
+          "limitSource": "inferred",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "mimo-v2.5-free",
+          "name": "mimo-v2.5-free",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "ling-3.0-flash-free",
+          "name": "ling-3.0-flash-free",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "nemotron-3-ultra-free",
+          "name": "nemotron-3-ultra-free",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "north-mini-code-free",
+          "name": "north-mini-code-free",
+          "reasoning": false,
+          "input": [
+            "text"
+          ],
+          "contextWindow": 128000,
+          "maxTokens": 16384,
+          "limitSource": "default",
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          }
+        },
+        {
+          "id": "laguna-s-2.1-free",
+          "name": "laguna-s-2.1-free",
           "reasoning": false,
           "input": [
             "text"

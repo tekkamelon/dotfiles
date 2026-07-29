@@ -31,7 +31,13 @@
     "build-Nvidia/deepseek-ai/deepseek-v4-pro",
     "build-Nvidia/minimaxai/minimax-m3",
     "build-Nvidia/moonshotai/kimi-k2.6",
-    "build-Nvidia/z-ai/glm-5.2"
+    "build-Nvidia/z-ai/glm-5.2",
+    "OpenCodeZen/deepseek-v4-flash-free",
+    "OpenCodeZen/mimo-v2.5-free",
+    "OpenCodeZen/ling-3.0-flash-free",
+    "OpenCodeZen/nemotron-3-ultra-free",
+    "OpenCodeZen/north-mini-code-free",
+    "OpenCodeZen/laguna-s-2.1-free"
   ],
   "compaction": {
     "enabled": true
