@@ -135,7 +135,7 @@ CHATGPT_CODEX_REASONING_EFFORT: medium
 providers:
   custom_sakura:
     enabled: true
-    model: preview/Kimi-K2.6
+    model: preview/Kimi-K2.7-Code
     configured: true
 active_provider: custom_sakura
 GOOSE_MODE: auto

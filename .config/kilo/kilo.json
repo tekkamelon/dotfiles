@@ -1,6 +1,6 @@
 {
   "$schema": "https://app.kilo.ai/config.json",
-  "model": "sakura-ai/preview/Kimi-K2.6",
+  "model": "sakura-ai/preview/Kimi-K2.7-Code",
   "small_model": "sakura-ai/preview/Qwen3.6-35B-A3B",
   "provider": {
     "sakura-ai": {
@@ -15,6 +15,18 @@
 		"Qwen3-Coder-480B-A35B-Instruct-FP8": {},
 		"preview/Kimi-K2.6": {
 			"name": "Kimi-K2.6",
+			"limit": {
+
+				"context": 262144,
+				"output": 16384
+			},
+			"modalities": { 
+				"input":["text", "image"],
+				"output":["text"] 
+			}
+		},
+		"preview/Kimi-K2.7-Code": {
+			"name": "Kimi-K2.7-Code",
 			"limit": {
 
 				"context": 262144,
