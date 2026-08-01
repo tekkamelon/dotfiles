@@ -1,19 +1,25 @@
 {
-  "lastChangelogVersion": "0.82.1",
+  "lastChangelogVersion": "0.83.0",
   "theme": "dark/dark",
   "defaultProvider": "Sakura-AI-Engine",
-  "defaultModel": "preview/Kimi-K2.6",
+  "defaultModel": "preview/Kimi-K2.7-Code",
   "packages": [
     "npm:pi-setup-custom-providers",
     "npm:pi-mcp-adapter"
   ],
   "defaultThinkingLevel": "low",
   "enabledModels": [
+    "Sakura-AI-Engine/gpt-oss-120b",
+    "Sakura-AI-Engine/preview/Kimi-K2.7-Code",
     "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4",
     "Sakura-AI-Engine/preview/Kimi-K2.6",
     "Sakura-AI-Engine/preview/gemma-4-31B-it",
     "Sakura-AI-Engine/preview/Qwen3.6-35B-A3B",
-    "Sakura-AI-Engine/gpt-oss-120b"
+    "Nous-Research/inclusionai/ling-3.0-flash:free",
+    "Nous-Research/poolside/laguna-s-2.1:free",
+    "Nous-Research/poolside/laguna-xs-2.1:free",
+    "Nous-Research/stepfun/step-3.7-flash:free",
+    "Nous-Research/tencent/hy3:free"
   ],
   "compaction": {
     "enabled": true
