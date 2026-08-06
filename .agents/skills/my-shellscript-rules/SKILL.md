@@ -89,6 +89,7 @@ done
   - Avoid: $value (unless strict shell syntax requires it)
 - Environment variables: uppercase snake_case.
 - Normal variables: lowercase snake_case.
+- Do not use uppercase letters in variable names except for environment variables.
 
 Example:
 
