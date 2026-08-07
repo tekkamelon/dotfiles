@@ -57,35 +57,5 @@
     "bash": "allow"
   },
   "mcp": {
-    "brave-search": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@brave/brave-search-mcp-server"
-      ],
-      "enabled": true,
-      "environment": {
-        "BRAVE_API_KEY": "{env:BRAVE_API_KEY}"
-      }
-    },
-    "playwright": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@playwright/mcp@latest",
-		"--browser",
-		"firefox"
-      ],
-      "enabled": false
-    },
-    "fetch": {
-      "type": "local",
-      "command": [
-        "uvx",
-        "mcp-server-fetch"
-      ],
-      "enabled": true
-    }
   }
 }
