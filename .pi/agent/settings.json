@@ -1,11 +1,10 @@
 {
-  "lastChangelogVersion": "0.83.0",
+  "lastChangelogVersion": "0.84.1",
   "theme": "dark/dark",
   "defaultProvider": "Sakura-AI-Engine",
   "defaultModel": "preview/Kimi-K2.7-Code",
   "packages": [
-    "npm:pi-setup-custom-providers",
-    "npm:pi-mcp-adapter"
+    "npm:pi-setup-custom-providers"
   ],
   "defaultThinkingLevel": "low",
   "enabledModels": [
@@ -19,7 +18,8 @@
     "Nous-Research/poolside/laguna-s-2.1:free",
     "Nous-Research/poolside/laguna-xs-2.1:free",
     "Nous-Research/stepfun/step-3.7-flash:free",
-    "Nous-Research/tencent/hy3:free"
+    "Nous-Research/tencent/hy3:free",
+    "Hermes Agent/hermes-agent"
   ],
   "compaction": {
     "enabled": true
