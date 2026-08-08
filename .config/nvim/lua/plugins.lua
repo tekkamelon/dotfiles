@@ -36,7 +36,7 @@ require("lazy").setup({
 	{ "MunifTanjim/nui.nvim",                    lazy = true },
 	{ "rcarriga/nvim-notify",                    lazy = true },
 	{ "neovim/nvim-lspconfig",                   lazy = true },
-	{ "copilotlsp-nvim/copilot-lsp",             lazy = true },
+	-- { "copilotlsp-nvim/copilot-lsp",             lazy = true },
 	{
 		"nvim-treesitter/nvim-treesitter",
 		lazy = true,
@@ -114,6 +114,7 @@ require("lazy").setup({
 			require("plugins.copilot")
 		end,
 	},
+
 
 	-- img-clipの設定
 	{

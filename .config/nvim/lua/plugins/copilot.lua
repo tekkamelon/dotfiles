@@ -45,9 +45,8 @@ require('copilot').setup {
 	nes = {
 
 		-- 有効化
-		enabled = true,
+		enabled = false,
 		keymap = {
-
 			accept_and_goto = "<C-i>",
 			accept = false,
 			dismiss = "<Esc>",
