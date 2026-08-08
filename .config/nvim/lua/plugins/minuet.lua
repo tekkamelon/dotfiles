@@ -69,7 +69,7 @@ require('minuet').setup {
 		openai_compatible = {
 			api_key = 'GROQ_API_KEY',
 			end_point = 'https://api.groq.com/openai/v1/chat/completions',
-			model = 'moonshotai/kimi-k2-instruct-0905',
+			model = 'openai/gpt-oss-120b',
 			name = 'Groq',
 			stream = true,
 			optional = {
@@ -93,6 +93,18 @@ require('minuet').setup {
 			model = 'qwen3-coder-30b-a3b-instruct',
 			name = 'LMStudio',
 			stream = false,
+		},
+
+		-- cerebras
+		cerebras = {
+			api_key = 'CEREBRAS_API_KEY',
+			end_point = 'https://api.cerebras.ai/v1/chat/completions',
+			model = 'gemma-4-31b',
+			name = 'Cerebras',
+			stream = true,
+			optional = {
+				temperature = temperature_param,
+			},
 		},
 
 	},
