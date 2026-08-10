@@ -2,6 +2,11 @@ return (function()
 	local shortcuts = {
 		-- コード編集用
 		{
+			name = "chat",
+			description = "チャット",
+			prompt = "ファイル編集を禁止,必要に応じweb検索やドキュメント参照を実行,質問への回答を行う"
+		},
+		{
 			name = "explain",
 			description = "詳細解説",
 			prompt = "現在のコードを日本語で解説して下さい",
