@@ -39,6 +39,32 @@ grep -F "${needle}" "${file_path}"
 - Do not rely on GNU awk-only extensions.
 - Keep awk syntax conservative and portable.
 
+## Pipeline Rules
+
+- Keep pipeline steps readable from left to right.
+- Split pipelines one segment per line when they exceed the comfortable line length.
+- Prefer the following line-break style:
+
+```sh
+foo |
+	bar |
+	baz
+```
+
+- Use tab characters for indentation of continuation lines.
+- Keep the pipe operator `|` at the end of the preceding line.
+- Comments should precede the entire pipeline.
+
+Example:
+
+```sh
+# needleを含む行を抽出し、ソートして重複を除去
+grep -F "${needle}" "${input_file}" |
+	sort |
+	uniq -c |
+	sort -nr
+```
+
 ## Argument Parsing Rules
 
 - Do not use `getopts` in my scripts.
@@ -50,35 +76,35 @@ Example:
 
 ```sh
 while [ "${#}" -gt 0 ]; do
-    case "${1}" in
-        -i)
-            if [ "${#}" -lt 2 ]; then
-                print_error "引数値の不足"
-                print_usage
-                exit 1
-            fi
-            input_file="${2}"
-            shift 2
-            ;;
-        -n)
-            if [ "${#}" -lt 2 ]; then
-                print_error "引数値の不足"
-                print_usage
-                exit 1
-            fi
-            needle="${2}"
-            shift 2
-            ;;
-        -h|--help)
-            print_usage
-            exit 0
-            ;;
-        *)
-            print_error "未知の引数: ${1}"
-            print_usage
-            exit 1
-            ;;
-    esac
+	case "${1}" in
+		-i)
+			if [ "${#}" -lt 2 ]; then
+				print_error "引数値の不足"
+				print_usage
+				exit 1
+			fi
+			input_file="${2}"
+			shift 2
+			;;
+		-n)
+			if [ "${#}" -lt 2 ]; then
+				print_error "引数値の不足"
+				print_usage
+				exit 1
+			fi
+			needle="${2}"
+			shift 2
+			;;
+		-h|--help)
+			print_usage
+			exit 0
+			;;
+		*)
+			print_error "未知の引数: ${1}"
+			print_usage
+			exit 1
+			;;
+	esac
 done
 ```
 
@@ -118,6 +144,7 @@ Apply the same idea to function and variable blocks.
 # ...
 # ====== 関数の宣言ここまで ======
 
+
 # ====== 変数の宣言 ======
 # ...
 # ====== 変数の宣言ここまで ======
@@ -153,3 +180,4 @@ Avoid:
 - [ ] Logical blocks separated by blank lines.
 - [ ] Section marker comments inserted where helpful.
 - [ ] Comments are Japanese noun phrases.
+- [ ] Pipeline line breaks use tab-indented continuation with `|` at line end.
