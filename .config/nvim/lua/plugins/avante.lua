@@ -1,4 +1,4 @@
--- avante.lua
+--
 -- Neovim >= 0.11.0
 
 if vim.g.vscode then return end
@@ -24,7 +24,9 @@ require('avante').setup {
 	provider = provider_name,
 	---@alias Mode "agentic" | "legacy"
 	---@type Mode
-	mode = "agentic",
+	-- ACP の rawInput は userdata として返るため、現在の履歴レンダラーと衝突する。
+	-- legacy モードではこの ACP 履歴処理を使用しない。
+	mode = "legacy",
 
 	-- CLIコーディングエージェント
 	-- コマンドと引数を指定してプロバイダを定義
@@ -95,8 +97,7 @@ require('avante').setup {
 
 		["pi"] = {
 			command = "pi-acp",
-			args = {},
-		},
+			args = {}, },
 	},
 
 	-- 各種自動設定
@@ -143,3 +144,4 @@ require('avante').setup {
 
 	shortcuts = shortcuts,
 }
+
