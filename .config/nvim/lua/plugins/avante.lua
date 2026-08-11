@@ -1,4 +1,4 @@
---
+-- avante.lua
 -- Neovim >= 0.11.0
 
 if vim.g.vscode then return end
@@ -24,9 +24,7 @@ require('avante').setup {
 	provider = provider_name,
 	---@alias Mode "agentic" | "legacy"
 	---@type Mode
-	-- ACP の rawInput は userdata として返るため、現在の履歴レンダラーと衝突する。
-	-- legacy モードではこの ACP 履歴処理を使用しない。
-	mode = "legacy",
+	mode = "agentic",
 
 	-- CLIコーディングエージェント
 	-- コマンドと引数を指定してプロバイダを定義
@@ -97,7 +95,8 @@ require('avante').setup {
 
 		["pi"] = {
 			command = "pi-acp",
-			args = {}, },
+			args = {},
+		},
 	},
 
 	-- 各種自動設定
@@ -145,3 +144,37 @@ require('avante').setup {
 	shortcuts = shortcuts,
 }
 
+-- ACP の一部プロバイダは rawInput/rawOutput を Lua の userdata として返す。
+-- v0.0.29 の履歴レンダラはこれらを table として直接参照するため、
+-- 表示時だけ非 table の値を隠して履歴全体を描画できるようにする。
+do
+	local Render = require("avante.history.render")
+	local function sanitize_message(message)
+		if type(message) ~= "table" or type(message.acp_tool_call) ~= "table" then
+			return message
+		end
+
+		local raw_input = message.acp_tool_call.rawInput
+		local raw_output = message.acp_tool_call.rawOutput
+		if (raw_input == nil or type(raw_input) == "table")
+			and (raw_output == nil or type(raw_output) == "table") then
+			return message
+		end
+
+		local sanitized = vim.tbl_extend("force", {}, message)
+		sanitized.acp_tool_call = vim.tbl_extend("force", {}, message.acp_tool_call)
+		if type(raw_input) ~= "table" then sanitized.acp_tool_call.rawInput = nil end
+		if type(raw_output) ~= "table" then sanitized.acp_tool_call.rawOutput = nil end
+		return sanitized
+	end
+
+	local message_to_lines = Render.message_to_lines
+	Render.message_to_lines = function(message, messages, expanded)
+		return message_to_lines(sanitize_message(message), messages, expanded)
+	end
+
+	local message_to_text = Render.message_to_text
+	Render.message_to_text = function(message, messages)
+		return message_to_text(sanitize_message(message), messages)
+	end
+end
