@@ -108,6 +108,9 @@ M.setup_neovim = function()
 		-- ミニマップをトグル
 		{ 'n',          '<leader>mm', ':lua require("mini.map").toggle()<CR>' },
 
+		-- img-clip
+		-- クリップボードの画像を貼り付ける
+		{ 'n',          '<leader>p',  ':PasteImage<CR>' },
 	}
 
 	-- テーブルの内容をループし代入
