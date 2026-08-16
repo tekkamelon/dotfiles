@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.1",
+  "lastChangelogVersion": "0.84.2",
   "theme": "dark/dark",
   "defaultProvider": "Sakura-AI-Engine",
   "defaultModel": "preview/Kimi-K2.7-Code",
@@ -8,18 +8,19 @@
   ],
   "defaultThinkingLevel": "low",
   "enabledModels": [
-    "Sakura-AI-Engine/gpt-oss-120b",
     "Sakura-AI-Engine/preview/Kimi-K2.7-Code",
-    "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4",
     "Sakura-AI-Engine/preview/Kimi-K2.6",
     "Sakura-AI-Engine/preview/gemma-4-31B-it",
     "Sakura-AI-Engine/preview/Qwen3.6-35B-A3B",
-    "Nous-Research/inclusionai/ling-3.0-flash:free",
+    "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4",
+    "Sakura-AI-Engine/gpt-oss-120b",
     "Nous-Research/poolside/laguna-s-2.1:free",
     "Nous-Research/poolside/laguna-xs-2.1:free",
-    "Nous-Research/stepfun/step-3.7-flash:free",
     "Nous-Research/tencent/hy3:free",
-    "Hermes Agent/hermes-agent"
+    "Nous-Research/stepfun/step-3.7-flash:free",
+    "Nous-Research/upstage/solar-pro4:free",
+    "Nous-Research/meituan/longcat-2.0:free",
+    "Hermes-Agent/hermes-agent"
   ],
   "compaction": {
     "enabled": true
