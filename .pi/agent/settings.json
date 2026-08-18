@@ -4,7 +4,8 @@
   "defaultProvider": "Sakura-AI-Engine",
   "defaultModel": "preview/Kimi-K2.7-Code",
   "packages": [
-    "npm:pi-setup-custom-providers"
+    "npm:pi-setup-custom-providers",
+    "npm:pi-context-view"
   ],
   "defaultThinkingLevel": "low",
   "enabledModels": [
