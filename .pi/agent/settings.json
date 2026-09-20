@@ -1,8 +1,8 @@
 {
-  "lastChangelogVersion": "0.84.2",
+  "lastChangelogVersion": "0.85.1",
   "theme": "dark/dark",
-  "defaultProvider": "Sakura-AI-Engine",
-  "defaultModel": "preview/Kimi-K2.7-Code",
+  "defaultProvider": "opencode-go",
+  "defaultModel": "muse-spark-1.3-contributor",
   "packages": [
     "npm:pi-setup-custom-providers",
     "npm:pi-context-view"
@@ -15,14 +15,17 @@
     "Sakura-AI-Engine/preview/Qwen3.6-35B-A3B",
     "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4",
     "Sakura-AI-Engine/gpt-oss-120b",
-    "Nous-Research/inclusionai/ling-3.0-flash:free",
     "Nous-Research/poolside/laguna-s-2.1:free",
     "Nous-Research/poolside/laguna-xs-2.1:free",
     "Nous-Research/stepfun/step-3.7-flash:free",
     "Nous-Research/tencent/hy3:free",
     "Nous-Research/upstage/solar-pro4:free",
     "Nous-Research/meituan/longcat-2.0:free",
-    "Hermes-Agent/hermes-agent"
+    "Hermes-Agent/hermes-agent",
+    "opencode-go/muse-spark-1.3-contributor",
+    "opencode-go/mimo-v2.5",
+    "opencode-go/grok-4.6",
+    "opencode-go/minimax-m3"
   ],
   "compaction": {
     "enabled": true
