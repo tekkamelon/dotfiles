@@ -97,6 +97,7 @@ require('avante').setup {
 			command = "pi-acp",
 			args = {},
 		},
+
 	},
 
 	-- 各種自動設定
@@ -176,5 +177,35 @@ do
 	local message_to_text = Render.message_to_text
 	Render.message_to_text = function(message, messages)
 		return message_to_text(sanitize_message(message), messages)
+	end
+end
+
+-- pi等のACPエージェントは description を userdata で返す事があるため、
+-- 文字列の場合のみ連結する様に修正。上流の更新に追従できる様、
+-- 実行時にソースへ最小差分を当てて preload する。
+do
+	local modname = "avante.acp_config_selector"
+	local paths = vim.api.nvim_get_runtime_file("lua/avante/acp_config_selector.lua", false)
+	local path = paths[1]
+	if not path then return end
+	local file = io.open(path, "r")
+	if not file then return end
+	local src = file:read("*a")
+	file:close()
+	local old = 'if val.description then label = label .. " - " .. val.description end'
+	local new =
+	'if type(val.description) == "string" and val.description ~= "" then label = label .. " - " .. val.description end'
+	if not src:find(old, 1, true) then return end
+	local patched = src:gsub(old:gsub("(%W)", "%%%1"), new, 1)
+	local chunk, err = load(patched, "@" .. path)
+	if not chunk then
+		vim.notify("avante patch failed: " .. (err or ""), vim.log.levels.WARN)
+		return
+	end
+	local ok, mod = pcall(chunk)
+	if ok and mod then
+		mod._patched_by_config = true
+		package.loaded[modname] = mod
+		package.preload[modname] = function() return mod end
 	end
 end
