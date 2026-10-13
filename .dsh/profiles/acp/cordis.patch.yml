@@ -1,0 +1,24 @@
+# Your patch layer for this dsh profile, applied after every bundle layer:
+# a top-level YAML array of loader patch entries (id-targeted config
+# overrides, disables, and insert lists; `!!js` expressions allowed).
+#
+# opencode-go: enable the opencode zen "go" gateway through the pi-ai adapter
+# and pin the default route used by session/new. The ACP app reads the acp
+# plugin's own config (dsh-acp initialSelection), not agent-default-model, so
+# the acp plugin entry itself must be patched.
+# The API key resolves from the shared credential store
+# (llm-pi-ai/opencode-go) or the OPENCODE_API_KEY environment variable.
+- id: llm-deepseek
+  name: "@deepseek-ai/dsh-llm-deepseek-api-key"
+  config:
+    baseURL: https://opencode.ai/zen/go/v1
+- id: llm-pi-ai
+  name: "@deepseek-ai/dsh-llm-pi-ai"
+  config:
+    providers:
+      opencode-go: {}
+- id: acp
+  name: "@deepseek-ai/dsh-acp"
+  config:
+    provider: opencode-go
+    model: deepseek-v4.1-flash

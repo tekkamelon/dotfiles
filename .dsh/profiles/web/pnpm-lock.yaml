@@ -1,0 +1,28 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@fang2hou/dsh-locale-ja':
+        specifier: ^0.5.1
+        version: 0.5.1
+
+packages:
+
+  '@fang2hou/dsh-locale-ja@0.5.1':
+    resolution: {integrity: sha512-7kCc4jzvqHeFQEIlEncQiqa2nBEMGCenn/VR71a/h6FEiN+hpYLTxnCBUeGG+sGsE6p0o3toBoc7n+0I/7djVA==}
+    engines: {node: '>=22'}
+    peerDependencies:
+      '@deepseek-ai/dsh-client-locale': ^0.1.5-rc.2
+    peerDependenciesMeta:
+      '@deepseek-ai/dsh-client-locale':
+        optional: true
+
+snapshots:
+
+  '@fang2hou/dsh-locale-ja@0.5.1': {}
