@@ -1,7 +1,7 @@
 # dotfiles
 自分用の設定ファイル
 
-## Template
+## Templates
 
 - neovimで使用するテンプレート
 
@@ -156,3 +156,83 @@
 - mpd.conf
 
     - mpdの設定ファイル
+
+### asunder
+
+- asunder(CDリッパー)の設定
+
+### goose
+
+- gooseの設定,権限やカスタムプロバイダーの設定
+
+### iamb
+
+- iamb(Matrixクライアント)の設定
+
+### kilo
+
+- Kilo Codeの設定,使用するモデルやプロバイダーの設定
+
+### mcphub
+
+- mcphubで管理するMCPサーバーの設定
+
+### ncmpcpp
+
+- ncmpcppのキーバインドや配色の設定
+
+### neomutt
+
+- neomuttのメール送受信などの設定
+
+### opencode
+
+- opencodeの設定,使用するモデルやプロバイダーの設定
+
+### rofi
+
+- rofiの設定,テーマや各モードのスクリプト
+
+## .agents
+
+- 各AIエージェントで使用するスキルの定義
+
+## .cline
+
+- Clineの設定,MCPサーバーの設定
+
+## .codex
+
+- Codex CLIの設定,モデルやMCPサーバーの設定
+
+## .dsh
+
+- dshのプロファイル設定,各UI(acp,pi-tui,web)ごとの構成
+
+## .gemini
+
+- Gemini CLIの設定,MCPサーバーやコンテキストの設定
+
+## .grok
+
+- Grok CLIの設定,モデルやUIの設定
+
+## .nori
+
+- nori CLIの設定,使用するエージェントの設定
+
+## .pi
+
+- piエージェントの設定,モデルやMCPサーバーの設定
+
+## .qwen
+
+- Qwen Codeの設定,環境変数やMCPサーバーの設定
+
+## WSL2
+
+- WSL2環境用の各シェルの設定
+
+## root
+
+- rootユーザー用のbashの設定
