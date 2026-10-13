@@ -93,11 +93,16 @@ require('avante').setup {
 			},
 		},
 
+		-- ======= 注意 ======
+		-- 事前にpi側で`/login`コマンドを実行してログインしておく
+		-- `~/.pi/agent/auth.json`に使用したいAPIキーがあるかを確認
 		["pi"] = {
 			command = "pi-acp",
 			args = {},
 		},
 
+		-- ======= 注意 ======
+		-- `.dsh/profiles/acp/cordis.patch.yml`で`- id: acp`を定義しておく
 		["dsh"] = {
 			command = "dsh",
 			args = {
@@ -187,6 +192,6 @@ do
 	end
 end
 
--- ACP の設定項目の選択肢を組み立てる処理を修正する。
--- 実装は plugins/avante_acp_patch.lua に分割。
+-- ACP の設定項目の選択肢を組み立てる処理を修正
+-- pi,dsh用の設定,これがないとモデルを選択できない
 require("plugins.avante_acp_patch")
