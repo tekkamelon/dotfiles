@@ -117,12 +117,6 @@
 
 - 各種プラグインの設定
 
-- copilot.lua
-
-- copilotchat.lua
-
-- hlchunk.lua
-
 ##### keymaps/
 
 - キーマップの設定
