@@ -94,15 +94,9 @@ M.setup_neovim = function()
 		-- 全ウィンドウのすべての文字にラベルを付ける
 		{ 'n',          '<leader>h',  ':HopAnywhereMW<CR>' },
 
-		-- avante
-		-- チャットバッファをトグル
-		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
-		-- プロバイダーを選択
-		{ 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
-		-- LLMを変更
-		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
-		-- チャット内容をクリア
-		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
+		-- trial/agentic-nvim: avante keymap を撤去
+		-- agentic の keymap (<leader>cc, <leader>ap, <leader>aM) は
+		-- 遅延読み込みのため lua/plugins.lua の spec 側で定義
 
 		-- mini.map
 		-- ミニマップをトグル

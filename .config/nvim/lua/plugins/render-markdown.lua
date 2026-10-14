@@ -11,7 +11,9 @@ require('render-markdown').setup {
 
 		'markdown',
 		'vimwiki',
-		'Avante'
+		'Avante',
+		-- trial/agentic-nvim: agentic の chat バッファ
+		'AgenticChat'
 
 	},
 

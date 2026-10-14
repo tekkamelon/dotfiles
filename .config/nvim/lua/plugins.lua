@@ -126,8 +126,10 @@ require("lazy").setup({
 	},
 
 	-- avanteの設定
+	-- trial/agentic-nvim: agentic へ移行試用のため無効化
 	{
 		"yetone/avante.nvim",
+		enabled = false,
 		build = "make",
 		tag = "v0.0.29",
 		-- commit = "8c84af0",
@@ -153,6 +155,35 @@ require("lazy").setup({
 		},
 		config = function()
 			require("plugins.avante")
+		end,
+	},
+
+	-- agenticの設定 (trial/agentic-nvim: avante からの移行試用)
+	-- keymap は遅延読み込みのためここで定義
+	{
+		"carlos-algms/agentic.nvim",
+		keys = {
+			{
+				"<leader>cc",
+				function() require("agentic").toggle() end,
+				mode = { "n", "v", "i" },
+				desc = "Toggle Agentic Chat",
+			},
+			{
+				"<leader>ap",
+				function() require("agentic").switch_provider() end,
+				mode = { "n" },
+				desc = "Agentic Switch Provider",
+			},
+			{
+				"<leader>aM",
+				function() require("plugins.agentic").pick_model() end,
+				mode = { "n" },
+				desc = "Agentic Switch Model",
+			},
+		},
+		config = function()
+			require("plugins.agentic")
 		end,
 	},
 
@@ -262,7 +293,8 @@ require("lazy").setup({
 	{
 		"saghen/blink.cmp",
 		dependencies = {
-			"Kaiser-Yang/blink-cmp-avante",
+			-- trial/agentic-nvim: avante 無効化のため撤去
+			-- "Kaiser-Yang/blink-cmp-avante",
 			"rafamadriz/friendly-snippets",
 		},
 		version = "1.*",
