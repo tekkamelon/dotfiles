@@ -22,9 +22,10 @@ M.setup_vscode = function()
 		{ { 'n', 'v' }, '<C-l>',     '<Plug>(edgemotion-k)' },
 		{ { 'n', 'v' }, '<C-Up>',    '<Plug>(edgemotion-k)' },
 
-		-- mini.comment
-		-- コメントアウト
-		{ { 'n', 'v' }, '<leader>g', 'gcc',                 { remap = true } },
+		-- 組み込みのコメントトグル (gcc / gc)
+		-- コメントアウト (ノーマルモードは行, ビジュアルモードは選択範囲)
+		{ 'n',          '<leader>g', 'gcc',                 { remap = true } },
+		{ 'v',          '<leader>g', 'gc',                  { remap = true } },
 
 		-- hop
 		-- 全ウィンドウのすべての文字にラベルを付ける
@@ -54,9 +55,10 @@ M.setup_neovim = function()
 		-- jumpcursor
 		{ { 'n', 'v' }, '<leader>h',  '<Plug>(jumpcursor-jump)' },
 
-		-- mini.comment
-		-- コメントアウト
-		{ { 'n', 'v' }, '<leader>g',  'gcc',                                                                                   { remap = true } },
+		-- 組み込みのコメントトグル (gcc / gc)
+		-- コメントアウト (ノーマルモードは行, ビジュアルモードは選択範囲)
+		{ 'n',          '<leader>g',  'gcc', { remap = true } },
+		{ 'v',          '<leader>g',  'gc',  { remap = true } },
 
 		-- vim-partedit
 		-- ビジュアルモード時にコマンドを表示

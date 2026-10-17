@@ -297,15 +297,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- mini.commentの設定
-	{
-		"echasnovski/mini.comment",
-		keys = "<leader>g",
-		opts = {
-			options = { ignore_blank_line = true },
-		},
-	},
-
 	-- mini.filesの設定
 	{
 		"echasnovski/mini.files",
