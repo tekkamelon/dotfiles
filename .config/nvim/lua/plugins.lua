@@ -50,6 +50,7 @@ require("lazy").setup({
 	{
 		"williamboman/mason.nvim",
 		lazy = true,
+		cmd = "Mason",
 		config = function()
 			if vim.g.vscode then return end
 			require("mason").setup({})
@@ -345,6 +346,7 @@ require("lazy").setup({
 		"williamboman/mason-lspconfig.nvim",
 		pin = true,
 		event = { "BufReadPost", "BufNewFile" },
+		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
 		config = function()
 			require("plugins.mason-lsp")
 		end,
