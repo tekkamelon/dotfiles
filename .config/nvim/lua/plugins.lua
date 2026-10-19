@@ -44,6 +44,11 @@ require("lazy").setup({
 	},
 
 	-- lua製プラグイン
+	-- nvim-treesitter(main branch)はparserのbuildにtree-sitter CLI (0.26.1 or later)とC compilerを要求する
+	-- 前提条件: cc/gcc等のC compilerがPATHにあること
+	-- tree-sitter CLIの導入手順 (npm経由は非推奨, apt版は0.22.6と古いためGitHubのbinaryを使用):
+	--   curl -sL https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.13/tree-sitter-linux-x64.gz | gzip -dc > ~/.local/bin/tree-sitter && chmod +x ~/.local/bin/tree-sitter
+	-- version確認: tree-sitter --version
 	{
 		"nvim-treesitter/nvim-treesitter",
 		event = "VeryLazy",
