@@ -298,14 +298,14 @@ require("lazy").setup({
 	},
 
 	-- mini.filesの設定
-	{
-		"echasnovski/mini.files",
-		keys = "<C-n>",
-		dependencies = "echasnovski/mini.icons",
-		config = function()
-			require("plugins.mini-files")
-		end,
-	},
+	-- {
+	-- 	"echasnovski/mini.files",
+	-- 	keys = "<C-n>",
+	-- 	dependencies = "echasnovski/mini.icons",
+	-- 	config = function()
+	-- 		require("plugins.mini-files")
+	-- 	end,
+	-- },
 
 	-- mini.surroundの設定
 	{
