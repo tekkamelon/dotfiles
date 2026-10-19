@@ -35,17 +35,27 @@ require("lazy").setup({
 	{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 	{ "MunifTanjim/nui.nvim",                    lazy = true },
 	{ "rcarriga/nvim-notify",                    lazy = true },
-	{ "neovim/nvim-lspconfig",                   lazy = true },
+	-- nvim-lspconfigの読み込み時にcopilotの設定も読み込む
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPost", "BufNewFile", "InsertEnter" },
+		config = function()
+			require("plugins.copilot")
+		end,
+	},
+
+	-- lua製プラグイン
 	-- { "copilotlsp-nvim/copilot-lsp",             lazy = true },
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = false,
+		lazy = true,
 		-- Neovim 0.12ではfrozenのmasterではなくmainブランチを使用
 		branch = "main",
 		config = function()
 			require("plugins.treesitter")
 		end,
 	},
+
 	-- masonの設定
 	{
 		"williamboman/mason.nvim",
@@ -57,7 +67,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- lua製プラグイン
 	-- toggletermの設定
 	{
 		"akinsho/toggleterm.nvim",
@@ -73,7 +82,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- noiceの設定
 	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
 	{
 		"folke/noice.nvim",
@@ -106,17 +114,6 @@ require("lazy").setup({
 		},
 	},
 
-	-- copilot.luaの設定
-	{
-		"zbirenbaum/copilot.lua",
-		cmd = "Copilot",
-		event = "InsertEnter",
-		config = function()
-			require("plugins.copilot")
-		end,
-	},
-
-
 	-- img-clipの設定
 	{
 		"HakonHarnes/img-clip.nvim",
@@ -141,10 +138,6 @@ require("lazy").setup({
 			"AvanteToggle",
 			"AvanteModels",
 			"AvanteSwitchProvider",
-		},
-		keys = {
-			"<leader>a",
-			"<leader>c",
 		},
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -332,6 +325,14 @@ require("lazy").setup({
 	},
 
 })
+
+-- ui2をUIEnterで有効化
+-- vim.api.nvim_create_autocmd('UIEnter', {
+-- 	once = true,
+-- 	callback = function()
+-- 		require("plugins.ui2")
+-- 	end
+-- })
 
 -- キーマップをUIEnterで遅延読み込み
 vim.api.nvim_create_autocmd('UIEnter', {
