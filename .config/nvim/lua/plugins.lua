@@ -297,16 +297,6 @@ require("lazy").setup({
 		end,
 	},
 
-	-- mini.filesの設定
-	-- {
-	-- 	"echasnovski/mini.files",
-	-- 	keys = "<C-n>",
-	-- 	dependencies = "echasnovski/mini.icons",
-	-- 	config = function()
-	-- 		require("plugins.mini-files")
-	-- 	end,
-	-- },
-
 	-- mini.surroundの設定
 	{
 		"echasnovski/mini.surround",
@@ -327,16 +317,6 @@ require("lazy").setup({
 			-- 矩形選択時に各行を囲む
 			respect_selection_type = true,
 		},
-	},
-
-	-- mini.mapの設定
-	{
-		"echasnovski/mini.map",
-		lazy = true,
-		config = function()
-			if vim.g.vscode then return end
-			require("plugins.minimap")
-		end,
 	},
 
 	-- lsp関連
