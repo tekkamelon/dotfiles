@@ -39,9 +39,9 @@ require("lazy").setup({
 	-- { "copilotlsp-nvim/copilot-lsp",             lazy = true },
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = true,
-		-- ブランチを指定
-		branch = "master",
+		lazy = false,
+		-- Neovim 0.12ではfrozenのmasterではなくmainブランチを使用
+		branch = "main",
 		config = function()
 			require("plugins.treesitter")
 		end,
