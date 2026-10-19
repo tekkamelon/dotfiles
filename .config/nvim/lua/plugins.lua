@@ -34,7 +34,6 @@ require("lazy").setup({
 	{ "nvim-lua/plenary.nvim",                   lazy = true },
 	{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
 	{ "MunifTanjim/nui.nvim",                    lazy = true },
-	{ "rcarriga/nvim-notify",                    lazy = true },
 	-- nvim-lspconfigの読み込み時にcopilotの設定も読み込む
 	{
 		"neovim/nvim-lspconfig",
@@ -45,10 +44,9 @@ require("lazy").setup({
 	},
 
 	-- lua製プラグイン
-	-- { "copilotlsp-nvim/copilot-lsp",             lazy = true },
 	{
 		"nvim-treesitter/nvim-treesitter",
-		lazy = true,
+		event = "VeryLazy",
 		-- Neovim 0.12ではfrozenのmasterではなくmainブランチを使用
 		branch = "main",
 		config = function()
