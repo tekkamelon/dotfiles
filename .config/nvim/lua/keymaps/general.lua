@@ -74,6 +74,9 @@ M.setup_neovim = function()
 
 	end
 
+	-- 左上フロートnetrwのトグル
+	vim_keymap('n', '<C-n>', require('keymaps.float_netrw').toggle, options)
+
 end
 
 -- vscode-neovimから起動した際に真,それ以外で偽
