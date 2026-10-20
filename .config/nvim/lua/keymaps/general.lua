@@ -75,7 +75,7 @@ M.setup_neovim = function()
 	end
 
 	-- 左上フロートnetrwのトグル
-	vim_keymap('n', '<C-n>', require('keymaps.float_netrw').toggle, options)
+	vim_keymap('n', '<C-n>', require('features.float_netrw').toggle, options)
 
 end
 
