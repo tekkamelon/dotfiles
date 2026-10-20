@@ -39,13 +39,13 @@ end, { expr = true, silent = true })
 -- 単語単位のサジェストの受け入れ
 vim.keymap.set("i", "<C-s>", neocodeium.accept_word)
 
--- 次の候補
-vim.keymap.set("i", "<C-f>", function()
+-- 次の候補 (copilot.luaと統一)
+vim.keymap.set("i", "<C-j>", function()
 	neocodeium.cycle(1)
 end)
 
 -- 前の候補
-vim.keymap.set("i", "<C-F>", function()
+vim.keymap.set("i", "<C-k>", function()
 	neocodeium.cycle(-1)
 end)
 

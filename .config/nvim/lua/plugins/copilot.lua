@@ -13,6 +13,8 @@ local disabled_filetypes = {
 	AvantePromptInput = true,
 	AvanteSelectedFiles = true,
 	AvanteSelectedCode = true,
+	markdown = true,
+	gitcommit = true,
 	env = true,
 }
 
@@ -131,13 +133,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.lsp.inline_completion.enable(true, { bufnr = bufnr })
 
 		-- 次の候補
-		-- <C-f>と<C-F>は同じキーコードになるため, copilot.luaの既定キーを使う
-		vim.keymap.set("i", "<M-]>", function()
+		-- i3の$mod=Altと干渉するため, <C-j>/<C-k>を使う
+		vim.keymap.set("i", "<C-j>", function()
 			vim.lsp.inline_completion.select({ count = 1 })
 		end, { buffer = bufnr, desc = "次のインライン補完候補" })
 
 		-- 前の候補
-		vim.keymap.set("i", "<M-[>", function()
+		vim.keymap.set("i", "<C-k>", function()
 			vim.lsp.inline_completion.select({ count = -1 })
 		end, { buffer = bufnr, desc = "前のインライン補完候補" })
 
