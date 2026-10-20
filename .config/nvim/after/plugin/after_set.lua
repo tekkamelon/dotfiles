@@ -73,6 +73,10 @@ local highlight_groups = {
 	AvantePromptInput = { fg = 'white', bg = '#2e3234', bold = true, underline = false },
 	-- ビジュアルモード時のヒント
 	AvanteInlineHint = { fg = 'lightgrey', bg = 'black', bold = false, underline = false },
+
+	-- Copilot (vim.lsp.inline_completion) のゴーストテキスト
+	ComplHint = { fg = '#8a8a8a', italic = true },
+	ComplHintMore = { fg = '#8a8a8a', bold = true },
 }
 
 -- テーブルからハイライトを一括設定
