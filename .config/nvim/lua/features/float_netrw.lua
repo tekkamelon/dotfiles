@@ -9,6 +9,12 @@ local float_netrw_win = nil
 local float_netrw_buf = nil
 local return_win = nil
 
+-- ツリー表示を既定 (0:thin, 1:long, 2:wide, 3:tree)
+-- "i"で切り替え可能
+vim.g.netrw_liststyle = 3
+-- バナーを非表示
+vim.g.netrw_banner = 0
+
 -- カーソル下のnetrwパスを取得する
 -- ファイルならフルパス, ディレクトリならフルパス, 取得失敗時はnil
 local function get_netrw_target()
@@ -94,12 +100,6 @@ local function apply_netrw_mappings(buf)
 		silent = true,
 		buffer = buf,
 		desc = 'netrw: 通常バッファで開く',
-	})
-	vim.keymap.set('n', '<Esc>', close_and_return, {
-		noremap = true,
-		silent = true,
-		buffer = buf,
-		desc = 'netrw: フロートを閉じる',
 	})
 end
 
