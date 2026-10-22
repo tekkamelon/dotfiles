@@ -9,9 +9,6 @@ local float_netrw_win = nil
 local float_netrw_buf = nil
 local return_win = nil
 
--- ツリー表示を既定 (0:thin, 1:long, 2:wide, 3:tree)
--- "i"で切り替え可能
-vim.g.netrw_liststyle = 3
 -- バナーを非表示
 vim.g.netrw_banner = 0
 
