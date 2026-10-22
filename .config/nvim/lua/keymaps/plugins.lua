@@ -100,7 +100,9 @@ M.setup_neovim = function()
 		-- チャットバッファをトグル
 		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
 		-- プロバイダーを選択
-		{ 'n',          '<leader>ap', ':TelescopeAvanteProvider<CR>' },
+		-- 切り替え時にACPクライアントを破棄し,次回リクエストで再接続させる
+		-- サイドバー未生成のタブでもエラーにならないようnilチェックを入れる
+		{ 'n',          '<leader>ap', ':AvanteSwitchProvider<CR>:lua local sidebar = require("avante").get(); if sidebar then sidebar.acp_client = nil end<CR>' },
 		-- LLMを変更
 		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
 		-- チャット内容をクリア
