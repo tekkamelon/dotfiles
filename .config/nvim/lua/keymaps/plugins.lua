@@ -41,6 +41,29 @@ end
 
 -- 通常のneovimから呼び出した場合の設定
 M.setup_neovim = function()
+	-- avanteのプロバイダー切り替え
+	-- `AvanteSwitchProvider`は`vim.ui.select`で非同期に選択するため,
+	-- コマンド連結(`:AvanteSwitchProvider<CR>:lua ...<CR>`)では選択前にnil化が走り,
+	-- 後続の`:`コマンドがセレクトUIを妨げてコールバックが発火しない場合がある.
+	-- 選択コールバック内で旧ACPクライアントの停止・破棄とセッションIDの破棄まで行う.
+	local function switch_avante_provider()
+		local Config = require("avante.config")
+		local providers = vim.list_extend(vim.tbl_keys(Config.providers), vim.tbl_keys(Config.acp_providers))
+		vim.ui.select(providers, { prompt = "Provider> " }, function(choice)
+			if not choice then return end
+			local sidebar = require("avante").get()
+			if sidebar and sidebar.acp_client then
+				pcall(sidebar.acp_client.stop, sidebar.acp_client)
+			end
+			require("avante.api").switch_provider(choice)
+			-- 切り替え後にnilを保証し,旧セッションIDを使い回さない
+			if sidebar then
+				sidebar.acp_client = nil
+				if sidebar.chat_history then sidebar.chat_history.acp_session_id = nil end
+			end
+		end)
+	end
+
 	-- キーマップ設定のテーブルを作成
 	local kmaps = {
 
@@ -100,9 +123,8 @@ M.setup_neovim = function()
 		-- チャットバッファをトグル
 		{ 'n',          '<leader>cc', ':AvanteToggle<CR>' },
 		-- プロバイダーを選択
-		-- 切り替え時にACPクライアントを破棄し,次回リクエストで再接続させる
-		-- サイドバー未生成のタブでもエラーにならないようnilチェックを入れる
-		{ 'n',          '<leader>ap', ':AvanteSwitchProvider<CR>:lua local sidebar = require("avante").get(); if sidebar then sidebar.acp_client = nil end<CR>' },
+		-- 選択コールバック内でACPクライアントを停止・破棄し,次回リクエストで再接続させる
+		{ 'n',          '<leader>ap', switch_avante_provider },
 		-- LLMを変更
 		{ 'n',          '<leader>aP', ':AvanteModels<CR>' },
 		-- チャット内容をクリア
