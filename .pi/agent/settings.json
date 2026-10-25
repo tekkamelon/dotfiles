@@ -1,5 +1,8 @@
 {
-  "lastChangelogVersion": "0.85.1",
+  "defaultTools": [
+    "+codemode"
+  ],
+  "lastChangelogVersion": "1.4.0",
   "theme": "dark/dark",
   "defaultProvider": "opencode-go",
   "defaultModel": "muse-spark-1.3-contributor",
@@ -10,22 +13,14 @@
   "defaultThinkingLevel": "low",
   "enabledModels": [
     "Sakura-AI-Engine/preview/Kimi-K2.7-Code",
-    "Sakura-AI-Engine/preview/Kimi-K2.6",
-    "Sakura-AI-Engine/preview/gemma-4-31B-it",
-    "Sakura-AI-Engine/preview/Qwen3.6-35B-A3B",
-    "Sakura-AI-Engine/llm-jp-3.1-8x13b-instruct4",
-    "Sakura-AI-Engine/gpt-oss-120b",
-    "Nous-Research/poolside/laguna-s-2.1:free",
-    "Nous-Research/poolside/laguna-xs-2.1:free",
-    "Nous-Research/stepfun/step-3.7-flash:free",
-    "Nous-Research/tencent/hy3:free",
-    "Nous-Research/upstage/solar-pro4:free",
-    "Nous-Research/meituan/longcat-2.0:free",
-    "Hermes-Agent/hermes-agent",
     "opencode-go/muse-spark-1.3-contributor",
-    "opencode-go/mimo-v2.5",
-    "opencode-go/grok-4.6",
-    "opencode-go/minimax-m3"
+    "opencode-go/deepseek-v4.1-flash",
+    "opencode-go/glm-5.3-flash",
+    "opencode-go/glm-5.3",
+    "opencode-go/kimi-k3",
+    "opencode-go/minimax-m3.1-flash",
+    "opencode-go/mimo-v2.6-flash",
+    "opencode-go/grok-4.7"
   ],
   "compaction": {
     "enabled": true
