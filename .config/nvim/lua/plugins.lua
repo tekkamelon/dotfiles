@@ -1,22 +1,12 @@
 -- plugins.lua
--- Neovim >= 0.11.0
+-- Neovim >= 0.12.0
 
 -- lazy.nvimのブートストラップ処理
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-
--- lazy.nvimが存在しない場合はGitHubからクローン
-local lazystat = vim.uv.fs_stat(lazypath)
-if not lazystat or lazystat.type ~= "directory" then
-	local clone_cmd = { "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable",
-		lazypath }
-	vim.system(clone_cmd, { text = true }, function(obj)
-		if obj.code ~= 0 then
-			vim.notify("Failed to clone lazy.nvim: " .. (obj.stderr or ""), vim.log.levels.ERROR)
-		end
-	end)
-end
-
-vim.opt.rtp:prepend(lazypath)
+-- vim.packはNeovim 0.12以降の機能
+-- init.luaの読み込み中はload=false相当となり, 直後のrequire("lazy")が可能
+vim.pack.add({
+	{ src = "https://github.com/folke/lazy.nvim", version = "stable" },
+}, { confirm = false })
 
 require("lazy").setup({
 	-- vim script製プラグイン
