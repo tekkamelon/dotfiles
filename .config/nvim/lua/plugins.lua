@@ -1,14 +1,16 @@
 -- plugins.lua
 -- Neovim >= 0.12.0
+-- プラグイン管理: vim.pack
+-- 遅延読み込み: lz.n
 
--- lazy.nvimのブートストラップ処理
--- vim.packはNeovim 0.12以降の機能
--- init.luaの読み込み中はload=false相当となり, 直後のrequire("lazy")が可能
+-- lz.nは遅延読み込みの管理側なので最初に追加する
+-- init.luaの読み込み中はload=false相当となり, packadd!でruntimepathだけが追加される
 vim.pack.add({
-	{ src = "https://github.com/folke/lazy.nvim", version = "stable" },
+	{ src = "https://github.com/lumen-oss/lz.n" },
 }, { confirm = false })
 
--- 起動速度に影響しない依存関係用プラグインはvim.packで管理
+-- 起動時にsetupを必要としない依存関係用プラグインはvim.packで管理
+-- runtimepathに追加するだけで, plugin/以下のスクリプトは読み込まない
 vim.pack.add({
 	{ src = "https://github.com/nvim-lua/plenary.nvim" },
 	{ src = "https://github.com/MunifTanjim/nui.nvim" },
@@ -17,30 +19,50 @@ vim.pack.add({
 	{ src = "https://github.com/Kaiser-Yang/blink-cmp-avante" },
 }, { confirm = false })
 
-require("lazy").setup({
-	-- vim script製プラグイン
-	{
-		"thinca/vim-partedit",
-		-- ビジュアルモードへの移行時に起動
-		event = "ModeChanged *:[vV\x16]*"
-	},
-	{
-		"haya14busa/vim-edgemotion",
-		event = { "BufReadPost", "BufNewFile" },
-	},
+-- avante.nvimのビルドをインストール/更新後に実行する
+-- build.shは旧リポジトリ名 (yetone/avante.nvim) を参照しており,
+-- GitHub APIのリダイレクトを追跡できないため, 実行前に現行のリポジトリ名へ置換する
+local function build_avante(path)
+	local script = path .. "/build.sh"
+	local patched, lines = pcall(vim.fn.readfile, script)
+	if patched then
+		for i, line in ipairs(lines) do
+			lines[i] = line:gsub('REPO_OWNER="yetone"', 'REPO_OWNER="avante-corp"')
+		end
+		vim.fn.writefile(lines, script)
+	end
 
-	-- 依存関係用プラグイン
-	{ "nvim-lua/plenary.nvim",                   lazy = true },
-	{ "nvim-telescope/telescope-ui-select.nvim", lazy = true },
-	{ "MunifTanjim/nui.nvim",                    lazy = true },
-	-- nvim-lspconfigの読み込み時にcopilotの設定も読み込む
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPost", "BufNewFile", "InsertEnter" },
-		config = function()
-			require("plugins.copilot")
-		end,
-	},
+	local result = vim.system({ "make" }, { cwd = path }):wait()
+
+	-- 一時的に変更したbuild.shを元に戻す
+	if patched then
+		vim.system({ "git", "-C", path, "checkout", "--", "build.sh" }):wait()
+	end
+
+	return result
+end
+
+vim.api.nvim_create_autocmd("PackChanged", {
+	callback = function(ev)
+		if ev.data.spec.name ~= "avante.nvim" then return end
+		if ev.data.kind ~= "install" and ev.data.kind ~= "update" then return end
+
+		local result = build_avante(ev.data.path)
+		if result.code ~= 0 then
+			vim.notify(
+				"avante.nvimのビルドに失敗しました: " .. (result.stderr or ""),
+				vim.log.levels.ERROR
+			)
+		end
+	end,
+})
+
+-- プラグインのインストールのみをvim.packで行い, 読み込みはlz.nに任せる
+-- loadを空関数にすることでvim.pack.add時のpackaddを抑止する
+vim.pack.add({
+	-- vim script製プラグイン
+	{ src = "https://github.com/thinca/vim-partedit" },
+	{ src = "https://github.com/haya14busa/vim-edgemotion" },
 
 	-- lua製プラグイン
 	-- nvim-treesitter(main branch)はparserのbuildにtree-sitter CLI (0.26.1 or later)とC compilerを要求する
@@ -48,22 +70,123 @@ require("lazy").setup({
 	-- tree-sitter CLIの導入手順 (npm経由は非推奨, apt版は0.22.6と古いためGitHubのbinaryを使用):
 	--   curl -sL https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.13/tree-sitter-linux-x64.gz | gzip -dc > ~/.local/bin/tree-sitter && chmod +x ~/.local/bin/tree-sitter
 	-- version確認: tree-sitter --version
+	-- Neovim 0.12ではfrozenのmasterではなくmainブランチを使用
+	{ src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
+	{ src = "https://github.com/neovim/nvim-lspconfig" },
+
+	-- masonの設定
+	{ src = "https://github.com/williamboman/mason.nvim" },
+
+	-- toggletermの設定
+	{ src = "https://github.com/akinsho/toggleterm.nvim" },
+
+	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
+	-- 以前の環境で導入済みのリビジョンを固定
 	{
-		"nvim-treesitter/nvim-treesitter",
-		event = "VeryLazy",
-		-- Neovim 0.12ではfrozenのmasterではなくmainブランチを使用
-		branch = "main",
-		config = function()
+		src = "https://github.com/folke/noice.nvim",
+		version = "0427460c2d7f673ad60eb02b35f5e9926cf67c59",
+	},
+
+	-- telescopeの設定
+	{ src = "https://github.com/nvim-telescope/telescope.nvim" },
+
+	-- eyelinerの設定
+	{ src = "https://github.com/jinh0/eyeliner.nvim" },
+
+	-- img-clipの設定
+	{ src = "https://github.com/HakonHarnes/img-clip.nvim" },
+
+	-- avanteの設定
+	-- 以前の環境で導入済みのリビジョン (v0.0.29) を固定
+	{
+		src = "https://github.com/avante-corp/avante.nvim",
+		version = "61f38b6d83c632d8778407993664809889c5511b",
+	},
+
+	-- hlchunkの設定
+	{ src = "https://github.com/shellRaining/hlchunk.nvim" },
+
+	-- render-markdownの設定
+	{ src = "https://github.com/MeanderingProgrammer/render-markdown.nvim" },
+
+	-- gitsignsの設定
+	-- 以前の環境で導入済みのリビジョンを固定
+	{
+		src = "https://github.com/lewis6991/gitsigns.nvim",
+		version = "0cb5a7753d3c4b8e9cfdc9d88d9110cb8d4b1544",
+	},
+
+	-- hopの設定
+	{ src = "https://github.com/smoka7/hop.nvim", version = vim.version.range("*") },
+
+	-- nvim-colorizerの設定
+	{ src = "https://github.com/norcalli/nvim-colorizer.lua" },
+
+	-- mini.nvimのモジュール
+	{ src = "https://github.com/echasnovski/mini.pairs" },
+	{ src = "https://github.com/echasnovski/mini.icons" },
+	{ src = "https://github.com/echasnovski/mini.statusline" },
+	{ src = "https://github.com/echasnovski/mini.tabline" },
+	{ src = "https://github.com/echasnovski/mini.surround" },
+
+	-- blink.cmpの設定
+	{ src = "https://github.com/saghen/blink.cmp", version = vim.version.range("1.*") },
+
+	-- lsp関連
+	-- mason-lspconfigの設定
+	-- 以前の環境で導入済みのリビジョンを固定
+	{
+		src = "https://github.com/williamboman/mason-lspconfig.nvim",
+		version = "155eac5d8609a2f110041f8ac3491664cc126354",
+	},
+}, { confirm = false, load = function() end })
+
+-- 依存プラグインを先に読み込む
+local function load_deps(...)
+	local deps = { ... }
+	return function()
+		if vim.g.vscode then return end
+		require("lz.n").trigger_load(deps)
+	end
+end
+
+-- 遅延読み込みの設定
+-- before: 依存プラグインの読み込み, after: 従来のconfig/optsに相当
+require("lz.n").load({
+	-- vim script製プラグイン
+	{
+		"vim-partedit",
+		-- ビジュアルモードへの移行時に起動
+		event = "ModeChanged *:[vV\x16]*",
+	},
+	{
+		"vim-edgemotion",
+		event = { "BufReadPost", "BufNewFile" },
+	},
+
+	-- nvim-lspconfigの読み込み時にcopilotの設定も読み込む
+	{
+		"nvim-lspconfig",
+		event = { "BufReadPost", "BufNewFile", "InsertEnter" },
+		after = function()
+			require("plugins.copilot")
+		end,
+	},
+
+	-- lua製プラグイン
+	{
+		"nvim-treesitter",
+		event = "DeferredUIEnter",
+		after = function()
 			require("plugins.treesitter")
 		end,
 	},
 
 	-- masonの設定
 	{
-		"williamboman/mason.nvim",
-		lazy = true,
+		"mason.nvim",
 		cmd = "Mason",
-		config = function()
+		after = function()
 			if vim.g.vscode then return end
 			require("mason").setup({})
 		end,
@@ -71,13 +194,13 @@ require("lazy").setup({
 
 	-- toggletermの設定
 	{
-		"akinsho/toggleterm.nvim",
+		"toggleterm.nvim",
 		cmd = {
 			"ToggleTerm",
 			"ToggleTermSendCurrentLine",
-			"ToggleTermSendVisualLines"
+			"ToggleTermSendVisualLines",
 		},
-		config = function()
+		after = function()
 			-- vscode-neovimから起動した場合は実行しない
 			if vim.g.vscode then return end
 			require("toggleterm").setup({})
@@ -86,51 +209,48 @@ require("lazy").setup({
 
 	-- ":checkhealth noice"で必要なtreesitterパーサーを確認
 	{
-		"folke/noice.nvim",
-		pin = true,
-		event = "VeryLazy",
-		config = function()
+		"noice.nvim",
+		event = "DeferredUIEnter",
+		after = function()
 			require("plugins.noice")
 		end,
 	},
 
 	-- telescopeの設定
 	{
-		"nvim-telescope/telescope.nvim",
-		lazy = true,
+		"telescope.nvim",
 		cmd = {
 			"Telescope",
-			"TelescopeAvanteProvider"
+			"TelescopeAvanteProvider",
 		},
-		config = function()
+		after = function()
 			require("plugins.telescope")
 		end,
 	},
 
 	-- eyelinerの設定
 	{
-		"jinh0/eyeliner.nvim",
+		"eyeliner.nvim",
 		keys = { "h", "j", "k", "l", "f", "w", "b", "e", "ge" },
-		opts = {
-			highlight_on_key = false
-		},
+		after = function()
+			require("eyeliner").setup({
+				highlight_on_key = false,
+			})
+		end,
 	},
 
 	-- img-clipの設定
 	{
-		"HakonHarnes/img-clip.nvim",
-		lazy = true,
-		config = function()
+		"img-clip.nvim",
+		cmd = "PasteImage",
+		after = function()
 			require("plugins.img-clip")
 		end,
 	},
 
 	-- avanteの設定
 	{
-		"yetone/avante.nvim",
-		build = "make",
-		tag = "v0.1.2",
-		pin = true,
+		"avante.nvim",
 		-- コマンドモードまたはビジュアルモードへの移行時に起動
 		event = { "ModeChanged *:[cvV\x16]*" },
 		cmd = {
@@ -140,45 +260,41 @@ require("lazy").setup({
 			"AvanteToggle",
 			"AvanteModels",
 			"AvanteSwitchProvider",
+			"AvanteClear",
 		},
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			"echasnovski/mini.icons",
-			"nvim-telescope/telescope.nvim",
-		},
-		config = function()
+		before = load_deps("nvim-treesitter", "mini.icons", "telescope.nvim"),
+		after = function()
 			require("plugins.avante")
 		end,
 	},
 
 	-- hlchunkの設定
 	{
-		"shellRaining/hlchunk.nvim",
+		"hlchunk.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		config = function()
+		after = function()
 			require("plugins.hlchunk")
 		end,
 	},
 
 	-- render-markdownの設定
 	{
-		"MeanderingProgrammer/render-markdown.nvim",
+		"render-markdown.nvim",
 		ft = {
 			"markdown",
 			"vimwiki",
-			"Avante"
+			"Avante",
 		},
-		config = function()
+		after = function()
 			require("plugins.render-markdown")
 		end,
 	},
 
 	-- gitsignsの設定
 	{
-		"lewis6991/gitsigns.nvim",
+		"gitsigns.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		pin = true,
-		config = function()
+		after = function()
 			-- vscode以外から起動した場合に真
 			if vim.g.vscode then return end
 			require("gitsigns").setup({
@@ -192,7 +308,7 @@ require("lazy").setup({
 
 	-- hopの設定
 	{
-		"smoka7/hop.nvim",
+		"hop.nvim",
 		cmd = {
 			"HopChar1",
 			"HopChar2",
@@ -204,47 +320,49 @@ require("lazy").setup({
 			"HopVertical",
 			"HopPattern",
 		},
-		version = "*",
-		opts = {
-			keys = 'zxcvbqwertyuiopasdfghjkl'
-		}
+		after = function()
+			require("hop").setup({
+				keys = "zxcvbqwertyuiopasdfghjkl",
+			})
+		end,
 	},
 
 	-- nvim-colorizerの設定
 	{
-		"norcalli/nvim-colorizer.lua",
+		"nvim-colorizer.lua",
 		cmd = {
 			"ColorizerAttachToBuffer",
 			"ColorizerDetachFromBuffer",
 			"ColorizerReloadAllBuffers",
 			"ColorizerToggle",
-		}
+		},
 	},
-
 
 	-- mini.nvimのモジュール
 	-- mini.pairsの設定
 	{
-		"echasnovski/mini.pairs",
+		"mini.pairs",
 		event = "InsertEnter",
-		opts = {
-			mappings = {
-				-- "<>"の設定
-				["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
-				[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
-				-- "「」"の設定
-				["「"] = { action = "open", pair = "「」", neigh_pattern = "[^\\]." },
-				["」"] = { action = "close", pair = "「」", neigh_pattern = "[^\\]." },
-			},
-
-		}
+		after = function()
+			require("mini.pairs").setup({
+				mappings = {
+					-- "<>"の設定
+					["<"] = { action = "open", pair = "<>", neigh_pattern = "[^\\]." },
+					[">"] = { action = "close", pair = "<>", neigh_pattern = "[^\\]." },
+					-- "「」"の設定
+					["「"] = { action = "open", pair = "「」", neigh_pattern = "[^\\]." },
+					["」"] = { action = "close", pair = "「」", neigh_pattern = "[^\\]." },
+				},
+			})
+		end,
 	},
 
 	-- mini.iconsの設定
+	-- blink.cmpとavante.nvimのbeforeフックから読み込む
 	{
-		"echasnovski/mini.icons",
+		"mini.icons",
 		lazy = true,
-		config = function()
+		after = function()
 			if vim.g.vscode then return end
 			require("mini.icons").setup({
 				-- アイコンのスタイルを"ascii"に設定
@@ -255,14 +373,10 @@ require("lazy").setup({
 
 	-- blink.cmpの設定
 	{
-		"saghen/blink.cmp",
-		dependencies = {
-			"Kaiser-Yang/blink-cmp-avante",
-			"rafamadriz/friendly-snippets",
-		},
-		version = "1.*",
+		"blink.cmp",
 		event = "InsertEnter",
-		config = function()
+		before = load_deps("mini.icons"),
+		after = function()
 			if vim.g.vscode then return end
 			require("plugins.blink-cmp")
 		end,
@@ -270,9 +384,9 @@ require("lazy").setup({
 
 	-- mini.statuslineの設定
 	{
-		"echasnovski/mini.statusline",
-		event = "VeryLazy",
-		config = function()
+		"mini.statusline",
+		event = "DeferredUIEnter",
+		after = function()
 			if vim.g.vscode then return end
 			require("mini.statusline").setup({
 				use_icons = false,
@@ -282,9 +396,9 @@ require("lazy").setup({
 
 	-- mini.tablineの設定
 	{
-		"echasnovski/mini.tabline",
-		event = "VeryLazy",
-		config = function()
+		"mini.tabline",
+		event = "DeferredUIEnter",
+		after = function()
 			if vim.g.vscode then return end
 			require("mini.tabline").setup({
 				show_icons = false,
@@ -294,38 +408,38 @@ require("lazy").setup({
 
 	-- mini.surroundの設定
 	{
-		"echasnovski/mini.surround",
+		"mini.surround",
 		event = "ModeChanged *:[vV\x16]*",
-		opts = {
-			-- キーマップの設定
-			mappings = {
-				add = "ca",
-				delete = "cd",
-				find = "cf",
-				find_left = "cF",
-				highlight = "ch",
-				replace = "cr",
-				update_n_lines = "cn",
-				suffix_last = "l",
-				suffix_next = "n",
-			},
-			-- 矩形選択時に各行を囲む
-			respect_selection_type = true,
-		},
+		after = function()
+			require("mini.surround").setup({
+				-- キーマップの設定
+				mappings = {
+					add = "ca",
+					delete = "cd",
+					find = "cf",
+					find_left = "cF",
+					highlight = "ch",
+					replace = "cr",
+					update_n_lines = "cn",
+					suffix_last = "l",
+					suffix_next = "n",
+				},
+				-- 矩形選択時に各行を囲む
+				respect_selection_type = true,
+			})
+		end,
 	},
 
 	-- lsp関連
 	-- mason-lspconfigの設定
 	{
-		"williamboman/mason-lspconfig.nvim",
-		pin = true,
+		"mason-lspconfig.nvim",
 		event = { "BufReadPost", "BufNewFile" },
-		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
-		config = function()
+		before = load_deps("mason.nvim", "nvim-lspconfig"),
+		after = function()
 			require("plugins.mason-lsp")
 		end,
 	},
-
 })
 
 -- ui2をUIEnterで有効化
