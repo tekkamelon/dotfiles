@@ -8,6 +8,15 @@ vim.pack.add({
 	{ src = "https://github.com/folke/lazy.nvim", version = "stable" },
 }, { confirm = false })
 
+-- 起動速度に影響しない依存関係用プラグインはvim.packで管理
+vim.pack.add({
+	{ src = "https://github.com/nvim-lua/plenary.nvim" },
+	{ src = "https://github.com/MunifTanjim/nui.nvim" },
+	{ src = "https://github.com/nvim-telescope/telescope-ui-select.nvim" },
+	{ src = "https://github.com/rafamadriz/friendly-snippets" },
+	{ src = "https://github.com/Kaiser-Yang/blink-cmp-avante" },
+}, { confirm = false })
+
 require("lazy").setup({
 	-- vim script製プラグイン
 	{
