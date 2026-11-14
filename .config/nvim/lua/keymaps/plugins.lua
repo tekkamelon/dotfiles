@@ -75,8 +75,8 @@ M.setup_neovim = function()
 		{ { 'n', 'v' }, '<C-k>',      '<Plug>(edgemotion-k)' },
 		{ { 'n', 'v' }, '<C-Up>',     '<Plug>(edgemotion-k)' },
 
-		-- jumpcursor
-		{ { 'n', 'v' }, '<leader>h',  '<Plug>(jumpcursor-jump)' },
+		-- jumpcursor (skanehira/jumpcursor.vim) は現行構成で未導入のため設定しない
+		-- <leader>h はhopに割り当てる
 
 		-- 組み込みのコメントトグル (gcc / gc)
 		-- コメントアウト (ノーマルモードは行, ビジュアルモードは選択範囲)
@@ -130,9 +130,7 @@ M.setup_neovim = function()
 		-- チャット内容をクリア
 		{ 'n',          '<leader>ar', ':AvanteClear<CR>' },
 
-		-- mini.map
-		-- ミニマップをトグル
-		{ 'n',          '<leader>mm', ':lua require("mini.map").toggle()<CR>' },
+		-- mini.map (ミニマップ) は現行構成で未導入のため設定しない
 
 		-- img-clip
 		-- クリップボードの画像を貼り付ける
