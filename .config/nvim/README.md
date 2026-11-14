@@ -226,8 +226,8 @@ curl -sL https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.13/t
 補足。
 
 - `<leader>ap` は `AvanteSwitchProvider` を直接叩かず、`vim.ui.select` のコールバック内で旧 ACP クライアントの停止とセッション ID の破棄まで行う。コマンド連結では選択 UI と衝突するため
-- `<leader>h` は `lua/keymaps/plugins.lua` 内で jumpcursor と hop の両方に割り当てており、後から定義される hop が有効になる
-- `<leader>mm` (`mini.map` のトグル) は minimap プラグインを導入していないため動作しない
+- `<leader>h` は hop (`HopAnywhereMW`) のみに割り当てる。旧構成の jumpcursor は現行構成で導入していないため設定しない
+- ミニマップのトグル (`<leader>mm`) は `mini.map` を導入していないため設定しない
 
 ## 外観
 
