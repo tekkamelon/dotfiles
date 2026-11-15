@@ -283,15 +283,14 @@ curl -sL https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.13/t
 
 ## 未使用・レガシー
 
-以下は現在の起動経路から参照されていない。整理の候補。
+以下は現在の起動経路から参照されていないが記録及び将来にもし万が一必要になった場合のために残してある
 
 | ファイル | 由来 |
 | --- | --- |
 | `init.vim`, `light_init.vim`, `after/plugin/after_set.vim` | vim script 時代の設定 |
-| `light_init.lua` | プラグイン無しで起動する軽量設定 (`nvim -u light_init.lua` で明示的に使う) |
-| `lua/plugins_old.lua` | lazy.nvim 時代の定義 |
+| `lua/plugins_old.lua` | vim-jetpack 時代の定義 |
 | `lazy-lock.json` | lazy.nvim 時代のロックファイル |
-| `lua/pop-os_plug.lua` | jetpack 時代の設定 |
+| `lua/pop-os_plug.lua` | vim-jetpack 時代の母艦PC用設定 |
 | `lua/vscode-neovim_plug.lua`, `lua/vscode-neovim_set.lua` | 旧 vscode-neovim 用設定 |
 | `lua/plugins/codecompanion.lua`, `copilotchat.lua`, `cc_config/*` | codecompanion / CopilotChat 時代の設定 |
 | `lua/plugins/neocodeium.lua`, `minuet.lua`, `supermaven.lua` | 補完プラグインの比較用設定 |
