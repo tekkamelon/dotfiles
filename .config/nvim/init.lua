@@ -50,6 +50,10 @@ local function setup_options()
 		did_load_ftplugin = 0,
 		skip_loading_mswin = 1,
 		mapleader = ' ',
+
+		-- netrw
+		netrw_banner = 0,
+		netrw_liststyle = 3,
 	}
 
 	-- vimオプション

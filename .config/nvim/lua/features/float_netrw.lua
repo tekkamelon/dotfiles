@@ -9,10 +9,8 @@ local float_netrw_win = nil
 local float_netrw_buf = nil
 local return_win = nil
 
--- バナーを非表示
-vim.g.netrw_banner = 0
-
 -- カーソル下のnetrwパスを取得する
+-- ツリー表示中はカーソル行の深さを考慮する必要があるため, パスの解決もnetrw自身に任せる
 -- ファイルならフルパス, ディレクトリならフルパス, 取得失敗時はnil
 local function get_netrw_target()
 	local word = nil
@@ -26,21 +24,13 @@ local function get_netrw_target()
 		return nil
 	end
 
-	-- フォールバック時の装飾記号を取り除く
-	-- ディレクトリの末尾スラッシュはnormalizeで吸収する
-	word = word:gsub('[@*]$', '')
-
-	local curdir = vim.b.netrw_curdir or vim.fn.expand('%:p:h')
-	if curdir == nil or curdir == '' then
-		curdir = vim.fn.getcwd()
+	-- 第4引数を渡すとnetrwはファイルを開かずパスの解決だけを行う
+	-- ツリーの展開/折り畳みの判定もNetrwBrowseChgDir側で行われる
+	local chg_ok, target = pcall(vim.fn['netrw#Call'], 'NetrwBrowseChgDir', 1, word, 1, 1)
+	if not chg_ok or type(target) ~= 'string' or target == '' then
+		return nil
 	end
-
-	-- 絶対パスはそのまま, 相対パスはカレントディレクトリと結合する
-	local full = word
-	if word:sub(1, 1) ~= '/' and word:match('^%a:[/\\]') == nil then
-		full = vim.fs.joinpath(curdir, word)
-	end
-	return vim.fs.normalize(full)
+	return target
 end
 
 -- フロートウィンドウを閉じる
@@ -76,9 +66,15 @@ local function open_in_return_win()
 		return
 	end
 
-	-- ディレクトリならフロート内で移動する
+	-- ディレクトリならnetrw自身のツリー操作に任せる
+	-- 自前で:Exploreすると折り畳みが行われずディレクトリ名のバッファが開いてしまう
 	if vim.fn.isdirectory(target) == 1 then
-		vim.cmd.Explore({ args = { target } })
+		local browse_ok = pcall(function()
+			vim.fn['netrw#LocalBrowseCheck'](target)
+		end)
+		if not browse_ok then
+			vim.notify('float_netrw: ディレクトリを開けません', vim.log.levels.WARN)
+		end
 		return
 	end
 
