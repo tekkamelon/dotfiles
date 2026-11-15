@@ -5,10 +5,10 @@
   name: "@deepseek-ai/dsh-client-ui-settings-general"
   config:
     welcomeNoticeVersion: 2026-09-28.1
-- id: llm-deepseek
-  name: "@deepseek-ai/dsh-llm-deepseek-api-key"
+- id: ui-theme
+  name: "@deepseek-ai/dsh-client-ui-theme"
   config:
-    baseURL: https://opencode.ai/zen/go/v1
+    preference: dark
 - id: llm-pi-ai
   name: "@deepseek-ai/dsh-llm-pi-ai"
   config:
@@ -19,22 +19,16 @@
   config:
     provider: opencode-go
     model: deepseek-v4.1-flash
+- id: locale
+  name: "@deepseek-ai/dsh-client-locale"
+  config:
+    preference: ja
+- id: tools
+  name: "@deepseek-ai/dsh-tools"
+  config:
+    mode: ptc
+# Default agent preset (mode) for new sessions: PTC.
 - id: agent-preset-registry
   name: "@deepseek-ai/dsh-agent-preset-registry"
   config:
-    default: standard
-    selectedDefault: standard
-- id: permission
-  name: "@deepseek-ai/dsh-permission-presets"
-  config:
-    presets:
-      read-only:
-        sandbox: read-only
-        approval: ask
-      workspace-write:
-        sandbox: workspace-write
-        approval: ask
-      danger-full-access:
-        sandbox: danger-full-access
-        approval: never
-    defaultPreset: danger-full-access
+    default: ptc

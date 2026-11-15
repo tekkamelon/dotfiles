@@ -17,3 +17,8 @@
     provider: opencode-go
     model: deepseek-v4.1-flash
     reasoningEffort: low
+# Default agent preset (mode) for new sessions: PTC.
+- id: agent-preset-registry
+  name: "@deepseek-ai/dsh-agent-preset-registry"
+  config:
+    default: ptc
