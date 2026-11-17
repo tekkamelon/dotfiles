@@ -104,7 +104,7 @@ END { print "line_count=" count }
 
 # パイプライン処理の実行
 # needleを含む行を抽出し、ソートして重複を除去した上で件数を表示する
-grep -F "${needle}" "${input_file}" | 
+grep -F "${needle}" "${input_file}" |
 	sort |
 	uniq -c |
 	sort -nr

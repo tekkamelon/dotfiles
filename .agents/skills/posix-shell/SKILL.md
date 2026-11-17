@@ -84,13 +84,13 @@ read -r -d ''     # → Non-POSIX. Use alternatives
 
 ```sh
 # Always double-quote (prevents word splitting/glob expansion)
-echo "${var}"
+printf '%s\n' "${var}"
 rm -f "${file}"
 
 # Quote all variable expansions that may contain spaces
 for f in "${@}"; do
 
-    echo "${f}"
+    printf '%s\n' "${f}"
 
 done
 
@@ -110,18 +110,18 @@ val="${VAR:-default}"
 
 ```sh
 # Correct [ ] usage
-[ -z "$var" ]     # Empty string
-[ -n "$var" ]     # Non-empty
-[ "$a" = "$b" ]   # String equal (== non-POSIX)
-[ "$a" != "$b" ]  # String not equal
-[ "$n" -eq 0 ]    # Numeric eq
-[ -f "$file" ]    # Regular file exists
-[ -d "$dir" ]     # Directory exists
-[ -r "$file" ]    # Readable
-[ -x "$file" ]    # Executable
+[ -z "${var}" ]      # Empty string
+[ -n "${var}" ]      # Non-empty
+[ "${a}" = "${b}" ]  # String equal (== non-POSIX)
+[ "${a}" != "${b}" ] # String not equal
+[ "${n}" -eq 0 ]     # Numeric eq
+[ -f "${file}" ]    # Regular file exists
+[ -d "${dir}" ]      # Directory exists
+[ -r "${file}" ]    # Readable
+[ -x "${file}" ]    # Executable
 
 # Compound (use shell-level && || )
-[ -f "$f" ] && [ -r "$f" ]
+[ -f "${f}" ] && [ -r "${f}" ]
 ```
 
 ---
@@ -132,13 +132,13 @@ val="${VAR:-default}"
 # POSIX-compliant function
 log() {
 
-    printf '[%s] %s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "$*" >&2
+    printf '[%s] %s\n' "$(date '+%Y-%m-%dT%H:%M:%S')" "${*}" >&2
 
 }
 
 die() {
 
-    log "ERROR: $*"
+    log "ERROR: ${*}"
     exit 1
 
 }
@@ -167,31 +167,35 @@ parse_args() {
 set -eu
 
 # Reliable temp file cleanup
-TMPFILE=""
+tmpfile=""
 
 cleanup() {
 
-    [ -n "$TMPFILE" ] && rm -f "$TMPFILE"
+    [ -n "${tmpfile}" ] && rm -f "${tmpfile}"
 
 }
 
 trap cleanup EXIT        # Run on normal/abnormal exit
 trap 'exit 1' INT TERM   # On Ctrl+C or kill
 
-TMPFILE=$(mktemp)
+tmpfile="$(mktemp)"
 
 # Process...
 ```
 
 ---
 
-## Argument Parsing (getopts)
+## Argument Parsing (manual loop)
+
+Do not use `getopts` (personal convention, see the my-shellscript-rules skill).
+Parse arguments with a `while` loop, `case`, and `shift`.
+Validate missing option values explicitly.
 
 ```sh
 usage() {
 
     cat <<EOF
-Usage: $(basename "$0") [-v] [-o OUTPUT] FILE...
+Usage: $(basename "${0}") [-v] [-o OUTPUT] FILE...
 Options:
   -v          verbose mode
   -o OUTPUT   output file (default: stdout)
@@ -203,20 +207,36 @@ EOF
 verbose=0
 output=""
 
-while getopts ":vo:h" opt; do
+while [ "${#}" -gt 0 ]; do
 
-    case "$opt" in
-        v) verbose=1 ;;
-        o) output="$OPTARG" ;;
-        h) usage; exit 0 ;;
-        :) die "Option -$OPTARG requires an argument" ;;
-        \?) die "Unknown option: -$OPTARG" ;;
+    case "${1}" in
+        -v)
+            verbose=1
+            shift 1
+            ;;
+        -o)
+            if [ "${#}" -lt 2 ]; then
+                die "Option -o requires an argument"
+            fi
+            output="${2}"
+            shift 2
+            ;;
+        -h)
+            usage
+            exit 0
+            ;;
+        --)
+            shift 1
+            break
+            ;;
+        *)
+            die "Unknown option: ${1}"
+            ;;
     esac
 
 done
 
-shift $((OPTIND - 1))
-# $@ now positional args after options
+# Positional args now in "${@}"
 ```
 
 ---
@@ -238,7 +258,7 @@ EOF
 
 # With expansion
 cat <<EOF
-Hello, $name!
+Hello, ${name}!
 Today is $(date).
 EOF
 ```
@@ -249,36 +269,35 @@ EOF
 
 ```sh
 # To lowercase (POSIX)
-lower=$(printf '%s' "$str" | tr '[:upper:]' '[:lower:]')
+lower="$(printf '%s' "${str}" | tr '[:upper:]' '[:lower:]')"
 
 # Trim leading/trailing whitespace
 trim() {
 
-    printf '%s' "$1" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
+    printf '%s' "${1}" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//'
 
 }
 
 
 # Explicitly pass - when paste reads from standard input
 # Required for compatibility with macOS paste
-printf '%s\n' "${line_a}" "${line_b}" | paste -s -d ',' - 
-
+printf '%s\n' "${line_a}" "${line_b}" | paste -s -d ',' -
 
 # Line count
-count=$(wc -l < "$file")
+count="$(wc -l < "${file}")"
 
 # Process each line
 while IFS= read -r line; do
 
-    printf 'Line: %s\n' "$line"
+    printf 'Line: %s\n' "${line}"
 
-done < "$file"
+done < "${file}"
 
 # Process command output lines (note subshell issue)
 some_command | while IFS= read -r line; do
 
     # Changes inside while don't propagate out
-    printf '%s\n' "$line"
+    printf '%s\n' "${line}"
 
 done
 ```
@@ -289,16 +308,16 @@ done
 
 ```sh
 # Script dir
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+script_dir="$(cd "$(dirname "${0}")" && pwd)"
 
 # basename/dirname
-filename=$(basename "$path")          # /a/b/c.txt → c.txt
-dir=$(dirname "$path")                # /a/b/c.txt → /a/b
-stem=$(basename "$path" .txt)         # /a/b/c.txt → c
+filename="$(basename "${path}")"    # /a/b/c.txt → c.txt
+dir="$(dirname "${path}")"          # /a/b/c.txt → /a/b
+stem="$(basename "${path}" .txt)"   # /a/b/c.txt → c
 
 # Safe temp files
-tmp=$(mktemp)
-tmpdir=$(mktemp -d)
+tmp="$(mktemp)"
+tmpdir="$(mktemp -d)"
 ```
 
 ---
@@ -310,14 +329,14 @@ Never use bare `$var`, `"$var"`, or `${var}` without surrounding double-quotes.
 
 ```sh
 # OK
-echo "${message}"
+printf '%s\n' "${message}"
 cp "${src_file}" "${dest_dir}/"
 log_file="${output_dir}/app.log"
 
 # NG — do not use these forms
-echo $message          # no quotes, no braces
-echo "$message"        # quotes but no braces
-echo ${message}        # braces but no quotes
+printf '%s\n' $message     # no quotes, no braces
+printf '%s\n' "$message"   # quotes but no braces
+printf '%s\n' ${message}   # braces but no quotes
 ```
 
 This rule applies to:
@@ -327,6 +346,8 @@ This rule applies to:
 - Command substitutions inside strings (`"${output_dir}/$(date +%Y%m%d)"`)
 
 Exception: variables inside `$(( ))` arithmetic expressions do not require quotes or braces.
+Special parameters that cannot take braces (such as `$!`) are quoted without braces.
+
 ## Debugging
 
 ```sh
@@ -352,11 +373,12 @@ Before completion, verify:
 
 - [ ] Starts with `#!/bin/sh`
 - [ ] Has `set -eu` early
-- [ ] All var expansions double-quoted
+- [ ] All var expansions written as `"${var}"`
 - [ ] No bashisms like `[[ ]] (( ))`
 - [ ] Uses `printf` not `echo`
 - [ ] Uses `.` not `source`
 - [ ] No `local var=$(cmd)` (split lines)
+- [ ] Arguments parsed with `while` + `case` + `shift` (no `getopts`)
 - [ ] Temp files cleaned by `trap ... EXIT`
 - [ ] Passes `shellcheck`
 

@@ -120,7 +120,9 @@ done
 Example:
 
 ```sh
-PATH_INPUT="${PATH_INPUT}"
+# 環境変数を通常変数へ受け取り(デフォルト値付き)
+log_level="${LOG_LEVEL:-INFO}"
+# 通常変数
 file_path="/tmp/example.txt"
 printf '%s\n' "${file_path}"
 ```
@@ -181,3 +183,7 @@ Avoid:
 - [ ] Section marker comments inserted where helpful.
 - [ ] Comments are Japanese noun phrases.
 - [ ] Pipeline line breaks use tab-indented continuation with `|` at line end.
+
+## References
+
+- `assets/template.sh` — 規約を適用したスケルトン(引数解析、セクションマーカー、パイプライン改行を含む)

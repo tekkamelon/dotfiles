@@ -15,10 +15,10 @@ Legend: OK = POSIX / NG = Bash/zsh specific / Caution = Implementation dependent
 | `${var##pat}` | Longest prefix remove | OK | — |
 | `${var%pat}` | Shortest suffix remove | OK | — |
 | `${var%%pat}` | Longest suffix remove | OK | — |
-| `${var/a/b}` | First replace | NG | `echo "$var" \| sed 's/a/b/'` |
-| `${var//a/b}` | All replace | NG | `echo "$var" \| sed 's/a/b/g'` |
-| `${var,,}` | Lowercase | NG | `printf '%s' "$var" \| tr '[:upper:]' '[:lower:]'` |
-| `${var^^}` | Uppercase | NG | `printf '%s' "$var" \| tr '[:lower:]' '[:upper:]'` |
+| `${var/a/b}` | First replace | NG | `printf '%s' "${var}" \| sed 's/a/b/'` |
+| `${var//a/b}` | All replace | NG | `printf '%s' "${var}" \| sed 's/a/b/g'` |
+| `${var,,}` | Lowercase | NG | `printf '%s' "${var}" \| tr '[:upper:]' '[:lower:]'` |
+| `${var^^}` | Uppercase | NG | `printf '%s' "${var}" \| tr '[:lower:]' '[:upper:]'` |
 
 ## Conditionals
 
@@ -26,9 +26,9 @@ Legend: OK = POSIX / NG = Bash/zsh specific / Caution = Implementation dependent
 |--------|---------|--------|-------------|
 | `[ ... ]` | Test | OK | — |
 | `[[ ... ]]` | Extended test | NG | `[ ... ]` |
-| `[ "$a" = "$b" ]` | String eq | OK | — |
-| `[ "$a" == "$b" ]` | String eq | NG | `[ "$a" = "$b" ]` |
-| `[[ $a =~ regex ]]` | Regex match | NG | `printf '%s' "$a" \| grep -E 'regex'` |
+| `[ "${a}" = "${b}" ]` | String eq | OK | — |
+| `[ "${a}" == "${b}" ]` | String eq | NG | `[ "${a}" = "${b}" ]` |
+| `[[ $a =~ regex ]]` | Regex match | NG | `printf '%s' "${a}" \| grep -E 'regex'` |
 | `(( expr ))` | Arithmetic cond | NG | `[ $((expr)) -ne 0 ]` |
 
 ## Arithmetic
@@ -68,8 +68,8 @@ POSIX has only scalar vars and positional params (`$@`, `$*`).
 | Syntax | POSIX? | Alternative |
 |--------|--------|-------------|
 | `arr=(a b c)` | NG | `set -- a b c` use positionals |
-| `${arr[@]}` | NG | `"$@"` |
-| `${#arr[@]}` | NG | `$#` |
+| `${arr[@]}` | NG | `"${@}"` |
+| `${#arr[@]}` | NG | `${#}` |
 
 ## Process Substitution
 
@@ -87,4 +87,3 @@ POSIX has only scalar vars and positional params (`$@`, `$*`).
 | `foo() { ... }` | OK | — |
 | `$'...'` (ANSI) | NG | `printf` for control chars |
 | `{1..10}` (brace exp) | NG | `seq 1 10` or loop |
-
